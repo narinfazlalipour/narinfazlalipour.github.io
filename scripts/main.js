@@ -1,71 +1,70 @@
-/* -------------------------------------------------------------------------
-   Main Entry Point — Narin Fazlalipour Portfolio
-   ------------------------------------------------------------------------- */
-
-import { initCursor } from './cursor.js';
-import { initReveal } from './reveal.js';
-import { initBreathe } from './breathe.js';
-import { initSeam } from './seam.js';
-import { initCouch } from './couch.js';
-import { initJourney } from './journey.js';
-import { initEvidence } from './evidence.js';
-import { initWords } from './words.js';
+/* ═══════════════════════════════════════════════════════════════
+   Main JS — Tab Switching + Internal Links
+   ═══════════════════════════════════════════════════════════════ */
 
 document.addEventListener('DOMContentLoaded', () => {
-  // 1. Initialize custom cursor
-  initCursor();
 
-  // 2. Initialize scroll reveals
-  initReveal();
+  const tabBtns   = document.querySelectorAll('.tab-btn');
+  const tabPanels = document.querySelectorAll('.tab-panel');
 
-  // 3. Set default page mode: Narrative
-  document.body.classList.add('mode-narrative');
+  /**
+   * Switch to a given tab by name.
+   */
+  function switchTab(tabName) {
+    // Update buttons
+    tabBtns.forEach(btn => {
+      const isActive = btn.dataset.tab === tabName;
+      btn.classList.toggle('active', isActive);
+      btn.setAttribute('aria-selected', isActive);
+    });
 
-  // 4. Set up the dual-aspect mode toggle
-  initModeSwitch();
+    // Update panels
+    tabPanels.forEach(panel => {
+      panel.classList.toggle('active', panel.id === `tab-${tabName}`);
+    });
 
-  // 5. Initialize Narrative elements
-  initBreathe();
-  initSeam();
-  initCouch();
-  initJourney();
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 
-  // 6. Initialize Evidence elements
-  initEvidence();
-
-  // 7. Initialize quote cross-fades
-  initWords();
-});
-
-function initModeSwitch() {
-  const toggle = document.querySelector('.mode-switch');
-  if (!toggle) return;
-
-  const toggleMode = () => {
-    const isNarrative = document.body.classList.contains('mode-narrative');
-
-    if (isNarrative) {
-      document.body.classList.remove('mode-narrative');
-      document.body.classList.add('mode-evidence');
-      // Scroll to top when switching modes for visual cleanliness
-      window.scrollTo({ top: 0, behavior: 'instant' });
-      // Notify components that mode shifted if needed
-      document.dispatchEvent(new CustomEvent('modechange', { detail: 'evidence' }));
-    } else {
-      document.body.classList.remove('mode-evidence');
-      document.body.classList.add('mode-narrative');
-      window.scrollTo({ top: 0, behavior: 'instant' });
-      document.dispatchEvent(new CustomEvent('modechange', { detail: 'narrative' }));
+    // Update URL hash
+    if (history.pushState) {
+      history.pushState(null, null, `#${tabName}`);
     }
-  };
+  }
 
-  toggle.addEventListener('click', toggleMode);
+  // ── Tab button clicks ──
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tabName = btn.dataset.tab;
+      if (tabName) switchTab(tabName);
+    });
+  });
 
-  // Keyboard navigation support
-  toggle.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      toggleMode();
+  // ── Internal links with data-tab attribute ──
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('a[data-tab]');
+    if (!link) return;
+    e.preventDefault();
+    const tabName = link.dataset.tab;
+    if (tabName) switchTab(tabName);
+  });
+
+  // ── Handle initial hash on load ──
+  const hash = window.location.hash.replace('#', '');
+  if (hash) {
+    const validTabs = ['narin', 'medicine', 'media', 'publications'];
+    if (validTabs.includes(hash)) {
+      switchTab(hash);
+    }
+  }
+
+  // ── Handle browser back/forward ──
+  window.addEventListener('hashchange', () => {
+    const newHash = window.location.hash.replace('#', '');
+    const validTabs = ['narin', 'medicine', 'media', 'publications'];
+    if (validTabs.includes(newHash)) {
+      switchTab(newHash);
     }
   });
-}
+
+});

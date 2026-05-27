@@ -23,7 +23,6 @@ body {
   overflow-x: hidden;
   margin: 0;
   padding: 0;
-  cursor: none; /* Hide default cursor to let custom candle cursor take over */
 }
 
 /* Touch devices fallback: restore standard cursor */
