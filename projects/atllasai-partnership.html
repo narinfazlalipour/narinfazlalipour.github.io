@@ -1,262 +1,271 @@
-     1|<!DOCTYPE html>
-     2|<html lang="en">
-     3|<head>
-     4|<meta charset="UTF-8">
-     5|<meta name="viewport" content="width=device-width, initial-scale=1.0">
-     6|<title>AtllasAI Partnership — Narin Fazlalipour</title>
-     7|<link rel="preconnect" href="https://fonts.googleapis.com">
-     8|<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-     9|<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    10|<style>
-    11|  :root {
-    12|    --royal-deep: #0A1733; --royal: #1E3A6E; --royal-accent: #2C5AA0; --royal-light: #4A7CC9;
-    13|    --royal-subtle: #EEF4FC; --royal-mist: #F6F9FD;
-    14|    --cream: #FBFAF7; --linen: #F4F0EA; --paper: #FFFFFF; --ink: #14182A;
-    15|    --warm-gray: #6B6560; --fg-muted: #6B6560; --fg-soft: #3A3F55;
-    16|    --rule: rgba(20, 24, 42, 0.10); --border-accent: rgba(44, 90, 160, 0.28);
-    17|    --accent: #2C5AA0; --green: #059669; --amber: #d97706; --red: #dc2626;
-    18|    --green-muted: #ecfdf5; --amber-muted: #fffbeb; --blue-muted: #eff6ff;
-    19|    --maxw: 1040px; --gutter: clamp(1.25rem, 5vw, 3rem);
-    20|    --radius: 10px; --radius-lg: 16px; --shadow-md: 0 6px 20px rgba(11, 26, 59, 0.08);
-    21|    --font-serif: 'Cormorant Garamond', Georgia, serif;
-    22|    --font-sans: 'Inter', system-ui, sans-serif;
-    23|    --font-mono: 'JetBrains Mono', monospace;
-    24|    --ease: cubic-bezier(0.22, 1, 0.36, 1); --slow: 720ms; --med: 360ms; --fast: 180ms;
-    25|  }
-    26|  * { margin: 0; padding: 0; box-sizing: border-box; }
-    27|  body { font-family: var(--font-sans); background: var(--cream); color: var(--ink); line-height: 1.65; -webkit-font-smoothing: antialiased; }
-    28|  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--gutter); }
-    29|  .mast { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.25rem var(--gutter); font-family: var(--font-mono); font-size: 0.82rem; letter-spacing: 0.08em; color: var(--fg-muted); mix-blend-mode: difference; color: var(--linen); }
-    30|  .mast a { color: inherit; text-decoration: none; border-bottom: none; text-transform: uppercase; }
-    31|  .mast a:hover { color: var(--royal-light); }
-    32|  header.hero { padding: 8rem 0 4rem; }
-    33|  .hero .label { font-family: var(--font-mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.14em; color: var(--royal-accent); font-weight: 600; margin-bottom: 0.75rem; }
-    34|  .hero h1 { font-family: var(--font-serif); font-size: clamp(2.2rem, 5vw, 3.6rem); font-weight: 500; line-height: 1.1; letter-spacing: -0.02em; color: var(--royal-deep); margin-bottom: 0.75rem; }
-    35|  .hero h1 em { font-style: italic; color: var(--royal-accent); }
-    36|  .hero .sub { font-size: 1.1rem; color: var(--warm-gray); max-width: 600px; }
-    37|  section { padding: 3rem 0; }
-    38|  section h2 { font-family: var(--font-serif); font-size: clamp(1.6rem, 2.4vw, 2rem); font-weight: 500; letter-spacing: -0.01em; margin-bottom: 1.5rem; color: var(--royal-deep); padding-bottom: 0.5rem; border-bottom: 1px solid var(--rule); }
-    39|  section h3 { font-family: var(--font-serif); font-size: 1.25rem; font-weight: 500; margin: 1.8rem 0 0.75rem; color: var(--royal); }
-    40|  section p { margin-bottom: 1rem; color: #44403c; font-size: 0.95rem; }
-    41|  table { width: 100%; border-collapse: collapse; font-size: 0.88rem; margin: 1rem 0 1.5rem; }
-    42|  table th { text-align: left; font-weight: 600; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--fg-muted); padding: 10px 14px; border-bottom: 2px solid var(--rule); }
-    43|  table td { padding: 10px 14px; border-bottom: 1px solid var(--rule); vertical-align: top; }
-    44|  table td:first-child { font-weight: 500; }
-    45|  .callout { background: var(--royal-subtle); border-left: 3px solid var(--royal-accent); padding: 16px 20px; border-radius: 0 8px 8px 0; margin: 1.5rem 0; }
-    46|  .callout p { margin: 0; color: #1e3a5f; font-weight: 500; }
-    47|  .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 1.5rem 0; }
-    48|  .pricing-card { background: var(--paper); border: 1px solid var(--rule); border-radius: var(--radius-lg); padding: 24px; text-align: center; transition: all var(--fast) var(--ease); }
-    49|  .pricing-card.featured { border-color: var(--royal-accent); box-shadow: var(--shadow-md); }
-    50|  .pricing-card .tier { font-family: var(--font-mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--fg-muted); margin-bottom: 0.5rem; }
-    51|  .pricing-card .price { font-family: var(--font-serif); font-size: 2.4rem; font-weight: 600; color: var(--royal-deep); margin: 0.5rem 0; }
-    52|  .pricing-card .price span { font-size: 1rem; color: var(--fg-muted); }
-    53|  .pricing-card ul { text-align: left; list-style: none; padding: 0; margin: 1rem 0 0; font-size: 0.85rem; color: #57534e; }
-    54|  .pricing-card ul li { padding: 4px 0; }
-    55|  .pricing-card ul li::before { content: "✓ "; color: var(--green); font-weight: 700; }
-    56|  .tag { display: inline-block; font-size: 0.72rem; font-weight: 600; padding: 2px 10px; border-radius: 4px; letter-spacing: 0.03em; }
-    57|  .tag.green { background: var(--green-muted); color: var(--green); }
-    58|  .tag.amber { background: var(--amber-muted); color: var(--amber); }
-    59|  .foot { text-align: center; padding: 3rem 0 4rem; font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-muted); border-top: 1px solid var(--rule); margin-top: 2rem; }
-    60|  .foot a { color: var(--royal-accent); text-decoration: none; }
-    61|  @media (max-width: 700px) { .pricing-grid { grid-template-columns: 1fr; } header.hero { padding: 6rem 0 2rem; } }
-    62|</style>
-    63|</head>
-    64|<body>
-    65|
-    66|<header class="mast">
-    67|  <a href="/">Narin Fazlalipour</a>
-    68|</header>
-    69|
-    70|<header class="hero">
-    71|  <div class="wrap">
-    72|    <div class="label">Client Partnership · May 2026</div>
-    73|    <h1>AtllasAI × <em>Narin Fazlalipour</em></h1>
-    74|    <p class="sub">Social media management proposal &amp; contract for @atllasai — built on a full Instagram audit before a single dollar was asked.</p>
-    75|  </div>
-    76|</header>
-    77|
-    78|<!-- COVER -->
-    79|<section>
-    80|  <div class="wrap">
-    81|    <h2>Cover Letter</h2>
-    82|
-    83|    <div class="callout">
-    84|      <p>🔥 Pulse Score: <strong>38/100.</strong> The product demos itself — real AI calls, real bookings, real agents. But the Instagram runs like a feature page, not a story engine. You're sitting on the one content format your competitors can't fake, and you're posting none of it.</p>
-    85|    </div>
-    86|
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AtllasAI Partnership — Narin Fazlalipour</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --royal-deep: #0A1733; --royal: #1E3A6E; --royal-accent: #2C5AA0; --royal-light: #4A7CC9;
+    --royal-subtle: #EEF4FC; --royal-mist: #F6F9FD;
+    --cream: #FBFAF7; --linen: #F4F0EA; --paper: #FFFFFF; --ink: #14182A;
+    --warm-gray: #6B6560; --fg-muted: #6B6560; --fg-soft: #3A3F55;
+    --rule: rgba(20, 24, 42, 0.10); --border-accent: rgba(44, 90, 160, 0.28);
+    --accent: #2C5AA0; --green: #059669; --amber: #d97706; --red: #dc2626;
+    --green-muted: #ecfdf5; --amber-muted: #fffbeb; --blue-muted: #eff6ff;
+    --maxw: 1040px; --gutter: clamp(1.25rem, 5vw, 3rem);
+    --radius: 10px; --radius-lg: 16px; --shadow-md: 0 6px 20px rgba(11, 26, 59, 0.08);
+    --font-serif: 'Cormorant Garamond', Georgia, serif;
+    --font-sans: 'Inter', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+    --ease: cubic-bezier(0.22, 1, 0.36, 1); --slow: 720ms; --med: 360ms; --fast: 180ms;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: var(--font-sans); background: var(--cream); color: var(--ink); line-height: 1.65; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--gutter); }
+  .mast { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.25rem var(--gutter); font-family: var(--font-mono); font-size: 0.82rem; letter-spacing: 0.08em; color: var(--fg-muted); mix-blend-mode: difference; color: var(--linen); }
+  .mast a { color: inherit; text-decoration: none; border-bottom: none; text-transform: uppercase; }
+  .mast a:hover { color: var(--royal-light); }
+  header.hero { padding: 8rem 0 4rem; }
+  .hero .label { font-family: var(--font-mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.14em; color: var(--royal-accent); font-weight: 600; margin-bottom: 0.75rem; }
+  .hero h1 { font-family: var(--font-serif); font-size: clamp(2.2rem, 5vw, 3.6rem); font-weight: 500; line-height: 1.1; letter-spacing: -0.02em; color: var(--royal-deep); margin-bottom: 0.75rem; }
+  .hero h1 em { font-style: italic; color: var(--royal-accent); }
+  .hero .sub { font-size: 1.1rem; color: var(--warm-gray); max-width: 600px; }
+  section { padding: 3rem 0; }
+  section h2 { font-family: var(--font-serif); font-size: clamp(1.6rem, 2.4vw, 2rem); font-weight: 500; letter-spacing: -0.01em; margin-bottom: 1.5rem; color: var(--royal-deep); padding-bottom: 0.5rem; border-bottom: 1px solid var(--rule); }
+  section h3 { font-family: var(--font-serif); font-size: 1.25rem; font-weight: 500; margin: 1.8rem 0 0.75rem; color: var(--royal); }
+  section p { margin-bottom: 1rem; color: #44403c; font-size: 0.95rem; }
+  section p strong { color: var(--ink); }
+  table { width: 100%; border-collapse: collapse; font-size: 0.88rem; margin: 1rem 0 1.5rem; }
+  table th { text-align: left; font-weight: 600; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--fg-muted); padding: 10px 14px; border-bottom: 2px solid var(--rule); }
+  table td { padding: 10px 14px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  table td:first-child { font-weight: 500; }
+  .callout { background: var(--royal-subtle); border-left: 3px solid var(--royal-accent); padding: 16px 20px; border-radius: 0 8px 8px 0; margin: 1.5rem 0; }
+  .callout p { margin: 0; color: #1e3a5f; font-weight: 500; }
+  .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 1.5rem 0; }
+  .pricing-card { background: var(--paper); border: 1px solid var(--rule); border-radius: var(--radius-lg); padding: 24px; text-align: center; transition: all var(--fast) var(--ease); }
+  .pricing-card.featured { border-color: var(--royal-accent); box-shadow: var(--shadow-md); }
+  .pricing-card .tier { font-family: var(--font-mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--fg-muted); margin-bottom: 0.5rem; }
+  .pricing-card .price { font-family: var(--font-serif); font-size: 2.4rem; font-weight: 600; color: var(--royal-deep); margin: 0.5rem 0; }
+  .pricing-card .price span { font-size: 1rem; color: var(--fg-muted); }
+  .pricing-card ul { text-align: left; list-style: none; padding: 0; margin: 1rem 0 0; font-size: 0.85rem; color: #57534e; }
+  .pricing-card ul li { padding: 4px 0; }
+  .pricing-card ul li::before { content: "✓ "; color: var(--green); font-weight: 700; }
+  .tag { display: inline-block; font-size: 0.72rem; font-weight: 600; padding: 2px 10px; border-radius: 4px; letter-spacing: 0.03em; }
+  .tag.green { background: var(--green-muted); color: var(--green); }
+  .foot { text-align: center; padding: 3rem 0 4rem; font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-muted); border-top: 1px solid var(--rule); margin-top: 2rem; }
+  .foot a { color: var(--royal-accent); text-decoration: none; }
+  @media (max-width: 700px) { .pricing-grid { grid-template-columns: 1fr; } header.hero { padding: 6rem 0 2rem; } }
+</style>
+</head>
+<body>
+
+<header class="mast">
+  <a href="/">Narin Fazlalipour</a>
+</header>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="label">Client Partnership · May 2026</div>
+    <h1>AtllasAI × <em>Narin Fazlalipour</em></h1>
+    <p class="sub">Social media management proposal &amp; contract for @atllasai — built on a full Instagram audit before a single dollar was asked.</p>
+  </div>
+</header>
+
+<!-- COVER LETTER -->
+<section>
+  <div class="wrap">
+    <h2>Cover Letter</h2>
+
+    <div class="callout">
+      <p>🔥 Pulse Score: <strong>38/100.</strong> The product demos itself — real AI calls, real bookings, real agents. But the Instagram runs like a feature page, not a story engine. You're sitting on the one content format your competitors can't fake, and you're posting none of it.</p>
+    </div>
+
     <h3>What I Actually Do</h3>
     <p>I take the energy Neema already has on @neema_bardi (10K IG, 8.8K TikTok) and build that same voice into @atllasai — documentary-style, building in public, real faces instead of product screenshots. Late nights, product wins, struggles, team moments. No corporate SaaS tone. No stock footage. No posts that feel like they were written by a marketing department.</p>
-    90|
-    91|    <h3>The Before/After</h3>
-    92|    <table>
-    93|      <tr><td>974 followers, sporadic posting</td><td>→</td><td>2,000–3,000 in 90 days</td></tr>
-    94|      <tr><td>Corporate product demos</td><td>→</td><td>@neema_bardi energy on @atllasai</td></tr>
-    95|      <tr><td>All features, zero story</td><td>→</td><td>Every post: hero → villain → transformation</td></tr>
-    96|      <tr><td>IG-only (TikTok + YouTube dormant)</td><td>→</td><td>Reels cross-posted everywhere</td></tr>
-    97|      <tr><td>Zero competitive awareness</td><td>→</td><td>Quarterly competitor audits</td></tr>
-    98|      <tr><td>Ghosting comments</td><td>→</td><td>100% reply within 4 hours</td></tr>
-    99|      <tr><td>No analytics</td><td>→</td><td>Monthly growth reports</td></tr>
-   100|    </table>
-   101|
-   102|    <h3>What Makes Me Different</h3>
-   103|    <p><strong>I know the account cold.</strong> I audited @atllasai before I wrote a single word of this proposal — every gap in here, I found myself.</p>
-   104|    <p><strong>I studied @neema_bardi.</strong> I know the voice. The Atllas account will feel like an extension of Neema, not a separate corporate thing.</p>
-   105|    <p><strong>I show up.</strong> Weekly on-site shoots at Atllas HQ. 60% Neema, 25% team, 15% agents. Real faces, real names, real moments.</p>
-   106|    <p><strong>Competitive intelligence is baked in.</strong> Quarterly audits via AuditLayer. You'll know what competitors are up to before they know.</p>
-   107|    <p><strong>Everything runs through story.</strong> Hero (agent) → villain (missed calls, dead leads) → transformation (AI closes while they sleep). If a post doesn't hit all three, it doesn't go up.</p>
-   108|  </div>
-   109|</section>
-   110|
-   111|<!-- SCOPE -->
-   112|<section style="background: var(--paper);">
-   113|  <div class="wrap">
-   114|    <h2>Scope of Work</h2>
-   115|    <p><strong>Primary Platform:</strong> Instagram (@atllasai — 974 followers baseline)</p>
-   116|    <table>
-   117|      <tr><th>Service</th><th>Detail</th></tr>
-   118|      <tr><td>Content strategy</td><td>Monthly content calendar, content pillars, storytelling architecture</td></tr>
-   119|      <tr><td>Content creation</td><td>4 Reels + 1 carousel per week — shot during weekly on-site content sessions at Atllas HQ</td></tr>
-   120|      <tr><td>Stories management</td><td>Daily Stories (5–7/week) — behind-the-scenes, polls, call-of-the-week breakdowns</td></tr>
-   121|      <tr><td>On-site content shoot</td><td>Weekly visit to Atllas HQ to capture raw footage — Neema, team, office, product</td></tr>
-   122|      <tr><td>Copywriting</td><td>Captions, hashtag strategy, bio optimization</td></tr>
-   123|      <tr><td>Community management</td><td>Reply to all comments within 4 hours, DM engagement</td></tr>
-   124|      <tr><td>Analytics & reporting</td><td>Monthly performance report — growth, engagement, top-performing content</td></tr>
-   125|      <tr><td>Competitive monitoring</td><td>Quarterly competitor audit (AI calling space)</td></tr>
-   126|      <tr><td>Cross-platform posting</td><td>Same Reels posted to TikTok (@neemabardi) + YouTube Shorts — content only</td></tr>
-   127|    </table>
-   128|
-   129|    <h3>Brand Voice: The Neema Vibe</h3>
-   130|    <p>@atllasai will adopt the same <strong>raw, documentary-style founder energy</strong> that @neema_bardi has built across Instagram (10K) and TikTok (8.8K). This is not a corporate brand account. It's a startup run by a guy in his 20s, building in public, and the content should feel like it.</p>
-   131|
-   132|    <div class="callout">
-   133|      <p>🎬 <strong>The rule:</strong> If it feels like a polished SaaS ad, kill it. If it feels like something Neema would post on @neema_bardi, ship it. If it doesn't show a real human face, ask why not.</p>
-   134|    </div>
-   135|
-   136|    <table>
-   137|      <tr><th>Role</th><th>Screen Time</th><th>Vibe</th></tr>
-   138|      <tr><td><strong>Neema (CEO)</strong></td><td>60% — main face</td><td>Founder energy. Voice clone demos. Building in public. The guy.</td></tr>
-   139|      <tr><td><strong>Team</strong></td><td>25% — supporting cast</td><td>Engineers shipping late. Sales closing deals. Support handling calls. Real humans.</td></tr>
-   140|      <tr><td><strong>Agents (customers)</strong></td><td>15% — proof</td><td>Testimonials. Transformations. Before/after. They're the heroes.</td></tr>
-   141|    </table>
-   142|  </div>
-   143|</section>
-   144|
-   145|<!-- CONTENT MIX -->
-   146|<section>
-   147|  <div class="wrap">
-   148|    <h2>Content Mix & Weekly Calendar</h2>
-   149|    <p>Every piece of content runs through: <strong>hero (the agent) → villain (missed calls, dead leads) → transformation (AI books, agent closes).</strong> If it doesn't have all three, it doesn't ship.</p>
-   150|
-   151|    <table>
-   152|      <tr><th>Pillar</th><th>%</th><th>Storytelling Angle</th><th>Weekly Output</th></tr>
-   153|      <tr><td><strong>Product in Action</strong></td><td>35%</td><td>Not "here's a feature." It's "watch this agent sleep through 30 calls and wake up to 5 booked appointments." AI is the sidekick — the agent is the hero.</td><td>1–2 Reels</td></tr>
-   154|      <tr><td><strong>Agent Transformations</strong></td><td>25%</td><td>Before/after: "I used to do 200 dials/day. Now my AI qualifies leads while I'm at my kid's soccer game." Real agents, real numbers, real faces.</td><td>1 Reel</td></tr>
-   155|      <tr><td><strong>Industry Narrative</strong></td><td>25%</td><td>"Cold calling is dead. Here's the data." Positioning Atllas as inevitable. Meme format or voiceover. Not a slide deck.</td><td>1 Carousel or Reel</td></tr>
-   156|      <tr><td><strong>Founder / Building in Public</strong></td><td>15%</td><td>Neema as the face. Voice clone demos. Late nights. Team cameos — engineers shipping, sales closing. Raw, personal, human.</td><td>1 Reel</td></tr>
-   157|    </table>
-   158|
-   159|    <h3>Weekly Calendar</h3>
-   160|    <table>
-   161|      <tr><th>Day</th><th>Format</th><th>Story Arc</th></tr>
-   162|      <tr><td><strong>Mon</strong></td><td>Reel</td><td>Agent transformation — before/after arc. Real agent, real numbers.</td></tr>
-   163|      <tr><td><strong>Tue</strong></td><td>Carousel or Reel</td><td>Industry narrative — "3 stats that prove cold calling is dead."</td></tr>
-   164|      <tr><td><strong>Wed</strong></td><td>Reel</td><td>Product in action — AI call demo. Short, punchy, documentary-style.</td></tr>
-   165|      <tr><td><strong>Thu</strong></td><td>Reel</td><td>Founder BTS or team spotlight — real people, real moments from the weekly shoot.</td></tr>
-   166|      <tr><td><strong>Fri</strong></td><td>Reel</td><td>Product in action or agent story — second demo or second transformation.</td></tr>
-   167|      <tr><td><strong>Sat</strong></td><td>Stories</td><td>"Call of the week" breakdown. Polls. Real AI call snippet.</td></tr>
-   168|      <tr><td><strong>Sun</strong></td><td>Stories</td><td>Industry reaction. Competitor news. "What we're watching."</td></tr>
-   169|    </table>
-   170|  </div>
-   171|</section>
-   172|
-   173|<!-- PRICING -->
-   174|<section style="background: var(--paper);">
-   175|  <div class="wrap">
-   176|    <h2>Pricing</h2>
-   177|
-   178|    <div class="pricing-grid">
-   179|      <div class="pricing-card">
-   180|        <div class="tier">Core</div>
-   181|        <div class="price">$2,500<span>/mo</span></div>
-   182|        <ul>
-   183|          <li>Strategy + content calendar</li>
-   184|          <li>4 Reels/week</li>
-   185|          <li>1 carousel/week</li>
-   186|          <li>Captions + hashtags</li>
-   187|          <li>Cross-posting to TikTok & YT</li>
-   188|        </ul>
-   189|      </div>
-   190|      <div class="pricing-card featured">
-   191|        <div class="tier">Growth</div>
-   192|        <div class="price">$4,000<span>/mo</span></div>
-   193|        <ul>
-   194|          <li>Everything in Core</li>
-   195|          <li>Daily Stories (5–7/week)</li>
-   196|          <li>Community management</li>
-   197|          <li>100% reply within 4hrs</li>
-   198|          <li>Monthly performance report</li>
-   199|        </ul>
-   200|      </div>
-   201|      <div class="pricing-card">
-   202|        <div class="tier">Full-Stack</div>
-   203|        <div class="price">$6,000<span>/mo</span></div>
-   204|        <ul>
-   205|          <li>Everything in Growth</li>
-   206|          <li>TikTok management</li>
-   207|          <li>YouTube Shorts management</li>
-   208|          <li>LinkedIn thought leadership</li>
-   209|          <li>Quarterly competitor audit</li>
-   210|        </ul>
-   211|      </div>
-   212|    </div>
-   213|
-   214|    <p style="text-align:center; font-family: var(--font-mono); font-size: 0.85rem; color: var(--fg-muted); margin-top: 0.5rem;">
-   215|      Setup fee: $2,000 one-time · Travel stipend: $200/mo · Bi-weekly invoicing, Net 15
-   216|    </p>
-   217|  </div>
-   218|</section>
-   219|
-   220|<!-- TERMS -->
-   221|<section>
-   222|  <div class="wrap">
-   223|    <h2>Key Terms</h2>
-   224|
-   225|    <table>
-   226|      <tr><th>Term</th><th>Detail</th></tr>
-   227|      <tr><td><strong>Duration</strong></td><td>90-day minimum, auto-renewing monthly. 30 days written notice to cancel.</td></tr>
-   228|      <tr><td><strong>Kill fee</strong></td><td>If client terminates within first 90 days: 50% of remaining months' retainer.</td></tr>
-   229|      <tr><td><strong>Approval model</strong></td><td>Reels & Stories: no approval (speed keeps the vibe alive). Carousels: client review. Calendar: monthly approval.</td></tr>
-   230|      <tr><td><strong>Non-exclusivity</strong></td><td>Narin can work with other clients — including adjacent industries. No direct competitors without disclosure.</td></tr>
-   231|      <tr><td><strong>Content ownership</strong></td><td>Narin retains ownership until full payment. Upon payment: client owns all deliverables. Raw footage transfers upon payment.</td></tr>
-   232|      <tr><td><strong>Non-payment</strong></td><td>If payment not received by Net 15, Narin may immediately pause all content creation. Paused days do not extend contract term.</td></tr>
-   233|      <tr><td><strong>Confidentiality</strong></td><td>Narin agrees not to disclose product roadmap, voice clone tech, customer data, revenue figures. Survives termination for 2 years.</td></tr>
-   234|      <tr><td><strong>Governing law</strong></td><td>State of California. Good-faith mediation before litigation.</td></tr>
-   235|      <tr><td><strong>Liability cap</strong></td><td>Capped at total fees paid in preceding 3 months. Narin is an independent contractor, not an employee.</td></tr>
-   236|    </table>
-   237|  </div>
-   238|</section>
-   239|
-   240|<!-- KPI -->
-   241|<section style="background: var(--paper);">
-   242|  <div class="wrap">
-   243|    <h2>Performance Targets</h2>
-   244|    <table>
-   245|      <tr><th>Metric</th><th>Baseline</th><th>90-Day Target</th></tr>
-   246|      <tr><td>Follower growth</td><td>974</td><td><span class="tag green">2,000–3,000</span></td></tr>
-   247|      <tr><td>Engagement rate</td><td>Unknown (&lt;2%)</td><td><span class="tag green">3–5%</span></td></tr>
-   248|      <tr><td>Reels avg views</td><td>Unknown</td><td><span class="tag green">2,000+</span></td></tr>
-   249|      <tr><td>Content output</td><td>~2–3 posts/week (sporadic)</td><td><span class="tag green">4 Reels + 1 carousel + daily Stories</span></td></tr>
-   250|      <tr><td>Comment reply rate</td><td>Near zero</td><td><span class="tag green">100% within 4 hours</span></td></tr>
-   251|      <tr><td>Brand voice</td><td>Corporate/polished</td><td><span class="tag green">@neema_bardi energy — raw, founder-led, documentary</span></td></tr>
-   252|      <tr><td>Cross-platform presence</td><td>Accounts exist, no strategy</td><td><span class="tag green">Reels auto-posted to TikTok + YT Shorts</span></td></tr>
-   253|    </table>
-   254|  </div>
-   255|</section>
-   256|
-   257|<footer class="foot">
-   258|  <p>Narin Fazlalipour · <a href="/">narinfazlalipour.com</a> · May 2026</p>
-   259|</footer>
-   260|
-   261|</body>
-   262|</html>
-   263|
+
+    <h3>The Before/After</h3>
+    <table>
+      <tr><td>974 followers, sporadic posting</td><td style="text-align:center">→</td><td>2,000–3,000 in 90 days</td></tr>
+      <tr><td>Corporate product demos</td><td style="text-align:center">→</td><td>@neema_bardi energy on @atllasai</td></tr>
+      <tr><td>All features, zero story</td><td style="text-align:center">→</td><td>Every post: hero → villain → transformation</td></tr>
+      <tr><td>IG-only (TikTok + YouTube dormant)</td><td style="text-align:center">→</td><td>Reels cross-posted everywhere</td></tr>
+      <tr><td>Zero competitive awareness</td><td style="text-align:center">→</td><td>Quarterly competitor audits</td></tr>
+      <tr><td>Ghosting comments</td><td style="text-align:center">→</td><td>100% reply within 4 hours</td></tr>
+      <tr><td>No analytics</td><td style="text-align:center">→</td><td>Monthly growth reports</td></tr>
+    </table>
+
+    <h3>The Numbers</h3>
+    <table>
+      <tr><td><strong>$2,500/mo</strong></td><td>Strategy + 4 Reels + 1 carousel + cross-posting</td></tr>
+      <tr><td><strong>$4,000/mo</strong></td><td>Above + daily Stories + community management + monthly reports</td></tr>
+      <tr><td><strong>$6,000/mo</strong></td><td>Above + TikTok/YouTube management + LinkedIn + competitor audits</td></tr>
+      <tr><td><strong>$2,000</strong> one-time</td><td>Setup — strategy doc, brand voice guide, content architecture, competitor dossier</td></tr>
+      <tr><td><strong>$200/mo</strong> travel</td><td>Weekly on-site shoot at Atllas HQ</td></tr>
+    </table>
+
+    <h3>What Makes Me Different</h3>
+    <p><strong>I know the account cold.</strong> I audited @atllasai before I wrote a single word of this proposal — every gap in here, I found myself.</p>
+    <p><strong>I studied @neema_bardi.</strong> I know the voice. The Atllas account will feel like an extension of Neema, not a separate corporate thing.</p>
+    <p><strong>I show up.</strong> Weekly on-site shoots at Atllas HQ. 60% Neema, 25% team, 15% agents. Real faces, real names, real moments.</p>
+    <p><strong>Competitive intelligence is baked in.</strong> Quarterly audits via AuditLayer. You'll know what competitors are up to before they know.</p>
+    <p><strong>Everything runs through story.</strong> Hero (agent) → villain (missed calls, dead leads) → transformation (AI closes while they sleep). If a post doesn't hit all three, it doesn't go up.</p>
+  </div>
+</section>
+
+<!-- SCOPE -->
+<section style="background: var(--paper);">
+  <div class="wrap">
+    <h2>Scope of Work</h2>
+    <p><strong>Primary Platform:</strong> Instagram (@atllasai — 974 followers baseline)</p>
+    <table>
+      <tr><th>Service</th><th>Detail</th></tr>
+      <tr><td>Content strategy</td><td>Monthly content calendar, content pillars, storytelling architecture</td></tr>
+      <tr><td>Content creation</td><td>4 Reels + 1 carousel per week — shot during weekly on-site sessions at Atllas HQ</td></tr>
+      <tr><td>Stories management</td><td>Daily Stories (5–7/week) — behind-the-scenes, polls, call-of-the-week breakdowns</td></tr>
+      <tr><td>On-site content shoot</td><td>Weekly visit to Atllas HQ to capture raw footage — Neema, team, office, product</td></tr>
+      <tr><td>Copywriting</td><td>Captions, hashtag strategy, bio optimization</td></tr>
+      <tr><td>Community management</td><td>Reply to all comments within 4 hours, DM engagement</td></tr>
+      <tr><td>Analytics &amp; reporting</td><td>Monthly performance report — growth, engagement, top-performing content</td></tr>
+      <tr><td>Competitive monitoring</td><td>Quarterly competitor audit (AI calling space)</td></tr>
+      <tr><td>Cross-platform posting</td><td>Same Reels posted to TikTok (@neemabardi) + YouTube Shorts — content only</td></tr>
+    </table>
+
+    <h3>Brand Voice: The Neema Vibe</h3>
+    <p>@atllasai will adopt the same <strong>raw, documentary-style founder energy</strong> that @neema_bardi has built across Instagram (10K) and TikTok (8.8K). This is not a corporate brand account. It's a startup run by a guy in his 20s, building in public, and the content should feel like it.</p>
+
+    <div class="callout">
+      <p>🎬 <strong>The rule:</strong> If it feels like a polished SaaS ad, kill it. If it feels like something Neema would post on @neema_bardi, ship it. If it doesn't show a real human face, ask why not.</p>
+    </div>
+
+    <table>
+      <tr><th>Role</th><th>Screen Time</th><th>Vibe</th></tr>
+      <tr><td><strong>Neema (CEO)</strong></td><td>60% — main face</td><td>Founder energy. Voice clone demos. Building in public. The guy.</td></tr>
+      <tr><td><strong>Team</strong></td><td>25% — supporting cast</td><td>Engineers shipping late. Sales closing deals. Support handling calls. Real humans.</td></tr>
+      <tr><td><strong>Agents (customers)</strong></td><td>15% — proof</td><td>Testimonials. Transformations. Before/after. They're the heroes.</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- CONTENT MIX -->
+<section>
+  <div class="wrap">
+    <h2>Content Mix &amp; Weekly Calendar</h2>
+    <p>Every piece of content runs through: <strong>hero (the agent) → villain (missed calls, dead leads) → transformation (AI books, agent closes).</strong> If it doesn't have all three, it doesn't ship.</p>
+
+    <table>
+      <tr><th>Pillar</th><th>%</th><th>Storytelling Angle</th><th>Weekly Output</th></tr>
+      <tr><td><strong>Product in Action</strong></td><td>35%</td><td>Not "here's a feature." It's "watch this agent sleep through 30 calls and wake up to 5 booked appointments." AI is the sidekick — the agent is the hero.</td><td>1–2 Reels</td></tr>
+      <tr><td><strong>Agent Transformations</strong></td><td>25%</td><td>Before/after: "I used to do 200 dials/day. Now my AI qualifies leads while I'm at my kid's soccer game." Real agents, real numbers, real faces.</td><td>1 Reel</td></tr>
+      <tr><td><strong>Industry Narrative</strong></td><td>25%</td><td>"Cold calling is dead. Here's the data." Positioning Atllas as inevitable. Meme format or voiceover. Not a slide deck.</td><td>1 Carousel or Reel</td></tr>
+      <tr><td><strong>Founder / Building in Public</strong></td><td>15%</td><td>Neema as the face. Voice clone demos. Late nights. Team cameos — engineers shipping, sales closing. Raw, personal, human.</td><td>1 Reel</td></tr>
+    </table>
+
+    <h3>Weekly Calendar</h3>
+    <table>
+      <tr><th>Day</th><th>Format</th><th>Story Arc</th></tr>
+      <tr><td><strong>Mon</strong></td><td>Reel</td><td>Agent transformation — before/after arc. Real agent, real numbers.</td></tr>
+      <tr><td><strong>Tue</strong></td><td>Carousel or Reel</td><td>Industry narrative — "3 stats that prove cold calling is dead."</td></tr>
+      <tr><td><strong>Wed</strong></td><td>Reel</td><td>Product in action — AI call demo. Short, punchy, documentary-style.</td></tr>
+      <tr><td><strong>Thu</strong></td><td>Reel</td><td>Founder BTS or team spotlight — real people, real moments from the weekly shoot.</td></tr>
+      <tr><td><strong>Fri</strong></td><td>Reel</td><td>Product in action or agent story — second demo or second transformation.</td></tr>
+      <tr><td><strong>Sat</strong></td><td>Stories</td><td>"Call of the week" breakdown. Polls. Real AI call snippet.</td></tr>
+      <tr><td><strong>Sun</strong></td><td>Stories</td><td>Industry reaction. Competitor news. "What we're watching."</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section style="background: var(--paper);">
+  <div class="wrap">
+    <h2>Pricing</h2>
+
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <div class="tier">Core</div>
+        <div class="price">$2,500<span>/mo</span></div>
+        <ul>
+          <li>Strategy + content calendar</li>
+          <li>4 Reels/week</li>
+          <li>1 carousel/week</li>
+          <li>Captions + hashtags</li>
+          <li>Cross-posting to TikTok &amp; YT</li>
+        </ul>
+      </div>
+      <div class="pricing-card featured">
+        <div class="tier">Growth</div>
+        <div class="price">$4,000<span>/mo</span></div>
+        <ul>
+          <li>Everything in Core</li>
+          <li>Daily Stories (5–7/week)</li>
+          <li>Community management</li>
+          <li>100% reply within 4hrs</li>
+          <li>Monthly performance report</li>
+        </ul>
+      </div>
+      <div class="pricing-card">
+        <div class="tier">Full-Stack</div>
+        <div class="price">$6,000<span>/mo</span></div>
+        <ul>
+          <li>Everything in Growth</li>
+          <li>TikTok management</li>
+          <li>YouTube Shorts management</li>
+          <li>LinkedIn thought leadership</li>
+          <li>Quarterly competitor audit</li>
+        </ul>
+      </div>
+    </div>
+
+    <p style="text-align:center; font-family: var(--font-mono); font-size: 0.85rem; color: var(--fg-muted); margin-top: 0.5rem;">
+      Setup fee: $2,000 one-time · Travel stipend: $200/mo · Bi-weekly invoicing, Net 15
+    </p>
+  </div>
+</section>
+
+<!-- TERMS -->
+<section>
+  <div class="wrap">
+    <h2>Key Terms</h2>
+
+    <table>
+      <tr><th>Term</th><th>Detail</th></tr>
+      <tr><td><strong>Duration</strong></td><td>90-day minimum, auto-renewing monthly. 30 days written notice to cancel.</td></tr>
+      <tr><td><strong>Kill fee</strong></td><td>If client terminates within first 90 days: 50% of remaining months' retainer.</td></tr>
+      <tr><td><strong>Approval model</strong></td><td>Reels &amp; Stories: no approval (speed keeps the vibe alive). Carousels: client review. Calendar: monthly approval.</td></tr>
+      <tr><td><strong>Non-exclusivity</strong></td><td>Narin can work with other clients — including adjacent industries. No direct competitors without disclosure.</td></tr>
+      <tr><td><strong>Content ownership</strong></td><td>Narin retains ownership until full payment. Upon payment: client owns all deliverables. Raw footage transfers upon payment.</td></tr>
+      <tr><td><strong>Non-payment</strong></td><td>If payment not received by Net 15, Narin may immediately pause all content creation. Paused days do not extend contract term.</td></tr>
+      <tr><td><strong>Confidentiality</strong></td><td>No disclosure of product roadmap, voice clone tech, customer data, or revenue figures. Survives termination for 2 years.</td></tr>
+      <tr><td><strong>Governing law</strong></td><td>State of California. Good-faith mediation before litigation.</td></tr>
+      <tr><td><strong>Liability cap</strong></td><td>Capped at total fees paid in preceding 3 months. Narin is an independent contractor, not an employee.</td></tr>
+      <tr><td><strong>Client responsibilities</strong></td><td>Brand assets, account access, tools (CapCut/Canva/AuditLayer), 2 agent testimonials/month, single POC, 1-week notice on product updates.</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- KPIs -->
+<section style="background: var(--paper);">
+  <div class="wrap">
+    <h2>Performance Targets</h2>
+    <table>
+      <tr><th>Metric</th><th>Baseline</th><th>90-Day Target</th></tr>
+      <tr><td>Follower growth</td><td>974</td><td><span class="tag green">2,000–3,000</span></td></tr>
+      <tr><td>Engagement rate</td><td>Unknown (&lt;2%)</td><td><span class="tag green">3–5%</span></td></tr>
+      <tr><td>Reels avg views</td><td>Unknown</td><td><span class="tag green">2,000+</span></td></tr>
+      <tr><td>Content output</td><td>~2–3 posts/week (sporadic)</td><td><span class="tag green">4 Reels + 1 carousel + daily Stories</span></td></tr>
+      <tr><td>Comment reply rate</td><td>Near zero</td><td><span class="tag green">100% within 4 hours</span></td></tr>
+      <tr><td>Brand voice</td><td>Corporate/polished</td><td><span class="tag green">@neema_bardi energy — raw, founder-led, documentary</span></td></tr>
+      <tr><td>Cross-platform presence</td><td>Accounts exist, no strategy</td><td><span class="tag green">Reels auto-posted to TikTok + YT Shorts</span></td></tr>
+    </table>
+  </div>
+</section>
+
+<footer class="foot">
+  <p>Narin Fazlalipour · <a href="/">narinfazlalipour.com</a> · May 2026</p>
+</footer>
+
+</body>
+</html>
