@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>@discovermescreen — Social Media Audit · AuditLayer</title>
+<title>@discovermescreen — Instagram Audit · AuditLayer</title>
 <style>
   :root {
     --bg: #0d1117; --surface: #161b22; --surface2: #1c2129;
     --border: #30363d; --text: #e6edf3; --text2: #8b949e;
     --accent: #58a6ff; --red: #f85149; --green: #3fb950;
-    --amber: #d29922; --purple: #a371f7; --teal: #0d9488;
+    --amber: #d29922; --purple: #a371f7;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
@@ -20,7 +20,7 @@
   }
   h1 { font-size: 2rem; font-weight: 700; margin-bottom: 4px; }
   h2 { font-size: 1.35rem; font-weight: 600; margin: 2.5rem 0 1rem; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
-  h3 { font-size: 1.1rem; font-weight: 600; margin: 1.5rem 0 0.75rem; color: var(--text); }
+  h3 { font-size: 1.1rem; font-weight: 600; margin: 1.5rem 0 0.75rem; }
   p { margin-bottom: 1rem; color: var(--text2); }
   .subtitle { color: var(--text2); font-size: 0.95rem; margin-bottom: 2rem; }
   .header { margin-bottom: 2rem; }
@@ -48,7 +48,7 @@
   .sw-card li strong { color: var(--text); }
   .score-bar-container { margin: 1rem 0; }
   .score-row { display: flex; align-items: center; margin: 6px 0; font-size: 0.9rem; }
-  .score-label { width: 170px; flex-shrink: 0; color: var(--text2); }
+  .score-label { width: 200px; flex-shrink: 0; color: var(--text2); }
   .score-track { flex: 1; height: 8px; background: var(--surface2); border-radius: 4px; overflow: hidden; }
   .score-fill { height: 100%; border-radius: 4px; }
   .score-num { width: 40px; text-align: right; font-weight: 600; color: var(--text); flex-shrink: 0; }
@@ -71,366 +71,175 @@
 <body>
 
 <header class="header">
-  <span class="badge">Social Media Audit</span>
-  <h1>mescreen™ (@discovermescreen)</h1>
-  <p class="subtitle">Instagram-primary health-tech brand · Mitochondrial at-home testing · AuditLayer · May 2026</p>
+  <span class="badge">Instagram Audit</span>
+  <h1>@discovermescreen</h1>
+  <p class="subtitle">mescreen™ — World's first at-home mitochondrial function test · AuditLayer · May 2026</p>
 </header>
 
 <!-- ==================== EXECUTIVE SUMMARY ==================== -->
 <h2>1. Executive Summary</h2>
 <p>
-  <strong>@discovermescreen</strong> is the Instagram presence of <strong>mescreen™</strong>, the world's first at-home mitochondrial function test — a product with genuine scientific pedigree (NASA Twin Study origins, 20+ years of mitochondrial research) and a polished consumer brand. With <strong>4K+ Instagram followers, 155 posts, and a $699 flagship product</strong>, mescreen sits at a fascinating inflection point: the science and brand identity are already stronger than most health-tech startups at this stage, but the social media engine that should be converting that credibility into audience growth is underbuilt. The account has the <em>hard part</em> done — proprietary technology, ISO 9001 certification, a 10X Health partnership, and leadership with real domain authority. What's missing is the content system that turns scientific authority into discoverable, shareable social media assets. This audit maps the gap and provides a phased roadmap to close it.
+  <strong>@discovermescreen</strong> is the Instagram presence of mescreen™ — the world's first at-home mitochondrial function test, built on NASA Twin Study technology and backed by 20+ years of mitochondrial research. With <strong>~4K followers and 155 posts</strong>, the account has the hard part done: a genuinely credible product, polished branding, and a $699 price point that signals premium science. But the Instagram strategy is underbuilt — irregular posting, low engagement relative to follower count, no founder-led content, and a missing customer story engine. This isn't a product problem. It's a content distribution problem. The science is better than the Instagram tells.
 </p>
 
-<!-- ==================== BRAND SNAPSHOT ==================== -->
-<h2>2. Brand Snapshot</h2>
+<!-- ==================== PROFILE SNAPSHOT ==================== -->
+<h2>2. Profile Snapshot</h2>
 <table class="data-table">
-  <tr><th>Brand</th><td>mescreen™ by Verséa Discovery</td></tr>
-  <tr><th>Instagram Handle</th><td>@discovermescreen</td></tr>
-  <tr><th>Product</th><td>At-home mitochondrial efficiency test ($699)</td></tr>
-  <tr><th>Parent Company</th><td>Verséa Health, Inc.</td></tr>
-  <tr><th>Founded</th><td>~2024</td></tr>
-  <tr><th>HQ</th><td>Tampa, FL</td></tr>
-  <tr><th>CEO / Co-Founder</th><td>Sean Fetcho</td></tr>
-  <tr><th>Key Leadership</th><td>Stephen Porada (President), Toby Moeller MD (CMO), James Olin (CCO), Hemal Patel PhD</td></tr>
-  <tr><th>Price Range</th><td>$549 – $1,200</td></tr>
-  <tr><th>Technology Origin</th><td>Originally developed for NASA's Twin Study</td></tr>
-  <tr><th>Key Partners</th><td>10X Health System (10X MitoScreen™)</td></tr>
-  <tr><th>Certification</th><td>ISO 9001</td></tr>
-</table>
-
-<!-- ==================== PLATFORM AUDIT ==================== -->
-<h2>3. Platform-by-Platform Audit</h2>
-<table class="data-table">
-  <tr>
-    <th>Platform</th><th>Handle</th><th>Followers</th><th>Content</th><th>Engagement</th><th>Verdict</th>
-  </tr>
-  <tr>
-    <td>Instagram</td>
-    <td>@discovermescreen</td>
-    <td><strong>4K+</strong></td>
-    <td>155 posts — product demos, unboxings, practitioner features, educational carousels, Reels</td>
-    <td>Low–moderate; individual posts range 5–94 likes; "comment X and I'll send you Y" posts drive comments</td>
-    <td><span class="verdict verdict-ok">Primary · Underleveraged</span></td>
-  </tr>
-  <tr>
-    <td>YouTube</td>
-    <td>@discovermescreen</td>
-    <td><strong>~50–150</strong> (est.)</td>
-    <td>~12 videos — product intro, practitioner welcome, podcast interviews, shorts</td>
-    <td>Very low — 50–1.1K views per video; shorts slightly better</td>
-    <td><span class="verdict verdict-weak">Neglected</span></td>
-  </tr>
-  <tr>
-    <td>TikTok</td>
-    <td>@mescreen</td>
-    <td><strong>109</strong></td>
-    <td>Few posts — lab visuals, product explainers</td>
-    <td>869 total likes; near-zero</td>
-    <td><span class="verdict verdict-weak">Dormant</span></td>
-  </tr>
-  <tr>
-    <td>X / Twitter</td>
-    <td>—</td>
-    <td><strong>No presence</strong></td>
-    <td>N/A</td>
-    <td>N/A</td>
-    <td><span class="verdict verdict-weak">Missing</span></td>
-  </tr>
-  <tr>
-    <td>LinkedIn</td>
-    <td>Verséa Discovery</td>
-    <td><strong>Company page</strong></td>
-    <td>Corporate updates, product announcements, leadership spotlights</td>
-    <td>Low; B2B-appropriate</td>
-    <td><span class="verdict verdict-ok">Adequate</span></td>
-  </tr>
-  <tr>
-    <td>Website</td>
-    <td>mescreen.com</td>
-    <td><strong>N/A</strong></td>
-    <td>Product pages, shopping cart, AI chatbot ("Mia"), testimonials, leadership page</td>
-    <td>Conversion-oriented; clean UX</td>
-    <td><span class="verdict verdict-strong">Strong</span></td>
-  </tr>
+  <tr><th>Handle</th><td>@discovermescreen</td></tr>
+  <tr><th>Followers</th><td>~4,000</td></tr>
+  <tr><th>Following</th><td>~1,100</td></tr>
+  <tr><th>Posts</th><td>155</td></tr>
+  <tr><th>Bio</th><td>World's 1st at-home mitochondrial test ⚡ Unlock your energy insights · Personalized reports · NASA-developed science</td></tr>
+  <tr><th>Link in Bio</th><td>mescreen.com</td></tr>
+  <tr><th>Content Mix</th><td>Product demos, unboxings, practitioner features, educational carousels, Reels</td></tr>
+  <tr><th>Engagement Range</th><td>~5–94 likes per post; comment-to-DM tactics drive replies</td></tr>
+  <tr><th>Posting Cadence</th><td>Irregular — no visible content calendar</td></tr>
 </table>
 <div class="data-notice">
-  ⚠️ <strong>Data note:</strong> Instagram metrics are approximate from indexed snapshots (Instagram login-walls all unauthenticated profile views as of May 2026). YouTube subscriber count and TikTok follower count are browser-verified. No third-party analytics tools were accessible for Instagram due to platform-wide viewer blockades.
+  ⚠️ <strong>Data note:</strong> Instagram login-walls all unauthenticated profile views as of May 2026. Metrics are approximate from indexed snapshots and search results. No third-party analytics tools were accessible.
 </div>
 
 <!-- ==================== STRENGTHS ==================== -->
-<h2>4. Strengths</h2>
+<h2>3. What's Working</h2>
 <div class="sw-grid">
   <div class="sw-card strengths">
-    <h3>What's Working</h3>
+    <h3>Strengths</h3>
     <ol>
-      <li><strong>NASA-origin science narrative</strong> — "Built on NASA Twin Study technology" is a one-sentence credibility unlock that most health startups can't claim</li>
-      <li><strong>Polished visual brand</strong> — "mescreen™" branding is clean, premium, and consistent across platforms</li>
-      <li><strong>Practitioner ecosystem</strong> — Separate product tiers for practitioners ($549–$599) create a built-in referral network</li>
-      <li><strong>10X Health partnership</strong> — Co-branded "10X MitoScreen" expands distribution into an established wellness brand's audience</li>
-      <li><strong>ISO 9001 certification</strong> — Rare for a health-tech startup; signals operational maturity to skeptics</li>
-      <li><strong>Leadership depth</strong> — CEO with multiple exits, double-board-certified CMO, 30-year pharma veteran president</li>
+      <li><strong>NASA-origin science narrative</strong> — "Built on NASA Twin Study technology" is a one-sentence credibility unlock</li>
+      <li><strong>Premium visual brand</strong> — "mescreen™" branding is clean, consistent, and signals scientific rigor</li>
       <li><strong>Product-market clarity</strong> — "Why you're tired" is a universal hook; mitochondrial dysfunction connects to energy, aging, brain fog</li>
-      <li><strong>Website is conversion-ready</strong> — Shopify-backed, AI chatbot, clear pricing, testimonials</li>
-      <li><strong>"Comment-to-engage" tactics</strong> — Posts like "Comment REPORT and I'll send you a sample" generate conversational engagement</li>
-      <li><strong>3–4 week results timeline creates natural re-engagement window</strong> — unboxing → waiting → results → interpretation = built-in content arc</li>
+      <li><strong>"Comment-to-engage" tactics</strong> — Posts like "Comment REPORT and I'll send you a sample report" generate conversational engagement</li>
+      <li><strong>17 distinct profiles</strong> — "We've developed 17 distinct mitochondrial profiles" is fantastic serializable content waiting to be deployed</li>
+      <li><strong>Leadership credibility</strong> — PhDs, double-board-certified CMO, founder with multiple exits — the faces behind this account have real authority</li>
+      <li><strong>3–4 week results timeline</strong> — Unboxing → waiting → results → interpretation = built-in content arc with natural re-engagement</li>
     </ol>
   </div>
   <div class="sw-card weaknesses">
-    <h3>What's Broken or Missing</h3>
+    <h3>What's Missing</h3>
     <ol>
-      <li><strong>No X/Twitter presence</strong> — The biohacking/longevity conversation lives heavily on X; complete absence is a strategic blind spot</li>
-      <li><strong>TikTok is functionally abandoned</strong> — 109 followers, no consistent posting; biohacking TikTok is exploding</li>
-      <li><strong>YouTube is a content graveyard</strong> — 50–150 view videos with no optimization; long-form trust-building is untapped</li>
-      <li><strong>Instagram engagement is low relative to follower count</strong> — 4K followers but single-digit likes on many posts suggest algorithmic reach suppression</li>
-      <li><strong>No visible content strategy</strong> — Posting appears reactive (product news, reposts) rather than built on a calendar with format variety</li>
-      <li><strong>Missing founder-led content</strong> — Sean Fetcho or Dr. Toby Moeller have significant personal credibility that isn't being deployed</li>
-      <li><strong>No educational pillar content</strong> — "What are mitochondria?" "Why does mitochondrial function decline?" These are search-demand topics with zero owned content</li>
-      <li><strong>Reddit is a missed opportunity</strong> — r/Biohacking, r/Supplements, r/cfs have active mitochondrial discussions; one Reddit post about mescreen exists with no brand response</li>
-      <li><strong>No customer story engine</strong> — The most powerful content ("my mescore was X, here's what I changed, here's what happened") is absent</li>
-      <li><strong>Handle fragmentation</strong> — @discovermescreen on IG/YT vs. @mescreen on TikTok creates brand confusion and dilutes cross-platform discovery</li>
+      <li><strong>No consistent posting cadence</strong> — Algorithm punishes irregular accounts; 4K followers with single-digit likes on multiple posts signals suppressed reach</li>
+      <li><strong>Missing founder-led content</strong> — Sean Fetcho and Dr. Toby Moeller have significant personal credibility that isn't deployed on camera</li>
+      <li><strong>No customer transformation stories</strong> — "My mescore was 42, I changed X, now it's 78" — the most powerful content format is entirely absent</li>
+      <li><strong>No educational pillar content</strong> — "What are mitochondria?" "Why does your energy crash at 3pm?" are search-demand topics with zero owned content</li>
+      <li><strong>Reels are underutilized</strong> — Instagram heavily favors Reels for discovery; the account doesn't post them consistently</li>
+      <li><strong>No Stories strategy</strong> — Polls, Q&A boxes, and behind-the-scenes are missing; Stories build the daily touchpoint</li>
+      <li><strong>No visible content strategy</strong> — Posting appears reactive rather than calendar-driven with format variety</li>
     </ol>
   </div>
 </div>
 
-<!-- ==================== ROOT CAUSE ANALYSIS ==================== -->
-<h2>5. Root Cause Analysis</h2>
-<h3>Why do these gaps exist?</h3>
+<!-- ==================== CONTENT ANALYSIS ==================== -->
+<h2>4. Content Analysis</h2>
 <table class="data-table">
-  <tr><th>Dimension</th><th>Reality</th><th>Social Media Gap</th></tr>
-  <tr><td>Team</td><td>Leadership is stacked with science + business talent; no visible social media/content hire</td><td>Content production requires dedicated ownership — PhDs and CEOs won't naturally post Reels</td></tr>
-  <tr><td>Product maturity</td><td>mescreen launched ~2024; still building product-market fit and distribution</td><td>Early-stage companies prioritize product over content; social media gets leftover energy</td></tr>
-  <tr><td>B2B vs DTC tension</td><td>Practitioner dropship model suggests B2B revenue may be primary; DTC is secondary</td><td>Content strategy looks different for B2B (LinkedIn, educational) vs DTC (Instagram, TikTok)</td></tr>
-  <tr><td>Scientific rigor vs social media speed</td><td>ISO 9001, NASA science, peer-reviewed claims — the brand value is precision</td><td>Science brands fear oversimplifying; the result is silence instead of accessible education</td></tr>
-</table>
-<p>
-  The core tension: <strong>mescreen's product story is better than its social media story.</strong> The science, team, and partnerships are genuinely impressive — but the social accounts operate like an afterthought. A $699 test with NASA origins should have more than 4K Instagram followers. This isn't a product problem; it's a content distribution problem.
-</p>
-
-<!-- ==================== PEER COMPARISON ==================== -->
-<h2>6. Peer Comparison</h2>
-<p style="color: var(--text2); font-size: 0.9rem;">Same-tier health-testing and biohacking brands operating with similar constraints: small teams, science-anchored products, building audience from scratch.</p>
-<table class="data-table">
-  <tr>
-    <th></th><th>@discovermescreen</th><th>@insidetracker</th><th>@function</th><th>Peer C — At-Home Diagnostic Startup (est.)</th>
-  </tr>
-  <tr>
-    <td><strong>Niche</strong></td><td>Mitochondrial testing</td><td>Blood biomarker tracking</td><td>Comprehensive lab testing</td><td>Single-biomarker at-home test</td></tr>
-  <tr>
-    <td><strong>Instagram Followers</strong></td><td>~4K</td><td>~135K</td><td>~703K</td><td>~3K–8K</td></tr>
-  <tr>
-    <td><strong>Content Format</strong></td><td>Product + educational</td><td>Educational carousels + influencer partnerships</td><td>Celebrity/influencer testimonials + lifestyle</td><td>Founder-led + educational</td></tr>
-  <tr>
-    <td><strong>Posting Cadence</strong></td><td>Irregular</td><td>Daily</td><td>Daily</td><td>2–3x/week</td></tr>
-  <tr>
-    <td><strong>Engagement Strategy</strong></td><td>Comment-to-DM</td><td>Carousel saves + influencer UGC</td><td>Celebrity halo + community</td><td>Founder personality + Q&A</td></tr>
-  <tr>
-    <td><strong>YouTube</strong></td><td>~12 videos, inactive</td><td>Moderate</td><td>Strong (podcast clips)</td><td>None or minimal</td></tr>
-  <tr>
-    <td><strong>TikTok</strong></td><td>Dormant (109)</td><td>Growing</td><td>Growing</td><td>Absent</td></tr>
-  <tr>
-    <td><strong>Key Gap vs mescreen</strong></td><td>—</td><td>20× larger; heavily funded</td><td>150× larger; celebrity-backed</td><td>Less scientific credibility</td></tr>
-</table>
-<div class="callout">
-  <strong>Why these peers?</strong> InsideTracker and Function Health represent the growth trajectory mescreen could follow — they started small, built trust through educational content, and scaled through influencer partnerships. They are not competitors (they test different biomarkers); they are <em>format peers</em>. The key insight: both grew by making complex science digestible, not by being the loudest voice in the room.
-</div>
-
-<!-- ==================== GROWTH BOTTLENECKS ==================== -->
-<h2>7. Growth Bottlenecks</h2>
-<table class="data-table">
-  <tr><th>Bottleneck</th><th>Severity</th><th>Fix Difficulty</th></tr>
-  <tr><td>No consistent content cadence — algorithmic reach penalizes irregular posting</td><td><span class="verdict verdict-weak">Critical</span></td><td>Medium</td></tr>
-  <tr><td>Instagram engagement rate appears low relative to follower base — content may not be reaching followers</td><td><span class="verdict verdict-weak">Critical</span></td><td>Medium</td></tr>
-  <tr><td>Zero presence on X/Twitter — the biohacking thought-leadership platform</td><td><span class="verdict verdict-ok">High</span></td><td>Low</td></tr>
-  <tr><td>TikTok abandonment — fastest-growing health content platform with lowest competition for mitochondrial niche</td><td><span class="verdict verdict-ok">High</span></td><td>Medium</td></tr>
-  <tr><td>No customer-generated content pipeline — missing the most credible content format</td><td><span class="verdict verdict-ok">High</span></td><td>Low</td></tr>
-  <tr><td>Handle inconsistency across platforms (discovermescreen vs mescreen)</td><td><span class="verdict verdict-ok">Medium</span></td><td>Low</td></tr>
-  <tr><td>YouTube channel has content but zero optimization — titles, thumbs, descriptions are not discoverable</td><td><span class="verdict verdict-ok">Medium</span></td><td>Low</td></tr>
+  <tr><th>Content Type</th><th>Frequency</th><th>Performance</th><th>Verdict</th></tr>
+  <tr><td>Product demos / unboxings</td><td>Moderate</td><td>Low–moderate likes; high story value</td><td><span class="verdict verdict-ok">Underleveraged</span></td></tr>
+  <tr><td>Educational carousels</td><td>Low</td><td>Good save potential if consistent</td><td><span class="verdict verdict-weak">Missing volume</span></td></tr>
+  <tr><td>Practitioner features</td><td>Occasional</td><td>Trust-building; B2B value</td><td><span class="verdict verdict-ok">Good format</span></td></tr>
+  <tr><td>Reels (short video)</td><td>Inconsistent</td><td>Discovery potential high; current output low</td><td><span class="verdict verdict-weak">Underinvested</span></td></tr>
+  <tr><td>Customer stories / before-after</td><td>None</td><td>N/A — highest-potential format, unused</td><td><span class="verdict verdict-weak">Missing entirely</span></td></tr>
+  <tr><td>Founder / team face-to-camera</td><td>None</td><td>N/A — highest-trust format, unused</td><td><span class="verdict verdict-weak">Missing entirely</span></td></tr>
+  <tr><td>Stories (daily engagement)</td><td>Unclear</td><td>Polls, Q&A, BTS — unclear if active</td><td><span class="verdict verdict-weak">Likely dormant</span></td></tr>
 </table>
 
-<!-- ==================== CONTENT GAPS ==================== -->
-<h2>8. Content Gaps</h2>
-<table class="data-table">
-  <tr><th>Missing Content Type</th><th>Platform(s)</th><th>Why It Matters</th></tr>
-  <tr><td><strong>Founder-led video</strong> — Sean Fetcho or Dr. Toby explaining mitochondrial science in 60 seconds</td><td>Instagram Reels, TikTok, YouTube Shorts</td><td>Personal authority compounds faster than brand authority; founders are the most underused asset</td></tr>
-  <tr><td><strong>Customer transformation stories</strong> — "My mescore was 42, I changed X, now it's 78"</td><td>Instagram, TikTok, YouTube</td><td>Social proof is the #1 conversion driver for health products; currently zero customer stories on social</td></tr>
-  <tr><td><strong>Educational pillar content</strong> — "What mitochondria actually do," "Why your energy crashes at 3pm," "Mitochondria and aging"</td><td>YouTube, Instagram carousels, blog → social</td><td>Creates search-discoverable assets that bring new audiences in; builds trust before the sale</td></tr>
-  <tr><td><strong>Behind-the-scenes lab content</strong> — Sample processing, scientist interviews, equipment walkthroughs</td><td>TikTok, Instagram Reels</td><td>Demystifies the $699 price tag; shows the "NASA science" instead of just claiming it</td></tr>
-  <tr><td><strong>Practitioner spotlight series</strong> — Interviews with healthcare providers using mescreen</td><td>YouTube, LinkedIn</td><td>Strengthens B2B channel; practitioners become distribution partners when featured</td></tr>
-</table>
-
-<!-- ==================== AUDIENCE PSYCHOLOGY ==================== -->
-<h2>9. Audience Psychology Patterns</h2>
+<!-- ==================== AUDIENCE ==================== -->
+<h2>5. Audience</h2>
 <div class="metric-grid">
   <div class="metric-card">
     <div class="num">🎯</div>
-    <div class="label"><strong>Primary Audience</strong><br>Biohackers & health optimizers (28–55) — already tracking biomarkers, willing to spend on self-quantification</div>
+    <div class="label"><strong>Primary</strong><br>Biohackers & health optimizers (28–55) — already tracking biomarkers, willing to spend on self-quantification</div>
   </div>
   <div class="metric-card">
     <div class="num">🔬</div>
-    <div class="label"><strong>Secondary Audience</strong><br>Health practitioners (MDs, NDs, functional medicine) — looking for new diagnostic tools to offer patients</div>
+    <div class="label"><strong>Secondary</strong><br>Health practitioners (MDs, NDs, functional medicine) — looking for new diagnostic tools for patients</div>
   </div>
   <div class="metric-card">
     <div class="num">🧠</div>
-    <div class="label"><strong>Tertiary Audience</strong><br>Chronically fatigued / "something is wrong" seekers — frustrated with normal bloodwork, searching for answers</div>
+    <div class="label"><strong>Tertiary</strong><br>Chronically fatigued seekers — frustrated with normal bloodwork, searching for answers</div>
   </div>
 </div>
 <table class="data-table" style="margin-top: 1rem;">
-  <tr><th>Segment</th><th>Motivation</th><th>Content That Works</th><th>Trust Signal</th></tr>
-  <tr><td>Biohackers</td><td>Optimization, edge, being first</td><td>Data-driven results, comparison charts, "17 distinct profiles" content</td><td>NASA origin, scientific citations</td></tr>
-  <tr><td>Practitioners</td><td>New revenue, better patient outcomes</td><td>Case studies, ROI, clinical integration guides</td><td>ISO 9001, peer-reviewed research, CMO credentials</td></tr>
-  <tr><td>Fatigue seekers</td><td>Answers, validation, hope</td><td>Empathetic storytelling, "you're not crazy" framing, transformation narratives</td><td>Customer testimonials, before/after mescores</td></tr>
+  <tr><th>Segment</th><th>Motivation</th><th>Content That Works</th></tr>
+  <tr><td>Biohackers</td><td>Optimization, edge, being first</td><td>Data-driven results, "17 profiles," comparison charts</td></tr>
+  <tr><td>Practitioners</td><td>New revenue, better outcomes</td><td>Case studies, clinical integration, ROI framing</td></tr>
+  <tr><td>Fatigue seekers</td><td>Answers, validation, hope</td><td>Empathetic storytelling, "you're not crazy," before/after mescores</td></tr>
 </table>
 
-<!-- ==================== VIRAL OPPORTUNITIES ==================== -->
-<h2>10. Viral Opportunities</h2>
-<ol style="color: var(--text2); padding-left: 18px;">
-  <li style="margin-bottom: 10px;"><strong style="color: var(--text);">"Your mitochondria have a score"</strong> — A Reel/TikTok that visualizes mescore™ as a simple number, with the hook: "You know your credit score. You know your IQ. Do you know your mitochondrial efficiency score?" This is the kind of personal-metric hook that travels.</li>
-  <li style="margin-bottom: 10px;"><strong style="color: var(--text);">Lab-to-living-room unboxing</strong> — Show the $699 kit arriving, the finger prick, the sample prep, the FedEx pickup, and the lab processing. Make the science feel like an event.</li>
-  <li style="margin-bottom: 10px;"><strong style="color: var(--text);">"17 distinct profiles" reveal series</strong> — One Reel per profile type. "Are you a Type 7? Here's what your mitochondria are telling you." Creates FOMO — people want to know their type.</li>
-  <li style="margin-bottom: 10px;"><strong style="color: var(--text);">CEO vs. CMO challenge</strong> — Sean Fetcho and Dr. Toby both take the test. Compare their mescores. The biohacker CEO vs. the double-board-certified pain specialist. Humanizes the leadership.</li>
-  <li style="margin-bottom: 10px;"><strong style="color: var(--text);">"What your energy crashes actually mean"</strong> — Educational carousel mapping common symptoms (3pm slump, brain fog, post-meal fatigue) to mitochondrial function. No product pitch — pure value.</li>
-  <li style="margin-bottom: 10px;"><strong style="color: var(--text);">Practitioner POV: "I started testing my patients' mitochondria"</strong> — A functional medicine doctor explains why they added mescreen to their practice and what changed. B2B + DTC in one piece.</li>
-  <li style="margin-bottom: 10px;"><strong style="color: var(--text);">Reddit AMA with Dr. Toby Moeller</strong> — r/Biohacking or r/Supplements. "I'm a double-board-certified pain specialist and CMO of a mitochondrial testing company. AMA about cellular energy."</li>
-  <li style="margin-bottom: 10px;"><strong style="color: var(--text);">The Dave Asprey conference reel</strong> — You already have footage from the biohacking conference. Cut it into a high-energy Reel with the hook: "What happens when 500 biohackers learn about their mitochondria."</li>
-</ol>
-
-<!-- ==================== ENGAGEMENT GROWTH STRATEGY ==================== -->
-<h2>11. Engagement Growth Strategy</h2>
+<!-- ==================== GROWTH BOTTLENECKS ==================== -->
+<h2>6. Growth Bottlenecks</h2>
 <table class="data-table">
-  <tr><th>Format</th><th>Recommended Cadence</th><th>Content Angle</th></tr>
-  <tr><td><strong>Instagram Reels</strong></td><td>3–4x/week</td><td>Short education ("mitochondria in 60 seconds"), founder clips, customer transformations, lab BTS</td></tr>
-  <tr><td><strong>Instagram Carousels</strong></td><td>2x/week</td><td>Educational deep-dives (saves > likes), "17 profiles" series, myth-busting, science explainers</td></tr>
-  <tr><td><strong>Instagram Stories</strong></td><td>Daily</td><td>Polls ("What time does your energy crash?"), Q&A boxes, behind-the-scenes, unboxing reposts</td></tr>
-  <tr><td><strong>TikTok</strong></td><td>3–5x/week</td><td>Same Reels content + trending audio remixes, "I tested my mitochondria and…" hooks, lab ASMR</td></tr>
-  <tr><td><strong>YouTube</strong></td><td>1 long-form + 2 shorts/week</td><td>Practitioner interviews, science deep-dives (20+ min), shorts from long-form cuts</td></tr>
-  <tr><td><strong>X/Twitter</strong></td><td>2–3x/day</td><td>Thread summaries of podcast appearances, mitochondrial science facts, engagement with biohacking community</td></tr>
+  <tr><th>Bottleneck</th><th>Severity</th><th>Fix Difficulty</th></tr>
+  <tr><td>No consistent Reel cadence — algorithmic reach suppressed</td><td><span class="verdict verdict-weak">Critical</span></td><td>Medium — needs content commitment</td></tr>
+  <tr><td>Low engagement rate signals content isn't resonating with followers</td><td><span class="verdict verdict-weak">Critical</span></td><td>Medium — needs format shift</td></tr>
+  <tr><td>No customer-generated content — missing the most credible format</td><td><span class="verdict verdict-ok">High</span></td><td>Low — just ask customers</td></tr>
+  <tr><td>Founder authority not deployed on camera</td><td><span class="verdict verdict-ok">High</span></td><td>Low — one filming session</td></tr>
+  <tr><td>Educational content gap — no search-discoverable assets</td><td><span class="verdict verdict-ok">High</span></td><td>Medium — requires writing/design</td></tr>
+  <tr><td>Stories likely dormant — missing daily audience touchpoint</td><td><span class="verdict verdict-ok">Medium</span></td><td>Low — 5 min/day</td></tr>
 </table>
-<div class="callout">
-  <strong>Cross-Platform Flywheel:</strong> YouTube long-form → Shorts/Reels/TikToks → Instagram carousel summaries → X thread summaries. One interview with a practitioner feeds all platforms for a week.
-</div>
 
 <!-- ==================== PERFORMANCE SCORE ==================== -->
-<h2>12. Performance Score</h2>
+<h2>7. Instagram Performance Score</h2>
 <div class="score-bar-container">
-  <div class="score-row"><span class="score-label">Branding & Messaging (10%)</span><div class="score-track"><div class="score-fill" style="width:85%;background:var(--green)"></div></div><span class="score-num">8.5</span></div>
-  <div class="score-row"><span class="score-label">Audience Alignment (15%)</span><div class="score-track"><div class="score-fill" style="width:60%;background:var(--amber)"></div></div><span class="score-num">9.0</span></div>
-  <div class="score-row"><span class="score-label">Content Strategy (20%)</span><div class="score-track"><div class="score-fill" style="width:30%;background:var(--red)"></div></div><span class="score-num">6.0</span></div>
-  <div class="score-row"><span class="score-label">Engagement Quality (15%)</span><div class="score-track"><div class="score-fill" style="width:35%;background:var(--red)"></div></div><span class="score-num">5.3</span></div>
-  <div class="score-row"><span class="score-label">Growth Potential (15%)</span><div class="score-track"><div class="score-fill" style="width:80%;background:var(--green)"></div></div><span class="score-num">12.0</span></div>
-  <div class="score-row"><span class="score-label">Platform Optimization (15%)</span><div class="score-track"><div class="score-fill" style="width:25%;background:var(--red)"></div></div><span class="score-num">3.8</span></div>
-  <div class="score-row"><span class="score-label">Conversion Strategy (5%)</span><div class="score-track"><div class="score-fill" style="width:50%;background:var(--amber)"></div></div><span class="score-num">2.5</span></div>
-  <div class="score-row"><span class="score-label">Competitive Positioning (5%)</span><div class="score-track"><div class="score-fill" style="width:70%;background:var(--amber)"></div></div><span class="score-num">3.5</span></div>
+  <div class="score-row"><span class="score-label">Branding & Visual Identity</span><div class="score-track"><div class="score-fill" style="width:85%;background:var(--green)"></div></div><span class="score-num">8.5/10</span></div>
+  <div class="score-row"><span class="score-label">Content Strategy</span><div class="score-track"><div class="score-fill" style="width:30%;background:var(--red)"></div></div><span class="score-num">3.0/10</span></div>
+  <div class="score-row"><span class="score-label">Posting Consistency</span><div class="score-track"><div class="score-fill" style="width:20%;background:var(--red)"></div></div><span class="score-num">2.0/10</span></div>
+  <div class="score-row"><span class="score-label">Engagement Rate</span><div class="score-track"><div class="score-fill" style="width:35%;background:var(--red)"></div></div><span class="score-num">3.5/10</span></div>
+  <div class="score-row"><span class="score-label">Format Variety (Reels/Carousels/Stories)</span><div class="score-track"><div class="score-fill" style="width:25%;background:var(--red)"></div></div><span class="score-num">2.5/10</span></div>
+  <div class="score-row"><span class="score-label">Founder/Team Presence</span><div class="score-track"><div class="score-fill" style="width:10%;background:var(--red)"></div></div><span class="score-num">1.0/10</span></div>
+  <div class="score-row"><span class="score-label">Customer Story Content</span><div class="score-track"><div class="score-fill" style="width:0%;background:var(--red)"></div></div><span class="score-num">0.0/10</span></div>
+  <div class="score-row"><span class="score-label">Educational / Pillar Content</span><div class="score-track"><div class="score-fill" style="width:20%;background:var(--red)"></div></div><span class="score-num">2.0/10</span></div>
   <div class="score-row" style="font-weight: 700; border-top: 1px solid var(--border); padding-top: 8px; margin-top: 4px;">
-    <span class="score-label">TOTAL</span><div class="score-track" style="background:transparent"></div><span class="score-num">50.5/100</span>
+    <span class="score-label">TOTAL</span><div class="score-track" style="background:transparent"></div><span class="score-num">22.5/80</span>
   </div>
 </div>
 <p style="font-size: 0.85rem; color: var(--text2); margin-top: 4px;">
-  <strong>Interpretation:</strong> 50.5 is a fair score for a science-first brand at this stage. Branding and growth potential are genuine strengths. Content strategy and platform optimization are dragging the score down — and those are the two dimensions most directly under the brand's control. The score is not a judgment of the product or team; it's a reflection of social media investment so far. The good news: the dimensions with the highest weights (Content Strategy 20%, Engagement 15%) have the most room to grow.
+  <strong>28/100 weighted.</strong> The brand identity and product credibility are real. Everything else — content strategy, consistency, engagement, format variety — is underbuilt. The good news: these are all fixable with a content calendar and a weekly filming habit. The product doesn't need to change. The posting needs to start.
 </p>
 
-<!-- ==================== ROAD TO 10K ==================== -->
-<h2>13. Road to 10K</h2>
-<p style="color: var(--text2); margin-bottom: 1rem;">90-day phased plan targeting 10K Instagram followers (from ~4K). Daily actions compound; the gap is execution consistency, not strategy.</p>
+<!-- ==================== RECOMMENDATIONS ==================== -->
+<h2>8. What to Do</h2>
 
-<div class="phase-card">
-  <h4>Phase 1: Foundation (Days 1–30) — "Show Up"</h4>
-  <ul>
-    <li>Publish 3 Reels and 2 carousels per week — no exceptions</li>
-    <li>Launch the "17 Profiles" carousel series (one per week)</li>
-    <li>Film 5 founder clips with Sean or Dr. Toby (batch in one afternoon)</li>
-    <li>Set up a simple content calendar (Notion/Google Sheets) with 4-week visibility</li>
-    <li>Post one YouTube Short per week from existing long-form content</li>
-    <li><strong>Success signal:</strong> Consistent posting cadence established; first carousel breaks 20+ saves</li>
-  </ul>
-</div>
-<div class="phase-card">
-  <h4>Phase 2: Engagement (Days 31–60) — "Build Conversation"</h4>
-  <ul>
-    <li>Reply to every comment within 2 hours — fire emoji replies are fine, genuine questions get real answers</li>
-    <li>Launch "Mescore Reveal" series — 3 customer stories per week (with permission)</li>
-    <li>Run 2 Instagram Live sessions: Dr. Toby does a mitochondrial Q&A</li>
-    <li>Post one Reddit comment per day in r/Biohacking (not promotional — genuinely helpful answers)</li>
-    <li>Cross-post Reels to TikTok (same content, native upload)</li>
-    <li><strong>Success signal:</strong> 3+ customer-submitted before/after stories; comment volume increases 2×</li>
-  </ul>
-</div>
-<div class="phase-card">
-  <h4>Phase 3: Amplification (Days 61–90) — "Reach New Audiences"</h4>
-  <ul>
-    <li>Identify 5 biohacking creators (5K–50K followers) for collaboration — guest Reels or joint Lives</li>
-    <li>Launch the X/Twitter presence — 2 threads per week summarizing podcast appearances or science insights</li>
-    <li>Optimize YouTube titles/thumbnails/descriptions for all 12 existing videos</li>
-    <li>Run a "Tag someone who needs to know their mescore" giveaway (kit giveaway drives tags → reach)</li>
-    <li>Publish one long-form YouTube video (practitioner interview or science deep-dive)</li>
-    <li><strong>Success signal:</strong> 10K Instagram followers; one Reel breaks 10K+ views; X account has 50+ followers</li>
-  </ul>
+<div class="callout" style="border-left-color: var(--green); margin-bottom: 1.5rem;">
+  <strong>🥇 1% Compounding Move:</strong> Post one Reel every single day for 30 days. No skips. Not "good" Reels — just one per day. The algorithm rewards consistency over quality at this stage. A daily Reel habit compounds harder than any strategy document.
 </div>
 
-<!-- ==================== HIGH-IMPACT RECOMMENDATIONS ==================== -->
-<h2>14. High-Impact Recommendations</h2>
-
 <div class="rec-card">
-  <span class="tier t1">★★★★★ Tier 1 — Do This Week</span>
-  <p style="margin-top: 4px;"><strong>1. Post 3 Reels this week. Any 3.</strong> The single biggest problem is posting inconsistency. The algorithm punishes dormancy. Three Reels — a product unboxing, a 60-second "what mitochondria do," and a repurposed conference clip — break the silence and signal to Instagram that the account is active. Don't overthink production quality. Ship.</p>
+  <span class="tier t1">★★★★★ Immediate</span>
+  <p style="margin-top: 4px;"><strong>Post 3 Reels this week.</strong> Product unboxing, 60-second "what mitochondria do," and a repurposed conference clip. Break the silence. Don't overthink production — ship.</p>
 </div>
 <div class="rec-card">
-  <span class="tier t1">★★★★★ Tier 1 — Do This Week</span>
-  <p style="margin-top: 4px;"><strong>2. Launch the X/Twitter account today.</strong> @discovermescreen or @mescreen — pick one and lock it. The biohacking conversation on X is worth 10× the follower count. One thoughtful thread from @hemalpatelphd or Sean Fetcho about mitochondrial function could bring more qualified traffic than a month of Instagram posting. X is where the people who will pay $699 for a test are already talking.</p>
+  <span class="tier t1">★★★★★ Immediate</span>
+  <p style="margin-top: 4px;"><strong>Film a "founder explains" batch.</strong> Sean or Dr. Toby on camera for 60 seconds each. "What is mitochondrial efficiency?" "Why did NASA need this?" "What does a mescore of 40 mean?" Batch 10 in one afternoon.</p>
 </div>
 <div class="rec-card">
-  <span class="tier t2">★★★★ Tier 2 — This Month</span>
-  <p style="margin-top: 4px;"><strong>3. Film a "founder explains" series.</strong> Sean Fetcho or Dr. Toby on camera for 60 seconds each, answering one question per clip: "What is mitochondrial efficiency?" "Why did NASA need this?" "What does a mescore of 40 mean?" Batch-record 10 clips in one session. These are reusable across every platform.</p>
+  <span class="tier t2">★★★★ This Month</span>
+  <p style="margin-top: 4px;"><strong>Launch the "17 Profiles" carousel series.</strong> One profile per week. "Are you a Type 7? Here's what your mitochondria are telling you." Creates FOMO — people want to know their type. Carousels = saves = algorithmic signal.</p>
 </div>
 <div class="rec-card">
-  <span class="tier t2">★★★★ Tier 2 — This Month</span>
-  <p style="margin-top: 4px;"><strong>4. Activate TikTok with 3 posts/week.</strong> The mitochondrial/biohacking niche on TikTok has almost no competition in the 1K–10K follower tier. Repurpose Instagram Reels. The same video that gets 300 views on Instagram could get 30K on TikTok with the right hook.</p>
+  <span class="tier t2">★★★★ This Month</span>
+  <p style="margin-top: 4px;"><strong>Build the customer story pipeline.</strong> Every person who gets a mescore should be asked: "Want to share your results? We'll feature your story." One transformation Reel is worth 50 product posts.</p>
 </div>
 <div class="rec-card">
-  <span class="tier t2">★★★★ Tier 2 — This Month</span>
-  <p style="margin-top: 4px;"><strong>5. Build the customer story pipeline.</strong> Every person who gets a mescore™ should receive an email: "Want to share your results? We'll feature your story." Offer a discount on their next test. One good transformation story is worth 50 product posts.</p>
+  <span class="tier t2">★★★★ This Month</span>
+  <p style="margin-top: 4px;"><strong>Run Stories daily.</strong> Polls ("What time does your energy crash?"), Q&A boxes, behind-the-scenes of the lab. 5 minutes a day builds the daily touchpoint that keeps you in followers' feeds.</p>
 </div>
 <div class="rec-card">
-  <span class="tier t3">★★★ Tier 3 — This Quarter</span>
-  <p style="margin-top: 4px;"><strong>6. Consolidate handles across platforms.</strong> @discovermescreen on IG/YT, @mescreen on TikTok — pick one and redirect the other. Handle consistency improves cross-platform discoverability and prevents confused users from following the wrong account.</p>
-</div>
-<div class="rec-card">
-  <span class="tier t3">★★★ Tier 3 — This Quarter</span>
-  <p style="margin-top: 4px;"><strong>7. Revive YouTube with 1 long-form video/month.</strong> The existing 12 videos already have ~1K views total — there's an audience. A monthly practitioner interview or science deep-dive gives the algorithm something to recommend. Each long-form video produces 3–5 shorts.</p>
-</div>
-
-<div class="callout" style="border-left-color: var(--green);">
-  <strong>🥇 1% Compounding Move:</strong> Post one Reel every single day for 30 days. No skips. Not "good" Reels — just one per day, any topic. The algorithm rewards consistency over quality at this stage. A daily Reel habit is the smallest action that produces the largest compounding return. If you do nothing else from this audit, do this.
+  <span class="tier t3">★★★ This Quarter</span>
+  <p style="margin-top: 4px;"><strong>5 educational carousels.</strong> "What mitochondria actually do." "Why energy crashes at 3pm." "5 things damaging your mitochondria." These live forever as save-bait and build trust before the sale.</p>
 </div>
 
 <!-- ==================== CONTENT IDEAS ==================== -->
-<h2>15. Content Ideas — 10 Specific Pieces</h2>
+<h2>9. 5 Reels You Could Post Tomorrow</h2>
 <ol style="color: var(--text2); padding-left: 18px;">
-  <li style="margin-bottom: 12px;"><strong style="color: var(--text);">"I tested my mitochondria and the results shocked me"</strong> — A Reel where a team member (or Sean) gets their mescore and reacts on camera. The hook is emotional, not scientific. People click "results shocked me" 10× more than "mitochondrial efficiency explained."</li>
-  <li style="margin-bottom: 12px;"><strong style="color: var(--text);">"The 3pm energy crash, explained in 60 seconds"</strong> — Animated or talking-head Reel connecting post-lunch fatigue to mitochondrial function. The hook targets a universal experience. End with: "Want to know YOUR mitochondrial efficiency? Link in bio."</li>
-  <li style="margin-bottom: 12px;"><strong style="color: var(--text);">"We built a test for NASA. Now it's in your mailbox."</strong> — Carousel: Slide 1 = NASA logo. Slide 2 = Twin Study explanation. Slide 3 = The mescreen kit on a kitchen counter. The contrast is the story.</li>
-  <li style="margin-bottom: 12px;"><strong style="color: var(--text);">"This is what a $699 lab test looks like from the inside"</strong> — BTS TikTok/Reel: sample arriving at the lab, going into the analyzer, the software dashboard lighting up. ASMR-style. No talking — just visuals and captions.</li>
-  <li style="margin-bottom: 12px;"><strong style="color: var(--text);">"5 things that damage your mitochondria (that you do every day)"</strong> — Educational carousel. Slide topics: poor sleep, chronic stress, ultra-processed food, alcohol, sitting all day. Save-bait content that positions mescreen as the solution without selling.</li>
-  <li style="margin-bottom: 12px;"><strong style="color: var(--text);">Dr. Toby Moeller: "What I wish every patient knew about energy"</strong> — YouTube video (15–20 min) or podcast-style interview. The double-board-certified CMO speaking directly to camera about mitochondrial health. This is trust-building content that lives forever.</li>
-  <li style="margin-bottom: 12px;"><strong style="color: var(--text);">"My mescore was 42. Here's what I changed."</strong> — Customer transformation Reel. Split-screen: before (low energy, brain fog) → after (sleep improved, workouts better). The most powerful ad mescreen will ever run.</li>
-  <li style="margin-bottom: 12px;"><strong style="color: var(--text);">"Why 10X Health partnered with us"</strong> — Carousel or short video explaining the 10X MitoScreen partnership. Borrows credibility from an established brand and answers the implicit question: "If this is legit, why haven't I heard of it?"</li>
-  <li style="margin-bottom: 12px;"><strong style="color: var(--text);">"The mitochondria chat series"</strong> — Weekly 60-second clip from practitioner interviews. One insight per clip. The podcast/interview content already exists (50-video playlist on YouTube) — it just needs to be clipped for short-form.</li>
-  <li style="margin-bottom: 12px;"><strong style="color: var(--text);">"You've had bloodwork. You've tracked your sleep. You've never tested THIS."</strong> — Hook-driven Reel introducing mitochondrial testing as the missing biomarker. The "you've tried everything but X" frame works for the fatigue-seeker audience.</li>
+  <li style="margin-bottom: 10px;"><strong style="color: var(--text);">"I tested my mitochondria and the results shocked me"</strong> — Team member gets their mescore on camera. Emotional hook, not scientific. People click "results shocked me" 10× more than "mitochondrial efficiency explained."</li>
+  <li style="margin-bottom: 10px;"><strong style="color: var(--text);">"The 3pm energy crash, explained in 60 seconds"</strong> — Talking-head connecting post-lunch fatigue to mitochondrial function. Universal experience. End with: "Want to know YOUR efficiency? Link in bio."</li>
+  <li style="margin-bottom: 10px;"><strong style="color: var(--text);">"We built a test for NASA. Now it's in your mailbox."</strong> — Cut from NASA Twin Study imagery to the mescreen kit on a kitchen counter. The contrast IS the story.</li>
+  <li style="margin-bottom: 10px;"><strong style="color: var(--text);">"This is what a $699 lab test looks like from the inside"</strong> — ASMR-style BTS: sample arriving, going into analyzer, software dashboard lighting up. No talking — just captions.</li>
+  <li style="margin-bottom: 10px;"><strong style="color: var(--text);">"Your mitochondria have a score"</strong> — Hook: "You know your credit score. You know your IQ. Do you know your mitochondrial efficiency score?" Personal-metric hook that travels.</li>
 </ol>
-
-<!-- ==================== AUDIT CADENCE ==================== -->
-<h2>16. Audit Cadence</h2>
-<table class="data-table">
-  <tr><th>Frequency</th><th>What to Review</th><th>Who Owns It</th></tr>
-  <tr><td><strong>Weekly</strong></td><td>Top 3 performing posts by reach, saves, and comments; adjust next week's content based on what resonated</td><td>Social media lead</td></tr>
-  <tr><td><strong>Monthly</strong></td><td>Follower growth rate, engagement rate trends, platform-by-platform content performance, content calendar adherence</td><td>Marketing lead</td></tr>
-  <tr><td><strong>Quarterly</strong></td><td>Full re-audit: updated scores, peer comparison refresh, strategy pivot recommendations, platform expansion decisions</td><td>AuditLayer or internal</td></tr>
-  <tr><td><strong>Event-Triggered</strong></td><td>Re-audit after: product launch, major partnership announcement, crossing 10K/25K follower milestones, or leadership change</td><td>On-demand</td></tr>
-</table>
 
 <div class="footer-note">
   <p>
-    <strong>Methodology:</strong> This audit was conducted on May 27, 2026 using publicly available data from Instagram (indexed snapshots — live profile behind login wall), YouTube, TikTok, LinkedIn, company website (mescreen.com), parent company website (versea.com), press releases, and podcast appearances. Engagement metrics are approximate where platform APIs were inaccessible. Peer comparisons use publicly available follower counts and observable content strategies.<br><br>
+    <strong>Methodology:</strong> This audit was conducted on May 27, 2026 using publicly available Instagram data (indexed snapshots — live profile behind login wall). Engagement metrics are approximate. Peer context drawn from the biohacking and at-home testing category.<br><br>
     Generated by <strong>AuditLayer</strong> — social media competitive intelligence for evidence-based health, wellness, and biohacking creators.
   </p>
 </div>
