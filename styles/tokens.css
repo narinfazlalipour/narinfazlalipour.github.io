@@ -1,0 +1,66 @@
+/* ═══════════════════════════════════════════════════════════════
+   Design Tokens — Narin Fazlalipour
+   Palette: Deep Royal Blue + Warm Neutral Ground
+   Typography: Times New Roman / Garamond serif core
+   ═══════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ── Core Palette ── */
+  --royal-deep:    #0B1A3B;   /* deepest navy, near-black */
+  --royal-dark:    #132850;   /* dark royal, section headers */
+  --royal:         #1E3A6E;   /* primary royal blue */
+  --royal-accent:  #2C5AA0;   /* bright accent blue, links */
+  --royal-light:   #4A7CC9;   /* hover / interaction blue */
+  --royal-soft:    #D6E4F5;   /* pale blue tint, card backgrounds */
+  --royal-subtle:  #EDF3FA;   /* barely-there blue, alt sections */
+
+  /* ── Neutrals ── */
+  --cream:         #FBFAF7;   /* paper ground */
+  --linen:         #F4F0EA;   /* warm off-white alt */
+  --warm-gray:     #6B6560;   /* muted secondary text */
+  --ink:           #1A1A1A;   /* primary text */
+  --ink-light:     #4A4A4A;   /* softer text */
+  --rule:          rgba(26, 26, 26, 0.10); /* dividers */
+
+  /* ── Semantic Mapping ── */
+  --bg:            var(--cream);
+  --bg-alt:        var(--linen);
+  --bg-card:       var(--royal-subtle);
+  --fg:            var(--ink);
+  --fg-muted:      var(--warm-gray);
+  --accent:        var(--royal-accent);
+  --accent-hover:  var(--royal-light);
+  --accent-dark:   var(--royal);
+  --border:        rgba(26, 26, 26, 0.12);
+  --border-accent: rgba(44, 90, 160, 0.25);
+
+  /* ── Typography ── */
+  --font-serif:    'Cormorant Garamond', 'Times New Roman', Georgia, serif;
+  --font-sans:     'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono:     'JetBrains Mono', 'IBM Plex Mono', ui-monospace, monospace;
+
+  /* ── Fluid Type Scale ── */
+  --t-display:     clamp(2.6rem, 7vw, 5.5rem);
+  --t-h1:          clamp(1.8rem, 4vw, 2.8rem);
+  --t-h2:          clamp(1.3rem, 2.2vw, 1.8rem);
+  --t-h3:          clamp(1.05rem, 1.4vw, 1.25rem);
+  --t-body:        clamp(0.95rem, 1.05vw, 1.1rem);
+  --t-small:       0.82rem;
+  --t-xs:          0.7rem;
+
+  /* ── Motion ── */
+  --ease:          cubic-bezier(0.22, 1, 0.36, 1);
+  --slow:          600ms;
+  --med:           300ms;
+  --fast:          150ms;
+
+  /* ── Layout ── */
+  --maxw:          1000px;
+  --gutter:        clamp(1.25rem, 5vw, 3rem);
+  --radius:        8px;
+  --radius-lg:     14px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --slow: 1ms; --med: 1ms; --fast: 1ms; }
+}
