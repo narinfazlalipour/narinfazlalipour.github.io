@@ -2,7 +2,7 @@
    Main JS — Tabs · Progress · A11y
    ═══════════════════════════════════════════════════════════════ */
 
-const VALID_TABS = ['narin', 'medicine', 'media', 'publications'];
+const VALID_TABS = ['narin', 'medicine', 'media', 'publications', 'projects'];
 
 document.addEventListener('DOMContentLoaded', () => {
   const tabBtns   = Array.from(document.querySelectorAll('.tab-btn'));
@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function updateProgressVisibility(tabName) {
     if (!progress) return;
     /* show on long content tabs */
-    const show = tabName === 'medicine' || tabName === 'media';
+    const show = tabName === 'medicine' || tabName === 'media' || tabName === 'projects';
     progress.classList.toggle('is-active', show);
   }
 
