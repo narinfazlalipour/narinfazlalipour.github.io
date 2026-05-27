@@ -1,0 +1,62 @@
+/* -------------------------------------------------------------------------
+   Design System Tokens — Narin Fazlalipour Portfolio
+   Lifted from mood boards: chocolate, umber, sky blue, cream, warm gold, ink
+   ------------------------------------------------------------------------- */
+
+:root {
+  /* Core Color Palette */
+  --ink:          #130907;   /* deep black-brown */
+  --chocolate:    #251612;   /* primary text, deep tone */
+  --umber:        #8B3A1C;   /* dark terracotta, emotional highlight */
+  --ember:        #D98A4F;   /* warm gold, candle core */
+  --candle:       #F5C599;   /* light gold, warm glow */
+  --sky:          #7B8C9C;   /* slate blue, clinical/lab focus */
+  --twilight:     #2A3247;   /* deep navy-slate, dark sections */
+  --beige:        #9E8875;   /* earthy brown-grey */
+  --linen:        #EFE9DB;   /* soft paper secondary */
+  --cream:        #FBF9F6;   /* paper ground primary */
+  --paper-grain:  rgba(37, 22, 18, 0.05);
+
+  /* Light Theme Semantic Mapping */
+  --bg:           var(--cream);
+  --bg-alt:       var(--linen);
+  --bg-dark:      var(--ink);
+  --fg:           var(--chocolate);
+  --fg-muted:     #6E5A54;
+  --rule:         rgba(37, 22, 18, 0.12);
+  --accent:       var(--umber);
+  --accent-glow:  rgba(139, 58, 28, 0.15);
+  --border:       rgba(37, 22, 18, 0.18);
+
+  /* Typography Scales */
+  --font-serif:   'Cormorant Garamond', 'EB Garamond', Georgia, serif;
+  --font-sans:    'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono:    'JetBrains Mono', 'IBM Plex Mono', ui-monospace, monospace;
+
+  /* Clamped Fluid Typography */
+  --t-display:    clamp(2.8rem, 8vw, 6.5rem);
+  --t-h1:         clamp(2rem, 4.5vw, 3.2rem);
+  --t-h2:         clamp(1.4rem, 2.5vw, 2rem);
+  --t-body:       clamp(0.95rem, 1.05vw, 1.1rem);
+  --t-small:      0.82rem;
+  --t-xs:         0.7rem;
+
+  /* Motion & Easing */
+  --ease:         cubic-bezier(0.22, 1, 0.36, 1);
+  --slow:         800ms;
+  --med:          400ms;
+  --fast:         200ms;
+
+  /* Layout */
+  --maxw:         1200px;
+  --gutter:       clamp(1.25rem, 5vw, 3.5rem);
+}
+
+/* Reduced Motion Override */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --slow: 1ms;
+    --med: 1ms;
+    --fast: 1ms;
+  }
+}

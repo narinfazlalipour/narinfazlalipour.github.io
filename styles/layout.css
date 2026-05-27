@@ -1,0 +1,191 @@
+/* -------------------------------------------------------------------------
+   Layout Framework & Navigation — Narin Fazlalipour Portfolio
+   ------------------------------------------------------------------------- */
+
+/* ---------- Fixed Header / Masthead ---------- */
+.mast {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem var(--gutter);
+  background: linear-gradient(to bottom, var(--bg) 60%, transparent);
+  transition: background var(--slow) var(--ease);
+}
+
+.mast .brand {
+  font-family: var(--font-mono);
+  font-size: var(--t-small);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fg);
+  border-bottom: none;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+/* Pulsing aura next to the brand name representing her pulse/presence */
+.mast .brand::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  background: var(--accent);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--accent);
+  animation: pulse-dot 3s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.5); opacity: 0.4; }
+}
+
+/* Navigation area */
+.mast nav {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.mast nav a {
+  font-family: var(--font-mono);
+  font-size: var(--t-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  border-bottom: none;
+}
+
+.mast nav a:hover {
+  color: var(--accent);
+}
+
+/* -------------------------------------------------------------------------
+   Physical Mode Switcher (Pill Style)
+   ------------------------------------------------------------------------- */
+.mode-switch-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.mode-switch {
+  position: relative;
+  display: inline-flex;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 30px;
+  padding: 3px;
+  cursor: pointer;
+  user-select: none;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.mode-btn {
+  position: relative;
+  z-index: 2;
+  font-family: var(--font-mono);
+  font-size: var(--t-xs);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  color: var(--fg-muted);
+  background: none;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: color var(--med) var(--ease);
+}
+
+/* Active sliding background indicator */
+.mode-indicator {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  bottom: 3px;
+  width: calc(50% - 3px);
+  background: var(--fg);
+  border-radius: 20px;
+  z-index: 1;
+  transition: transform var(--med) cubic-bezier(0.25, 1, 0.5, 1);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+/* Color states when toggle shifts */
+body.mode-narrative .mode-btn.btn-narrative {
+  color: var(--bg);
+}
+
+body.mode-evidence .mode-btn.btn-evidence {
+  color: var(--bg);
+}
+
+body.mode-evidence .mode-indicator {
+  transform: translateX(100%);
+}
+
+/* In dark sections, adjust mast styling */
+body.theme-dark .mast {
+  background: linear-gradient(to bottom, var(--bg-dark) 60%, transparent);
+}
+
+/* -------------------------------------------------------------------------
+   Dual Mode Page Routing Displays
+   ------------------------------------------------------------------------- */
+.mode-narrative-container,
+.mode-evidence-container {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--med) var(--ease), visibility var(--med) var(--ease);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  pointer-events: none;
+}
+
+/* When Narrative is active */
+body.mode-narrative .mode-narrative-container {
+  position: relative;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* When Evidence is active */
+body.mode-evidence .mode-evidence-container {
+  position: relative;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* Hide inactive mode headers from screen readers */
+body.mode-narrative .mode-evidence-container,
+body.mode-evidence .mode-narrative-container {
+  display: none;
+}
+
+/* Responsive grid adjustments */
+@media (max-width: 768px) {
+  .mast {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+    position: absolute; /* scrolling header on mobile to save space */
+    background: transparent;
+  }
+  .mast nav {
+    width: 100%;
+    justify-content: space-between;
+  }
+}

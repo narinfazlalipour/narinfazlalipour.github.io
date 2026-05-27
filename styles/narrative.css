@@ -1,0 +1,643 @@
+/* -------------------------------------------------------------------------
+   Narrative Mode CSS — Narin Fazlalipour Portfolio
+   Includes Hero, Breathing Orb, Brain-Heart Seam, Couch, Timeline
+   ------------------------------------------------------------------------- */
+
+/* ---------- Hero Narrative ---------- */
+.hero-narrative {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-top: 8rem;
+  overflow: hidden;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+@media (min-width: 900px) {
+  .hero-grid {
+    grid-template-columns: 1.2fr 1fr;
+  }
+}
+
+.hero-title {
+  font-size: var(--t-display);
+  font-weight: 400;
+  line-height: 0.95;
+  color: var(--chocolate);
+  margin-bottom: 2rem;
+}
+
+.hero-title span {
+  display: block;
+}
+
+.hero-title em {
+  font-style: italic;
+  color: var(--umber);
+}
+
+.hero-intro {
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--fg-muted);
+  max-width: 42ch;
+  margin-bottom: 2.5rem;
+}
+
+/* ---------- Coherent Breathing Orb ---------- */
+.breath-section {
+  background: var(--bg-alt);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+
+.breath-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+@media (min-width: 800px) {
+  .breath-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.breath-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.breath-orb-wrapper {
+  position: relative;
+  width: clamp(240px, 30vw, 340px);
+  height: clamp(240px, 30vw, 340px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* The expanding core */
+.breath-orb {
+  position: absolute;
+  width: 70%;
+  height: 70%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%,
+              var(--candle) 0%,
+              var(--ember) 40%,
+              var(--umber) 80%,
+              transparent 100%);
+  filter: blur(1px);
+  box-shadow: 0 10px 40px rgba(139, 58, 28, 0.25);
+  animation: breathe-cycle 10s ease-in-out infinite; /* default Coherent: 5s in, 5s out */
+  transform-origin: center;
+  will-change: transform, opacity;
+}
+
+/* Outer expanding ring */
+.breath-ring {
+  position: absolute;
+  width: 90%;
+  height: 90%;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  animation: breathe-ring-cycle 10s ease-in-out infinite;
+  transform-origin: center;
+  will-change: transform, opacity;
+}
+
+/* The instructional text at the center of the orb */
+.breath-prompt {
+  position: relative;
+  z-index: 5;
+  font-family: var(--font-mono);
+  font-size: var(--t-small);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--cream);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+  pointer-events: none;
+  animation: breathe-text-cycle 10s ease-in-out infinite;
+}
+
+/* Custom Tempo Switcher */
+.breath-controls {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.breath-btn {
+  font-family: var(--font-mono);
+  font-size: var(--t-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 8px 16px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  color: var(--fg-muted);
+  cursor: pointer;
+  transition: all var(--fast) var(--ease);
+}
+
+.breath-btn.active {
+  border-color: var(--umber);
+  color: var(--fg);
+  background: rgba(139, 58, 28, 0.05);
+}
+
+/* Keyframes for Coherent Breathe (Default 10s total: 50% scale up, 50% scale down) */
+@keyframes breathe-cycle {
+  0%, 100% { transform: scale(0.72); opacity: 0.75; }
+  50% { transform: scale(1.0); opacity: 1; }
+}
+
+@keyframes breathe-ring-cycle {
+  0%, 100% { transform: scale(0.9); opacity: 0.25; }
+  50% { transform: scale(1.15); opacity: 0.8; }
+}
+
+@keyframes breathe-text-cycle {
+  0%, 100% { opacity: 0.8; content: "Inhale"; }
+  50% { opacity: 1; content: "Exhale"; }
+}
+
+/* ---------- Brain-Heart Seam ---------- */
+.seam-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+@media (min-width: 900px) {
+  .seam-grid {
+    grid-template-columns: 1fr 1.2fr;
+  }
+}
+
+.seam-interactive {
+  position: relative;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  height: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+}
+
+.seam-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: crosshair;
+}
+
+.seam-instruction {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: var(--t-xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* ---------- Yellow Couch Sanctuary ---------- */
+.couch-sanctuary {
+  background: var(--ink);
+  color: var(--linen);
+  overflow: hidden;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+.couch-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+@media (min-width: 900px) {
+  .couch-grid {
+    grid-template-columns: 1.2fr 1fr;
+  }
+}
+
+.couch-text h2 {
+  color: var(--candle);
+  font-style: italic;
+  font-size: var(--t-h1);
+}
+
+.couch-illustration-wrapper {
+  position: relative;
+  height: 340px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid rgba(245, 197, 153, 0.12);
+  border-bottom: 1px solid rgba(245, 197, 153, 0.12);
+  background: radial-gradient(ellipse at center, rgba(217, 138, 79, 0.08) 0%, transparent 70%);
+}
+
+.couch-silhouette {
+  width: 320px;
+  height: 150px;
+  fill: none;
+  stroke: var(--ember);
+  stroke-width: 1.5;
+  cursor: pointer;
+  filter: drop-shadow(0 0 8px rgba(217, 138, 79, 0.3));
+  transition: transform var(--med) var(--ease), stroke var(--med) var(--ease), filter var(--med) var(--ease);
+}
+
+.couch-silhouette:hover {
+  transform: scale(1.06);
+  stroke: var(--candle);
+  filter: drop-shadow(0 0 15px rgba(245, 197, 153, 0.6));
+}
+
+.couch-hint {
+  position: absolute;
+  bottom: 16px;
+  font-family: var(--font-mono);
+  font-size: var(--t-xs);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(245, 197, 153, 0.4);
+  pointer-events: none;
+}
+
+/* Fullscreen Quote Overlay */
+.couch-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(19, 9, 7, 0.96);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--slow) var(--ease), visibility var(--slow) var(--ease);
+}
+
+.couch-overlay.is-visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.couch-overlay-content {
+  max-width: 680px;
+  width: 90%;
+  text-align: center;
+  padding: 2rem;
+}
+
+.couch-quote {
+  font-size: clamp(1.5rem, 3.5vw, 2.3rem);
+  font-style: italic;
+  line-height: 1.45;
+  color: var(--cream);
+  margin-bottom: 2rem;
+  min-height: 140px; /* prevent jumps during typing */
+}
+
+.couch-quote-cite {
+  font-family: var(--font-mono);
+  font-size: var(--t-small);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--candle);
+  display: block;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity var(--slow) var(--ease), transform var(--slow) var(--ease);
+}
+
+.couch-quote-cite.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.couch-close-btn {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  background: none;
+  border: none;
+  color: var(--candle);
+  font-family: var(--font-mono);
+  font-size: var(--t-xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 8px 16px;
+  border: 1px solid rgba(245, 197, 153, 0.3);
+  border-radius: 20px;
+  transition: all var(--fast) var(--ease);
+}
+
+.couch-close-btn:hover {
+  background: var(--candle);
+  color: var(--ink);
+}
+
+/* Drifting particles background in overlay */
+.couch-particles {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* ---------- Timeline Journey ---------- */
+.journey-section {
+  padding-bottom: 10rem;
+}
+
+.timeline-container {
+  position: relative;
+  max-width: 800px;
+  margin: 4rem auto 0;
+  padding-left: clamp(2.5rem, 8vw, 6rem);
+}
+
+/* The vertical thread line */
+.timeline-line {
+  position: absolute;
+  top: 0;
+  left: 7.5px;
+  width: 1px;
+  height: 100%;
+  background: var(--rule);
+}
+
+/* Dynamic glowing line drawn on scroll */
+.timeline-line-glow {
+  position: absolute;
+  top: 0;
+  left: 7.5px;
+  width: 1.5px;
+  height: 0%; /* updated by JS */
+  background: linear-gradient(to bottom, var(--accent), var(--ember));
+  box-shadow: 0 0 8px var(--ember);
+}
+
+.timeline-station {
+  position: relative;
+  margin-bottom: 4.5rem;
+}
+
+.timeline-station:last-child {
+  margin-bottom: 0;
+}
+
+/* The circular node dot on the line */
+.timeline-node {
+  position: absolute;
+  left: -48.5px; /* aligns directly over line at 7.5px when container has padding */
+  top: 6px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid var(--border);
+  z-index: 10;
+  transition: border-color var(--med) var(--ease), background var(--med) var(--ease), box-shadow var(--med) var(--ease);
+}
+
+/* Active node state */
+.timeline-station.active .timeline-node {
+  border-color: var(--accent);
+  background: var(--ember);
+  box-shadow: 0 0 10px var(--ember);
+}
+
+.timeline-meta {
+  font-family: var(--font-mono);
+  font-size: var(--t-xs);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.timeline-title {
+  font-size: var(--t-h2);
+  font-weight: 500;
+  margin-bottom: 0.8rem;
+  cursor: pointer;
+  display: inline-block;
+  transition: color var(--fast) var(--ease);
+}
+
+.timeline-title em {
+  font-style: italic;
+  color: var(--umber);
+}
+
+.timeline-title:hover {
+  color: var(--umber);
+}
+
+.timeline-summary {
+  font-family: var(--font-sans);
+  font-size: 0.98rem;
+  line-height: 1.6;
+  color: var(--fg-muted);
+  max-width: 60ch;
+  margin-bottom: 1rem;
+}
+
+.timeline-toggle-trigger {
+  font-family: var(--font-mono);
+  font-size: var(--t-xs);
+  letter-spacing: 0.05em;
+  color: var(--accent);
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.timeline-toggle-trigger::after {
+  content: "+";
+  font-size: 1.1em;
+  transition: transform var(--med) var(--ease);
+}
+
+.timeline-station.open .timeline-toggle-trigger::after {
+  transform: rotate(45deg);
+}
+
+/* Collapsible Handwritten-Style Reflection Note */
+.reflection-note-wrapper {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height var(--slow) cubic-bezier(0.22, 1, 0.36, 1), opacity var(--med) var(--ease);
+  margin-top: 0;
+}
+
+.timeline-station.open .reflection-note-wrapper {
+  max-height: 500px;
+  opacity: 1;
+  margin-top: 1.5rem;
+}
+
+/* Textured parchment card */
+.reflection-note {
+  background: #FCF7EE; /* slightly warmer parchment */
+  border-left: 2px solid var(--umber);
+  padding: 1.5rem 1.75rem;
+  border-radius: 0 8px 8px 0;
+  box-shadow:
+    inset 0 0 20px rgba(37,22,18,0.02),
+    0 4px 15px rgba(37, 22, 18, 0.04);
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: #3D2923; /* warmer brown ink */
+  font-style: italic;
+  max-width: 58ch;
+  transform: rotate(-0.5deg); /* very slight organic tilt */
+  transform-origin: left top;
+  position: relative;
+}
+
+.reflection-note::before {
+  content: "✦";
+  position: absolute;
+  top: 1rem;
+  right: 1.25rem;
+  font-size: 0.8rem;
+  color: rgba(139, 58, 28, 0.25);
+}
+
+/* Adjust timeline line coordinate offset on smaller screens */
+@media (max-width: 600px) {
+  .timeline-container {
+    padding-left: 2rem;
+  }
+  .timeline-line,
+  .timeline-line-glow {
+    left: 4.5px;
+  }
+  .timeline-node {
+    left: -27.5px;
+    width: 12px;
+    height: 12px;
+    top: 6px;
+  }
+}
+
+/* ---------- Words (Scripture / Quotes Rotator) ---------- */
+.words-section {
+  background: linear-gradient(180deg, var(--ink) 0%, #170C09 100%);
+  color: var(--linen);
+  text-align: center;
+  overflow: hidden;
+  padding: clamp(5rem, 12vh, 9rem) 0;
+}
+
+.words-section .eyebrow {
+  color: var(--candle);
+}
+
+.scripture-stack {
+  position: relative;
+  margin: 3rem auto 0;
+  min-height: 240px;
+  max-width: 700px;
+}
+
+.scripture-stack .scripture {
+  position: absolute;
+  inset: 0;
+  margin: 0 auto;
+  opacity: 0;
+  transition: opacity 1.2s var(--ease);
+  pointer-events: none;
+}
+
+.scripture-stack .scripture.is-active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.scripture {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1.45rem, 3vw, 2.3rem);
+  line-height: 1.4;
+  color: var(--cream);
+  max-width: 24ch;
+}
+
+.scripture cite {
+  display: block;
+  margin-top: 1.5rem;
+  font-style: normal;
+  font-family: var(--font-mono);
+  font-size: var(--t-xs);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--candle);
+}
+
+/* Sacred stamp/seal */
+.words-seal {
+  display: inline-block;
+  margin-top: 3.5rem;
+  width: 58px;
+  height: 58px;
+  border: 1px solid rgba(245, 197, 153, 0.35);
+  border-radius: 50%;
+  position: relative;
+  color: var(--candle);
+  opacity: 0.8;
+}
+
+.words-seal::before {
+  content: "✦";
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 1.1rem;
+}
+

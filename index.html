@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Narin Fazlalipour — neuroscience study, clinical presence, and the kind of medicine that stays in the heart." />
+  <meta name="theme-color" content="#251612" />
+  <title>Narin Fazlalipour — Portfolio</title>
+
+  <!-- Google Fonts Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <!-- Modular Stylesheets -->
+  <link rel="stylesheet" href="./styles/tokens.css" />
+  <link rel="stylesheet" href="./styles/base.css" />
+  <link rel="stylesheet" href="./styles/layout.css" />
+  <link rel="stylesheet" href="./styles/cursor.css" />
+  <link rel="stylesheet" href="./styles/narrative.css" />
+  <link rel="stylesheet" href="./styles/evidence.css" />
+
+  <!-- SVG Site Icon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><circle cx=%2216%22 cy=%2216%22 r=%226%22 fill=%22%23D98A4F%22/></svg>" />
+</head>
+<body>
+
+  <!-- ============================ HEADER (MAST) ============================ -->
+  <header class="mast" role="banner">
+    <a class="brand" href="#top" aria-label="Narin Fazlalipour — Home">Narin&nbsp;Fazlalipour</a>
+
+    <!-- Pill Mode Toggle -->
+    <div class="mode-switch-wrapper">
+      <div class="mode-switch" role="button" tabindex="0" aria-label="Toggle between Narrative and Evidence modes">
+        <div class="mode-indicator"></div>
+        <button class="mode-btn btn-narrative" type="button" tabindex="-1">✦ Narrative</button>
+        <button class="mode-btn btn-evidence" type="button" tabindex="-1">🔬 Evidence</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- =======================================================================
+       NARRATIVE MODE (PRESENCE)
+       ======================================================================= -->
+  <div class="mode-narrative-container" id="narrative-content">
+    
+    <!-- Hero Narrative -->
+    <section class="hero-narrative" id="top">
+      <div class="wrap hero-grid">
+        <div>
+          <span class="eyebrow">Neuroscience · Presence · Heart-centered Medicine</span>
+          <h1 class="hero-title">
+            <span>A student of the brain</span>
+            <span>learning to be a student</span>
+            <span>of the <em>person</em>.</span>
+          </h1>
+          <p class="hero-intro">
+            Training my heart as rigorously as my mind — building the discipline to stay present when presence is hardest to offer.
+          </p>
+          <a class="mono" href="#journey" style="font-size: var(--t-xs); letter-spacing: 0.1em; text-transform: uppercase;">Explore The Journey &darr;</a>
+        </div>
+
+        <!-- Breathing Orb Meditation Cue -->
+        <div class="reveal" data-delay="2" aria-hidden="true" style="justify-self: center;">
+          <div class="breath-orb-wrapper">
+            <div class="breath-orb"></div>
+            <div class="breath-ring"></div>
+            <div class="breath-prompt">Pause</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- Coherent Breathing Pause -->
+    <section class="breath-section">
+      <div class="wrap breath-grid">
+        <div>
+          <span class="eyebrow">01 · Pause</span>
+          <h2>A Meditative Interval</h2>
+          <p class="sans" style="color: var(--fg-muted); line-height: 1.6; max-width: 48ch;">
+            Healing begins in the nervous system. Before exploring my academic stops, I invite you to take a moment and align. Tap the controls below to choose a tempo, then match your breath to the expanding orb.
+          </p>
+          <div class="breath-controls">
+            <button class="breath-btn active" data-tempo="coherent" type="button">Coherent (5s/5s)</button>
+            <button class="breath-btn" data-tempo="calm" type="button">Calming (4-7-8)</button>
+          </div>
+        </div>
+
+        <div class="breath-center">
+          <div class="breath-orb-wrapper">
+            <div class="breath-orb"></div>
+            <div class="breath-ring"></div>
+            <div class="breath-prompt">Pause</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- Brain-Heart Seam Canvas -->
+    <section class="seam-section" id="seam">
+      <div class="wrap seam-grid">
+        <div>
+          <span class="eyebrow">02 · The Seam</span>
+          <h2>Where Thought Becomes Biology</h2>
+          <p class="sans" style="color: var(--fg-muted); line-height: 1.6; max-width: 48ch; margin-bottom: 1.5rem;">
+            My neuroscience research at UC San Diego focused on mind-body interventions — measuring cellular changes in response to cognitive states. To me, the brain is not just an organ to study, but the physical bridge where intention meets physiology.
+          </p>
+          <p class="sans" style="color: var(--fg-muted); line-height: 1.6; max-width: 48ch;">
+            <em>Move your mouse across the canvas</em> to bridge the neural mesh of the Mind with the rhythmic pulse of the Heart. <em>Click the canvas</em> to fire a neural-body pulse.
+          </p>
+        </div>
+
+        <div class="seam-interactive reveal">
+          <canvas id="seam-canvas" class="seam-canvas"></canvas>
+          <div class="seam-instruction">Touch / Hover / Click</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Yellow Couch Sanctuary -->
+    <section class="couch-sanctuary" id="couch">
+      <div class="wrap couch-grid">
+        <div class="couch-text">
+          <span class="eyebrow" style="color: var(--candle);">03 · The Turning Point</span>
+          <h2>Florida. Late Summer. <em>A single yellow couch</em>.</h2>
+          <p class="sans" style="color: var(--linen); opacity: 0.8; line-height: 1.6; max-width: 48ch;">
+            In the heat of a research retreat, uncertainty locked into focus. A simple sentence from a mentor carved out the direction of my future: the field doesn't just need clinical technicalities — it needs doctors who can stay in their hearts.
+          </p>
+        </div>
+
+        <div class="couch-illustration-wrapper reveal">
+          <!-- Inline minimal SVG Couch Silhouette -->
+          <svg class="couch-silhouette" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+            <!-- Couch backrest -->
+            <path d="M 50 140 C 50 100, 70 80, 100 80 L 300 80 C 330 80, 350 100, 350 140" />
+            <!-- Left Armrest -->
+            <path d="M 40 140 C 40 110, 80 110, 80 145 C 80 160, 50 160, 40 140 Z" />
+            <!-- Right Armrest -->
+            <path d="M 360 140 C 360 110, 320 110, 320 145 C 320 160, 350 160, 360 140 Z" />
+            <!-- Seat Cushion -->
+            <path d="M 75 145 L 325 145 C 335 145, 335 170, 325 170 L 75 170 C 65 170, 65 145, 75 145 Z" />
+            <!-- Left Leg -->
+            <line x1="85" y1="170" x2="80" y2="185" />
+            <!-- Right Leg -->
+            <line x1="315" y1="170" x2="320" y2="185" />
+          </svg>
+          <div class="couch-hint">Click the couch · sit a moment</div>
+        </div>
+      </div>
+
+      <!-- Fullscreen Quote overlay -->
+      <div class="couch-overlay" role="dialog" aria-modal="true" aria-labelledby="overlay-quote">
+        <canvas id="couch-particles-canvas" class="couch-particles"></canvas>
+        <button class="couch-close-btn" type="button">Close Sanctuary</button>
+        <div class="couch-overlay-content">
+          <blockquote class="couch-quote" id="overlay-quote">
+            <!-- Typed dynamically by JS -->
+          </blockquote>
+          <cite class="couch-quote-cite">— Kevin Crowe</cite>
+        </div>
+      </div>
+    </section>
+
+    <!-- Scroll-Linked Timeline Journey -->
+    <section class="journey-section" id="journey">
+      <div class="wrap">
+        <span class="eyebrow">04 · The Journey</span>
+        <h2>Stops along the way</h2>
+        <p class="sans" style="color: var(--fg-muted); line-height: 1.6; max-width: 50ch; margin-bottom: 3rem;">
+          These chapters are not just milestones on a CV — they are training stations where I tested my clarity against the realities of clinical, lab, and community spaces.
+        </p>
+
+        <div class="timeline-container">
+          <!-- Thread lines -->
+          <div class="timeline-line"></div>
+          <div class="timeline-line-glow"></div>
+
+          <!-- Station 1 -->
+          <div class="timeline-station">
+            <div class="timeline-node"></div>
+            <span class="timeline-meta">Clinical · UCLA Care Extenders</span>
+            <h3 class="timeline-title">The <em>Hospital</em> Floor</h3>
+            <p class="timeline-summary">
+              Volunteering in the Neurology department and ER rotations. Escorting families, restocking medical cabinets, and sitting with patients facing critical transitions.
+            </p>
+            <button class="timeline-toggle-trigger" type="button">Read Reflection</button>
+            <div class="reflection-note-wrapper">
+              <div class="reflection-note">
+                "Between restocking supplies and transporting patients, I found myself sitting at bedsides longer than my tasks required. I learned that the conversations between check-ins — life lessons, gratitude, even shared prayers — carry their own therapeutic weight. These moments confirmed that the physician I want to become is one who treats presence as medicine. I remember standing beside a patient fresh from surgery, still searching for a hand to hold. In those rooms, procedural metrics fade and the human presence becomes the anchor."
+              </div>
+            </div>
+          </div>
+
+          <!-- Station 2 -->
+          <div class="timeline-station">
+            <div class="timeline-node"></div>
+            <span class="timeline-meta">Research · CardioNeuroProtection Lab</span>
+            <h3 class="timeline-title">The Seam of <em>Mind</em> &amp; Body</h3>
+            <p class="timeline-summary">
+              Wet lab assays (ELISA, Western blots) combined with monthly field research visits to collect biological samples from cancer, PTSD, ALS, and MS patients.
+            </p>
+            <button class="timeline-toggle-trigger" type="button">Read Reflection</button>
+            <div class="reflection-note-wrapper">
+              <div class="reflection-note">
+                "These retreats were where I needed to be — to collect saliva and cheek scrapes, yes, but also to recalibrate my vision of the future. I remember sitting with one participant before drawing blood, walking her through the consent form. Somewhere in that exchange, the science receded and the person appeared. She was nervous — not about the needle, but about whether any of this would work. I learned my job was not just to collect a sample. It was to make her feel safe enough to believe the study was worth her trust. That is where research and clinical care merge."
+              </div>
+            </div>
+          </div>
+
+          <!-- Station 3 -->
+          <div class="timeline-station">
+            <div class="timeline-node"></div>
+            <span class="timeline-meta">Science Communication · Verséa Discovery</span>
+            <h3 class="timeline-title">Making the <em>Answers</em> Matter</h3>
+            <p class="timeline-summary">
+              Translating mitochondrial research into accessible communication channels. Managing Dr. Patel's medical profile voluntarily and growing it to 10.7k followers.
+            </p>
+            <button class="timeline-toggle-trigger" type="button">Read Reflection</button>
+            <div class="reflection-note-wrapper">
+              <div class="reflection-note">
+                "After two years of bench research, I was asked to do something different: communicate the science instead of generating it. I managed Dr. Patel's profile. Once, a mother DMed: her child needed a mitochondrial test, but the only route was a painful muscle biopsy. She asked if our test could yield the same data. I checked with our chief scientist, confirmed it, and the mother was overjoyed. The bench taught me how to ask questions. This role taught me how to make the answers matter to real families."
+              </div>
+            </div>
+          </div>
+
+          <!-- Station 4 -->
+          <div class="timeline-station">
+            <div class="timeline-node"></div>
+            <span class="timeline-meta">Leadership · STARS Coordination</span>
+            <h3 class="timeline-title">Building <em>Lasting</em> Networks</h3>
+            <p class="timeline-summary">
+              Spent twenty months coordinating research mentorship programs at UC San Diego, serving as a liaison between undergraduates and PhD faculty mentors.
+            </p>
+            <button class="timeline-toggle-trigger" type="button">Read Reflection</button>
+            <div class="reflection-note-wrapper">
+              <div class="reflection-note">
+                "On paper, the work was logistical — applications, orientations, seminars — but the instinct was the same one I would later bring to patient care. I learned to listen across hierarchies, to translate faculty expectations into student needs, and to build structures that outlasted any single coordinator. True coordination is not administrative; it is human connection made stable."
+              </div>
+            </div>
+          </div>
+
+          <!-- Station 5 -->
+          <div class="timeline-station">
+            <div class="timeline-node"></div>
+            <span class="timeline-meta">Community Outreach · Remote Healing</span>
+            <h3 class="timeline-title">Holding <em>Space</em> at a Distance</h3>
+            <p class="timeline-summary">
+              Facilitated guided meditation and energy work sessions with 'Healed by the Future' collective, including dedicated 12-week groups for autistic children.
+            </p>
+            <button class="timeline-toggle-trigger" type="button">Read Reflection</button>
+            <div class="reflection-note-wrapper">
+              <div class="reflection-note">
+                "Facilitating twice-weekly sessions, especially for autistic children, taught me how to lead with presence and unconditional care for individuals I often knew only by name and photograph. I adapted pacing, sensory inputs, and visual triggers. It taught me how to stay grounded in empathy for neurodivergent needs. I learned that presence and patience are clinical interventions in themselves, meeting people where they are."
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Scripture / Quotes Stack -->
+    <section class="words-section" id="words">
+      <div class="wrap">
+        <span class="eyebrow">05 · Creeds &amp; Anchorage</span>
+        <div class="scripture-stack">
+          
+          <blockquote class="scripture">
+            "Come to me, all you who are weary and burdened, and I will give you rest."
+            <cite>Matthew 11:28</cite>
+          </blockquote>
+
+          <blockquote class="scripture">
+            "You are loved beyond measure."
+            <cite>Ephesians 3:9</cite>
+          </blockquote>
+
+          <blockquote class="scripture">
+            "Practice presence the way a surgeon practices suturing — deliberately, repeatedly."
+            <cite>Note to Self</cite>
+          </blockquote>
+
+          <blockquote class="scripture">
+            "The angry patient is probably terrified. The family receiving bad news needs someone who can sit in the silence."
+            <cite>A Working Creed</cite>
+          </blockquote>
+
+        </div>
+        <div class="words-seal" aria-hidden="true"></div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- =======================================================================
+       EVIDENCE MODE (RIGOR)
+       ======================================================================= -->
+  <div class="mode-evidence-container" id="evidence-content">
+    <div class="wrap">
+      
+      <!-- Academic Header -->
+      <header class="evidence-header">
+        <span class="eyebrow">AAMC Academic &amp; Clinical Audit</span>
+        <h1 class="evidence-title">Credentials &amp; <em>Scientific</em> Rigor</h1>
+        <p class="evidence-intro">
+          This dashboard summarizes my academic credentials, research publications, and clinical experience compiled for my AMCAS medical school application dossier.
+        </p>
+      </header>
+
+      <!-- Stat Cards Overview -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-num">450+</div>
+          <div class="stat-label">Clinical Hours</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">2.5 Yrs</div>
+          <div class="stat-label">Lab &amp; Field Research</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">1</div>
+          <div class="stat-label">Co-Authored Paper</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">5</div>
+          <div class="stat-label">Leadership Titles</div>
+        </div>
+      </div>
+
+      <!-- Co-authored Publication -->
+      <section class="pub-showcase">
+        <h2 class="matrix-title">Academic Publications</h2>
+        <div class="pub-card">
+          <span class="pub-badge">Co-Author · Peer Reviewed</span>
+          <h3 class="pub-title">Neural and Molecular Changes During a Mind-Body Reconceptualization, Meditation, and Open-Label Placebo Healing Intervention</h3>
+          <p class="pub-citation">Published November 5, 2025 · <em>Journal of Mind-Body Regulation</em>. Co-Authored by <strong>Fazlalipour, N.</strong>, Patel, H. et al.</p>
+          <button class="pub-abstract-trigger" type="button">Show Abstract</button>
+          <div class="pub-abstract">
+            <p class="sans">
+              <strong>Abstract:</strong> This study investigated the physiological and epigenetic changes associated with intensive meditation and open-label placebo interventions. Utilizing metabolic profiling (Seahorse cellular assays), Western blotting, ELISA, and neuroimaging, we mapped metabolic efficiency shifts and functional connectivity in neural networks. The research tracked biological markers in participants living with chronic inflammatory conditions, demonstrating measurable changes in cellular inflammatory output and mitochondrial efficiency post-intervention.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Competency Matrix Filter -->
+      <section class="matrix-section">
+        <h2 class="matrix-title">AAMC Core Competencies</h2>
+        <p class="sans" style="color: var(--fg-muted); margin-bottom: 2rem; max-width: 60ch;">
+          Tap any competency chip to filter the 13 activities database, showing the direct evidence that maps to each required standard.
+        </p>
+        
+        <div class="matrix-grid">
+          <button class="competency-chip" data-competency="clinical" type="button">Clinical Exposure</button>
+          <button class="competency-chip" data-competency="scientific" type="button">Scientific Inquiry</button>
+          <button class="competency-chip" data-competency="leadership" type="button">Leadership</button>
+          <button class="competency-chip" data-competency="service" type="button">Service Orientation</button>
+          <button class="competency-chip" data-competency="communication" type="button">Science Communication</button>
+          <button class="competency-chip" data-competency="teaching" type="button">Teaching &amp; Mentorship</button>
+        </div>
+
+        <!-- AMCAS Activities Database -->
+        <div class="activities-grid">
+          
+          <!-- Card 1 -->
+          <div class="activity-card" data-competencies="clinical,leadership">
+            <div class="activity-header">
+              <h4 class="activity-title">Care Extenders — Department Coordinator</h4>
+              <span class="activity-mme-badge">Leadership</span>
+            </div>
+            <div class="activity-meta-list">
+              <span class="activity-meta-item">Setting: <strong>UCLA Health, Neurology/ER</strong></span>
+              <span class="activity-meta-item">Dates: <strong>Nov 2025 – Present</strong></span>
+              <span class="activity-meta-item">Type: <strong>Leadership</strong></span>
+            </div>
+            <div class="activity-desc-wrapper">
+              <div class="activity-desc-content">
+                <p class="activity-desc">
+                  Served as Care Extenders Department Coordinator, auditing volunteer performance, gathering staff feedback on program quality, addressing volunteer concerns, and reporting updates to leadership. Served as the direct communication bridge between volunteers and management. Learned that organizational health depends on listening across hierarchies and acting on feedback.
+                </p>
+              </div>
+            </div>
+            <span class="activity-card-toggle">View Details</span>
+          </div>
+
+          <!-- Card 2 (MME) -->
+          <div class="activity-card" data-competencies="clinical,service">
+            <div class="activity-header">
+              <h4 class="activity-title">Care Extenders — Clinical Volunteer</h4>
+              <span class="activity-mme-badge">Most Meaningful</span>
+            </div>
+            <div class="activity-meta-list">
+              <span class="activity-meta-item">Setting: <strong>UCLA Health, Neurology/ER</strong></span>
+              <span class="activity-meta-item">Dates: <strong>Nov 2025 – Present</strong></span>
+              <span class="activity-meta-item">Hours: <strong>120 Hours</strong></span>
+            </div>
+            <div class="activity-desc-wrapper">
+              <div class="activity-desc-content">
+                <p class="activity-desc">
+                  Working with neurology and ER patients showed me healing extends beyond treatment — bedside conversations can be as impactful as clinical care. Assisted nurses, transported patients, and restocked supplies, but prioritized staying at bedsides longer than tasks required to comfort families and anxious patients.
+                </p>
+                <div class="activity-mme">
+                  <span class="activity-mme-title">Narrative Reflection:</span>
+                  <p class="activity-mme-text">
+                    I have felt the silent weight of a family receiving news that their loved one is not coming home. I have stood beside a patient fresh from surgery, still searching for a hand to hold. I have sat with an anxious, angry patient who believed they were being held hostage — and I have learned that anger in a hospital bed is almost never about what it appears to be. What I am learning is that the difference between a doctor who survives and a doctor who transforms is the discipline to stay present and stay in her heart.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <span class="activity-card-toggle">View Details</span>
+          </div>
+
+          <!-- Card 3 (MME) -->
+          <div class="activity-card" data-competencies="scientific,clinical">
+            <div class="activity-header">
+              <h4 class="activity-title">CNP Lab — Patient Sample Collection</h4>
+              <span class="activity-mme-badge">Most Meaningful</span>
+            </div>
+            <div class="activity-meta-list">
+              <span class="activity-meta-item">Setting: <strong>CardioNeuroProtection Research</strong></span>
+              <span class="activity-meta-item">Dates: <strong>Jul 2023 – Present</strong></span>
+              <span class="activity-meta-item">Hours: <strong>320 Hours</strong></span>
+            </div>
+            <div class="activity-desc-wrapper">
+              <div class="activity-desc-content">
+                <p class="activity-desc">
+                  Attended nine-day meditation research retreats to collect biological samples from participants experiencing cancer, PTSD, ALS, and MS. Aliquoted plasma, saliva, cheek scrapes, and urine samples. Grew experienced in human subjects research, informed consent, and field adaptability.
+                </p>
+                <div class="activity-mme">
+                  <span class="activity-mme-title">Narrative Reflection:</span>
+                  <p class="activity-mme-text">
+                    I remember sitting with one participant before drawing blood, walking her through the consent form. Somewhere in that exchange, the science receded and the person appeared. She was nervous — not about the needle, but about whether any of this would work. I learned my job was not just to collect a sample. It was to make her feel safe enough to believe the study was worth her trust. The retreats also taught me chain of command and how to let go of assumptions when a protocol didn't fit the moment.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <span class="activity-card-toggle">View Details</span>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="activity-card" data-competencies="scientific">
+            <div class="activity-header">
+              <h4 class="activity-title">CNP Lab — Bench Research</h4>
+              <span class="activity-mme-badge">Scientific Inquiry</span>
+            </div>
+            <div class="activity-meta-list">
+              <span class="activity-meta-item">Setting: <strong>UCSD Neuroscience Dept</strong></span>
+              <span class="activity-meta-item">Dates: <strong>Mar 2023 – Present</strong></span>
+              <span class="activity-meta-item">Hours: <strong>480 Hours</strong></span>
+            </div>
+            <div class="activity-desc-wrapper">
+              <div class="activity-desc-content">
+                <p class="activity-desc">
+                  Built wet lab research skills in cell culture, Seahorse metabolic assays, ELISA, PCR, neuroimaging, and Western blotting. Contributed as co-author to publication on mind-body placebo healing pathways. The experience deepened my appreciation for wet lab science while clarifying my desire to translate discoveries directly into heart-centered patient care.
+                </p>
+              </div>
+            </div>
+            <span class="activity-card-toggle">View Details</span>
+          </div>
+
+          <!-- Card 5 (MME) -->
+          <div class="activity-card" data-competencies="communication,leadership">
+            <div class="activity-header">
+              <h4 class="activity-title">Verséa Discovery — Media Manager</h4>
+              <span class="activity-mme-badge">Most Meaningful</span>
+            </div>
+            <div class="activity-meta-list">
+              <span class="activity-meta-item">Setting: <strong>Verséa Discovery Biotech</strong></span>
+              <span class="activity-meta-item">Dates: <strong>Jul 2024 – Oct 2025</strong></span>
+              <span class="activity-meta-item">Hours: <strong>15 Months</strong></span>
+            </div>
+            <div class="activity-desc-wrapper">
+              <div class="activity-desc-content">
+                <p class="activity-desc">
+                  Managed social media channels and newsletter communication translating mitochondrial efficiency research. Continued voluntarily representing Dr. Patel's profile post-employment, growing audience from 0 to 10.7K followers. Connected patient families to scientific testing networks.
+                </p>
+                <div class="activity-mme">
+                  <span class="activity-mme-title">Narrative Reflection:</span>
+                  <p class="activity-mme-text">
+                    A mother DMed: her child needed a mitochondrial test, but a muscle biopsy was the only proposed route. She asked if our test could provide the answers without a biopsy. I checked with our chief scientist, confirmed it, and the mother was overjoyed. The bench research taught me how to ask questions. This role taught me how to make the answers matter to real families. As a future doctor, I will go to every patient room knowing I can leverage my network to support them.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <span class="activity-card-toggle">View Details</span>
+          </div>
+
+          <!-- Card 6 -->
+          <div class="activity-card" data-competencies="service">
+            <div class="activity-header">
+              <h4 class="activity-title">Remote Healing Sessions</h4>
+              <span class="activity-mme-badge">Service</span>
+            </div>
+            <div class="activity-meta-list">
+              <span class="activity-meta-item">Organization: <strong>Healed by the Future</strong></span>
+              <span class="activity-meta-item">Dates: <strong>2023 – Present</strong></span>
+              <span class="activity-meta-item">Type: <strong>Community Service</strong></span>
+            </div>
+            <div class="activity-desc-wrapper">
+              <div class="activity-desc-content">
+                <p class="activity-desc">
+                  Facilitated twice-weekly guided meditation and energy work sessions. Led 12-week group healing programs for autistic children, adapting pacing, sensory triggers, and visual structures. Learned to lead with compassion and presence for individuals I often knew only by name and photograph.
+                </p>
+              </div>
+            </div>
+            <span class="activity-card-toggle">View Details</span>
+          </div>
+
+          <!-- Card 7 -->
+          <div class="activity-card" data-competencies="teaching">
+            <div class="activity-header">
+              <h4 class="activity-title">Teaching Assistant — Neurophysiology &amp; Anatomy</h4>
+              <span class="activity-mme-badge">Teaching</span>
+            </div>
+            <div class="activity-meta-list">
+              <span class="activity-meta-item">Professor: <strong>Dr. Mary Boyle, UCSD</strong></span>
+              <span class="activity-meta-item">Dates: <strong>1 Quarter</strong></span>
+              <span class="activity-meta-item">Students: <strong>53 Students</strong></span>
+            </div>
+            <div class="activity-desc-wrapper">
+              <div class="activity-desc-content">
+                <p class="activity-desc">
+                  Held discussion sections, grading sessions, and office hours. Guided students through challenging anatomical lab assignments. Learned to adapt teaching styles to diverse learning needs by explaining neurophysiological concepts in multiple visual ways, reinforcing the value of patience in education.
+                </p>
+              </div>
+            </div>
+            <span class="activity-card-toggle">View Details</span>
+          </div>
+
+          <!-- Card 8 -->
+          <div class="activity-card" data-competencies="leadership,teaching">
+            <div class="activity-header">
+              <h4 class="activity-title">UCSD STARS Research Coordinator</h4>
+              <span class="activity-mme-badge">Leadership</span>
+            </div>
+            <div class="activity-meta-list">
+              <span class="activity-meta-item">Setting: <strong>UCSD STARS Program</strong></span>
+              <span class="activity-meta-item">Dates: <strong>Oct 2022 – Jun 2024</strong></span>
+              <span class="activity-meta-item">Type: <strong>Logistics &amp; Mentorship</strong></span>
+            </div>
+            <div class="activity-desc-wrapper">
+              <div class="activity-desc-content">
+                <p class="activity-desc">
+                  Coordinated stars undergraduate research access, matching undergrads with PhD mentors. Managed program logistics, applications, seminar schedules, and social media channels. Learned to listen across hierarchies and build robust administrative frameworks connecting students to research they couldn't access alone.
+                </p>
+              </div>
+            </div>
+            <span class="activity-card-toggle">View Details</span>
+          </div>
+
+          <!-- Card 9 -->
+          <div class="activity-card" data-competencies="leadership,service">
+            <div class="activity-header">
+              <h4 class="activity-title">Give to Give — Founder &amp; President</h4>
+              <span class="activity-mme-badge">Leadership</span>
+            </div>
+            <div class="activity-meta-list">
+              <span class="activity-meta-item">Setting: <strong>Extracurricular Organization</strong></span>
+              <span class="activity-meta-item">Dates: <strong>1 Quarter</strong></span>
+              <span class="activity-meta-item">Type: <strong>Community Outreach</strong></span>
+            </div>
+            <div class="activity-desc-wrapper">
+              <div class="activity-desc-content">
+                <p class="activity-desc">
+                  Founded student organization promoting mindfulness awareness and supporting vulnerable women in Mexican prisons. Spearheaded fundraising campaigns, developed educational curriculum on mindfulness, and managed outreach initiatives. Proved capacity to initiate and grow community services.
+                </p>
+              </div>
+            </div>
+            <span class="activity-card-toggle">View Details</span>
+          </div>
+
+          <!-- Card 10 -->
+          <div class="activity-card" data-competencies="service">
+            <div class="activity-header">
+              <h4 class="activity-title">GCC Honors — Community Service Outreach</h4>
+              <span class="activity-mme-badge">Service</span>
+            </div>
+            <div class="activity-meta-list">
+              <span class="activity-meta-item">Setting: <strong>Glendale CC Honors Dept</strong></span>
+              <span class="activity-meta-item">Dates: <strong>2 Years</strong></span>
+              <span class="activity-meta-item">Type: <strong>Outreach Volunteering</strong></span>
+            </div>
+            <div class="activity-desc-wrapper">
+              <div class="activity-desc-content">
+                <p class="activity-desc">
+                  Served food to individuals experiencing homelessness at Hope Hollywood, participated in pediatric charity fundraisers, and attended developmental faculty committees. Learned that volunteer consistency must be paired with operational quality and a mindset of continuous growth.
+                </p>
+              </div>
+            </div>
+            <span class="activity-card-toggle">View Details</span>
+          </div>
+
+          <!-- Card 11 -->
+          <div class="activity-card" data-competencies="leadership,communication">
+            <div class="activity-header">
+              <h4 class="activity-title">GCC Student Ambassador</h4>
+              <span class="activity-mme-badge">Leadership</span>
+            </div>
+            <div class="activity-meta-list">
+              <span class="activity-meta-item">Setting: <strong>Glendale CC Admissions</strong></span>
+              <span class="activity-meta-item">Dates: <strong>6 Months</strong></span>
+              <span class="activity-meta-item">Type: <strong>Advising Support</strong></span>
+            </div>
+            <div class="activity-desc-wrapper">
+              <div class="activity-desc-content">
+                <p class="activity-desc">
+                  Guided second-language learners and elderly students in navigating college applications, FAFSA forms, and academic schedules. Designed social media recruitment content. Developed deep patience and communicative flexibility when translating complex organizational procedures to new applicants.
+                </p>
+              </div>
+            </div>
+            <span class="activity-card-toggle">View Details</span>
+          </div>
+
+          <!-- Card 12 -->
+          <div class="activity-card" data-competencies="leadership">
+            <div class="activity-header">
+              <h4 class="activity-title">GCC Activities Ambassador</h4>
+              <span class="activity-mme-badge">Leadership</span>
+            </div>
+            <div class="activity-meta-list">
+              <span class="activity-meta-item">Setting: <strong>Glendale CC Student Life</strong></span>
+              <span class="activity-meta-item">Dates: <strong>1 Semester</strong></span>
+              <span class="activity-meta-item">Type: <strong>Campus Networking</strong></span>
+            </div>
+            <div class="activity-desc-wrapper">
+              <div class="activity-desc-content">
+                <p class="activity-desc">
+                  Represented approximately 1,100 students, planning and executing wellness conferences and networking events. Learned that building an active, inclusive community space is crucial to helping individuals deal with academic and personal challenges during semesters.
+                </p>
+              </div>
+            </div>
+            <span class="activity-card-toggle">View Details</span>
+          </div>
+
+          <!-- Card 13 -->
+          <div class="activity-card" data-competencies="clinical">
+            <div class="activity-header">
+              <h4 class="activity-title">Physician Shadowing — Neurology</h4>
+              <span class="activity-mme-badge">Shadowing</span>
+            </div>
+            <div class="activity-meta-list">
+              <span class="activity-meta-item">Doctor: <strong>Dr. Minaean (Neurology)</strong></span>
+              <span class="activity-meta-item">Dates: <strong>Jul 2025 – Sep 2025</strong></span>
+              <span class="activity-meta-item">Setting: <strong>Private Practice / USC Verdugo</strong></span>
+            </div>
+            <div class="activity-desc-wrapper">
+              <div class="activity-desc-content">
+                <p class="activity-desc">
+                  Shadowed neurologist in private clinics and USC Verdugo Hospital rounds, observing patient evaluations, diagnostic interviews, EEG examinations, and neurological treatment planning. Gained passive exposure to the daily operational flow and critical decisions of practicing physicians.
+                </p>
+              </div>
+            </div>
+            <span class="activity-card-toggle">View Details</span>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- ============================ REACH (CONTACT) ============================ -->
+  <section class="contact-section" id="reach">
+    <div class="wrap">
+      <span class="eyebrow">06 · Reach</span>
+      <h2 style="font-style: italic; font-size: var(--t-h1); color: var(--fg); margin-bottom: 3rem;">
+        For conversations, collaborations, or <em>simply to connect</em>.
+      </h2>
+      
+      <div class="contact-row">
+        <a class="contact-card reveal" href="mailto:hello@narinfazlalipour.com">
+          <span class="label">Email</span>
+          <span class="value">hello@narinfazlalipour.com</span>
+        </a>
+        <a class="contact-card reveal" data-delay="1" href="#reach" style="cursor: not-allowed; opacity: 0.85;">
+          <span class="label">Notes &amp; Journal</span>
+          <span class="value">Coming soon</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ FOOTER ============================ -->
+  <footer class="foot" role="contentinfo">
+    <span>&copy; <span id="year"></span> Narin Fazlalipour</span>
+    <span>narinfazlalipour.com</span>
+  </footer>
+
+  <!-- Scripts -->
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script type="module" src="./scripts/main.js"></script>
+</body>
+</html>

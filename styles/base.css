@@ -1,0 +1,204 @@
+/* -------------------------------------------------------------------------
+   Base Styles & Reset — Narin Fazlalipour Portfolio
+   ------------------------------------------------------------------------- */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: var(--t-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  cursor: none; /* Hide default cursor to let custom candle cursor take over */
+}
+
+/* Touch devices fallback: restore standard cursor */
+@media (hover: none) {
+  body {
+    cursor: auto;
+  }
+}
+
+/* -------------------------------------------------------------------------
+   Tactile Paper Texture Overlay (CSS-only grain)
+   ------------------------------------------------------------------------- */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999; /* overlay everything to texture all cards and texts */
+  opacity: 0.055;
+  mix-blend-mode: multiply;
+  background-image:
+    radial-gradient(var(--ink) 1px, transparent 1px),
+    radial-gradient(var(--ink) 1px, transparent 1px);
+  background-size: 3px 3px, 8px 8px;
+  background-position: 0 0, 1px 3px;
+}
+
+/* Vignette border glow - soft shadows at the viewport edges */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9998;
+  background: radial-gradient(ellipse at center,
+              transparent 55%,
+              rgba(37, 22, 18, 0.12) 100%);
+  transition: background var(--slow) var(--ease);
+}
+
+body.theme-dark::after {
+  background: radial-gradient(ellipse at center,
+              transparent 45%,
+              rgba(19, 9, 7, 0.6) 100%);
+}
+
+/* -------------------------------------------------------------------------
+   Typography definitions
+   ------------------------------------------------------------------------- */
+h1, h2, h3, h4 {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  line-height: 1.1;
+  margin: 0 0 0.5em;
+  color: var(--fg);
+}
+
+p {
+  margin: 0 0 1.25em;
+}
+
+.mono {
+  font-family: var(--font-mono);
+  letter-spacing: 0.05em;
+}
+
+.sans {
+  font-family: var(--font-sans);
+}
+
+.italic {
+  font-style: italic;
+}
+
+/* Eyebrows for sections */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--t-xs);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  display: inline-block;
+  margin-bottom: 1.5rem;
+}
+
+/* Anchors */
+a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid var(--accent-glow);
+  transition: color var(--fast) var(--ease), border-color var(--fast) var(--ease);
+}
+
+a:hover {
+  color: var(--ember);
+  border-color: var(--ember);
+}
+
+::selection {
+  background: var(--ember);
+  color: var(--cream);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+  border-left: 1px solid var(--rule);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--beige);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--umber);
+}
+
+/* -------------------------------------------------------------------------
+   Layout Core Containers
+   ------------------------------------------------------------------------- */
+.wrap {
+  width: 100%;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  position: relative;
+  z-index: 10;
+}
+
+section {
+  position: relative;
+  padding: clamp(4rem, 10vh, 8rem) 0;
+  transition: background var(--slow) var(--ease), color var(--slow) var(--ease);
+}
+
+/* Section divider */
+hr.divider {
+  border: 0;
+  height: 1px;
+  background: var(--rule);
+  margin: 0;
+}
+
+/* -------------------------------------------------------------------------
+   Scroll Reveal Transitions
+   ------------------------------------------------------------------------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity var(--slow) var(--ease), transform var(--slow) var(--ease);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal[data-delay="1"].is-visible { transition-delay: 100ms; }
+.reveal[data-delay="2"].is-visible { transition-delay: 200ms; }
+.reveal[data-delay="3"].is-visible { transition-delay: 300ms; }
+.reveal[data-delay="4"].is-visible { transition-delay: 400ms; }
+
+/* -------------------------------------------------------------------------
+   Dark theme application
+   ------------------------------------------------------------------------- */
+body.theme-dark {
+  --bg:           var(--ink);
+  --bg-alt:       #1D100D;
+  --fg:           var(--candle);
+  --fg-muted:     var(--beige);
+  --rule:         rgba(245, 197, 153, 0.12);
+  --accent:       var(--ember);
+  --border:       rgba(245, 197, 153, 0.18);
+}
