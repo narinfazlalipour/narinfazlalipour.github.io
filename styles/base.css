@@ -1,203 +1,139 @@
-/* -------------------------------------------------------------------------
-   Base Styles & Reset — Narin Fazlalipour Portfolio
-   ------------------------------------------------------------------------- */
+/* ═══════════════════════════════════════════════════════════════
+   Base Styles — Narin Fazlalipour
+   ═══════════════════════════════════════════════════════════════ */
 
-*, *::before, *::after {
-  box-sizing: border-box;
-}
+*, *::before, *::after { box-sizing: border-box; }
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 5rem;
+  scroll-padding-top: 5.5rem;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
+  margin: 0;
   background: var(--bg);
   color: var(--fg);
   font-family: var(--font-serif);
   font-weight: 400;
   font-size: var(--t-body);
-  line-height: 1.6;
+  line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
-  margin: 0;
-  padding: 0;
+  font-feature-settings: "kern", "liga", "calt", "onum";
 }
 
-/* Touch devices fallback: restore standard cursor */
-@media (hover: none) {
-  body {
-    cursor: auto;
-  }
-}
-
-/* -------------------------------------------------------------------------
-   Tactile Paper Texture Overlay (CSS-only grain)
-   ------------------------------------------------------------------------- */
+/* ── Decorative background ── */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   pointer-events: none;
-  z-index: 9999; /* overlay everything to texture all cards and texts */
-  opacity: 0.055;
-  mix-blend-mode: multiply;
-  background-image:
-    radial-gradient(var(--ink) 1px, transparent 1px),
-    radial-gradient(var(--ink) 1px, transparent 1px);
-  background-size: 3px 3px, 8px 8px;
-  background-position: 0 0, 1px 3px;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse 70% 50% at 8% -5%, rgba(44, 90, 160, 0.06), transparent 60%),
+    radial-gradient(ellipse 60% 45% at 95% 5%, rgba(184, 146, 74, 0.04), transparent 60%),
+    var(--bg);
 }
 
-/* Vignette border glow - soft shadows at the viewport edges */
+/* ── Paper grain overlay ── */
 body::after {
   content: "";
   position: fixed;
   inset: 0;
   pointer-events: none;
-  z-index: 9998;
-  background: radial-gradient(ellipse at center,
-              transparent 55%,
-              rgba(37, 22, 18, 0.12) 100%);
-  transition: background var(--slow) var(--ease);
+  z-index: 9999;
+  opacity: 0.035;
+  mix-blend-mode: multiply;
+  background-image:
+    radial-gradient(var(--ink) 1px, transparent 1px),
+    radial-gradient(var(--ink) 1px, transparent 1px);
+  background-size: 3px 3px, 7px 7px;
+  background-position: 0 0, 1px 3px;
 }
 
-body.theme-dark::after {
-  background: radial-gradient(ellipse at center,
-              transparent 45%,
-              rgba(19, 9, 7, 0.6) 100%);
-}
-
-/* -------------------------------------------------------------------------
-   Typography definitions
-   ------------------------------------------------------------------------- */
+/* ── Typography ── */
 h1, h2, h3, h4 {
   font-family: var(--font-serif);
   font-weight: 500;
   letter-spacing: -0.015em;
-  line-height: 1.1;
-  margin: 0 0 0.5em;
+  line-height: 1.15;
   color: var(--fg);
+  margin: 0 0 0.5em;
 }
 
-p {
-  margin: 0 0 1.25em;
-}
+h1 em, h2 em, h3 em { font-style: italic; font-weight: 400; color: var(--royal); }
 
-.mono {
-  font-family: var(--font-mono);
-  letter-spacing: 0.05em;
-}
+p { margin: 0 0 0.9em; max-width: 68ch; }
+p:last-child { margin-bottom: 0; }
 
-.sans {
-  font-family: var(--font-sans);
-}
+strong { font-weight: 600; color: var(--royal-dark); }
+em { font-style: italic; }
 
-.italic {
-  font-style: italic;
-}
-
-/* Eyebrows for sections */
-.eyebrow {
-  font-family: var(--font-mono);
-  font-size: var(--t-xs);
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: var(--fg-muted);
-  display: inline-block;
-  margin-bottom: 1.5rem;
-}
-
-/* Anchors */
 a {
   color: var(--accent);
   text-decoration: none;
-  border-bottom: 1px solid var(--accent-glow);
+  border-bottom: 1px solid var(--border-accent);
   transition: color var(--fast) var(--ease), border-color var(--fast) var(--ease);
 }
-
 a:hover {
-  color: var(--ember);
-  border-color: var(--ember);
+  color: var(--accent-hover);
+  border-color: var(--accent-hover);
+}
+a:focus-visible {
+  outline: none;
+  border-radius: 3px;
+  box-shadow: var(--shadow-ring);
 }
 
-::selection {
-  background: var(--ember);
-  color: var(--cream);
-}
+::selection { background: var(--royal-accent); color: var(--cream); }
+::-moz-selection { background: var(--royal-accent); color: var(--cream); }
 
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-::-webkit-scrollbar-track {
-  background: var(--bg);
-  border-left: 1px solid var(--rule);
-}
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb {
-  background: var(--beige);
-  border-radius: 4px;
+  background: var(--royal-soft);
+  border-radius: 6px;
+  border: 2px solid var(--bg);
 }
-::-webkit-scrollbar-thumb:hover {
-  background: var(--umber);
-}
+::-webkit-scrollbar-thumb:hover { background: var(--royal-light); }
 
-/* -------------------------------------------------------------------------
-   Layout Core Containers
-   ------------------------------------------------------------------------- */
+/* ── Wrap ── */
 .wrap {
   width: 100%;
   max-width: var(--maxw);
   margin: 0 auto;
   padding: 0 var(--gutter);
-  position: relative;
-  z-index: 10;
 }
 
-section {
-  position: relative;
-  padding: clamp(4rem, 10vh, 8rem) 0;
-  transition: background var(--slow) var(--ease), color var(--slow) var(--ease);
-}
-
-/* Section divider */
-hr.divider {
-  border: 0;
-  height: 1px;
-  background: var(--rule);
-  margin: 0;
-}
-
-/* -------------------------------------------------------------------------
-   Scroll Reveal Transitions
-   ------------------------------------------------------------------------- */
-.reveal {
+/* ── Reading progress bar ── */
+.read-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--royal-accent), var(--royal-light));
+  z-index: 200;
+  transition: width var(--xfast) linear, opacity var(--med) var(--ease);
   opacity: 0;
-  transform: translateY(24px);
-  transition: opacity var(--slow) var(--ease), transform var(--slow) var(--ease);
+  pointer-events: none;
 }
+.read-progress.is-active { opacity: 1; }
 
-.reveal.is-visible {
-  opacity: 1;
-  transform: translateY(0);
+/* ── Skip to content (a11y) ── */
+.skip-link {
+  position: absolute;
+  left: -10000px;
+  top: 0;
+  background: var(--royal-deep);
+  color: var(--cream);
+  padding: 0.6rem 1rem;
+  border-radius: 0 0 var(--radius) 0;
+  font-family: var(--font-sans);
+  font-size: var(--t-small);
+  z-index: 999;
 }
-
-.reveal[data-delay="1"].is-visible { transition-delay: 100ms; }
-.reveal[data-delay="2"].is-visible { transition-delay: 200ms; }
-.reveal[data-delay="3"].is-visible { transition-delay: 300ms; }
-.reveal[data-delay="4"].is-visible { transition-delay: 400ms; }
-
-/* -------------------------------------------------------------------------
-   Dark theme application
-   ------------------------------------------------------------------------- */
-body.theme-dark {
-  --bg:           var(--ink);
-  --bg-alt:       #1D100D;
-  --fg:           var(--candle);
-  --fg-muted:     var(--beige);
-  --rule:         rgba(245, 197, 153, 0.12);
-  --accent:       var(--ember);
-  --border:       rgba(245, 197, 153, 0.18);
-}
+.skip-link:focus { left: 0; }

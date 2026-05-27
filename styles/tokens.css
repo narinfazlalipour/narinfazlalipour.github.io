@@ -1,38 +1,50 @@
 /* ═══════════════════════════════════════════════════════════════
    Design Tokens — Narin Fazlalipour
-   Palette: Deep Royal Blue + Warm Neutral Ground
-   Typography: Times New Roman / Garamond serif core
+   Palette: Deep Royal Blue + Warm Paper Ground
+   Typography: Cormorant Garamond serif core, Inter sans, JetBrains Mono
    ═══════════════════════════════════════════════════════════════ */
 
 :root {
-  /* ── Core Palette ── */
-  --royal-deep:    #0B1A3B;   /* deepest navy, near-black */
-  --royal-dark:    #132850;   /* dark royal, section headers */
-  --royal:         #1E3A6E;   /* primary royal blue */
-  --royal-accent:  #2C5AA0;   /* bright accent blue, links */
-  --royal-light:   #4A7CC9;   /* hover / interaction blue */
-  --royal-soft:    #D6E4F5;   /* pale blue tint, card backgrounds */
-  --royal-subtle:  #EDF3FA;   /* barely-there blue, alt sections */
+  /* ── Core Royal Palette ── */
+  --royal-deep:    #0A1733;
+  --royal-dark:    #122648;
+  --royal:         #1E3A6E;
+  --royal-accent:  #2C5AA0;
+  --royal-light:   #4A7CC9;
+  --royal-glow:    #6E9BDC;
+  --royal-soft:    #D6E4F5;
+  --royal-subtle:  #EEF4FC;
+  --royal-mist:    #F6F9FD;
 
-  /* ── Neutrals ── */
-  --cream:         #FBFAF7;   /* paper ground */
-  --linen:         #F4F0EA;   /* warm off-white alt */
-  --warm-gray:     #6B6560;   /* muted secondary text */
-  --ink:           #1A1A1A;   /* primary text */
-  --ink-light:     #4A4A4A;   /* softer text */
-  --rule:          rgba(26, 26, 26, 0.10); /* dividers */
+  /* ── Warm Neutrals ── */
+  --cream:         #FBFAF7;
+  --linen:         #F4F0EA;
+  --paper:         #FFFFFF;
+  --warm-gray:     #6B6560;
+  --ink:           #14182A;
+  --ink-light:     #3A3F55;
+  --ink-soft:      #555B72;
+  --rule:          rgba(20, 24, 42, 0.10);
+  --rule-soft:     rgba(20, 24, 42, 0.06);
+
+  /* ── Accent (warm contrast for selection / highlights) ── */
+  --gold:          #B8924A;
+  --gold-soft:     #E8D9B8;
 
   /* ── Semantic Mapping ── */
   --bg:            var(--cream);
   --bg-alt:        var(--linen);
   --bg-card:       var(--royal-subtle);
+  --bg-elev:       var(--paper);
   --fg:            var(--ink);
   --fg-muted:      var(--warm-gray);
+  --fg-soft:       var(--ink-light);
   --accent:        var(--royal-accent);
   --accent-hover:  var(--royal-light);
   --accent-dark:   var(--royal);
-  --border:        rgba(26, 26, 26, 0.12);
-  --border-accent: rgba(44, 90, 160, 0.25);
+  --border:        rgba(20, 24, 42, 0.12);
+  --border-accent: rgba(44, 90, 160, 0.28);
+  --border-strong: rgba(44, 90, 160, 0.45);
 
   /* ── Typography ── */
   --font-serif:    'Cormorant Garamond', 'Times New Roman', Georgia, serif;
@@ -40,27 +52,40 @@
   --font-mono:     'JetBrains Mono', 'IBM Plex Mono', ui-monospace, monospace;
 
   /* ── Fluid Type Scale ── */
-  --t-display:     clamp(2.6rem, 7vw, 5.5rem);
-  --t-h1:          clamp(1.8rem, 4vw, 2.8rem);
-  --t-h2:          clamp(1.3rem, 2.2vw, 1.8rem);
-  --t-h3:          clamp(1.05rem, 1.4vw, 1.25rem);
-  --t-body:        clamp(0.95rem, 1.05vw, 1.1rem);
-  --t-small:       0.82rem;
-  --t-xs:          0.7rem;
+  --t-display:     clamp(2.8rem, 7.5vw, 6rem);
+  --t-h1:          clamp(1.9rem, 4vw, 3rem);
+  --t-h2:          clamp(1.4rem, 2.4vw, 2rem);
+  --t-h3:          clamp(1.1rem, 1.5vw, 1.35rem);
+  --t-body:        clamp(0.98rem, 1.05vw, 1.1rem);
+  --t-small:       0.84rem;
+  --t-xs:          0.72rem;
 
   /* ── Motion ── */
   --ease:          cubic-bezier(0.22, 1, 0.36, 1);
-  --slow:          600ms;
-  --med:           300ms;
-  --fast:          150ms;
+  --ease-bounce:   cubic-bezier(0.34, 1.56, 0.64, 1);
+  --slow:          720ms;
+  --med:           360ms;
+  --fast:          180ms;
+  --xfast:         100ms;
+
+  /* ── Elevation ── */
+  --shadow-xs:     0 1px 2px rgba(11, 26, 59, 0.05);
+  --shadow-sm:     0 2px 6px rgba(11, 26, 59, 0.06), 0 1px 2px rgba(11, 26, 59, 0.04);
+  --shadow-md:     0 6px 20px rgba(11, 26, 59, 0.08), 0 2px 6px rgba(11, 26, 59, 0.05);
+  --shadow-lg:     0 18px 48px rgba(11, 26, 59, 0.12), 0 6px 16px rgba(11, 26, 59, 0.06);
+  --shadow-glow:   0 0 0 4px rgba(44, 90, 160, 0.15);
+  --shadow-ring:   0 0 0 3px rgba(44, 90, 160, 0.18);
 
   /* ── Layout ── */
-  --maxw:          1000px;
+  --maxw:          1040px;
+  --maxw-prose:    680px;
   --gutter:        clamp(1.25rem, 5vw, 3rem);
-  --radius:        8px;
-  --radius-lg:     14px;
+  --radius:        10px;
+  --radius-lg:     16px;
+  --radius-xl:     22px;
+  --radius-pill:   999px;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  :root { --slow: 1ms; --med: 1ms; --fast: 1ms; }
+  :root { --slow: 1ms; --med: 1ms; --fast: 1ms; --xfast: 1ms; }
 }
