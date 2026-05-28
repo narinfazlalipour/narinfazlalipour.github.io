@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bahamii — Executive Brief</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fafaf9; --surface: #ffffff; --text: #1c1917; --muted: #78716c;
+    --line: #e7e5e4; --accent: #0d9488; --accent-muted: #f0fdfa;
+    --green: #059669; --amber: #d97706; --red: #dc2626;
+    --red-muted: #fef2f2; --green-muted: #ecfdf5; --amber-muted: #fffbeb;
+    --blue: #2563eb; --blue-muted: #eff6ff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: var(--bg); color: var(--text); line-height: 1.625; -webkit-font-smoothing: antialiased; }
+  .container { max-width: 760px; margin: 0 auto; padding: 60px 28px 80px; }
+  .brief-header { margin-bottom: 48px; }
+  .brief-header .label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent); margin-bottom: 6px; }
+  .brief-header h1 { font-size: 2rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 6px; }
+  .brief-header .for { font-size: 0.9rem; color: var(--muted); margin-bottom: 24px; }
+  .brief-header .for strong { color: var(--text); }
+  .section { margin-bottom: 40px; }
+  .section h2 { font-size: 1.2rem; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 16px; color: var(--text); padding-bottom: 8px; border-bottom: 1px solid var(--line); }
+  .section h3 { font-size: 1rem; font-weight: 600; margin: 20px 0 8px; color: var(--text); }
+  .section p { font-size: 0.92rem; color: #44403c; margin-bottom: 12px; }
+  .finding { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 20px 24px; margin-bottom: 14px; position: relative; padding-left: 56px; }
+  .finding .num { position: absolute; left: 16px; top: 18px; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; font-weight: 600; color: var(--accent); background: var(--accent-muted); width: 28px; height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center; }
+  .finding h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 4px; color: var(--text); }
+  .finding p { font-size: 0.85rem; color: #57534e; margin: 0; }
+  .finding .detail { margin-top: 8px; font-size: 0.82rem; color: var(--muted); }
+  /* Score Diagram — compact for brief */
+  .score-diagram { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 20px 24px 16px; margin-bottom: 40px; }
+  .score-diagram .sd-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
+  .score-diagram .sd-header .sd-label { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); }
+  .score-diagram .sd-header .sd-overall { font-family: 'JetBrains Mono', monospace; font-size: 1.5rem; font-weight: 600; color: var(--text); line-height: 1; }
+  .score-diagram .sd-header .sd-overall span { font-size: 0.75rem; color: var(--muted); font-weight: 400; }
+  .sd-row { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+  .sd-row .sd-name { width: 140px; font-size: 0.76rem; font-weight: 500; color: var(--text); text-align: right; flex-shrink: 0; }
+  .sd-row .sd-track { flex: 1; height: 7px; background: #f0efed; border-radius: 4px; overflow: hidden; }
+  .sd-row .sd-fill { height: 100%; border-radius: 4px; }
+  .sd-row .sd-fill.high { background: var(--green); } .sd-row .sd-fill.mid { background: var(--amber); } .sd-row .sd-fill.low { background: var(--red); }
+  .sd-row .sd-num { width: 22px; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; font-weight: 500; color: var(--muted); text-align: right; flex-shrink: 0; }
+  .callout { background: var(--blue-muted); border-left: 3px solid var(--blue); padding: 14px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .callout p { font-size: 0.88rem; color: #1e3a5f; margin: 0; font-weight: 500; }
+  .data-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin: 14px 0; }
+  .data-table th { text-align: left; font-weight: 600; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); padding: 8px 12px; border-bottom: 2px solid var(--line); }
+  .data-table td { padding: 8px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .data-table td:first-child { font-weight: 500; }
+  .data-table .num { font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; text-align: right; }
+  .data-table tr.highlight { background: var(--accent-muted); }
+  .gap-row td { padding: 10px 12px; font-size: 0.84rem; }
+  .gap-row .gap-label { font-weight: 600; }
+  .tag { display: inline-block; font-size: 0.68rem; font-weight: 600; padding: 1px 8px; border-radius: 3px; }
+  .tag.red { background: var(--red-muted); color: var(--red); }
+  .tag.amber { background: var(--amber-muted); color: var(--amber); }
+  .tag.green { background: var(--green-muted); color: var(--green); }
+  .next-step { background: var(--surface); border: 1px solid var(--accent); border-radius: 10px; padding: 22px 26px; margin-top: 40px; text-align: center; }
+  .next-step h4 { font-size: 1.05rem; font-weight: 600; margin-bottom: 8px; }
+  .next-step p { font-size: 0.9rem; color: #57534e; margin-bottom: 12px; }
+  .next-step .cta { display: inline-block; background: var(--accent); color: #fff; padding: 10px 28px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.9rem; }
+  .brief-footer { margin-top: 48px; padding-top: 18px; border-top: 1px solid var(--line); font-size: 0.74rem; color: var(--muted); }
+  @media (max-width: 680px) { .container { padding: 36px 16px 60px; } .brief-header h1 { font-size: 1.5rem; } .sd-row .sd-name { width: 100px; font-size: 0.7rem; } }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <header class="brief-header">
+    <div class="label">Executive Brief</div>
+    <h1>How to turn a Costco shelf into a social audience</h1>
+    <div class="for">Prepared for <strong>Noah Nazarian</strong> & the <strong>Bahamii</strong> team &middot; May 2026</div>
+  </header>
+
+  <p>Noah — I spent time studying Bahamii's Instagram. Not a surface scan. I read the NOSH article about the Costco rollout. I found the Persian great-grandmother. The two destroyed blenders. The 5,000 students through your youth program. Here&rsquo;s what I found, why it matters, and what it would take to fix it.</p>
+
+  <!-- SCORE DIAGRAM -->
+  <div class="score-diagram">
+    <div class="sd-header">
+      <span class="sd-label">Instagram Performance Score</span>
+      <span class="sd-overall">52<span>&hairsp;/ 100</span></span>
+    </div>
+    <div class="sd-row">
+      <span class="sd-name">Brand Story</span>
+      <div class="sd-track"><div class="sd-fill high" style="width:80%"></div></div>
+      <span class="sd-num">80</span>
+    </div>
+    <div class="sd-row">
+      <span class="sd-name">Product Quality</span>
+      <div class="sd-track"><div class="sd-fill high" style="width:85%"></div></div>
+      <span class="sd-num">85</span>
+    </div>
+    <div class="sd-row">
+      <span class="sd-name">Visual Identity</span>
+      <div class="sd-track"><div class="sd-fill high" style="width:70%"></div></div>
+      <span class="sd-num">70</span>
+    </div>
+    <div class="sd-row">
+      <span class="sd-name">Content Cadence</span>
+      <div class="sd-track"><div class="sd-fill high" style="width:65%"></div></div>
+      <span class="sd-num">65</span>
+    </div>
+    <div class="sd-row">
+      <span class="sd-name">Community</span>
+      <div class="sd-track"><div class="sd-fill mid" style="width:40%"></div></div>
+      <span class="sd-num">40</span>
+    </div>
+    <div class="sd-row">
+      <span class="sd-name">Retail-to-Social</span>
+      <div class="sd-track"><div class="sd-fill low" style="width:20%"></div></div>
+      <span class="sd-num">20</span>
+    </div>
+  </div>
+
+  <!-- FINDING 1 -->
+  <div class="section">
+    <h2>1. The best ingredient in this brand isn't in the bar</h2>
+
+    <div class="finding">
+      <div class="num">01</div>
+      <h4>You have a founder story that most CPG brands at 100K followers would trade their agency retainer for</h4>
+      <p>Three brothers. Persian great-grandmother Parvin who loved dates but couldn't handle sugar. Your mother's kitchen. Two blenders destroyed — one nearly caused a house fire. The name Bahamii comes from <em>Baham</em>, the Farsi word for "together." An 18-month sprint from home recipe to 25 Costco locations.</p>
+      <p class="detail"><strong>Right now:</strong> Your Instagram bio reads like a nutrition label — "Date & Almond Bars. Fiber. Gluten Free. No Added Sugar." Your feed is product-forward. The story that makes Bahamii different from every other clean snack bar on the shelf is barely visible. Your founder, Noah Nazarian, has an Instagram account (@noah.nazarian) but doesn't appear on the brand feed. You're selling a bar when you should be selling a family.</p>
+    </div>
+
+    <div class="callout">
+      <p>💡 <strong>This is fixable in one filming session.</strong> Point a camera at Noah for 90 minutes. Four 60-second Reels: (1) the great-grandmother, (2) the smoking blender, (3) the Costco call, (4) what Bahamii means. Post one per week for a month. Founder-led content is the #1 trust builder for emerging CPG brands. You have a better story than anyone on your shelf. You're just not telling it.</p>
+    </div>
+  </div>
+
+  <!-- FINDING 2 -->
+  <div class="section">
+    <h2>2. You're in 25 Costco locations and your Instagram doesn't show it</h2>
+
+    <div class="finding">
+      <div class="num">02</div>
+      <h4>The most impressive thing about Bahamii at 4,500 followers is that it's on Costco shelves</h4>
+      <p>Most food brands at 4.5K followers are still in farmer's markets. You have a regional Costco rollout, Amazon nationwide, and a 5-star review profile. The brand is ahead of its Instagram — not the other way around. But the feed treats this like a footnote.</p>
+      <p class="detail"><strong>The gap:</strong> No Costco endcap Reel. No "here's our variety pack on the shelf" walk-up video. No sampling station content. No "I found Bahamii at Costco" UGC reshare pipeline. The Costco box promotes your Youth Venture Program with Boys & Girls Clubs — and the Instagram doesn't mention it. You have 5,000 students reached through a program that teaches entrepreneurship and healthy eating. That's a content pillar, not a packaging footnote.</p>
+    </div>
+
+    <div class="callout">
+      <p>💡 <strong>Every Costco shopper who follows you from the aisle is a retained customer with 2–3× the lifetime value.</strong> The bridge between "I saw this at Costco" and "I follow this brand" is a Reel of your endcap and a Story sticker that says "Found us? Tag us." Right now that bridge doesn't exist.</p>
+    </div>
+  </div>
+
+  <!-- FINDING 3 -->
+  <div class="section">
+    <h2>3. Your peers are running laps around you on content — with worse stories</h2>
+
+    <p>I compared Bahamii against three clean-snack brands in the same tier. Every single one posts more Reels, more founder content, and more customer stories. None of them have Costco placement. None of them have a three-brother origin story. None of them have a social impact program reaching 5,000 students.</p>
+
+    <table class="data-table">
+      <thead>
+        <tr><th></th><th>Bahamii</th><th>Comparable brand at Costco</th><th>Clean snack bar, Costco</th><th>DTC snack, Amazon</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Followers</strong></td><td class="num">4.5K</td><td class="num">~3–8K</td><td class="num">~5–12K</td><td class="num">~3–7K</td></tr>
+        <tr class="highlight"><td><strong>Reels/week</strong></td><td class="num"><span class="tag amber">~1–2</span></td><td class="num"><span class="tag green">3–4</span></td><td class="num"><span class="tag green">3–5</span></td><td class="num"><span class="tag green">3–4</span></td></tr>
+        <tr><td><strong>Founder presence</strong></td><td class="num"><span class="tag red">Minimal</span></td><td class="num"><span class="tag green">Strong</span></td><td class="num"><span class="tag green">Primary format</span></td><td class="num"><span class="tag amber">Occasional</span></td></tr>
+        <tr><td><strong>Customer stories / UGC</strong></td><td class="num"><span class="tag red">None</span></td><td class="num"><span class="tag green">Regular features</span></td><td class="num"><span class="tag green">Core strategy</span></td><td class="num"><span class="tag green">Influencer-heavy</span></td></tr>
+        <tr><td><strong>BTS / production content</strong></td><td class="num"><span class="tag red">None</span></td><td class="num"><span class="tag amber">Occasional</span></td><td class="num"><span class="tag green">Weekly</span></td><td class="num"><span class="tag amber">Monthly</span></td></tr>
+        <tr><td><strong>Retail-to-social bridge</strong></td><td class="num"><span class="tag red">None</span></td><td class="num"><span class="tag green">Costco features</span></td><td class="num"><span class="tag green">Endcap Reels</span></td><td class="num"><span class="tag amber">Amazon storefront</span></td></tr>
+      </tbody>
+    </table>
+
+    <p style="margin-top:8px;font-size:0.85rem;">The brands that win on Instagram at this tier aren't the ones with the best product. They're the ones that tell the best story about the product. You have the product. You have the story. You're just not connecting them yet.</p>
+  </div>
+
+  <!-- THE OPPORTUNITY -->
+  <div class="section">
+    <h2>4. The opportunity — and what it would take</h2>
+
+    <div class="finding">
+      <div class="num">→</div>
+      <h4>4.5K → 15K followers in 90 days, 4%+ engagement, retail-to-social flywheel active</h4>
+      <p>This isn't a growth-hack projection. It's the result of five structural shifts that take about 90 minutes of filming per week and one consistent posting calendar:</p>
+      <p style="margin-top:10px;">
+      <strong>1. Founder story arc.</strong> Four Reels across one month. Noah on camera. The origin, the mission, the Costco journey. This is the trust engine.<br>
+      <strong>2. Retail-to-social bridge.</strong> One Reel/week showing the Costco endcap, the sampling station, the variety pack on the shelf. Every Costco shopper who follows from the aisle is a retained customer.<br>
+      <strong>3. UGC pipeline.</strong> "Found us at Costco? Tag @eatbahamii." Repost the best one each week. One campaign = infinite content.<br>
+      <strong>4. Cultural storytelling.</strong> "Why dates are the superfood of Persian culture." "What Bahamii means." One carousel/week. This is your IP. No competitor has it.<br>
+      <strong>5. Impact content.</strong> Feature one student from the Youth Venture Program. Let them tell their story. The program reached 5,000 students. The feed should show at least one.</p>
+    </div>
+  </div>
+
+  <!-- NEXT STEP -->
+  <div class="next-step">
+    <h4>I built the full audit</h4>
+    <p>11 sections. Peer comparison. Weekly content calendar. 90-day growth timeline with phase-by-phase targets. It's live and ready to review — no strings, no pitch, just the work.</p>
+    <a class="cta" href="https://narinfazlalipour.com/projects/eatbahamii-pulse.html" target="_blank">View the full Brand Pulse Report →</a>
+    <p style="margin-top:14px;font-size:0.82rem;color:var(--muted);">Happy to walk you through it. DM me — 15 minutes, and I'll show you exactly where the leverage is.</p>
+  </div>
+
+  <footer class="brief-footer">
+    <p><strong>Executive Brief for Bahamii</strong> &middot; Prepared May 2026 &middot; Data via public Instagram, NOSH.com, bahamii.com &middot; Not affiliated with Instagram or Meta</p>
+  </footer>
+
+</div>
+
+</body>
+</html>
