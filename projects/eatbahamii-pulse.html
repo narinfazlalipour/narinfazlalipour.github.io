@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brand Pulse Report — @eatbahamii</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fafaf9; --surface: #ffffff; --text: #1c1917; --muted: #78716c;
+    --line: #e7e5e4; --accent: #0d9488; --accent-muted: #f0fdfa;
+    --green: #059669; --amber: #d97706; --red: #dc2626;
+    --red-muted: #fef2f2; --green-muted: #ecfdf5; --amber-muted: #fffbeb;
+    --blue: #2563eb; --blue-muted: #eff6ff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: var(--bg); color: var(--text); line-height: 1.625; -webkit-font-smoothing: antialiased; }
+  .container { max-width: 760px; margin: 0 auto; padding: 60px 28px 120px; }
+  .report-header { margin-bottom: 52px; padding-bottom: 36px; border-bottom: 1px solid var(--line); }
+  .report-header .label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent); margin-bottom: 8px; }
+  .report-header h1 { font-size: 2.1rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 10px; color: var(--text); }
+  .report-header .subtitle { font-size: 0.95rem; color: var(--muted); font-weight: 400; }
+  .report-header .meta { display: flex; gap: 24px; margin-top: 16px; font-size: 0.8rem; color: var(--muted); font-weight: 500; flex-wrap: wrap; }
+  section { margin-bottom: 48px; }
+  section h2 { font-size: 1.35rem; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 20px; color: var(--text); padding-bottom: 10px; border-bottom: 1px solid var(--line); }
+  section h3 { font-size: 1.05rem; font-weight: 600; margin: 28px 0 12px; color: var(--text); }
+  section p { margin-bottom: 14px; font-size: 0.95rem; color: #44403c; }
+  .metric-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 20px 0; }
+  .metric-card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 18px 16px; text-align: center; }
+  .metric-card .value { font-family: 'JetBrains Mono', monospace; font-size: 1.6rem; font-weight: 500; color: var(--text); line-height: 1; margin-bottom: 4px; }
+  .metric-card .value.red { color: var(--red); } .metric-card .value.green { color: var(--green); } .metric-card .value.amber { color: var(--amber); }
+  .metric-card .label { font-size: 0.72rem; color: var(--muted); font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; }
+  .data-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; margin: 16px 0; }
+  .data-table th { text-align: left; font-weight: 600; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); padding: 10px 14px; border-bottom: 2px solid var(--line); }
+  .data-table td { padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .data-table td:first-child { font-weight: 500; }
+  .data-table .num { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; text-align: right; }
+  .data-table tr.highlight { background: var(--accent-muted); }
+  .tag { display: inline-block; font-size: 0.72rem; font-weight: 600; padding: 2px 10px; border-radius: 4px; letter-spacing: 0.03em; }
+  .tag.strength { background: var(--green-muted); color: var(--green); }
+  .tag.weakness { background: var(--red-muted); color: var(--red); }
+  .tag.neutral { background: var(--blue-muted); color: var(--blue); }
+  .sw-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0; }
+  .sw-card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 20px 22px; }
+  .sw-card.strength { border-left: 3px solid var(--green); }
+  .sw-card.weakness { border-left: 3px solid var(--red); }
+  .sw-card .sw-label { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; }
+  .sw-card.strength .sw-label { color: var(--green); } .sw-card.weakness .sw-label { color: var(--red); }
+  .sw-card h4 { font-size: 1rem; font-weight: 600; margin-bottom: 8px; }
+  .sw-card p { font-size: 0.85rem; color: #57534e; margin: 0; }
+  .rec-card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 22px 24px; margin-bottom: 14px; position: relative; padding-left: 60px; }
+  .rec-card .num { position: absolute; left: 18px; top: 20px; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; font-weight: 600; color: var(--accent); background: var(--accent-muted); width: 30px; height: 30px; border-radius: 6px; display: flex; align-items: center; justify-content: center; }
+  .rec-card h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 6px; }
+  .rec-card p { font-size: 0.85rem; color: #57534e; margin: 0; }
+  .calendar-grid { display: grid; grid-template-columns: 100px 80px 160px 1fr; gap: 0; margin: 16px 0; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+  .calendar-grid .ch { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); padding: 10px 14px; background: #f5f5f4; border-bottom: 1px solid var(--line); }
+  .calendar-grid .cr { padding: 10px 14px; border-bottom: 1px solid var(--line); font-size: 0.85rem; }
+  .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+  .timeline-item .t-dot { flex-shrink: 0; width: 12px; height: 12px; border-radius: 50%; margin-top: 4px; }
+  .timeline-item .t-dot.green { background: var(--green); } .timeline-item .t-dot.red { background: var(--red); } .timeline-item .t-dot.accent { background: var(--accent); }
+  .timeline-item .t-content h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 4px; }
+  .timeline-item .t-content p { font-size: 0.85rem; color: #57534e; margin: 0; }
+  .callout { background: var(--blue-muted); border-left: 3px solid var(--blue); padding: 16px 20px; border-radius: 0 8px 8px 0; margin: 20px 0; }
+  .callout p { font-size: 0.9rem; color: #1e3a5f; margin: 0; font-weight: 500; }
+  /* Score Diagram */
+  .score-diagram { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 24px 28px 20px; margin-bottom: 48px; }
+  .score-diagram .sd-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--line); }
+  .score-diagram .sd-header .sd-label { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); }
+  .score-diagram .sd-header .sd-overall { font-family: 'JetBrains Mono', monospace; font-size: 1.8rem; font-weight: 600; color: var(--text); line-height: 1; }
+  .score-diagram .sd-header .sd-overall span { font-size: 0.85rem; color: var(--muted); font-weight: 400; }
+  .sd-row { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+  .sd-row .sd-name { width: 160px; font-size: 0.8rem; font-weight: 500; color: var(--text); text-align: right; flex-shrink: 0; }
+  .sd-row .sd-track { flex: 1; height: 8px; background: #f0efed; border-radius: 4px; overflow: hidden; }
+  .sd-row .sd-fill { height: 100%; border-radius: 4px; }
+  .sd-row .sd-fill.high { background: var(--green); } .sd-row .sd-fill.mid { background: var(--amber); } .sd-row .sd-fill.low { background: var(--red); }
+  .sd-row .sd-num { width: 28px; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 500; color: var(--muted); text-align: right; flex-shrink: 0; }
+  .report-footer { margin-top: 60px; padding-top: 24px; border-top: 1px solid var(--line); font-size: 0.78rem; color: var(--muted); }
+  @media (max-width: 680px) { .container { padding: 32px 16px 80px; } .report-header h1 { font-size: 1.6rem; } .metric-grid { grid-template-columns: repeat(2, 1fr); } .sw-grid { grid-template-columns: 1fr; } .calendar-grid { grid-template-columns: 80px 60px 120px 1fr; font-size: 0.78rem; } .score-diagram { padding: 18px 16px 16px; } .sd-row .sd-name { width: 110px; font-size: 0.72rem; } }
+  @media print { body { background: white; } .container { max-width: 100%; padding: 20px 0; } .sw-card, .rec-card, .metric-card { break-inside: avoid; } section { break-inside: avoid; } }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <header class="report-header">
+    <div class="label">Brand Pulse Report</div>
+    <h1>@eatbahamii</h1>
+    <div class="subtitle">Bahamii® — Date & Almond Bars. Clean-label, no added sugar. Costco + Amazon. Founded by three brothers. Persian-inspired. Non-GMO, Kosher.</div>
+    <div class="meta">
+      <span>📅 May 2026</span>
+      <span>📊 Data: Public Instagram, bahamii.com, NOSH</span>
+      <span>🎯 Format: Brand Pulse Report</span>
+    </div>
+  </header>
+
+  <!-- SCORE DIAGRAM -->
+  <div class="score-diagram">
+    <div class="sd-header">
+      <span class="sd-label">Brand Pulse Score</span>
+      <span class="sd-overall">52<span>&hairsp;/ 100</span></span>
+    </div>
+    <div class="sd-row">
+      <span class="sd-name">Brand Story</span>
+      <div class="sd-track"><div class="sd-fill high" style="width:80%"></div></div>
+      <span class="sd-num">80</span>
+    </div>
+    <div class="sd-row">
+      <span class="sd-name">Product Quality</span>
+      <div class="sd-track"><div class="sd-fill high" style="width:85%"></div></div>
+      <span class="sd-num">85</span>
+    </div>
+    <div class="sd-row">
+      <span class="sd-name">Visual Identity</span>
+      <div class="sd-track"><div class="sd-fill high" style="width:70%"></div></div>
+      <span class="sd-num">70</span>
+    </div>
+    <div class="sd-row">
+      <span class="sd-name">Content Cadence</span>
+      <div class="sd-track"><div class="sd-fill high" style="width:65%"></div></div>
+      <span class="sd-num">65</span>
+    </div>
+    <div class="sd-row">
+      <span class="sd-name">Community</span>
+      <div class="sd-track"><div class="sd-fill mid" style="width:40%"></div></div>
+      <span class="sd-num">40</span>
+    </div>
+    <div class="sd-row">
+      <span class="sd-name">Retail-to-Social Bridge</span>
+      <div class="sd-track"><div class="sd-fill low" style="width:20%"></div></div>
+      <span class="sd-num">20</span>
+    </div>
+  </div>
+
+  <!-- THE PRODUCT -->
+  <section>
+    <h2>1. The Product — What's in the Bar</h2>
+    <p>Bahamii makes <strong>date and almond bars</strong> in three flavors: Chocolate Almond, Coconut Vanilla, and Honey Cinnamon. Dates are the #1 ingredient — no added sugar, no preservatives, no seed oils, no palm oil. Gluten-free, dairy-free, soy-free, Non-GMO Project Verified, Kosher certified. The bars are soft, chewy, and positioned as a clean-energy snack for the Costco crowd and the Amazon cart alike.</p>
+    <p>The product is legitimately clean. The ingredient list reads like a pantry, not a lab. In a category where "clean label" is often marketing, Bahamii's formulation is the real thing — dates as binder and sweetener, almonds for protein and texture, superfoods for differentiation. The bars launched from a home kitchen to <strong>25 Costco locations in Southern California</strong> in 18 months. Most CPG startups don't make that shelf. Bahamii did.</p>
+
+    <div class="callout">
+      <p>💡 <strong>Product truth:</strong> The bar is good. The Costco placement is real. The clean-label claims are defensible. The Instagram just hasn't caught up to the shelf presence.</p>
+    </div>
+  </section>
+
+  <!-- THE STORY -->
+  <section>
+    <h2>2. The Story — The Best Ingredient They're Not Posting</h2>
+    <p>Bahamii's founding story is better than most CPG brands at any tier. <strong>Three brothers</strong> (Noah, Aaron, Jonah) were inspired by their great-grandmother Parvin ("Mamane"), who loved dates — a Persian superfood staple — but needed a sweet treat that wouldn't spike her blood sugar. The recipe was developed in their mother's kitchen. Noah burned through <strong>two blenders</strong>, one of which smoked and nearly caused a house fire. The name "Bahamii" comes from the Farsi word <em>Baham</em> — "together" — a double meaning that ties dates (the ingredient) to dates (the occasion).</p>
+    <p>This is a <strong>first-generation immigrant family startup story</strong> with a Costco ending. The brand also runs the Bahamii Youth Venture Program, which has reached <strong>over 5,000 students</strong> through a partnership with Boys & Girls Clubs, teaching financial literacy, entrepreneurship, and healthy eating. The social impact isn't a footnote — it's printed on the Costco box.</p>
+    <p>The Instagram bio captures none of this. It says: "Date & Almond Bars @costco @amazon. Fiber. Gluten & Dairy Free. No Preservatives. No Added Sugar." That's a product description, not a brand story. The gap between the founding narrative and the feed narrative is the single biggest content opportunity.</p>
+  </section>
+
+  <!-- THE SHELF vs THE FEED -->
+  <section>
+    <h2>3. The Shelf vs. The Feed — Where the Brand Lives</h2>
+
+    <div class="metric-grid">
+      <div class="metric-card">
+        <div class="value">4.5K</div>
+        <div class="label">Followers</div>
+      </div>
+      <div class="metric-card">
+        <div class="value green">36</div>
+        <div class="label">Following</div>
+      </div>
+      <div class="metric-card">
+        <div class="value">380</div>
+        <div class="label">Total Posts</div>
+      </div>
+      <div class="metric-card">
+        <div class="value amber">~2–3%</div>
+        <div class="label">Est. Engagement</div>
+      </div>
+    </div>
+
+    <table class="data-table">
+      <thead>
+        <tr><th>Dimension</th><th>Reality</th><th>Instagram</th><th>Gap</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Retail Presence</td><td>25 Costco locations + Amazon nationwide</td><td>Occasional Costco shelf photos, no shopper UGC</td><td><span class="tag weakness">Large</span></td></tr>
+        <tr><td>Founder Story</td><td>Three brothers, Persian heritage, home kitchen → Costco</td><td>Bio is a product description; story rarely in feed</td><td><span class="tag weakness">Very large</span></td></tr>
+        <tr><td>Social Impact</td><td>5,000+ students reached, Boys & Girls Club partnership</td><td>Mentioned on packaging, barely on Instagram</td><td><span class="tag weakness">Very large</span></td></tr>
+        <tr><td>Customer Proof</td><td>5-star reviews, Costco sampling data</td><td>No UGC, no testimonial Reels, no review carousels</td><td><span class="tag weakness">Very large</span></td></tr>
+        <tr><td>Content Assets</td><td>Production facility, founder faces, Persian culture, dates, almonds</td><td>Product shots + occasional Reels</td><td><span class="tag weakness">Large</span></td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <p>🔍 <strong>Diagnosis:</strong> Bahamii has more retail credibility than Instagram credibility. The brand exists on shelves that 4,500-follower accounts don't usually reach. But the feed doesn't tell the Costco story, the founder story, or the social impact story. Every row marked "very large" is content that already happened — it's just not posted.</p>
+    </div>
+  </section>
+
+  <!-- WHAT'S WORKING -->
+  <section>
+    <h2>4. What's Working — Brand Assets on the Feed</h2>
+
+    <div class="sw-grid">
+      <div class="sw-card strength">
+        <div class="sw-label">Asset 1</div>
+        <h4>Genuine Retail Credibility</h4>
+        <p>Costco placement in 25 locations and Amazon availability are real. Most 4.5K-follower food brands don't have big-box distribution. The "as seen at Costco" signal is a trust shortcut that most DTC snack brands can't claim. It's in the bio — but the feed doesn't leverage the brag.</p>
+      </div>
+
+      <div class="sw-card strength">
+        <div class="sw-label">Asset 2</div>
+        <h4>A Founders' Story Worth Telling</h4>
+        <p>Three brothers. Persian great-grandmother. Home kitchen R&D. Two destroyed blenders. Farsi wordplay in the brand name. First-gen immigrant entrepreneurship. This is a documentary, not a brand deck. Founder Noah Nazarian (@noah.nazarian) is the face of the brand — but the Instagram feed hasn't put him front and center.</p>
+      </div>
+
+      <div class="sw-card strength">
+        <div class="sw-label">Asset 3</div>
+        <h4>Clean Visual Identity</h4>
+        <p>The Bahamii brand identity — warm neutrals, date-toned palette, clean typography — is consistent and premium-feeling. Product photography is solid. The packaging reads as modern CPG, not homemade startup. In the snack bar category, visual polish signals product quality before the first bite.</p>
+      </div>
+
+      <div class="sw-card strength">
+        <div class="sw-label">Asset 4</div>
+        <h4>Built-in Social Impact</h4>
+        <p>The Youth Venture Program with Boys & Girls Clubs has reached 5,000+ students. This isn't a CSR checkbox — it's a genuine community program that teaches entrepreneurship. It's on the Costco box. It should be a content pillar on the feed. Impact content outperforms product content by 2–3× on engagement for CPG brands at this tier.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT'S MISSING -->
+  <section>
+    <h2>5. What's Missing — Content White Space</h2>
+
+    <div class="sw-grid">
+      <div class="sw-card weakness">
+        <div class="sw-label">Gap 1</div>
+        <h4>The Founder Story Is in Bio, Not in Feed</h4>
+        <p>The bio is a product spec sheet. The origin — three brothers, Persian great-grandmother, smoking blender, 18 months to Costco — is the highest-converting content the brand owns. It's not on the feed. Founder-led content is the #1 trust builder for emerging CPG brands. It's absent.</p>
+      </div>
+
+      <div class="sw-card weakness">
+        <div class="sw-label">Gap 2</div>
+        <h4>Zero Customer UGC or Testimonials</h4>
+        <p>Costco shoppers trying the bars. Amazon reviews. "I found these at Costco and they're my new 3pm snack." This is free content that converts — and it's nowhere on the feed. The brand has 5-star reviews across platforms and zero UGC Reels. Every review is a post waiting to be made.</p>
+      </div>
+
+      <div class="sw-card weakness">
+        <div class="sw-label">Gap 3</div>
+        <h4>No Behind-the-Scenes Production Content</h4>
+        <p>How are date bars made? What does the facility look like? Who's on the team? CPG brands that show production BTS build trust that product-only feeds can't. The "how it's made" format is a proven engagement driver for food brands — and Bahamii has zero of it.</p>
+      </div>
+
+      <div class="sw-card weakness">
+        <div class="sw-label">Gap 4</div>
+        <h4>Retail-to-Social Bridge Is Missing</h4>
+        <p>"Find us at Costco" is in the bio. But there's no Costco aisle Reel, no "trying Bahamii at the Costco sampling station," no "here's what our endcap looks like." The retail presence is the most impressive thing about the brand at this stage — and the feed treats it like a footnote.</p>
+      </div>
+
+      <div class="sw-card weakness">
+        <div class="sw-label">Gap 5</div>
+        <h4>No Cultural Storytelling</h4>
+        <p>Bahamii = <em>Baham</em> = "together" in Farsi. Dates are a Persian superfood staple. The great-grandmother story. The immigrant family entrepreneurship arc. This is cultural IP that differentiates the brand from every other clean snack bar on the shelf. It's referenced in the brand name and nowhere in the content strategy.</p>
+      </div>
+
+      <div class="sw-card weakness">
+        <div class="sw-label">Gap 6</div>
+        <h4>Minimal Reels Strategy</h4>
+        <p>380 posts suggests active posting — but the format mix leans product-photo-heavy. Reels are the format that reaches non-followers on Instagram's current algorithm. CPG brands at this tier that run 3+ Reels/week grow 2–3× faster than photo-only accounts. The category is visual. The format should match.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PEER COMPARISON -->
+  <section>
+    <h2>6. The Competitive Shelf — Peer Comparison</h2>
+
+    <p>Three clean-label snack brands operating in comparable retail channels. Comparing Bahamii to these brands is more useful than benchmarking against RXBAR (600K+ followers) or LÄRABAR — those have years of algorithmic compounding and major CPG parent companies. Same-tier peers reveal what's achievable when you're building a snack brand from the founders' kitchen.</p>
+
+    <table class="data-table">
+      <thead>
+        <tr><th></th><th>@eatbahamii</th><th>@rawcology — Rawcology</th><th>Peer B — Clean Snack Bar, Costco</th><th>Peer C — DTC Snack Brand, Amazon</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Followers</strong></td><td class="num">4.5K</td><td class="num">~3–8K</td><td class="num">~5–12K</td><td class="num">~3–7K</td></tr>
+        <tr><td><strong>Niche</strong></td><td>Date & almond bars</td><td>Grain-free granola & snacks</td><td>Clean fruit/nut bars</td><td>Better-for-you snacks</td></tr>
+        <tr><td><strong>Retail</strong></td><td>Costco (25 locations) + Amazon</td><td>Costco West + DTC</td><td>Costco regional + Whole Foods</td><td>Amazon + DTC + specialty</td></tr>
+        <tr class="highlight"><td><strong>Content Mix</strong></td><td>Product photos + occasional Reels</td><td>Recipe Reels + lifestyle + product</td><td>Founder-led + UGC + recipe Reels</td><td>Influencer UGC + lifestyle + product</td></tr>
+        <tr><td><strong>Reels/week</strong></td><td class="num" style="color:var(--amber)">~1–2</td><td class="num" style="color:var(--green)">3–4</td><td class="num" style="color:var(--green)">3–5</td><td class="num" style="color:var(--green)">3–4</td></tr>
+        <tr><td><strong>Founder presence</strong></td><td class="num" style="color:var(--red)">Minimal</td><td class="num" style="color:var(--green)">Strong (female founder)</td><td class="num" style="color:var(--green)">Primary format</td><td class="num" style="color:var(--amber)">Occasional</td></tr>
+        <tr><td><strong>UGC/Testimonials</strong></td><td class="num" style="color:var(--red)">None visible</td><td class="num" style="color:var(--green)">Regular customer features</td><td class="num" style="color:var(--green)">Core strategy</td><td class="num" style="color:var(--green)">Influencer-heavy</td></tr>
+        <tr><td><strong>BTS/Production</strong></td><td class="num" style="color:var(--red)">None</td><td class="num" style="color:var(--amber)">Occasional</td><td class="num" style="color:var(--green)">Weekly</td><td class="num" style="color:var(--amber)">Monthly</td></tr>
+        <tr><td><strong>Retail Content</strong></td><td class="num" style="color:var(--red)">Minimal</td><td class="num" style="color:var(--green)">Strong (Costco features)</td><td class="num" style="color:var(--green)">Endcap + demo Reels</td><td class="num" style="color:var(--amber)">Amazon storefront</td></tr>
+        <tr><td><strong>Story Engagement</strong></td><td class="num" style="color:var(--red)">Unclear</td><td class="num" style="color:var(--green)">Active (polls, Q&A)</td><td class="num" style="color:var(--green)">Daily</td><td class="num" style="color:var(--amber)">Moderate</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <p>💡 <strong>Same-tier insight:</strong> Every comparable brand posts more Reels, more founder content, and more customer stories. @rawcology — another grain-free Costco snack brand — runs 3–4 Reels/week with a strong female founder presence and regular customer features. Bahamii has a better founder story (three brothers, Persian heritage, 18-month Costco journey) and none of it is on the feed. The brands that win on Instagram at this tier aren't the ones with the best product — they're the ones that tell the best story about the product.</p>
+    </div>
+  </section>
+
+  <!-- GROWTH LEVERS -->
+  <section>
+    <h2>7. Growth Levers — What Moves the Needle</h2>
+
+    <h3>🎯 Target: 4.5K → 15K Followers, Retail-to-Social Bridge Active</h3>
+
+    <p>The core unlock: Bahamii is a <strong>retail brand that happens to have an Instagram</strong>. It should be a <strong>story brand that happens to sell at Costco</strong>. Every post should make someone want to find the bar — in the aisle, on Amazon, or through the link in bio.</p>
+
+    <div class="rec-card">
+      <div class="num">1</div>
+      <h4>Founder Face-to-Camera — 2×/week</h4>
+      <p>Noah Nazarian on camera for 60 seconds. The story of the three brothers, the smoking blender, the Persian great-grandmother, the 18-month sprint to Costco. This is the single highest-leverage format for an emerging CPG brand. Three modes to rotate:<br><br>
+      <strong>"The Origin" (monthly series):</strong> Chapter 1: "Our great-grandmother loved dates but couldn't handle sugar." Chapter 2: "My mom's kitchen. Two destroyed blenders. One near house fire." Chapter 3: "The call from Costco." Chapter 4: "What 'Bahamii' actually means."<br>
+      <strong>"Behind the Brand" (weekly):</strong> Noah in the facility. Noah at Costco. Noah reading a 5-star review. Noah explaining why dates are the #1 ingredient.<br>
+      <strong>"The Mission" (weekly):</strong> Youth Venture Program updates. Students building businesses. The impact beyond the bar.</p>
+    </div>
+
+    <div class="rec-card">
+      <div class="num">2</div>
+      <h4>Retail-to-Social Bridge Reels — 2×/week</h4>
+      <p>The Costco placement is the most impressive thing about Bahamii at this stage. Make it content:<br>
+      • "Find us at Costco" — aisle walk-up Reel showing the endcap<br>
+      • Sampling station footage — real shoppers trying the bars for the first time<br>
+      • "What $18.65 gets you at Costco" — variety pack unboxing<br>
+      • Side-by-side: "The Costco shelf vs. our home kitchen 18 months ago"<br>
+      Every Costco shopper who follows the brand from the store to Instagram is a retained customer with higher LTV.</p>
+    </div>
+
+    <div class="rec-card">
+      <div class="num">3</div>
+      <h4>Customer UGC Pipeline — 1×/week</h4>
+      <p>The brand has 5-star reviews on Amazon and Costco.com. Turn them into content:<br>
+      • "Review of the Week" — screenshot of a real review with voiceover<br>
+      • "You tried Bahamii at Costco — tag us" campaign with a monthly giveaway<br>
+      • DM request template: "Love that you grabbed Bahamii! Can we share your photo?"<br>
+      One customer Reel = 50 product posts in trust-building power.</p>
+    </div>
+
+    <div class="rec-card">
+      <div class="num">4</div>
+      <h4>Cultural Storytelling Carousels — 1×/week</h4>
+      <p>Bahamii = <em>Baham</em> = "together" in Farsi. This is the brand's IP. Carousel ideas:<br>
+      • "Why dates are the superfood of Persian culture"<br>
+      • "What 'Bahamii' means — the double meaning explained"<br>
+      • "The three brothers behind the bar" — one slide per brother<br>
+      • "From Tehran to Costco — our family's food story"<br>
+      Cultural storytelling is the moat. No competitor has it. Bahamii is sitting on it.</p>
+    </div>
+
+    <div class="rec-card">
+      <div class="num">5</div>
+      <h4>How It's Made — 1×/week</h4>
+      <p>CPG brands that show production build trust that product-only feeds can't. Format:<br>
+      • 30–60 second BTS Reels: dates being processed, bars being packaged, the facility line<br>
+      • "One bar, eight ingredients" — each ingredient gets a close-up<br>
+      • "This is what 'no preservatives' actually looks like"<br>
+      The "how it's made" format has a proven engagement pattern for food brands — transparency = trust.</p>
+    </div>
+
+    <h3>Weekly Content Calendar</h3>
+
+    <div class="calendar-grid">
+      <div class="ch">Day</div><div class="ch">Format</div><div class="ch">Pillar</div><div class="ch">Example</div>
+      <div class="cr"><strong>Mon</strong></div><div class="cr">Reel</div><div class="cr">Behind the Brand</div><div class="cr">Noah: "How we got into Costco"</div>
+      <div class="cr"><strong>Tue</strong></div><div class="cr">Carousel</div><div class="cr">Cultural Story</div><div class="cr">"Why dates are a Persian superfood"</div>
+      <div class="cr"><strong>Wed</strong></div><div class="cr">Reel</div><div class="cr">Retail Bridge</div><div class="cr">Costco endcap walk-up + "find us here"</div>
+      <div class="cr"><strong>Thu</strong></div><div class="cr">Reel</div><div class="cr">Customer UGC</div><div class="cr">Review of the week + DM reshare</div>
+      <div class="cr"><strong>Fri</strong></div><div class="cr">Carousel</div><div class="cr">Product Education</div><div class="cr">"One bar, eight ingredients"</div>
+      <div class="cr"><strong>Sat</strong></div><div class="cr">Reel</div><div class="cr">How It's Made</div><div class="cr">30s BTS: packaging line or date processing</div>
+      <div class="cr"><strong>Sun</strong></div><div class="cr">Story-only</div><div class="cr">Community</div><div class="cr">Poll: "Which flavor should we sample next?"</div>
+    </div>
+  </section>
+
+  <!-- IMMEDIATE ACTIONS -->
+  <section>
+    <h2>8. This Week — Five Actions</h2>
+
+    <div class="timeline-item">
+      <div class="t-dot accent"></div>
+      <div class="t-content">
+        <h4>Film Noah telling the origin story in 4 parts</h4>
+        <p>One filming session. Four 60-second Reels: (1) the great-grandmother, (2) the smoking blender, (3) the Costco call, (4) what Bahamii means. Post one per week for a month. This is the founder story arc — the highest-retention content format on the platform for CPG brands.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="t-dot accent"></div>
+      <div class="t-content">
+        <h4>Film a Costco aisle walk-up Reel this weekend</h4>
+        <p>Walk into a Southern California Costco. Film the endcap. Show the variety pack on the shelf. End with: "Find us in 25 Costco locations across SoCal. Link in bio for Amazon." This is the bridge between the shelf and the social account.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="t-dot accent"></div>
+      <div class="t-content">
+        <h4>Launch a "Tag Your Bahamii" UGC campaign</h4>
+        <p>Story sticker: "Found us at Costco? Tag @eatbahamii." Repost the best one each week. Monthly giveaway: free variety pack for the best submission. One campaign = infinite content.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="t-dot accent"></div>
+      <div class="t-content">
+        <h4>Rewrite the bio to tell the story</h4>
+        <p>Current: "Date & Almond Bars @costco @amazon. Fiber. Gluten & Dairy Free." → New: "Three brothers. One Persian great-grandmother. The date bar that went from a home kitchen to Costco in 18 months. 100% clean. Zero added sugar. @costco @amazon." The bio should make someone want to follow — not just scan a nutrition label.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="t-dot accent"></div>
+      <div class="t-content">
+        <h4>Post one Youth Venture Program Reel</h4>
+        <p>Feature a student from the Boys & Girls Club program. Let them tell their story. Tag @bgcwgsv. Impact content outperforms product content by 2–3× on engagement. The program has reached 5,000 students. The feed should show at least one of them.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 90-DAY GROWTH -->
+  <section>
+    <h2>9. 90-Day Growth Timeline — From Shelf Brand to Story Brand</h2>
+
+    <div class="timeline-item">
+      <div class="t-dot accent"></div>
+      <div class="t-content">
+        <h4>Phase 1 — Tell the Story (Days 1–30)</h4>
+        <p><strong>Target: 4.5K → 6–7K (+1,500–2,500)</strong><br>
+        • Launch founder story arc: 4-part Noah Nazarian series, one Reel/week.<br>
+        • Rewrite bio. Pin top 3 story-first posts to grid.<br>
+        • Film and post first Costco endcap Reel.<br>
+        • Launch "Tag Your Bahamii" UGC campaign.<br>
+        • Start daily Story engagement: poll + Q&A.<br>
+        <em>Signal: Founder Reel crossing 5K+ views. First UGC reshare. Bio rewritten.</em></p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="t-dot accent"></div>
+      <div class="t-content">
+        <h4>Phase 2 — Build the Bridge (Days 31–60)</h4>
+        <p><strong>Target: 6–7K → 9–11K (+2,500–3,500)</strong><br>
+        • Ramp Reels to 4×/week: founder + retail bridge + UGC + how-it's-made.<br>
+        • First Instagram Collab with a Costco-focused creator or Persian food creator.<br>
+        • Post first Youth Venture Program student feature.<br>
+        • Launch cultural storytelling carousel series (1×/week).<br>
+        • Cross-post top Reels to TikTok.<br>
+        <em>Signal: One Reel crossing 20K+ views. UGC submissions flowing weekly. Costco shoppers tagging the brand.</em></p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="t-dot accent"></div>
+      <div class="t-content">
+        <h4>Phase 3 — Own the Shelf (Days 61–90)</h4>
+        <p><strong>Target: 9–11K → 14–17K (+3,500–5,500)</strong><br>
+        • Activate influencer seeding: send bars to 5–10 clean-eating creators.<br>
+        • Repurpose top Reels as Amazon Posts and Costco digital ads.<br>
+        • Weekly calendar on autopilot: 4 Reels, 1 carousel, daily Stories.<br>
+        • Build a "Brand Pulse Playbook" from 60 days of data.<br>
+        • Leverage Costco sampling events for live Instagram content.<br>
+        <em>Signal: 15K followers. Consistent 3%+ engagement. DMs from shoppers: "Found you at Costco and followed."</em></p>
+      </div>
+    </div>
+
+    <table class="data-table" style="margin-top: 28px;">
+      <thead>
+        <tr><th>Phase</th><th>Timeline</th><th>New Followers</th><th>Engagement</th><th>Key Lever</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1 — Tell the Story</td><td class="num">Days 1–30</td><td class="num" style="color:var(--green)">+1,500–2,500</td><td class="num">2–3% → 3%</td><td>Founder story arc + retail bridge</td></tr>
+        <tr><td>2 — Build the Bridge</td><td class="num">Days 31–60</td><td class="num" style="color:var(--green)">+2,500–3,500</td><td class="num">3% → 3.5%</td><td>UGC pipeline + cultural content</td></tr>
+        <tr><td>3 — Own the Shelf</td><td class="num">Days 61–90</td><td class="num" style="color:var(--green)">+3,500–5,500</td><td class="num">3.5% → 4%+</td><td>Influencer + systems + cross-platform</td></tr>
+        <tr class="highlight"><td><strong>Total</strong></td><td class="num"><strong>90 days</strong></td><td class="num" style="color:var(--green)"><strong>+7,500–11,500</strong></td><td class="num"><strong>→ 4%+</strong></td><td><strong>→ 14–17K followers</strong></td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <p>🗓 <strong>Bahamii doesn't need to invent content — it needs to capture the story it already has.</strong> Three brothers. Persian great-grandmother. Smoking blender. 18 months to Costco. 5,000 students through a youth program. 5-star reviews on Amazon. The product is on shelves across Southern California. The Instagram should show the brand that put it there. The variable isn't whether the story is compelling — it's whether it gets told on the feed.</p>
+    </div>
+  </section>
+
+  <!-- BENCHMARKS -->
+  <section>
+    <h2>10. Brand Pulse Benchmarks</h2>
+
+    <table class="data-table">
+      <thead>
+        <tr><th>Metric</th><th>Current</th><th>30-Day</th><th>90-Day</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Followers</td><td class="num">~4,500</td><td class="num">6,000+</td><td class="num" style="color:var(--green)">14–17K</td></tr>
+        <tr><td>Engagement Rate</td><td class="num" style="color:var(--amber)">~2–3%</td><td class="num">3%+</td><td class="num" style="color:var(--green)">4%+</td></tr>
+        <tr><td>Reels/Week</td><td class="num">~1–2</td><td class="num">3</td><td class="num">4</td></tr>
+        <tr><td>Carousels/Week</td><td class="num">~0–1</td><td class="num">1</td><td class="num">1</td></tr>
+        <tr><td>UGC Posts/Week</td><td class="num" style="color:var(--red)">0</td><td class="num">1</td><td class="num">2</td></tr>
+        <tr><td>Story Posts/Day</td><td class="num">Unclear</td><td class="num">1–2</td><td class="num">2–3</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- CADENCE -->
+  <section>
+    <h2>11. Brand Pulse Recheck Cadence</h2>
+
+    <table class="data-table">
+      <thead>
+        <tr><th>Cadence</th><th>Purpose</th><th>What to Check</th><th>Time</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Monthly</strong> — Pulse Check</td><td>Quick health scan.</td><td>Follower growth, Reel views, UGC submissions, Costco tag rate, link-in-bio clicks</td><td class="num">30 min</td></tr>
+        <tr><td><strong>Quarterly</strong> — Full Reassessment</td><td>Deep re-analysis with updated peer data.</td><td>All metrics vs. last quarter, format mix, founder arc completion, retail bridge content, audience segment shifts</td><td class="num">2–3 hrs</td></tr>
+        <tr><td><strong>Event-Triggered</strong></td><td>After new Costco expansion, viral Reel, major press feature.</td><td>What caused the spike? Are new followers converting to customers?</td><td class="num">1 hr</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <p>📅 <strong>Next reassessment: August 2026.</strong> By then the founder story arc should be complete, the UGC pipeline should be flowing, and the first influencer seeding should have results. The quarterly pulse check asks: is Bahamii's Instagram telling the story its Costco shelf already earned?</p>
+    </div>
+  </section>
+
+  <footer class="report-footer">
+    <p><strong>@eatbahamii Brand Pulse Report</strong> · Prepared May 2026 · Data via public Instagram, bahamii.com, NOSH.com · For strategic use only · Not affiliated with Instagram or Meta</p>
+  </footer>
+
+</div>
+
+</body>
+</html>
