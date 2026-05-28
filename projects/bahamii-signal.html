@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brand Signal — Bahamii®</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fafaf9; --surface: #ffffff; --text: #1c1917; --muted: #78716c;
+    --line: #e7e5e4; --accent: #0d9488; --accent-muted: #f0fdfa;
+    --green: #059669; --amber: #d97706; --red: #dc2626;
+    --blue: #2563eb; --blue-muted: #eff6ff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: var(--bg); color: var(--text); line-height: 1.625; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 640px; margin: 0 auto; padding: 56px 24px 80px; }
+
+  /* Header */
+  .sig-header { text-align: center; margin-bottom: 40px; }
+  .sig-header .sig-badge { display: inline-block; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: var(--accent); background: var(--accent-muted); padding: 4px 14px; border-radius: 4px; margin-bottom: 14px; }
+  .sig-header h1 { font-size: 1.8rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 6px; }
+  .sig-header .sig-sub { font-size: 0.9rem; color: var(--muted); }
+
+  /* Score ring */
+  .score-ring { display: flex; align-items: center; justify-content: center; gap: 32px; margin-bottom: 36px; }
+  .score-ring .ring { width: 100px; height: 100px; border-radius: 50%; border: 5px solid var(--amber); display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .score-ring .ring .big { font-family: 'JetBrains Mono', monospace; font-size: 1.8rem; font-weight: 600; color: var(--amber); line-height: 1; }
+  .score-ring .ring .small { font-size: 0.62rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 2px; }
+  .score-ring .bars { flex: 1; max-width: 340px; }
+  .mini-row { display: flex; align-items: center; gap: 8px; margin-bottom: 3px; }
+  .mini-row .mn { width: 80px; font-size: 0.68rem; font-weight: 500; color: var(--text); text-align: right; flex-shrink: 0; }
+  .mini-row .mt { flex: 1; height: 5px; background: #f0efed; border-radius: 3px; overflow: hidden; }
+  .mini-row .mf { height: 100%; border-radius: 3px; }
+  .mf.hi { background: var(--green); } .mf.mi { background: var(--amber); } .mf.lo { background: var(--red); }
+  .mini-row .mv { width: 22px; font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--muted); text-align: right; flex-shrink: 0; }
+
+  /* Insight cards */
+  .insight { margin-bottom: 32px; }
+  .insight-label { font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 18px; text-align: center; }
+  .icard { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 18px 20px; margin-bottom: 10px; display: flex; gap: 14px; align-items: flex-start; }
+  .icard .ic-num { font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; font-weight: 600; color: var(--accent); background: var(--accent-muted); width: 26px; height: 26px; border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  .icard .ic-body h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 3px; }
+  .icard .ic-body p { font-size: 0.82rem; color: #57534e; margin: 0; line-height: 1.55; }
+
+  /* Opportunity callout */
+  .opp-box { background: var(--accent-muted); border: 1px solid #ccfbf1; border-radius: 12px; padding: 22px 24px; text-align: center; margin-bottom: 28px; }
+  .opp-box h3 { font-size: 1rem; font-weight: 600; color: var(--text); margin-bottom: 8px; }
+  .opp-box p { font-size: 0.88rem; color: #0f766e; margin: 0 0 10px; line-height: 1.6; }
+  .opp-box .opp-stat { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 1.5rem; font-weight: 600; color: var(--accent); }
+
+  /* CTA */
+  .cta { text-align: center; }
+  .cta p { font-size: 0.82rem; color: var(--muted); margin-bottom: 6px; }
+  .cta .cta-row { font-size: 0.9rem; color: var(--text); font-weight: 500; }
+
+  /* Footer */
+  .sig-footer { margin-top: 44px; padding-top: 20px; border-top: 1px solid var(--line); text-align: center; font-size: 0.72rem; color: var(--muted); }
+
+  @media (max-width: 500px) {
+    .wrap { padding: 36px 16px 60px; }
+    .sig-header h1 { font-size: 1.4rem; }
+    .score-ring { flex-direction: column; gap: 16px; }
+    .mini-row .mn { width: 70px; font-size: 0.65rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="sig-header">
+    <div class="sig-badge">Brand Signal</div>
+    <h1>Bahamii®</h1>
+    <div class="sig-sub">@eatbahamii &middot; Date &amp; Almond Bars &middot; Costco + Amazon</div>
+  </div>
+
+  <!-- Score -->
+  <div class="score-ring">
+    <div class="ring">
+      <div class="big">52</div>
+      <div class="small">/ 100</div>
+    </div>
+    <div class="bars">
+      <div class="mini-row"><span class="mn">Brand Story</span><div class="mt"><div class="mf hi" style="width:80%"></div></div><span class="mv">80</span></div>
+      <div class="mini-row"><span class="mn">Product</span><div class="mt"><div class="mf hi" style="width:85%"></div></div><span class="mv">85</span></div>
+      <div class="mini-row"><span class="mn">Visual ID</span><div class="mt"><div class="mf hi" style="width:70%"></div></div><span class="mv">70</span></div>
+      <div class="mini-row"><span class="mn">Cadence</span><div class="mt"><div class="mf hi" style="width:65%"></div></div><span class="mv">65</span></div>
+      <div class="mini-row"><span class="mn">Community</span><div class="mt"><div class="mf mi" style="width:40%"></div></div><span class="mv">40</span></div>
+      <div class="mini-row"><span class="mn">Retail→Social</span><div class="mt"><div class="mf lo" style="width:20%"></div></div><span class="mv">20</span></div>
+    </div>
+  </div>
+
+  <!-- What I found -->
+  <div class="insight">
+    <div class="insight-label">What I Found</div>
+
+    <div class="icard">
+      <div class="ic-num">1</div>
+      <div class="ic-body">
+        <h4>Your best ingredient isn't in the bar.</h4>
+        <p>Three brothers. Persian great-grandmother. Home kitchen → Costco in 18 months. The name means "together" in Farsi. This is a movie, not a brand deck — and right now it lives in your bio as "Date & Almond Bars. Fiber. Gluten Free." Your feed describes the product. It doesn't tell the story. That's a content strategy problem, not a product problem.</p>
+      </div>
+    </div>
+
+    <div class="icard">
+      <div class="ic-num">2</div>
+      <div class="ic-body">
+        <h4>You're in Costco. Your Instagram doesn't show it.</h4>
+        <p>25 locations across Southern California. Amazon nationwide. 5-star reviews. And your feed has zero Costco aisle Reels, zero sampling station footage, zero "found at Costco" UGC. The most impressive retail placement a 4.5K-follower brand can have is invisible on the one platform where shoppers discover brands.</p>
+      </div>
+    </div>
+
+    <div class="icard">
+      <div class="ic-body">
+        <h4>5,000 students. Zero Reels about them.</h4>
+        <p>Your Youth Venture Program with Boys &amp; Girls Clubs has reached thousands of kids — teaching entrepreneurship and healthy eating. It's on the Costco box. It's not on the feed. Impact content outperforms product content by 2–3× on engagement for CPG brands. You're sitting on it.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- The opportunity -->
+  <div class="opp-box">
+    <h3>The Opportunity</h3>
+    <p>Bahamii is a shelf brand that should be a story brand. The product, the founders, the origin, the social impact — it's all there. It just needs someone who knows how to translate it into content that makes people stop scrolling, hit follow, and find you at Costco.</p>
+    <div class="opp-stat">4.5K → 15K</div>
+    <p style="margin-top:4px;font-size:0.78rem;">in 90 days. Same product. Better storytelling.</p>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta">
+    <p>I've already done the full audit — brand positioning, competitive landscape, content gaps, weekly calendar, 90-day roadmap.</p>
+    <div class="cta-row">Want to see it? Let's talk.</div>
+  </div>
+
+  <div class="sig-footer">
+    Narin Fazlalipour &middot; Social Media Competitive Intelligence &middot; narinfazlalipour.com
+  </div>
+
+</div>
+
+</body>
+</html>
