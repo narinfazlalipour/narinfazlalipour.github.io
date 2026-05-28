@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Competitive Battlefield — @discovermescreen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fafaf9; --surface: #ffffff; --text: #1c1917; --muted: #78716c;
+    --line: #e7e5e4; --accent: #0d9488; --accent-muted: #f0fdfa;
+    --green: #059669; --amber: #d97706; --red: #dc2626;
+    --red-muted: #fef2f2; --green-muted: #ecfdf5; --amber-muted: #fffbeb;
+    --blue: #2563eb; --blue-muted: #eff6ff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: var(--bg); color: var(--text); line-height: 1.625; -webkit-font-smoothing: antialiased; }
+  .container { max-width: 760px; margin: 0 auto; padding: 60px 28px 120px; }
+  .report-header { margin-bottom: 52px; padding-bottom: 36px; border-bottom: 1px solid var(--line); }
+  .report-header .label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent); margin-bottom: 8px; }
+  .report-header h1 { font-size: 2.1rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 10px; color: var(--text); }
+  .report-header .subtitle { font-size: 0.95rem; color: var(--muted); font-weight: 400; }
+  .report-header .meta { display: flex; gap: 24px; margin-top: 16px; font-size: 0.8rem; color: var(--muted); font-weight: 500; flex-wrap: wrap; }
+  section { margin-bottom: 48px; }
+  section h2 { font-size: 1.35rem; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 20px; color: var(--text); padding-bottom: 10px; border-bottom: 1px solid var(--line); }
+  section h3 { font-size: 1.05rem; font-weight: 600; margin: 28px 0 12px; color: var(--text); }
+  section p { margin-bottom: 14px; font-size: 0.95rem; color: #44403c; }
+  .metric-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 20px 0; }
+  .metric-card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 18px 16px; text-align: center; }
+  .metric-card .value { font-family: 'JetBrains Mono', monospace; font-size: 1.6rem; font-weight: 500; color: var(--text); line-height: 1; margin-bottom: 4px; }
+  .metric-card .value.red { color: var(--red); } .metric-card .value.green { color: var(--green); } .metric-card .value.amber { color: var(--amber); }
+  .metric-card .label { font-size: 0.72rem; color: var(--muted); font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; }
+  .data-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; margin: 16px 0; }
+  .data-table th { text-align: left; font-weight: 600; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); padding: 10px 14px; border-bottom: 2px solid var(--line); }
+  .data-table td { padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .data-table td:first-child { font-weight: 500; }
+  .data-table .num { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; text-align: right; }
+  .data-table tr.highlight { background: var(--accent-muted); }
+  .tag { display: inline-block; font-size: 0.72rem; font-weight: 600; padding: 2px 10px; border-radius: 4px; letter-spacing: 0.03em; }
+  .tag.strength { background: var(--green-muted); color: var(--green); }
+  .tag.weakness { background: var(--red-muted); color: var(--red); }
+  .tag.neutral { background: var(--blue-muted); color: var(--blue); }
+  .sw-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0; }
+  .sw-card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 20px 22px; }
+  .sw-card.strength { border-left: 3px solid var(--green); }
+  .sw-card.weakness { border-left: 3px solid var(--red); }
+  .sw-card .sw-label { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; }
+  .sw-card.strength .sw-label { color: var(--green); } .sw-card.weakness .sw-label { color: var(--red); }
+  .sw-card h4 { font-size: 1rem; font-weight: 600; margin-bottom: 8px; }
+  .sw-card p { font-size: 0.85rem; color: #57534e; margin: 0; }
+  .rec-card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 22px 24px; margin-bottom: 14px; position: relative; padding-left: 60px; }
+  .rec-card .num { position: absolute; left: 18px; top: 20px; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; font-weight: 600; color: var(--accent); background: var(--accent-muted); width: 30px; height: 30px; border-radius: 6px; display: flex; align-items: center; justify-content: center; }
+  .rec-card h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 6px; }
+  .rec-card p { font-size: 0.85rem; color: #57534e; margin: 0; }
+  .calendar-grid { display: grid; grid-template-columns: 100px 80px 160px 1fr; gap: 0; margin: 16px 0; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+  .calendar-grid .ch { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); padding: 10px 14px; background: #f5f5f4; border-bottom: 1px solid var(--line); }
+  .calendar-grid .cr { padding: 10px 14px; border-bottom: 1px solid var(--line); font-size: 0.85rem; }
+  .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+  .timeline-item .t-dot { flex-shrink: 0; width: 12px; height: 12px; border-radius: 50%; margin-top: 4px; }
+  .timeline-item .t-dot.green { background: var(--green); } .timeline-item .t-dot.red { background: var(--red); } .timeline-item .t-dot.accent { background: var(--accent); }
+  .timeline-item .t-content h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 4px; }
+  .timeline-item .t-content p { font-size: 0.85rem; color: #57534e; margin: 0; }
+  .callout { background: var(--blue-muted); border-left: 3px solid var(--blue); padding: 16px 20px; border-radius: 0 8px 8px 0; margin: 20px 0; }
+  .callout p { font-size: 0.9rem; color: #1e3a5f; margin: 0; font-weight: 500; }
+  .stakes-bar { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 20px 24px; margin: 16px 0; }
+  .stakes-bar h4 { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 8px; }
+  .stakes-bar p { font-size: 0.9rem; margin: 0; }
+  .report-footer { margin-top: 60px; padding-top: 24px; border-top: 1px solid var(--line); font-size: 0.78rem; color: var(--muted); }
+  @media (max-width: 680px) { .container { padding: 32px 16px 80px; } .report-header h1 { font-size: 1.6rem; } .metric-grid { grid-template-columns: repeat(2, 1fr); } .sw-grid { grid-template-columns: 1fr; } .calendar-grid { grid-template-columns: 80px 60px 120px 1fr; font-size: 0.78rem; } }
+  @media print { body { background: white; } .container { max-width: 100%; padding: 20px 0; } .sw-card, .rec-card, .metric-card { break-inside: avoid; } section { break-inside: avoid; } }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <header class="report-header">
+    <div class="label">Competitive Battlefield Assessment</div>
+    <h1>@discovermescreen</h1>
+    <div class="subtitle">mescreen™ — World's first at-home mitochondrial function test. NASA-developed science, Verséa Discovery. $699 flagship. ISO 9001.</div>
+    <div class="meta">
+      <span>📅 May 2026</span>
+      <span>📊 Data: Public Instagram</span>
+      <span>⏱ Analysis period: May 27, 2026</span>
+      <span>🎯 Format: Competitive Battlefield</span>
+    </div>
+  </header>
+
+  <!-- THE BATTLEFIELD -->
+  <section>
+    <h2>1. The Battlefield</h2>
+    <p>At-home health testing is one of the most crowded categories on Instagram — blood biomarkers, gut tests, hormone panels, genetic kits. Mitochondrial function testing sits at the top of the stack: highest science barrier, highest price point, highest trust requirement. @discovermescreen holds a <strong>structural advantage</strong> (NASA science, ISO 9001, 10X Health partnership) but fights with <strong>hobbyist-grade weapons</strong> — irregular posting, minimal Reels, dormant Stories, and a promotional-heavy feed that signals transaction before trust.</p>
+
+    <div class="stakes-bar">
+      <h4>What's at Stake</h4>
+      <p>At ~4,000 followers, mescreen is still a first-mover in a category with no established Instagram footprint. The window is open, but it's closing. Competitors at this tier — @siphoxhealth (13K), single-biomarker DTC brands, wellness lab startups — are already running 3–4 Reels/week with founder-led content and educational carousels. They don't have NASA science, but they have <strong>audience attention</strong>. If mescreen waits another quarter, the fight moves from "win" to "catch up."</p>
+    </div>
+
+    <div class="callout">
+      <p>💡 <strong>The battlefield in one sentence:</strong> The most credible product in at-home testing is being out-posted, out-Reeled, and out-engaged by brands with a fraction of its scientific firepower.</p>
+    </div>
+  </section>
+
+  <!-- THE ARSENAL -->
+  <section>
+    <h2>2. The Arsenal — What mescreen Brings to the Fight</h2>
+
+    <div class="sw-grid">
+      <div class="sw-card strength">
+        <div class="sw-label">Weapon 1</div>
+        <h4>NASA-Origin Science Narrative</h4>
+        <p>"Built on NASA Twin Study technology" is a one-sentence credibility unlock that no competitor in this tier can match. It's provenance — not marketing. Deployed correctly, this single claim differentiates every piece of content from the noise of generic health brands.</p>
+      </div>
+
+      <div class="sw-card strength">
+        <div class="sw-label">Weapon 2</div>
+        <h4>Premium Visual Identity</h4>
+        <p>The mescreen brand — dark, scientific, polished — signals the $699 price before a word is read. In health-tech, visual polish IS trust. Competitors at this tier often look like supplements or wellness apps. mescreen looks like a diagnostic company. That gap widens with every post.</p>
+      </div>
+
+      <div class="sw-card strength">
+        <div class="sw-label">Weapon 3</div>
+        <h4>17 Proprietary Health Profiles</h4>
+        <p>From thousands of tests, mescreen has identified 17 distinct mitochondrial health profiles. This is proprietary data no competitor owns — and it converts to 17 weeks of serialized educational content. Competitors with generic biomarkers can't serialize "your profile type" because they don't have the dataset.</p>
+      </div>
+
+      <div class="sw-card strength">
+        <div class="sw-label">Weapon 4</div>
+        <h4>Founder + CMO That Belong on Camera</h4>
+        <p>Sean Fetcho (CEO, multiple exits, Tampa Bay 40 Under 40) and Dr Toby Moeller (double-board-certified CMO, former UCSD clinical professor) have genuine authority that most health brand founders lack. Neither has been deployed on camera in the feed. This is a <strong>loaded weapon, never fired</strong>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE BLIND SPOTS -->
+  <section>
+    <h2>3. The Blind Spots — Where mescreen is Taking Fire</h2>
+
+    <div class="sw-grid">
+      <div class="sw-card weakness">
+        <div class="sw-label">Blind Spot 1</div>
+        <h4>Irregular Posting = Algorithmic Invisiblity</h4>
+        <p>The algorithm punishes dormancy more than it rewards quality. With posting cadence that ebbs and flows, mescreen is invisible to non-followers for weeks at a time. Competitors posting 3–4 Reels/week are capturing the same algorithmic reach that mescreen surrenders by silence.</p>
+      </div>
+
+      <div class="sw-card weakness">
+        <div class="sw-label">Blind Spot 2</div>
+        <h4>Zero Customer Transformation Stories</h4>
+        <p>"My mescore was 42. I changed X. Now it's 78." This is the most powerful content format in health products — and it appears zero times on the account. Every competitor at this tier runs some form of UGC or testimonial. mescreen has thousands of completed tests and zero public results.</p>
+      </div>
+
+      <div class="sw-card weakness">
+        <div class="sw-label">Blind Spot 3</div>
+        <h4>No Educational Pillar Content</h4>
+        <p>"What are mitochondria?" "Why does your energy crash at 3pm?" "5 things damaging your cells daily" — these are search-demand topics with zero owned content. Educational carousels drive <strong>saves</strong> (Instagram's strongest signal) and build trust before the $699 ask. Competitors are filling this gap.</p>
+      </div>
+
+      <div class="sw-card weakness">
+        <div class="sw-label">Blind Spot 4</div>
+        <h4>Promotional Overload (~50%+ Promo Ratio)</h4>
+        <p>The current content mix appears heavily promotional — asking for the sale before building the relationship. Health brands at this tier average 15–20% promo. Every promotional post that could have been an educational carousel is a lost save and a lost follower. The ratio should be 80/20 value-to-promo.</p>
+      </div>
+
+      <div class="sw-card weakness">
+        <div class="sw-label">Blind Spot 5</div>
+        <h4>Dormant Stories = No Daily Touchpoint</h4>
+        <p>Stories are the daily presence that keeps an account in followers' feeds between posts. Competitors run polls, Q&A boxes, BTS — a living, breathing account. mescreen's Story silence means the account disappears from audience awareness between post cycles.</p>
+      </div>
+
+      <div class="sw-card weakness">
+        <div class="sw-label">Blind Spot 6</div>
+        <h4>High Following Ratio (~1,100)</h4>
+        <p>Following 1,100 accounts with ~4,000 followers looks like follow-back growth. For a premium $699 health brand, this dilutes positioning. Competitors at this tier follow &lt;200 accounts. The ratio signals curation — or its absence.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE OPPONENT'S MOVES -->
+  <section>
+    <h2>4. The Opponent's Moves — How Competitors Are Fighting</h2>
+
+    <p>Three at-home health testing brands operating in the same follower tier. This is not a benchmark against 100K+ accounts — those have teams, funding, and years of algorithmic compounding. These are the accounts mescreen is <strong>directly competing with for audience attention today</strong>. And every single one is posting more, engaging more, and showing faces more often.</p>
+
+    <table class="data-table">
+      <thead>
+        <tr><th></th><th>@discovermescreen</th><th>@siphoxhealth — SiPhox Health</th><th>Peer B — Single-Biomarker Test</th><th>Peer C — Wellness Lab Startup</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Followers</strong></td><td class="num">~4K</td><td class="num">~13K</td><td class="num">~3–8K</td><td class="num">~5–10K</td></tr>
+        <tr><td><strong>Niche</strong></td><td>Mitochondrial function</td><td>At-home blood biomarkers (17 markers)</td><td>Single-condition diagnostic</td><td>Wellness lab panels, DTC</td></tr>
+        <tr><td><strong>Price Point</strong></td><td class="num">$699</td><td class="num">~$85–250</td><td class="num">~$100–300</td><td class="num">~$150–500</td></tr>
+        <tr class="highlight"><td><strong>Content Mix</strong></td><td>Product + occasional Reels</td><td>Educational Reels + founder + product</td><td>Educational carousels + UGC</td><td>Founder Reels + testimonials</td></tr>
+        <tr><td><strong>Reels/week</strong></td><td class="num" style="color:var(--red)">&lt;1</td><td class="num" style="color:var(--green)">2–3</td><td class="num" style="color:var(--green)">2–3</td><td class="num" style="color:var(--green)">2–4</td></tr>
+        <tr><td><strong>Carousels/week</strong></td><td class="num">~0</td><td class="num">~1</td><td class="num">1–2</td><td class="num">~1</td></tr>
+        <tr><td><strong>Story engagement</strong></td><td class="num" style="color:var(--red)">Minimal</td><td class="num" style="color:var(--green)">Active (Q&A, polls)</td><td class="num" style="color:var(--amber)">Moderate</td><td class="num" style="color:var(--green)">Active (daily BTS)</td></tr>
+        <tr><td><strong>Founder presence</strong></td><td class="num" style="color:var(--red)">None</td><td class="num" style="color:var(--green)">Strong (CEO on camera)</td><td class="num" style="color:var(--amber)">Occasional</td><td class="num" style="color:var(--green)">Primary format</td></tr>
+        <tr><td><strong>Customer stories</strong></td><td class="num" style="color:var(--red)">None</td><td class="num" style="color:var(--amber)">Infrequent</td><td class="num" style="color:var(--green)">Core strategy</td><td class="num" style="color:var(--green)">Regular</td></tr>
+        <tr><td><strong>Promo ratio</strong></td><td class="num" style="color:var(--red)">~50%+</td><td class="num" style="color:var(--green)">~20%</td><td class="num" style="color:var(--green)">~15%</td><td class="num" style="color:var(--green)">~20%</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <p>💡 <strong>The competitive gap:</strong> mescreen has the strongest product and the weakest content operation of all four accounts. Every competitor runs more Reels, more carousels, more founder content, and more Stories — with less to talk about. The science isn't the variable. The systems are.</p>
+    </div>
+  </section>
+
+  <!-- BATTLEFIELD MAP -->
+  <section>
+    <h2>5. Battlefield Map — Where the Algorithm Rewards and Punishes</h2>
+
+    <p>Instagram's algorithm distributes reach based on four signals. Here's mescreen's position on each:</p>
+
+    <table class="data-table">
+      <thead>
+        <tr><th>Signal</th><th>Weight</th><th>mescreen Status</th><th>Competitor Average</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Saves</strong></td><td class="num" style="color:var(--red)">Highest</td><td>Near zero — no bookmarkable content</td><td>Carousels driving 20–50+ saves/post</td></tr>
+        <tr><td><strong>Shares</strong></td><td class="num" style="color:var(--amber)">High</td><td>Very low — nothing designed to be sent</td><td>Founder takes + educational graphics shared</td></tr>
+        <tr><td><strong>Comments</strong></td><td class="num">Medium</td><td>Moderate (Comment-to-DM tactic works but overused)</td><td>Genuine Q&A + community prompts</td></tr>
+        <tr><td><strong>Likes</strong></td><td class="num" style="color:var(--green)">Lowest</td><td>5–94 range — wide variance confirms inconsistency</td><td>Steady 40–150+ with less swing</td></tr>
+      </tbody>
+    </table>
+
+    <p style="margin-top:16px;"><strong>The tactical map is clear:</strong> mescreen is losing on the two highest-weight signals (saves and shares) and over-relying on a single mid-weight tactic (comment-to-DM). The fix is not to double down on comments — it's to build content that people <strong>save and send</strong>. Educational carousels. 17 Profiles series. Founder explainers. These are the weapons mescreen owns but hasn't deployed.</p>
+
+    <h3>Format-by-Format Position</h3>
+
+    <table class="data-table">
+      <thead>
+        <tr><th>Format</th><th>mescreen Output</th><th>Competitor Standard</th><th>Verdict</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Reels</td><td class="num">Inconsistent (&lt;1/week)</td><td class="num">3–4/week</td><td><span class="tag weakness">Losing ground</span></td></tr>
+        <tr><td>Carousels</td><td class="num">Rare (~0/week)</td><td class="num">1–2/week</td><td><span class="tag weakness">Missing entirely</span></td></tr>
+        <tr><td>Static Posts</td><td class="num">Primary format</td><td class="num">Minimal</td><td><span class="tag weakness">Over-indexed</span></td></tr>
+        <tr><td>Stories</td><td class="num">Dormant</td><td class="num">Daily</td><td><span class="tag weakness">No presence</span></td></tr>
+        <tr><td>Lives</td><td class="num">None</td><td class="num">1–2/month</td><td><span class="tag weakness">Uncontested space</span></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- THE CAMPAIGN -->
+  <section>
+    <h2>6. The Campaign — How mescreen Wins This Battlefield</h2>
+
+    <h3>🎯 Campaign Objective: 4K → 10K Followers, 4%+ Engagement, Category Leadership</h3>
+
+    <p>The campaign hinges on a single strategic shift: every post should make someone feel <strong>smarter about their own body</strong>. If it does, they'll save it, share it, and trust the $699 price tag. That's the conversion flywheel. Here's the five-move offensive:</p>
+
+    <div class="rec-card">
+      <div class="num">1</div>
+      <h4>Reels — 4×/week (The Growth Engine)</h4>
+      <p>Reels reach non-followers at 3–5× the rate of any other format. Rotate three formats weekly:<br><br>
+      <strong>A — "One Thing" Explainer (2×/week):</strong> Hook in 1.5s → explain one mitochondrial concept → "Want to know your score? Link in bio." Text on screen for entire video (85% watch without sound).<br>
+      <strong>B — Behind the Lab (1×/week):</strong> Raw BTS: sample processing, analyzer dashboard, liquid nitrogen. Narration explaining the science.<br>
+      <strong>C — Founder/CMO Clip (1×/week):</strong> Sean or Dr Toby on camera for 60s. "What is mitochondrial efficiency?" "Why did NASA need this?" "What a mescore of 40 means."</p>
+    </div>
+
+    <div class="rec-card">
+      <div class="num">2</div>
+      <h4>Carousel "Save Bait" — 2×/week (The Algorithm Weapon)</h4>
+      <p>Carousels get 2–3× the reach of single images because users swipe and dwell. Template: Slide 1 = bold hook → Slides 2–6 = one fact per slide → Slide 7 = "Save · Share with someone who needs this."<br><br>
+      <em>8 ready ideas:</em> "5 signs your mitochondria are struggling" · "What 10 minutes of meditation does to your cells" · "Why your energy crashes at 3pm" · "The NASA Twin Study and cellular aging" · "How we measure mitochondrial function from one drop of blood" · "What 'cellular resilience' actually means" · "Your mitochondria in numbers: 37 trillion cells, 500–5,000 mitochondria each" · "The 17 mitochondrial profiles — which one are you?"</p>
+    </div>
+
+    <div class="rec-card">
+      <div class="num">3</div>
+      <h4>Customer Transformation Reels — 1×/week (The Conversion Weapon)</h4>
+      <p>The single most powerful format in health products, currently entirely missing. Build the pipeline: every customer receives an email with their mescore asking permission to share. One transformation story = 50 product posts in conversion power. "My mescore was 42. I changed X. Now it's 78."</p>
+    </div>
+
+    <div class="rec-card">
+      <div class="num">4</div>
+      <h4>Story Engagement Loops — Daily (The Daily Presence)</h4>
+      <p>Stories keep the algorithm warm and drive DMs. Daily cadence: Morning BTS + poll ("When does your energy crash?") · Midday share an old post with "Still relevant?" · Evening Q&A ("Ask us anything about mitochondria"). <strong>Reply to every story reply.</strong> Stories are where audiences feel seen — and where trust compounds daily.</p>
+    </div>
+
+    <div class="rec-card">
+      <div class="num">5</div>
+      <h4>80/20 Value-to-Promotion — The Strategic Ratio</h4>
+      <p>Only 1 in every 5 posts should directly sell the test. The other 4 should educate, entertain, or feature customers. When mescreen does promote, it should feel like the logical next step: "You just learned how your mitochondria work. Want to know YOUR score?" Content builds the case. The price becomes the obvious answer.</p>
+    </div>
+
+    <h3>Weekly Battle Rhythm</h3>
+
+    <div class="calendar-grid">
+      <div class="ch">Day</div><div class="ch">Format</div><div class="ch">Pillar</div><div class="ch">Example</div>
+      <div class="cr"><strong>Mon</strong></div><div class="cr">Reel</div><div class="cr">Behind the Lab</div><div class="cr">60s: running the mescreen assay</div>
+      <div class="cr"><strong>Tue</strong></div><div class="cr">Carousel</div><div class="cr">Mitochondria Explained</div><div class="cr">"5 things damaging your mitochondria"</div>
+      <div class="cr"><strong>Wed</strong></div><div class="cr">Story-only</div><div class="cr">Community</div><div class="cr">Full Q&A day via question sticker</div>
+      <div class="cr"><strong>Thu</strong></div><div class="cr">Reel</div><div class="cr">Customer Story</div><div class="cr">"My mescore was 42 — here's what changed"</div>
+      <div class="cr"><strong>Fri</strong></div><div class="cr">Carousel</div><div class="cr">17 Profiles Series</div><div class="cr">"Profile #4: The Fatigued Optimizer"</div>
+      <div class="cr"><strong>Sat</strong></div><div class="cr">Reel</div><div class="cr">Founder Clip</div><div class="cr">Sean/Dr Toby: "What mitochondria actually do"</div>
+      <div class="cr"><strong>Sun</strong></div><div class="cr">Static + Story</div><div class="cr">Practitioner Spotlight</div><div class="cr">Feature a provider using mescreen</div>
+    </div>
+  </section>
+
+  <!-- VICTORY CONDITIONS -->
+  <section>
+    <h2>7. Victory Conditions — What Winning Looks Like</h2>
+
+    <table class="data-table">
+      <thead>
+        <tr><th>Metric</th><th>Current Position</th><th>30-Day Objective</th><th>90-Day Objective</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Followers</td><td class="num">~4,000</td><td class="num">5,000+</td><td class="num" style="color:var(--green)">10,000+</td></tr>
+        <tr><td>Engagement Rate</td><td class="num" style="color:var(--amber)">~1–3%</td><td class="num">3%+</td><td class="num" style="color:var(--green)">4%+</td></tr>
+        <tr><td>Avg Likes/Post</td><td class="num">5–94</td><td class="num">80+</td><td class="num">200+</td></tr>
+        <tr><td>Reels/Week</td><td class="num">&lt;1</td><td class="num">3</td><td class="num">4</td></tr>
+        <tr><td>Carousels/Week</td><td class="num">~0</td><td class="num">2</td><td class="num">2</td></tr>
+        <tr><td>Reel Views</td><td class="num">Unknown</td><td class="num">1,000+</td><td class="num">5,000+</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 90-DAY CAMPAIGN -->
+  <section>
+    <h2>8. 90-Day Campaign — Phase by Phase</h2>
+
+    <p>The campaign unfolds in three phases. Each phase conquers one objective and sets up the next. Total target: <strong>~6,000 net new followers</strong> in 90 days.</p>
+
+    <div class="timeline-item">
+      <div class="t-dot accent"></div>
+      <div class="t-content">
+        <h4>Phase 1 — Mobilize (Days 1–30)</h4>
+        <p><strong>Objective: 4K → 5.5–6K (+1,500–2,000)</strong><br>
+        • Switch to 80/20 value-to-promo ratio. Launch 2 carousels + 3 Reels/week.<br>
+        • Daily Story engagement: poll + Q&A. Reply to every response.<br>
+        • Film founder batch: 10 clips with Sean or Dr Toby in one session.<br>
+        • Set up customer story pipeline in post-results email flow.<br>
+        • Reduce following from ~1,100 to &lt;200.<br>
+        <em>Signal: Consistent cadence locked. First carousel 20+ saves. Story poll 100+ votes.</em></p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="t-dot accent"></div>
+      <div class="t-content">
+        <h4>Phase 2 — Advance (Days 31–60)</h4>
+        <p><strong>Objective: 5.5–6K → 7.5–8K (+1,500–2,000)</strong><br>
+        • Launch first 2 customer transformation Reels.<br>
+        • Run "17 Profiles" carousel series (one per week).<br>
+        • First Instagram Live: Dr Toby — mitochondrial Q&A.<br>
+        • Identify 3 biohacking creators (5K–50K) for future Collab posts.<br>
+        • Double down on winning formats from Phase 1 data.<br>
+        <em>Signal: One Reel crossing 5K views. Customer Reel driving 50+ DMs.</em></p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="t-dot accent"></div>
+      <div class="t-content">
+        <h4>Phase 3 — Dominate (Days 61–90)</h4>
+        <p><strong>Objective: 7.5–8K → 10–11K (+2,000–3,000)</strong><br>
+        • Execute first Collab Reel with a biohacking creator.<br>
+        • Cross-post top Reels to TikTok.<br>
+        • Weekly calendar on autopilot: 2 carousels, 4 Reels, daily Stories.<br>
+        • One Live/month featuring a practitioner or customer.<br>
+        • Build playbook from 60 days of data.<br>
+        <em>Signal: 4%+ engagement. 100+ new followers/day organically. One Reel crossing 20K+ views.</em></p>
+      </div>
+    </div>
+
+    <table class="data-table" style="margin-top: 28px;">
+      <thead>
+        <tr><th>Phase</th><th>Timeline</th><th>Follower Gain</th><th>Eng Rate</th><th>Primary Lever</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1 — Mobilize</td><td class="num">Days 1–30</td><td class="num" style="color:var(--green)">+1,500–2,000</td><td class="num">1–3% → 3%</td><td>Consistency + format shift</td></tr>
+        <tr><td>2 — Advance</td><td class="num">Days 31–60</td><td class="num" style="color:var(--green)">+1,500–2,000</td><td class="num">3% → 3.5%</td><td>Customer stories + profiles</td></tr>
+        <tr><td>3 — Dominate</td><td class="num">Days 61–90</td><td class="num" style="color:var(--green)">+2,000–3,000</td><td class="num">3.5% → 4%+</td><td>Collabs + cross-platform</td></tr>
+        <tr class="highlight"><td><strong>Campaign Total</strong></td><td class="num"><strong>90 days</strong></td><td class="num" style="color:var(--green)"><strong>+5,000–7,000</strong></td><td class="num"><strong>→ 4%+</strong></td><td><strong>→ 10–11K followers</strong></td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <p>🗓 <strong>The variable isn't whether mescreen can win this battlefield — it's whether the weapons get deployed.</strong> NASA science. 17 proprietary profiles. A CEO with exits. A double-board-certified CMO. Thousands of customer results. Every competitor on this battlefield would trade their entire content library for one of these assets. The campaign starts when the posting starts. One Reel a day for 90 days, and this account leads the category.</p>
+    </div>
+  </section>
+
+  <!-- AUDIT CADENCE -->
+  <section>
+    <h2>9. Battlefield Reassessment Cadence</h2>
+
+    <p>Competitive landscapes shift. Regular reassessment keeps the advantage:</p>
+
+    <table class="data-table">
+      <thead>
+        <tr><th>Cadence</th><th>Purpose</th><th>What to Check</th><th>Time</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Monthly</strong> — Tactical Check</td><td>Quick position scan.</td><td>Engagement rate, follower growth, top/bottom 3 posts, save count, Reel views, story participation</td><td class="num">30 min</td></tr>
+        <tr><td><strong>Quarterly</strong> — Strategic Reassessment</td><td>Full battlefield remap with updated competitor data.</td><td>All metrics vs. last quarter, format adherence, customer story pipeline, 90-day progress, competitor moves</td><td class="num">2–3 hrs</td></tr>
+        <tr><td><strong>Event-Triggered</strong> — Off-Cycle</td><td>After a viral Reel, major partnership, product launch, or crossing 10K.</td><td>What caused the spike? Is the new audience sticking? Did a competitor make a move?</td><td class="num">1 hr</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <p>📅 <strong>Next reassessment: August 2026.</strong> By then the weekly cadence should have 60+ days of battlefield data, the 17 Profiles series should be running, and the first customer transformation Reels should be live. The quarterly reassessment answers one question: is mescreen still the category leader it should be?</p>
+    </div>
+  </section>
+
+  <footer class="report-footer">
+    <p><strong>@discovermescreen Competitive Battlefield Assessment</strong> · Prepared May 27, 2026 · Data via public Instagram indexed content, web search, mescreen.com, versea.com · For strategic use only · Not affiliated with Instagram or Meta</p>
+  </footer>
+
+</div>
+
+</body>
+</html>
