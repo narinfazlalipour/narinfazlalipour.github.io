@@ -3,567 +3,271 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Founder's Story — @sean.fetcho</title>
+<title>Instagram Audit — @sean.fetcho</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #fafaf9; --surface: #ffffff; --text: #1c1917; --muted: #78716c;
-    --line: #e7e5e4; --accent: #0d9488; --accent-muted: #f0fdfa;
-    --green: #059669; --amber: #d97706; --red: #dc2626;
-    --red-muted: #fef2f2; --green-muted: #ecfdf5; --amber-muted: #fffbeb;
-    --blue: #2563eb; --blue-muted: #eff6ff;
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: var(--bg); color: var(--text); line-height: 1.625; -webkit-font-smoothing: antialiased; }
-  .container { max-width: 760px; margin: 0 auto; padding: 60px 28px 120px; }
-  .report-header { margin-bottom: 52px; padding-bottom: 36px; border-bottom: 1px solid var(--line); }
-  .report-header .label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent); margin-bottom: 8px; }
-  .report-header h1 { font-size: 2.1rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 10px; color: var(--text); }
-  .report-header .subtitle { font-size: 0.95rem; color: var(--muted); font-weight: 400; }
-  .report-header .meta { display: flex; gap: 24px; margin-top: 16px; font-size: 0.8rem; color: var(--muted); font-weight: 500; flex-wrap: wrap; }
-  section { margin-bottom: 48px; }
-  section h2 { font-size: 1.35rem; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 20px; color: var(--text); padding-bottom: 10px; border-bottom: 1px solid var(--line); }
-  section h3 { font-size: 1.05rem; font-weight: 600; margin: 28px 0 12px; color: var(--text); }
-  section p { margin-bottom: 14px; font-size: 0.95rem; color: #44403c; }
-  .metric-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 20px 0; }
-  .metric-card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 18px 16px; text-align: center; }
-  .metric-card .value { font-family: 'JetBrains Mono', monospace; font-size: 1.6rem; font-weight: 500; color: var(--text); line-height: 1; margin-bottom: 4px; }
-  .metric-card .value.red { color: var(--red); } .metric-card .value.green { color: var(--green); } .metric-card .value.amber { color: var(--amber); }
-  .metric-card .label { font-size: 0.72rem; color: var(--muted); font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; }
-  .data-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; margin: 16px 0; }
-  .data-table th { text-align: left; font-weight: 600; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); padding: 10px 14px; border-bottom: 2px solid var(--line); }
-  .data-table td { padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
-  .data-table td:first-child { font-weight: 500; }
-  .data-table .num { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; text-align: right; }
-  .data-table tr.highlight { background: var(--accent-muted); }
-  .tag { display: inline-block; font-size: 0.72rem; font-weight: 600; padding: 2px 10px; border-radius: 4px; letter-spacing: 0.03em; }
-  .tag.strength { background: var(--green-muted); color: var(--green); }
-  .tag.weakness { background: var(--red-muted); color: var(--red); }
-  .tag.neutral { background: var(--blue-muted); color: var(--blue); }
-  .sw-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0; }
-  .sw-card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 20px 22px; }
-  .sw-card.strength { border-left: 3px solid var(--green); }
-  .sw-card.weakness { border-left: 3px solid var(--red); }
-  .sw-card .sw-label { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; }
-  .sw-card.strength .sw-label { color: var(--green); } .sw-card.weakness .sw-label { color: var(--red); }
-  .sw-card h4 { font-size: 1rem; font-weight: 600; margin-bottom: 8px; }
-  .sw-card p { font-size: 0.85rem; color: #57534e; margin: 0; }
-  .rec-card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 22px 24px; margin-bottom: 14px; position: relative; padding-left: 60px; }
-  .rec-card .num { position: absolute; left: 18px; top: 20px; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; font-weight: 600; color: var(--accent); background: var(--accent-muted); width: 30px; height: 30px; border-radius: 6px; display: flex; align-items: center; justify-content: center; }
-  .rec-card h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 6px; }
-  .rec-card p { font-size: 0.85rem; color: #57534e; margin: 0; }
-  .calendar-grid { display: grid; grid-template-columns: 100px 80px 160px 1fr; gap: 0; margin: 16px 0; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
-  .calendar-grid .ch { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); padding: 10px 14px; background: #f5f5f4; border-bottom: 1px solid var(--line); }
-  .calendar-grid .cr { padding: 10px 14px; border-bottom: 1px solid var(--line); font-size: 0.85rem; }
-  .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
-  .timeline-item .t-dot { flex-shrink: 0; width: 12px; height: 12px; border-radius: 50%; margin-top: 4px; }
-  .timeline-item .t-dot.green { background: var(--green); } .timeline-item .t-dot.red { background: var(--red); } .timeline-item .t-dot.accent { background: var(--accent); }
-  .timeline-item .t-content h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 4px; }
-  .timeline-item .t-content p { font-size: 0.85rem; color: #57534e; margin: 0; }
-  .callout { background: var(--blue-muted); border-left: 3px solid var(--blue); padding: 16px 20px; border-radius: 0 8px 8px 0; margin: 20px 0; }
-  .callout p { font-size: 0.9rem; color: #1e3a5f; margin: 0; font-weight: 500; }
-  .report-footer { margin-top: 60px; padding-top: 24px; border-top: 1px solid var(--line); font-size: 0.78rem; color: var(--muted); }
-  .origin-block { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 24px; margin: 20px 0; }
-  .origin-block h4 { font-size: 1rem; font-weight: 600; margin-bottom: 8px; }
-  .origin-block p { font-size: 0.9rem; color: #44403c; margin: 0 0 8px; }
-  .origin-block .arc { font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--accent); font-weight: 500; }
-  @media (max-width: 680px) { .container { padding: 32px 16px 80px; } .report-header h1 { font-size: 1.6rem; } .metric-grid { grid-template-columns: repeat(2, 1fr); } .sw-grid { grid-template-columns: 1fr; } .calendar-grid { grid-template-columns: 80px 60px 120px 1fr; font-size: 0.78rem; } }
-  @media print { body { background: white; } .container { max-width: 100%; padding: 20px 0; } .sw-card, .rec-card, .metric-card { break-inside: avoid; } section { break-inside: avoid; } }
-
-  /* Score Diagram */
-  .score-diagram {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    padding: 24px 28px 20px;
-    margin-bottom: 48px;
-  }
-  .score-diagram .sd-header {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    margin-bottom: 18px;
-    padding-bottom: 14px;
-    border-bottom: 1px solid var(--line);
-  }
-  .score-diagram .sd-header .sd-label {
-    font-size: 0.68rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--muted);
-  }
-  .score-diagram .sd-header .sd-overall {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 1.8rem;
-    font-weight: 600;
-    color: var(--text);
-    line-height: 1;
-  }
-  .score-diagram .sd-header .sd-overall span {
-    font-size: 0.85rem;
-    color: var(--muted);
-    font-weight: 400;
-  }
-  .sd-row {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 8px;
-  }
-  .sd-row .sd-name {
-    width: 160px;
-    font-size: 0.8rem;
-    font-weight: 500;
-    color: var(--text);
-    text-align: right;
-    flex-shrink: 0;
-  }
-  .sd-row .sd-track {
-    flex: 1;
-    height: 8px;
-    background: #f0efed;
-    border-radius: 4px;
-    overflow: hidden;
-  }
-  .sd-row .sd-fill {
-    height: 100%;
-    border-radius: 4px;
-  }
-  .sd-row .sd-fill.high { background: var(--green); }
-  .sd-row .sd-fill.mid { background: var(--amber); }
-  .sd-row .sd-fill.low { background: var(--red); }
-  .sd-row .sd-num {
-    width: 28px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.75rem;
-    font-weight: 500;
-    color: var(--muted);
-    text-align: right;
-    flex-shrink: 0;
-  }
-  @media (max-width: 680px) {
-    .score-diagram { padding: 18px 16px 16px; }
-    .sd-row .sd-name { width: 110px; font-size: 0.72rem; }
-  }
-
+:root{--bg:#fafaf9;--surface:#fff;--text:#1c1917;--muted:#78716c;--line:#e7e5e4;--accent:#0d9488;--accent-muted:#f0fdfa;--green:#059669;--amber:#d97706;--red:#dc2626;--red-muted:#fef2f2;--green-muted:#ecfdf5;--amber-muted:#fffbeb;--blue:#2563eb;--blue-muted:#eff6ff}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);line-height:1.625;-webkit-font-smoothing:antialiased}
+.container{max-width:760px;margin:0 auto;padding:60px 28px 120px}
+.report-header{margin-bottom:52px;padding-bottom:36px;border-bottom:1px solid var(--line)}
+.report-header .label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:var(--accent);margin-bottom:8px}
+.report-header h1{font-size:2.1rem;font-weight:700;letter-spacing:-.02em;line-height:1.2;margin-bottom:10px;color:var(--text)}
+.report-header .subtitle{font-size:.95rem;color:var(--muted);font-weight:400}
+.report-header .meta{display:flex;gap:24px;margin-top:16px;font-size:.8rem;color:var(--muted);font-weight:500;flex-wrap:wrap}
+section{margin-bottom:48px}
+section h2{font-size:1.35rem;font-weight:700;letter-spacing:-.01em;margin-bottom:20px;color:var(--text);padding-bottom:10px;border-bottom:1px solid var(--line)}
+section h3{font-size:1.05rem;font-weight:600;margin:28px 0 12px;color:var(--text)}
+section p{margin-bottom:14px;font-size:.95rem;color:#44403c}
+.metric-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:20px 0}
+.metric-card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px 16px;text-align:center}
+.metric-card .value{font-family:'JetBrains Mono',monospace;font-size:1.6rem;font-weight:500;color:var(--text);line-height:1;margin-bottom:4px}
+.metric-card .value.red{color:var(--red)}.metric-card .value.green{color:var(--green)}
+.metric-card .label{font-size:.72rem;color:var(--muted);font-weight:500;text-transform:uppercase;letter-spacing:.05em}
+.data-table{width:100%;border-collapse:collapse;font-size:.88rem;margin:16px 0}
+.data-table th{text-align:left;font-weight:600;font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);padding:10px 14px;border-bottom:2px solid var(--line)}
+.data-table td{padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+.data-table td:first-child{font-weight:500}
+.data-table .num{font-family:'JetBrains Mono',monospace;font-size:.85rem;text-align:right}
+.data-table tr.highlight{background:var(--accent-muted)}
+.tag{display:inline-block;font-size:.72rem;font-weight:600;padding:2px 10px;border-radius:4px;letter-spacing:.03em}
+.tag.strength{background:var(--green-muted);color:var(--green)}
+.tag.weakness{background:var(--red-muted);color:var(--red)}
+.tag.neutral{background:var(--blue-muted);color:var(--blue)}
+.sw-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0}
+.sw-card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px 22px}
+.sw-card.strength{border-left:3px solid var(--green)}
+.sw-card.weakness{border-left:3px solid var(--red)}
+.sw-card .sw-label{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px}
+.sw-card.strength .sw-label{color:var(--green)}.sw-card.weakness .sw-label{color:var(--red)}
+.sw-card h4{font-size:1rem;font-weight:600;margin-bottom:8px}
+.sw-card p{font-size:.85rem;color:#57534e;margin:0}
+.timeline-item{display:flex;gap:16px;margin-bottom:20px}
+.timeline-item .t-dot{flex-shrink:0;width:12px;height:12px;border-radius:50%;margin-top:4px}
+.timeline-item .t-dot.accent{background:var(--accent)}
+.timeline-item .t-content h4{font-size:.95rem;font-weight:600;margin-bottom:4px}
+.timeline-item .t-content p{font-size:.85rem;color:#57534e;margin:0}
+.callout{background:var(--blue-muted);border-left:3px solid var(--blue);padding:16px 20px;border-radius:0 8px 8px 0;margin:20px 0}
+.callout p{font-size:.9rem;color:#1e3a5f;margin:0;font-weight:500}
+.callout.accent{background:var(--accent-muted);border-left-color:var(--accent)}
+.callout.accent p{color:#0f766e}
+.upgrade-box{background:linear-gradient(135deg,#0d9488,#0f766e);border-radius:12px;padding:32px;margin:32px 0;color:#fff;text-align:center}
+.upgrade-box h3{color:#fff;font-size:1.25rem;margin:0 0 12px}
+.upgrade-box p{color:#ccfbf1;font-size:.92rem;margin-bottom:20px}
+.upgrade-box .cta-btn{display:inline-block;background:#fff;color:#0d9488;font-weight:700;font-size:.9rem;padding:12px 28px;border-radius:8px;text-decoration:none;letter-spacing:.02em}
+.report-footer{margin-top:60px;padding-top:24px;border-top:1px solid var(--line);font-size:.78rem;color:var(--muted)}
+.score-diagram{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:24px 28px 20px;margin-bottom:24px}
+.score-diagram .sd-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+.score-diagram .sd-header .sd-label{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}
+.score-diagram .sd-header .sd-overall{font-family:'JetBrains Mono',monospace;font-size:1.8rem;font-weight:600;color:var(--text);line-height:1}
+.score-diagram .sd-header .sd-overall span{font-size:.85rem;color:var(--muted);font-weight:400}
+.sd-row{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.sd-row .sd-name{width:160px;font-size:.8rem;font-weight:500;color:var(--text);text-align:right;flex-shrink:0}
+.sd-row .sd-track{flex:1;height:8px;background:#f0efed;border-radius:4px;overflow:hidden}
+.sd-row .sd-fill{height:100%;border-radius:4px}
+.sd-row .sd-fill.high{background:var(--green)}.sd-row .sd-fill.mid{background:var(--amber)}.sd-row .sd-fill.low{background:var(--red)}
+.sd-row .sd-num{width:28px;font-family:'JetBrains Mono',monospace;font-size:.75rem;font-weight:500;color:var(--muted);text-align:right;flex-shrink:0}
+.idea-card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:22px 24px;margin-bottom:14px;border-left:3px solid var(--accent)}
+.idea-card h4{font-size:1rem;font-weight:600;margin-bottom:6px}
+.idea-card p{font-size:.85rem;color:#57534e;margin:0 0 10px}
+.idea-card .idea-meta{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;font-weight:600}
+.calendar-grid{display:grid;grid-template-columns:100px 80px 160px 1fr;gap:0;margin:16px 0;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.calendar-grid .ch{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);padding:10px 14px;background:#f5f5f4;border-bottom:1px solid var(--line)}
+.calendar-grid .cr{padding:10px 14px;border-bottom:1px solid var(--line);font-size:.85rem}
+@media(max-width:680px){.container{padding:32px 16px 80px}.report-header h1{font-size:1.6rem}.metric-grid{grid-template-columns:repeat(2,1fr)}.sw-grid{grid-template-columns:1fr}.calendar-grid{grid-template-columns:80px 60px 120px 1fr;font-size:.78rem}.score-diagram{padding:18px 16px 16px}.sd-row .sd-name{width:110px;font-size:.72rem}}
+@media print{body{background:#fff}.container{max-width:100%;padding:20px 0}.sw-card,.idea-card{break-inside:avoid}section{break-inside:avoid}.upgrade-box{break-inside:avoid}}
 </style>
 </head>
 <body>
-
 <div class="container">
-
-  <header class="report-header">
-    <div class="label">Founder Story Assessment</div>
-    <h1>@sean.fetcho</h1>
-    <div class="subtitle">Sean Fetcho — Co-Founder & CEO, Verséa Health. Builder of @discovermescreen. 15-year entrepreneur, Tampa Bay 40 Under 40. 110+ countries.</div>
-    <div class="meta">
-      <span>📅 May 2026</span>
-      <span>📊 Data: Public Instagram</span>
-      <span>⏱ Analysis period: May 27, 2026</span>
-      <span>🎯 Format: Founder Story Arc</span>
-    </div>
-  </header>
-
-
-  <!-- SCORE DIAGRAM -->
-  <div class="score-diagram">
-    <div class="sd-header">
-      <span class="sd-label">Performance Score</span>
-      <span class="sd-overall">38<span>&hairsp;/ 100</span></span>
-    </div>
-    <div class="sd-row">
-      <span class="sd-name">Founder Authority</span>
-      <div class="sd-track"><div class="sd-fill high" style="width:85%"></div></div>
-      <span class="sd-num">85</span>
-    </div>
-    <div class="sd-row">
-      <span class="sd-name">Personal Brand</span>
-      <div class="sd-track"><div class="sd-fill high" style="width:70%"></div></div>
-      <span class="sd-num">70</span>
-    </div>
-    <div class="sd-row">
-      <span class="sd-name">Storytelling</span>
-      <div class="sd-track"><div class="sd-fill low" style="width:15%"></div></div>
-      <span class="sd-num">15</span>
-    </div>
-    <div class="sd-row">
-      <span class="sd-name">Content Cadence</span>
-      <div class="sd-track"><div class="sd-fill low" style="width:20%"></div></div>
-      <span class="sd-num">20</span>
-    </div>
-    <div class="sd-row">
-      <span class="sd-name">Community Building</span>
-      <div class="sd-track"><div class="sd-fill low" style="width:25%"></div></div>
-      <span class="sd-num">25</span>
-    </div>
-    <div class="sd-row">
-      <span class="sd-name">Growth Strategy</span>
-      <div class="sd-track"><div class="sd-fill low" style="width:10%"></div></div>
-      <span class="sd-num">10</span>
-    </div>
-  </div>
-
-  <!-- THE CHAPTER BEING WRITTEN -->
-  <section>
-    <h2>1. The Chapter Being Written</h2>
-    <p>Most founders at 2,100 followers are still introducing themselves. Sean Fetcho has already lived the story they're trying to tell — <strong>launched Red Bull USA, built and sold 8 print and digital publications, co-founded a packaging company, visited 110+ countries, earned Tampa Bay 40 Under 40, joined YPO, and now leads the world's first at-home mitochondrial function test</strong>. His résumé reads like a career retrospective, not a LinkedIn bio.</p>
-    <p>But here's the tension at the heart of this assessment: the man with the most compelling founder story in health-tech is telling almost none of it on Instagram. With ~2,100 followers and 288 posts, his feed shows conference stages, biohacking summits, and the entrepreneurial life behind a NASA-science company. It does <strong>not</strong> show the Red Bull origin. The 8 exits. The lessons from 15 years of building. The moment he realized cellular energy was the biggest problem worth solving.</p>
-    <p>The gap between Sean's real-world story and his Instagram story is <strong>the single most addressable growth lever available to any founder account at this tier</strong>. The content is already lived. It just needs to be captured.</p>
-
-    <div class="callout">
-      <p>💡 <strong>Core insight:</strong> Sean's Instagram is a networking tool. It should be a storytelling platform. His real-world life is more interesting than his Instagram — and that's not a criticism. It's an opportunity with a remarkably low barrier: the camera is already in his pocket.</p>
-    </div>
-  </section>
-
-  <!-- WHO HE IS -->
-  <section>
-    <h2>2. Who He Is — The Material</h2>
-
-    <div class="origin-block">
-      <h4>The Arc — From Energy Drinks to Cellular Energy</h4>
-      <div class="arc">Red Bull USA Launch Team → 8 Publications Built & Sold → Packaging Startup → Verséa Health → NASA Science → mescreen™</div>
-      <p style="margin-top:10px;">This is not a career. This is a narrative with a thesis: <em>from selling energy in cans to measuring it in cells</em>. The arc has a beginning (Red Bull), a middle (building and selling companies), a turning point (healthcare is the biggest problem worth solving), and a climax (NASA-science health-tech). Every founder story needs one of these. Sean already has all four beats — they're just told in boardrooms, not on the feed.</p>
-    </div>
-
-    <div class="sw-grid">
-      <div class="sw-card strength">
-        <div class="sw-label">Story Asset 1</div>
-        <h4>15-Year Entrepreneurial Arc</h4>
-        <p>Launched Red Bull USA. Built and sold 8 publications. Co-founded a packaging company. Now leads a health-tech startup backed by NASA science. Few founders at any follower count have a trajectory this clean. It's a Netflix documentary — not a LinkedIn profile.</p>
-      </div>
-
-      <div class="sw-card strength">
-        <div class="sw-label">Story Asset 2</div>
-        <h4>Built-in Story Ecosystem via @discovermescreen</h4>
-        <p>Sean's personal account and the mescreen brand account feed each other structurally: lab footage, NASA science, customer results, conference stages, practitioner networks. The founder-company content flywheel exists — it just hasn't been activated.</p>
-      </div>
-
-      <div class="sw-card strength">
-        <div class="sw-label">Story Asset 3</div>
-        <h4>Stages Most Creators Can't Access</h4>
-        <p>Biohacking Summit. A4M. Dave Asprey Biohacking Conference. Zenos Health Summit. ACTAI Global. Every stage appearance is a chapter in the founder story — and every chapter is recordable. The content already happened. The camera wasn't pointed inward.</p>
-      </div>
-
-      <div class="sw-card strength">
-        <div class="sw-label">Story Asset 4</div>
-        <h4>Founder-to-Product Identity</h4>
-        <p>Sean's bio directly states his connection to mescreen. Unlike founders whose personal brand is divorced from their product, Sean's identity is the product's identity. Every follower he gains is a potential customer. Every customer's trust is already anchored to his face.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- THE GAP -->
-  <section>
-    <h2>3. The Gap — Between the Man and the Feed</h2>
-
-    <table class="data-table">
-      <thead>
-        <tr><th>Dimension</th><th>Reality</th><th>Instagram</th><th>Gap</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Personal Story</td><td>Red Bull → publications → packaging → Verséa → NASA science</td><td>Bio mentions Verséa; feed shows conferences</td><td><span class="tag weakness">Very large</span></td></tr>
-        <tr><td>Thought Leadership</td><td>Stages at Biohacking Summit, A4M, Dave Asprey conference, ACTAI</td><td>Stage photos, no clips, no key takeaways</td><td><span class="tag weakness">Very large</span></td></tr>
-        <tr><td>Behind-the-Scenes</td><td>Building a NASA-science health-tech startup from Tampa</td><td>Near-zero BTS content</td><td><span class="tag weakness">Very large</span></td></tr>
-        <tr><td>Audience Strategy</td><td>N/A</td><td>Follow-back pattern; no organic growth</td><td><span class="tag weakness">Large</span></td></tr>
-      </tbody>
-    </table>
-
-    <div class="callout">
-      <p>🔍 <strong>Why the gap exists:</strong> Sean uses Instagram as a networking tool — following peers, posting conference photos, staying visible to his industry. But a founder's Instagram is not a Rolodex. It's a stage. The same stage he commands at Biohacking Summit is available every day, for free, in his phone. The shift from "networking" to "storytelling" is the unlock.</p>
-    </div>
-  </section>
-
-  <!-- WHAT HIS PEERS ARE PUBLISHING -->
-  <section>
-    <h2>4. What His Peers Are Publishing — The Genre Context</h2>
-
-    <p>Three founder-CEOs in health-tech and biohacking at the same follower tier. These are not benchmarks against 1M+ accounts — those founders have teams, book deals, and years of compounding. These are founders writing their stories from the same starting line. Sean has a better story than all of them. They're publishing more of it.</p>
-
-    <table class="data-table">
-      <thead>
-        <tr><th></th><th>@sean.fetcho</th><th>@eliasarjan — Elias Arjan</th><th>@charleswr1ght — Charlie Wright</th><th>@adr1an.k — Adrian Kochsiek</th></tr>
-      </thead>
-      <tbody>
-        <tr><td><strong>Followers</strong></td><td class="num">~2.1K</td><td class="num">~3–5K</td><td class="num">~2–6K</td><td class="num">~1.5–4K</td></tr>
-        <tr><td><strong>Niche</strong></td><td>Mitochondrial health-tech CEO</td><td>Longevity speaker + healthspan</td><td>Founder & CEO, Humantra</td><td>CEO, ONVY (AI x Longevity)</td></tr>
-        <tr><td><strong>Followers</strong></td><td class="num">~2.1K</td><td class="num">~2.2K</td><td class="num">~8.4K</td><td class="num">~1.6K</td></tr>
-        <tr class="highlight"><td><strong>Face-to-Camera/Week</strong></td><td class="num" style="color:var(--red)">0</td><td class="num" style="color:var(--green)">3–5</td><td class="num" style="color:var(--green)">2–4</td><td class="num" style="color:var(--green)">3–5</td></tr>
-        <tr><td><strong>Founder Story Arc</strong></td><td class="num" style="color:var(--red)">Untold</td><td class="num" style="color:var(--green)">Building-in-public</td><td class="num" style="color:var(--amber)">Partially told</td><td class="num" style="color:var(--green)">Core pillar</td></tr>
-        <tr><td><strong>Carousels/Week</strong></td><td class="num">~0</td><td class="num">1–2</td><td class="num">1</td><td class="num">1</td></tr>
-        <tr><td><strong>Story Engagement</strong></td><td class="num" style="color:var(--red)">Minimal</td><td class="num" style="color:var(--green)">Daily BTS + Q&A</td><td class="num" style="color:var(--green)">Daily polls + BTS</td><td class="num" style="color:var(--amber)">Moderate</td></tr>
-        <tr><td><strong>Follower Ratio</strong></td><td class="num" style="color:var(--red)">~1:1</td><td class="num" style="color:var(--green)">~15:1</td><td class="num" style="color:var(--green)">~20:1</td><td class="num" style="color:var(--green)">~10:1</td></tr>
-        <tr><td><strong>LinkedIn Funnel</strong></td><td class="num" style="color:var(--amber)">Not active</td><td class="num" style="color:var(--green)">Active cross-post</td><td class="num" style="color:var(--amber)">Occasional</td><td class="num" style="color:var(--green)">Active cross-post</td></tr>
-      </tbody>
-    </table>
-
-    <div class="callout">
-      <p>💡 <strong>Same-tier context:</strong> @eliasarjan (2.2K), @charleswr1ght (8.4K), and @adr1an.k (1.6K) are health-tech founders telling their stories on Instagram. Every one posts face-to-camera Reels multiple times per week. Every one has a healthier follower ratio. Every one is building their founder narrative. Sean has a better story than all of them — more companies built, more countries visited, more stages commanded, NASA-level science. The variable isn't the material. It's whether it gets published.</p>
-    </div>
-  </section>
-
-  <!-- THE STORIES NOT YET TOLD -->
-  <section>
-    <h2>5. The Stories Not Yet Told</h2>
-
-    <div class="sw-grid">
-      <div class="sw-card weakness">
-        <div class="sw-label">Untold Story 1</div>
-        <h4>The Origin: Red Bull → Cellular Energy</h4>
-        <p>The arc from launching energy drinks to measuring mitochondrial function is a narrative with gravitational pull. It's a through-line that makes every future post more meaningful — the "why" behind everything Sean does. It's not on the feed.</p>
-      </div>
-
-      <div class="sw-card weakness">
-        <div class="sw-label">Untold Story 2</div>
-        <h4>The Lessons: 8 Companies Built and Sold</h4>
-        <p>Most founders exit once. Sean has done it 8 times. Every exit is a lesson — what he got right, what he got wrong, when he knew to hold and when to sell. These are the carousels that founders save and share. None are published.</p>
-      </div>
-
-      <div class="sw-card weakness">
-        <div class="sw-label">Untold Story 3</div>
-        <h4>The Mission: Why mescreen Had to Exist</h4>
-        <p>The moment Sean realized the healthcare system can't measure what matters — cellular energy — is a story. It's personal, it's mission-driven, and it's the emotional anchor for the $699 product. It's untold on Instagram.</p>
-      </div>
-
-      <div class="sw-card weakness">
-        <div class="sw-label">Untold Story 4</div>
-        <h4>The Daily: Building a NASA-Science Company from Tampa</h4>
-        <p>What does Tuesday look like for the CEO of a mitochondrial testing company? The lab. The team. The hard days. The wins. This is the behind-the-scenes content that builds parasocial trust. It's nowhere on the feed. Stories are silent.</p>
-      </div>
-
-      <div class="sw-card weakness">
-        <div class="sw-label">Untold Story 5</div>
-        <h4>The Worldview: 110 Countries, One Lens</h4>
-        <p>You don't visit 110+ countries without forming a worldview. Sean's perspective on health, culture, and building across borders is a content pillar that no competitor at this tier can replicate. It's untapped entirely.</p>
-      </div>
-
-      <div class="sw-card weakness">
-        <div class="sw-label">Untold Story 6</div>
-        <h4>The Signal Problem: 1:1 Follow Ratio</h4>
-        <p>Following ~2,000 accounts with ~2,100 followers reads as growth hacking — not curation. For a CEO with Sean's pedigree, this undermines the story before it's told. A founder at 2,100 followers with 85 following reads as curated authority. Same numbers. Radically different signal.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- THE STORYTELLING ENGINE -->
-  <section>
-    <h2>6. The Storytelling Engine — How to Tell It</h2>
-
-    <h3>🎯 Story Objective: 2.1K → 10K Followers, 5%+ Engagement, Founder Authority Cemented</h3>
-
-    <p>The engine runs on a single principle: every post should answer one of three questions. <strong>What does Sean believe? What has Sean learned? What is Sean building?</strong> If a post answers one of those, it grows an audience. If it doesn't — stage photos, panel recaps, product announcements — it's noise.</p>
-
-    <div class="rec-card">
-      <div class="num">1</div>
-      <h4>Face-to-Camera Reels — 3×/week (The Trust Format)</h4>
-      <p>A founder speaking directly to camera for 60–90 seconds is the highest-trust format on Instagram. Three modes to rotate:<br><br>
-      <strong>"What I Believe" (1×/week):</strong> One contrarian take on health, entrepreneurship, or building. "I've spent 15 years in healthcare. Here's the one thing everyone gets wrong."<br>
-      <strong>"What I Learned" (1×/week):</strong> One specific lesson from the journey. "When we sold our first company, I thought we'd made it. Here's what actually happened."<br>
-      <strong>"Behind the Build" (1×/week):</strong> Raw BTS of Verséa. The lab, the team, the hard days. "This is what building a NASA-science health company actually looks like."<br><br>
-      Rules: hook in first 1.5 seconds. Text on screen for entire video. End with a question ("What would you do?" "Have you experienced this?").</p>
-    </div>
-
-    <div class="rec-card">
-      <div class="num">2</div>
-      <h4>Founder Frameworks Carousels — 1×/week (The Save Format)</h4>
-      <p>Carousels get 2–3× the reach of static posts and drive saves — Instagram's strongest algorithmic signal. Template: Slide 1 = bold claim → Slides 2–7 = one framework element → Slide 8 = "Save · Share with a founder who needs this."<br><br>
-      <em>8 ready frameworks:</em> "5 lessons from launching Red Bull USA" · "The 3 biggest mistakes I made selling 8 companies" · "What 110 countries taught me about building" · "How to pitch NASA-level science to investors" · "The founder's guide to conference networking" · "Why I went from energy drinks to cellular energy" · "4 things I wish I knew before starting Verséa" · "How to build a brand that survives pivots"</p>
-    </div>
-
-    <div class="rec-card">
-      <div class="num">3</div>
-      <h4>Stage Clip Reels — 1×/week (The Credibility Format)</h4>
-      <p>Every stage appearance at Biohacking Summit, A4M, Dave Asprey conference should produce 2–3 Reels. Hook with his most provocative line → 45–60s of the best moment → End card: "Full talk in bio." Stage content borrows the credibility of the venue. Audiences trust curated highlights more than original posts because the conference already vetted him.</p>
-    </div>
-
-    <div class="rec-card">
-      <div class="num">4</div>
-      <h4>The Founder Arc — Monthly Narrative Series</h4>
-      <p>The Red Bull → 8 exits → Verséa → mescreen arc is a four-part mini-series. One Reel per week for one month:<br>
-      <strong>Chapter 1:</strong> "How I went from launching energy drinks to studying cellular energy"<br>
-      <strong>Chapter 2:</strong> "What selling 8 companies taught me about knowing when to hold"<br>
-      <strong>Chapter 3:</strong> "The moment I realized healthcare was the biggest problem worth solving"<br>
-      <strong>Chapter 4:</strong> "Why I wake up every day to build the future of mitochondrial testing"<br><br>
-      Audiences binge story arcs. This is the highest-retention content format on the platform.</p>
-    </div>
-
-    <div class="rec-card">
-      <div class="num">5</div>
-      <h4>Fix the Signal — Immediate</h4>
-      <p>Following ~2,000 accounts with ~2,100 followers undermines every story before it's read. <strong>Unfollow down to &lt;100</strong> — keep close friends, collaborators, and accounts you genuinely consume. A founder at 2,100/85 reads as curated authority. Same numbers. Different signal entirely.</p>
-    </div>
-
-    <h3>Weekly Story Rhythm</h3>
-
-    <div class="calendar-grid">
-      <div class="ch">Day</div><div class="ch">Format</div><div class="ch">Story Pillar</div><div class="ch">Example</div>
-      <div class="cr"><strong>Mon</strong></div><div class="cr">Reel</div><div class="cr">What I Believe</div><div class="cr">60s: "The biggest myth in longevity"</div>
-      <div class="cr"><strong>Tue</strong></div><div class="cr">Carousel</div><div class="cr">Founder Framework</div><div class="cr">"5 lessons from 15 years of startups"</div>
-      <div class="cr"><strong>Wed</strong></div><div class="cr">Story-only</div><div class="cr">BTS + Q&A</div><div class="cr">BTS of the lab + "Ask me anything"</div>
-      <div class="cr"><strong>Thu</strong></div><div class="cr">Reel</div><div class="cr">Stage Clip</div><div class="cr">45s highlight from last conference</div>
-      <div class="cr"><strong>Fri</strong></div><div class="cr">Reel</div><div class="cr">Behind the Build</div><div class="cr">"This week at Verséa" — raw BTS</div>
-      <div class="cr"><strong>Sat</strong></div><div class="cr">Carousel + Story</div><div class="cr">Personal / Worldview</div><div class="cr">110 countries: one photo, one lesson</div>
-      <div class="cr"><strong>Sun</strong></div><div class="cr">Reel</div><div class="cr">Product / mescreen</div><div class="cr">1:4 promo — "Why I built this test"</div>
-    </div>
-  </section>
-
-  <!-- THIS WEEK -->
-  <section>
-    <h2>7. This Week — Start Telling the Story</h2>
-
-    <div class="timeline-item">
-      <div class="t-dot accent"></div>
-      <div class="t-content">
-        <h4>Unfollow down to &lt;100 accounts</h4>
-        <p>30 minutes. The single most impactful positioning move available. A founder-CEO at 2.1K should not follow 2,000 accounts. Curate to collaborators, partners, and accounts you genuinely read. This instantly shifts perception from "growth hack" to "authority."</p>
-      </div>
-    </div>
-
-    <div class="timeline-item">
-      <div class="t-dot accent"></div>
-      <div class="t-content">
-        <h4>Film 5 face-to-camera Reels in one session</h4>
-        <p>"Why I went from energy drinks to cellular energy." "The one thing everyone gets wrong about mitochondrial health." "What selling 8 companies taught me." "Why Tampa is the future of health-tech." "The moment I knew mescreen had to exist." 60–90 seconds each. One session = a week of the highest-trust format on Instagram.</p>
-      </div>
-    </div>
-
-    <div class="timeline-item">
-      <div class="t-dot accent"></div>
-      <div class="t-content">
-        <h4>Clip your last 3 stage appearances</h4>
-        <p>Biohacking Summit. Dave Asprey conference. ACTAI. Find the best 45 seconds from each. Post one this week. Stage clips carry the credibility of the venue — they're the only format where the audience's trust is pre-earned.</p>
-      </div>
-    </div>
-
-    <div class="timeline-item">
-      <div class="t-dot accent"></div>
-      <div class="t-content">
-        <h4>A Story every day for the next 7 days</h4>
-        <p>Morning BTS of Verséa office or lab. Midday share @discovermescreen post with your commentary. Evening poll: "What's the #1 thing you want to know about mitochondrial health?" Stories build the daily touchpoint that anchors you in followers' feeds.</p>
-      </div>
-    </div>
-
-    <div class="timeline-item">
-      <div class="t-dot accent"></div>
-      <div class="t-content">
-        <h4>Rewrite your bio to tell the arc</h4>
-        <p>Current: "I'm Sean, co-founder and CEO of Verséa Health." → New: "Built & sold 8 companies. Launched Red Bull USA. Now building the future of mitochondrial health @discovermescreen. 110+ countries. Tampa, FL." The bio should make someone want to follow — not just state a job title.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- THE NEXT CHAPTER -->
-  <section>
-    <h2>8. The Next Chapters — 90-Day Narrative Timeline</h2>
-
-    <p>Founder accounts grow differently than brands or creators. They compound through <strong>storytelling, not trends</strong>. When a founder tells their story consistently, audiences don't just follow — they invest emotionally. Target: <strong>~5,900–8,900 net new followers</strong> in 90 days.</p>
-
-    <div class="timeline-item">
-      <div class="t-dot accent"></div>
-      <div class="t-content">
-        <h4>Chapter 1 — The Prologue (Days 1–30)</h4>
-        <p><strong>Target: 2.1K → 4–5K (+1,900–2,900)</strong><br>
-        • Fix the follow ratio: ~2,000 → &lt;100. A 30-minute task with months of positioning return.<br>
-        • Rewrite bio to tell the story, not the job title.<br>
-        • Launch 3 face-to-camera Reels/week + 1 carousel/week + daily Stories.<br>
-        • Clip top 3 stage appearances into Reels. Post one per week.<br>
-        • Begin the Founder Arc — Chapter 1: "From energy drinks to cellular energy."<br>
-        <em>Signal: Follow ratio fixed. First face-to-camera Reel crossing 2K+ views. Story poll 50+ responses.</em></p>
-      </div>
-    </div>
-
-    <div class="timeline-item">
-      <div class="t-dot accent"></div>
-      <div class="t-content">
-        <h4>Chapter 2 — Rising Action (Days 31–60)</h4>
-        <p><strong>Target: 4–5K → 6–7K (+1,500–2,500)</strong><br>
-        • Founder Arc Chapters 2–3. Audiences binge story arcs — keep the momentum.<br>
-        • Double down on the winning format from Chapter 1 data.<br>
-        • First Instagram Live: "Building a NASA-science health company — AMA."<br>
-        • Cross-post top Reels to LinkedIn (7K followers — untapped audience).<br>
-        • First Collab Reel with @discovermescreen or a peer founder.<br>
-        <em>Signal: One Reel crossing 10K views. Founder arc driving 50+ DMs from new followers.</em></p>
-      </div>
-    </div>
-
-    <div class="timeline-item">
-      <div class="t-dot accent"></div>
-      <div class="t-content">
-        <h4>Chapter 3 — The Climax (Days 61–90)</h4>
-        <p><strong>Target: 6–7K → 9–11K (+2,500–3,500)</strong><br>
-        • Founder Arc Chapter 4 — the finale: "Why I wake up every day to build this."<br>
-        • Weekly calendar on autopilot: 4 Reels, 2 carousels, daily Stories, 1 Live/month.<br>
-        • LinkedIn-to-Instagram funnel active: cross-posting consistently.<br>
-        • 1–2 more conferences this quarter — every stage is content.<br>
-        • Build a "Founder Playbook" from 60 days of data.<br>
-        <em>Signal: 10K followers. 5%+ engagement. Face-to-camera Reels at 5K+ views. DMs from founders: "Your story inspired me."</em></p>
-      </div>
-    </div>
-
-    <table class="data-table" style="margin-top: 28px;">
-      <thead>
-        <tr><th>Chapter</th><th>Timeline</th><th>New Followers</th><th>Eng Rate</th><th>Story Lever</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>1 — Prologue</td><td class="num">Days 1–30</td><td class="num" style="color:var(--green)">+1,900–2,900</td><td class="num">2–3% → 3.5%</td><td>Origin + follow fix</td></tr>
-        <tr><td>2 — Rising Action</td><td class="num">Days 31–60</td><td class="num" style="color:var(--green)">+1,500–2,500</td><td class="num">3.5% → 4.5%</td><td>Arc + Live + LinkedIn</td></tr>
-        <tr><td>3 — Climax</td><td class="num">Days 61–90</td><td class="num" style="color:var(--green)">+2,500–3,500</td><td class="num">4.5% → 5%+</td><td>Systems + cross-platform</td></tr>
-        <tr class="highlight"><td><strong>Total</strong></td><td class="num"><strong>90 days</strong></td><td class="num" style="color:var(--green)"><strong>+5,900–8,900</strong></td><td class="num"><strong>→ 5%+</strong></td><td><strong>→ 9–11K followers</strong></td></tr>
-      </tbody>
-    </table>
-
-    <div class="callout">
-      <p>🗓 <strong>Sean doesn't need to invent content — he needs to capture the life he's already living.</strong> Red Bull → 8 companies sold → building NASA-science health-tech → stages at the world's top biohacking conferences → 110 countries. That's not a content strategy. That's a documentary waiting for the director. The variable isn't whether the story is compelling — it's whether it gets told.</p>
-    </div>
-  </section>
-
-  <!-- CHAPTER MILESTONES -->
-  <section>
-    <h2>9. Chapter Milestones</h2>
-
-    <table class="data-table">
-      <thead>
-        <tr><th>Metric</th><th>Current</th><th>Chapter 1 Target (Day 30)</th><th>Chapter 3 Target (Day 90)</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Followers</td><td class="num">~2,100</td><td class="num">3,000+</td><td class="num" style="color:var(--green)">8–10K</td></tr>
-        <tr><td>Following</td><td class="num" style="color:var(--red)">~2,000</td><td class="num" style="color:var(--green)">&lt;100</td><td class="num" style="color:var(--green)">&lt;100</td></tr>
-        <tr><td>Engagement Rate</td><td class="num" style="color:var(--amber)">~2–3%</td><td class="num">3.5%+</td><td class="num" style="color:var(--green)">5%+</td></tr>
-        <tr><td>Reels/Week</td><td class="num">&lt;1</td><td class="num">3</td><td class="num">4</td></tr>
-        <tr><td>Carousels/Week</td><td class="num">~0</td><td class="num">1</td><td class="num">2</td></tr>
-        <tr><td>Face-to-Camera/Week</td><td class="num">0</td><td class="num">2</td><td class="num">3</td></tr>
-        <tr><td>Story Posts/Day</td><td class="num">~0</td><td class="num">1</td><td class="num">2–3</td></tr>
-      </tbody>
-    </table>
-  </section>
-
-  <!-- RE-READING THE STORY -->
-  <section>
-    <h2>10. When to Re-Read the Story</h2>
-
-    <table class="data-table">
-      <thead>
-        <tr><th>Cadence</th><th>Purpose</th><th>What to Check</th><th>Time</th></tr>
-      </thead>
-      <tbody>
-        <tr><td><strong>Monthly</strong> — Story Pulse</td><td>Quick check: is the narrative landing?</td><td>Engagement rate, follower growth, top/bottom 3 posts, face-to-camera views, Story participation, LinkedIn flow</td><td class="num">30 min</td></tr>
-        <tr><td><strong>Quarterly</strong> — Full Reassessment</td><td>Deep re-read. Compare against this assessment.</td><td>All metrics vs. last quarter, founder arc completion, format mix, audience segment shifts, road to 10K progress</td><td class="num">2–3 hrs</td></tr>
-        <tr><td><strong>Event-Triggered</strong> — Off-Cycle</td><td>After a viral Reel, major stage, or funding announcement.</td><td>What caused the spike? Is the new audience staying? Does the narrative need a pivot?</td><td class="num">1 hr</td></tr>
-      </tbody>
-    </table>
-
-    <div class="callout">
-      <p>📅 <strong>Next reassessment: August 2026.</strong> By then the follow ratio should be fixed, the founder arc should be complete, and face-to-camera should have 60+ days of data. The quarterly check asks one question: is Sean's Instagram telling the story his résumé already earned?</p>
-    </div>
-  </section>
-
-  <footer class="report-footer">
-    <p><strong>@sean.fetcho Founder Story Assessment</strong> · Prepared May 27, 2026 · Data via public Instagram indexed content, web search, versea.com, LinkedIn · For strategic use only · Not affiliated with Instagram or Meta</p>
-  </footer>
-
+<header class="report-header">
+<div class="label">Instagram Audit Report</div>
+<h1>@sean.fetcho</h1>
+<div class="subtitle">Sean Fetcho — CEO of Verséa Health, maker of mescreen™. Red Bull USA launch team. 8 companies built and sold. 110+ countries visited. Tampa Bay 40 Under 40. YPO member. The most compelling founder story in health-tech that isn't being told.</div>
+<div class="meta"><span>May 2026</span><span>Data: Instagram, public sources</span><span>AuditLayer Report</span></div>
+</header>
+<!-- 1. SCORE -->
+<section><h2>1. Overall Score — 38/100</h2>
+<div class="score-diagram">
+<div class="sd-header"><span class="sd-label">Overall Score</span><span class="sd-overall">38<span>/ 100</span></span></div>
+<div class="sd-row"><span class="sd-name">Founder Authority</span><div class="sd-track"><div class="sd-fill high" style="width:85%"></div></div><span class="sd-num">85</span></div>
+<div class="sd-row"><span class="sd-name">Personal Brand</span><div class="sd-track"><div class="sd-fill high" style="width:70%"></div></div><span class="sd-num">70</span></div>
+<div class="sd-row"><span class="sd-name">Community Building</span><div class="sd-track"><div class="sd-fill low" style="width:25%"></div></div><span class="sd-num">25</span></div>
+<div class="sd-row"><span class="sd-name">Content Cadence</span><div class="sd-track"><div class="sd-fill low" style="width:20%"></div></div><span class="sd-num">20</span></div>
+<div class="sd-row"><span class="sd-name">Storytelling</span><div class="sd-track"><div class="sd-fill low" style="width:15%"></div></div><span class="sd-num">15</span></div>
+<div class="sd-row"><span class="sd-name">Growth Strategy</span><div class="sd-track"><div class="sd-fill low" style="width:10%"></div></div><span class="sd-num">10</span></div>
 </div>
-
+<div class="callout accent"><p>The man with the most compelling founder story in health-tech is telling almost none of it on Instagram. Red Bull USA. 8 exits. 110 countries. NASA-level science. The raw material is extraordinary. The feed is conference photos.</p></div>
+</section>
+<!-- 2. RAW NUMBERS -->
+<section><h2>2. What the Account Is Showing — The Raw Numbers</h2>
+<div class="metric-grid">
+<div class="metric-card"><div class="value">2.1K</div><div class="label">Followers</div></div>
+<div class="metric-card"><div class="value">288</div><div class="label">Total Posts</div></div>
+<div class="metric-card"><div class="value red">~0</div><div class="label">Face-to-Camera/Week</div></div>
+<div class="metric-card"><div class="value red">~0</div><div class="label">Carousels/Week</div></div>
+</div>
+<table class="data-table">
+<thead><tr><th>Metric</th><th>@sean.fetcho</th><th>Benchmark (2K tier)</th><th>Assessment</th></tr></thead>
+<tbody>
+<tr><td>Followers</td><td class="num">~2,100</td><td class="num">—</td><td><span class="tag neutral">Early stage</span></td></tr>
+<tr class="highlight"><td>Following</td><td class="num" style="color:var(--red)">~2,000</td><td class="num">&lt;100</td><td><span class="tag weakness">1:1 ratio — reads as growth hack</span></td></tr>
+<tr><td>Total Posts</td><td class="num">288</td><td class="num">—</td><td><span class="tag neutral">Moderate volume</span></td></tr>
+<tr><td>Face-to-Camera/Week</td><td class="num" style="color:var(--red)">0</td><td class="num">2–4</td><td><span class="tag weakness">Missing trust format</span></td></tr>
+<tr><td>Carousels/Week</td><td class="num" style="color:var(--red)">~0</td><td class="num">1–2</td><td><span class="tag weakness">Missing save format</span></td></tr>
+<tr><td>Story engagement</td><td class="num" style="color:var(--red)">Minimal</td><td class="num">Daily</td><td><span class="tag weakness">No daily presence</span></td></tr>
+<tr><td>LinkedIn funnel</td><td class="num" style="color:var(--red)">Not active</td><td class="num">Active cross-post</td><td><span class="tag weakness">Missing cross-platform</span></td></tr>
+<tr><td>Content type</td><td>Conference photos + stages</td><td>Face-to-camera + frameworks</td><td><span class="tag weakness">Networking tool, not storytelling platform</span></td></tr>
+</tbody>
+</table>
+<p>The headline: <strong>Sean uses Instagram as a networking tool — conference photos, stage appearances, industry visibility.</strong> It should be a storytelling platform. His real-world life is more interesting than his Instagram. That's not a criticism. It's the single largest growth lever available to any founder account at this tier.</p>
+</section>
+<!-- 3. TOP 5 STRENGTHS -->
+<section><h2>3. Top 5 Strengths</h2>
+<div class="sw-grid">
+<div class="sw-card strength"><div class="sw-label">Strength 1</div><h4>A 15-Year Entrepreneurial Arc Most Founders Would Film a Documentary About</h4><p>Red Bull USA launch → 8 companies built and sold → packaging startup → Verséa Health → NASA-level mitochondrial science. This isn't a resume — it's a four-act narrative. Beginning, middle, turning point, climax. All four beats exist. None are on the feed.</p></div>
+<div class="sw-card strength"><div class="sw-label">Strength 2</div><h4>Built-In Story Ecosystem — Personal Brand + Product Brand</h4><p>@sean.fetcho and @discovermescreen can feed each other. Founder story drives product trust. Product science drives founder credibility. The flywheel exists in real life — it's just not activated on Instagram. Every follower Sean gains is a potential mescreen customer.</p></div>
+<div class="sw-card strength"><div class="sw-label">Strength 3</div><h4>Access to Elite Stages — Every Appearance Is Recordable Content</h4><p>Biohacking Summit. A4M. Dave Asprey Biohacking Conference. Zenos Health Summit. ACTAI Global. Every keynote is a Reel waiting to be clipped. Every panel is a carousel of insights. The stages are already booked. The cameras just aren't rolling.</p></div>
+<div class="sw-card strength"><div class="sw-label">Strength 4</div><h4>110 Countries — A Content Pillar No Competitor Can Replicate</h4><p>"What 110 countries taught me about health, business, and human nature." No founder at the 2K tier — or the 200K tier — has this perspective. It's a worldview content pillar that writes itself. One country = one post. 110 posts of unique, unduplicatable content.</p></div>
+<div class="sw-card strength"><div class="sw-label">Strength 5</div><h4>The Through-Line Writes Itself: "From Selling Energy in Cans to Measuring It in Cells"</h4><p>Red Bull → cellular energy. The narrative arc is so clean it sounds invented. It's not. Every post, every Reel, every carousel hangs on this single thread. Most founders spend years searching for their story. Sean's is already written — it's just not published.</p></div>
+</div>
+</section>
+<!-- 4. TOP 7 WEAKNESSES -->
+<section><h2>4. Top 7 Weaknesses</h2>
+<div class="sw-grid">
+<div class="sw-card weakness"><div class="sw-label">Weakness 1</div><h4>Zero Face-to-Camera Content — The Trust Format</h4><p>Face-to-camera Reels are the highest-trust format on Instagram. Sean speaks on elite stages regularly — the camera is already pointed at him. But none of that footage makes it to his feed. Zero face-to-camera Reels means zero parasocial trust with an audience that's never met him.</p></div>
+<div class="sw-card weakness"><div class="sw-label">Weakness 2</div><h4>No Carousels — The Save Format</h4><p>Founder frameworks, lessons from 8 exits, principles from 110 countries — this is perfect carousel material. Carousels get saved. Saves are Instagram's strongest signal. The account has zero carousels. The format that would perform best for a founder with this much material is absent.</p></div>
+<div class="sw-card weakness"><div class="sw-label">Weakness 3</div><h4>Instagram as Networking Tool, Not Storytelling Platform</h4><p>Conference photos. Stage appearances. Industry handshakes. The feed broadcasts "I was there." It should broadcast "Here's what I learned there — and here's what I believe." The shift from networking to storytelling is the single unlock for this account.</p></div>
+<div class="sw-card weakness"><div class="sw-label">Weakness 4</div><h4>~2,000 Following — The Fastest Trust Signal to Fix</h4><p>A 1:1 follow ratio reads as a growth tactic. Elite founders follow &lt;100 accounts — curating signals authority. Unfollowing down to 85 signals the same curation to every new profile visitor in under one second.</p></div>
+<div class="sw-card weakness"><div class="sw-label">Weakness 5</div><h4>No LinkedIn Funnel — Missing the Founder's Second Platform</h4><p>Founders live on LinkedIn. Sean's peer competitors cross-post Reels and carousels to LinkedIn, capturing a second audience with the same content. Sean's LinkedIn is dormant. One piece of content, two platforms, zero extra effort.</p></div>
+<div class="sw-card weakness"><div class="sw-label">Weakness 6</div><h4>Dormant Stories — No Daily Connection</h4><p>Stories are where founders build daily rapport — BTS of the lab, quick takes, replying to followers. Sean's Stories are silent. Every day without a Story is a day the audience forgets he exists.</p></div>
+<div class="sw-card weakness"><div class="sw-label">Weakness 7</div><h4>No Hashtag Strategy</h4><p>Founder-focused hashtags (#founderstory, #entrepreneurship, #startuplife, #healthtech) have active, engaged communities. None are being used. The account is invisible to people actively looking for founder content.</p></div>
+</div>
+</section>
+<!-- 5. THREE IMMEDIATE ACTIONS -->
+<section><h2>5. Three Immediate Actions — This Week</h2>
+<div class="timeline-item"><div class="t-dot accent"></div><div class="t-content"><h4>1. Film and post the first face-to-camera Reel</h4><p>60 seconds. Topic: "From selling energy in cans to measuring it in cells — how I went from Red Bull to mitochondrial science." No script needed — Sean tells this story on stages. Tell it to the phone. One take. Post it. The hardest Reel is the first one. After that, it's a habit.</p></div></div>
+<div class="timeline-item"><div class="t-dot accent"></div><div class="t-content"><h4>2. Post one founder framework carousel</h4><p>"5 lessons from launching Red Bull USA." 7 slides. Slide 1 = bold claim. Slides 2–6 = one lesson per slide. Slide 7 = "Save · Share with a founder who needs this." This is the content that gets bookmarked, shared in DMs, and remembered. One carousel = more saves than the entire existing grid combined.</p></div></div>
+<div class="timeline-item"><div class="t-dot accent"></div><div class="t-content"><h4>3. Unfollow down to 85 accounts</h4><p>Curate the following list to: peers (fellow health-tech founders), inspirations, and collaborators. Under 100 following instantly signals intentionality. Every new profile visitor sees it. It's the fastest trust signal to fix — takes 20 minutes, broadcasts forever.</p></div></div>
+</section>
+<!-- 6. COMPETITIVE COMPARISON -->
+<section><h2>6. Competitive Comparison — Three Founder Accounts at the Same Tier</h2>
+<p>Three health-tech founders in the 1.5K–8.5K follower range. None have Sean's resume. All have stronger content execution.</p>
+<table class="data-table">
+<thead><tr><th></th><th>@sean.fetcho</th><th>@eliasarjan</th><th>@charleswr1ght</th><th>@adr1an.k</th></tr></thead>
+<tbody>
+<tr><td><strong>Followers</strong></td><td class="num">~2.1K</td><td class="num">~2.2K</td><td class="num">~8.4K</td><td class="num">~1.6K</td></tr>
+<tr class="highlight"><td><strong>Face-to-Camera/Week</strong></td><td class="num" style="color:var(--red)">0</td><td class="num" style="color:var(--green)">3–5</td><td class="num" style="color:var(--green)">2–4</td><td class="num" style="color:var(--green)">3–5</td></tr>
+<tr><td><strong>Founder Story Arc</strong></td><td class="num" style="color:var(--red)">Untold</td><td class="num" style="color:var(--green)">Building-in-public</td><td class="num">Partially told</td><td class="num" style="color:var(--green)">Core pillar</td></tr>
+<tr><td><strong>Carousels/Week</strong></td><td class="num" style="color:var(--red)">~0</td><td class="num" style="color:var(--green)">1–2</td><td class="num">1</td><td class="num">1</td></tr>
+<tr><td><strong>Follower Ratio</strong></td><td class="num" style="color:var(--red)">~1:1</td><td class="num" style="color:var(--green)">~15:1</td><td class="num" style="color:var(--green)">~20:1</td><td class="num" style="color:var(--green)">~10:1</td></tr>
+<tr><td><strong>Story Engagement</strong></td><td class="num" style="color:var(--red)">Minimal</td><td class="num" style="color:var(--green)">Daily BTS+Q&A</td><td class="num" style="color:var(--green)">Daily polls+BTS</td><td class="num">Moderate</td></tr>
+<tr><td><strong>LinkedIn Funnel</strong></td><td class="num" style="color:var(--red)">Not active</td><td class="num" style="color:var(--green)">Active cross-post</td><td class="num">Occasional</td><td class="num" style="color:var(--green)">Active cross-post</td></tr>
+</tbody>
+</table>
+<div class="callout"><p>Sean has a better story than all of them — more companies built, more countries visited, more stages commanded, NASA-level science. The variable isn't the material. It's whether it gets published. Every peer has figured out the publishing habit. Sean hasn't started yet.</p></div>
+</section>
+<!-- 7. THREE CONTENT IDEAS -->
+<section><h2>7. Three Content Ideas That Match the Account's Vibe</h2>
+<p>Built for a multi-exit founder with a global worldview and a NASA-science startup. Direct. Insight-dense. No fluff.</p>
+<div class="idea-card"><div class="idea-meta">Content Idea 1</div><h4>"What I Believe" — Weekly Face-to-Camera Reels</h4><p><strong>Format:</strong> 60–90 second Reel. Sean on camera. One contrarian take on health, entrepreneurship, or building. Hook in first 1.5 seconds. Text on screen throughout. End with a question: "Agree? Disagree? Comment below."</p><p><strong>Why it fits:</strong> Sean already has strong opinions — he voices them on stages. This just moves the stage to Instagram. First three: "Why most health-tech startups fail in the first 18 months" · "The one thing 110 countries taught me about health" · "Why I went from selling energy drinks to measuring cellular energy."</p></div>
+<div class="idea-card"><div class="idea-meta">Content Idea 2</div><h4>"8 Exits, 8 Lessons" — Carousel Series</h4><p><strong>Format:</strong> 7-slide carousel. One lesson per company sold. Slide 1: company name + the lesson in one sentence. Slides 2–6: what happened, what he learned, what he'd do differently. Slide 7: "Save · Share with a founder."</p><p><strong>Why it fits:</strong> Founder frameworks get saved. Saves drive algorithmic reach. 8 companies = 8 weeks of content. Each carousel becomes a permanent bookmark for other founders — compounding reach over months, not hours.</p></div>
+<div class="idea-card"><div class="idea-meta">Content Idea 3</div><h4>"Behind the Build" — Daily Story + Weekly Reel</h4><p><strong>Format:</strong> Daily Story: one BTS photo from the Verséa lab or office. Weekly Reel: 60 seconds of building a NASA-science startup — the team, the hard days, the breakthroughs, the mescreen analyzer in action.</p><p><strong>Why it fits:</strong> Founders who build in public build trust faster than founders who only appear on stages. The lab exists. The team exists. The hard days exist. Show them. The audience that watches you build is the audience that buys what you built.</p></div>
+</div>
+</section>
+<!-- 8. 90-DAY MAP -->
+<section><h2>8. The 90-Day Map</h2>
+<p>Three phases. Target: <strong>2.1K → 10K followers. From networking tool to storytelling platform.</strong></p>
+<div class="timeline-item"><div class="t-dot accent"></div><div class="t-content"><h4>Phase 1 — Foundation (Days 1–30): 2.1K → 4K</h4><p>Launch face-to-camera Reels: 3/week. Launch founder framework carousels: 1/week. Unfollow to 85. Start daily Stories: BTS photo + poll + Q&A. Activate LinkedIn cross-posting: same Reels, native upload. <em>Endpoint: first Reel crossing 3K views. First carousel generating 15+ saves.</em></p></div></div>
+<div class="timeline-item"><div class="t-dot accent"></div><div class="t-content"><h4>Phase 2 — Acceleration (Days 31–60): 4K → 7K</h4><p>Launch "8 Exits, 8 Lessons" carousel series — one per week. First keynote clip Reel from a live stage. Insta Collab with a health-tech founder peer. One "viral swing" Reel/week with trending audio and a broader hook. <em>Endpoint: one Reel crossing 10K views. Collab driving 300+ followers.</em></p></div></div>
+<div class="timeline-item"><div class="t-dot accent"></div><div class="t-content"><h4>Phase 3 — Compound (Days 61–90): 7K → 10K</h4><p>Weekly calendar on autopilot: 3 Reels, 1 carousel, daily Stories, LinkedIn mirror. "110 Countries" content pillar launch — one country per post. First Instagram Live — Q&A on building in health-tech. <em>Endpoint: 10K followers. Founder authority cemented. Instagram transformed from networking to storytelling.</em></p></div></div>
+<table class="data-table" style="margin-top:24px;"><thead><tr><th>Phase</th><th>Timeline</th><th>New Followers</th><th>Mechanism</th></tr></thead><tbody>
+<tr><td>1 — Foundation</td><td class="num">Days 1–30</td><td class="num" style="color:var(--green)">+1,900</td><td>Format launch + curation + LinkedIn</td></tr>
+<tr><td>2 — Acceleration</td><td class="num">Days 31–60</td><td class="num" style="color:var(--green)">+3,000</td><td>Series + Collab + viral swings</td></tr>
+<tr><td>3 — Compound</td><td class="num">Days 61–90</td><td class="num" style="color:var(--green)">+3,000</td><td>Systems + cross-platform + community</td></tr>
+<tr class="highlight"><td><strong>Total</strong></td><td class="num"><strong>90 days</strong></td><td class="num" style="color:var(--green)"><strong>+7,900</strong></td><td><strong>→ 10K followers</strong></td></tr></tbody></table>
+</section>
+<!-- 9. STORIES + HIGHLIGHTS -->
+<section><h2>9. Leveraging Stories & Highlights</h2>
+<h3>Daily Story Protocol</h3>
+<table class="data-table"><thead><tr><th>Time</th><th>Format</th><th>Content</th><th>Purpose</th></tr></thead><tbody>
+<tr><td>Morning</td><td>Photo + poll</td><td>BTS of the Verséa lab: "What's the hardest part of building in health-tech?"</td><td>Engagement + relatability</td></tr>
+<tr><td>Midday</td><td>Share + sticker</td><td>Reshare a carousel slide: "Still true?" with slider</td><td>Content recycling</td></tr>
+<tr><td>Evening</td><td>Q&A box</td><td>"Ask me anything about building and selling companies"</td><td>DM generation, authority</td></tr></tbody></table>
+<h3>Three Highlight Covers</h3>
+<div class="sw-grid">
+<div class="sw-card strength"><h4>Lessons</h4><p>Best carousel slides, founder frameworks, principles. The wisdom archive. What a new visitor checks to decide if you know what you're talking about.</p></div>
+<div class="sw-card strength"><h4>The Build</h4><p>Behind-the-scenes of Verséa — lab, team, mescreen, the hard days, the wins. The documentary in real time.</p></div>
+<div class="sw-card strength"><h4>Stages</h4><p>Keynote clips, panel moments, conference takeaways. Proof that the ideas shared on the feed are tested on real stages.</p></div>
+</div>
+</section>
+<!-- 10. CONTENT SCHEDULE -->
+<section><h2>10. Hypothetical Content Schedule</h2>
+<div class="calendar-grid">
+<div class="ch">Day</div><div class="ch">Format</div><div class="ch">Pillar</div><div class="ch">Example</div>
+<div class="cr"><strong>Mon</strong></div><div class="cr">Reel</div><div class="cr">What I Believe</div><div class="cr">"Why most health-tech startups fail in the first 18 months"</div>
+<div class="cr"><strong>Tue</strong></div><div class="cr">Carousel</div><div class="cr">Lessons</div><div class="cr">"Exit #3: What I learned selling my packaging company"</div>
+<div class="cr"><strong>Wed</strong></div><div class="cr">Story-only</div><div class="cr">Community</div><div class="cr">Q&A day: "Ask me anything about building companies"</div>
+<div class="cr"><strong>Thu</strong></div><div class="cr">Reel</div><div class="cr">Behind the Build</div><div class="cr">60s inside the Verséa lab — the mescreen analyzer in action</div>
+<div class="cr"><strong>Fri</strong></div><div class="cr">Reel</div><div class="cr">Worldview</div><div class="cr">"What 110 countries taught me about health and human nature"</div>
+<div class="cr"><strong>Sat</strong></div><div class="cr">Carousel</div><div class="cr">Frameworks</div><div class="cr">"5 principles for building a company that lasts 15 years"</div>
+<div class="cr"><strong>Sun</strong></div><div class="cr">Static + Story</div><div class="cr">Personal</div><div class="cr">Weekend reflection — what I'm learning this week</div>
+</div>
+</section>
+<!-- 11. COMMENT RESPONSE -->
+<section><h2>11. The Four-Hour Window & Why Bots Hurt Accounts Under 30K</h2>
+<h3>The Four-Hour Rule</h3>
+<p>Instagram's algorithm weights engagement in the <strong>first four hours</strong> more heavily than any other signal in the first 24 hours. Reply to every comment within the first hour, and the algorithm treats your post as "generating conversation." For a founder account specifically: every reply is a relationship. The person who comments on a "What I Believe" Reel is the person who becomes a customer, a partner, or an evangelist. Reply fast. Reply like a human.</p>
+<h3>Why Bots Are a Trap Under 30K</h3>
+<p>At 2.1K followers, every engagement is visible and every commenter matters. A bot auto-reply under a post about selling companies or mitochondrial science gets spotted instantly — by Instagram's spam filters and by a founder-level audience that can smell inauthenticity from a mile away. Founder trust is built one reply at a time. Automation destroys it at the same speed.</p>
+<div class="callout"><p>Under 30K: <strong>reply manually, reply fast, reply like a founder.</strong> When Sean crosses 30K and comment volume exceeds what one person can manage, templates customized per post type become viable. Until then: the DMs and comments are where the relationships are built.</p></div>
+</section>
+<!-- 12. PRESENTABLE FEED -->
+<section><h2>12. Building a Presentable Feed — Color, Thumbnails & Visual Consistency</h2>
+<table class="data-table"><thead><tr><th>Element</th><th>Current</th><th>Recommended</th></tr></thead><tbody>
+<tr><td><strong>Color palette</strong></td><td>Mixed — conference photos, varied lighting</td><td>Stick to warm, editorial tones: cream, deep navy, rich leather brown. Think <em>Forbes</em> profile meets founder journal. Consistent warmth signals intentionality.</td></tr>
+<tr><td><strong>Thumbnail style</strong></td><td>No consistent design</td><td>Every carousel cover: bold statement in dark serif or Inter Bold, top-third. Every Reel cover: Sean's face or a strong visual moment, text overlay bottom-third.</td></tr>
+<tr><td><strong>Grid rhythm</strong></td><td>Random conference photos</td><td>Alternate: face-to-camera Reel → framework carousel → BTS Reel → lesson carousel. The grid should read like a founder's journal — not a networking photo album.</td></tr>
+<tr><td><strong>Profile picture</strong></td><td>Professional headshot</td><td>Keep. It's strong. A version on stage or mid-sentence adds energy — but the current one works.</td></tr>
+</tbody></table>
+</section>
+<!-- 13. HASHTAGS -->
+<section><h2>13. The Right Hashtags — What to Use & How to Use Them</h2>
+<h3>3–5 Niche Hashtags Per Post, Rotated Weekly</h3>
+<table class="data-table"><thead><tr><th>Tier</th><th>Size</th><th>Examples</th><th>When</th></tr></thead><tbody>
+<tr><td><strong>Niche</strong></td><td>10K–100K posts</td><td>#founderstory #healthtechfounder #startupjourney #buildinginpublic #entrepreneurmindset</td><td>Every post</td></tr>
+<tr><td><strong>Community</strong></td><td>100K–500K posts</td><td>#entrepreneurship #startuplife #founderlife #biohacking</td><td>Carousels and broader Reels</td></tr>
+<tr><td><strong>Reach</strong></td><td>500K+ posts</td><td>#business #motivation #success</td><td>One per post max. Reels only.</td></tr></tbody></table>
+<h3>Where to Put Them</h3>
+<p>In the caption (not the first comment). 3–5 per post. Rotate from a pool of 20–25. Find new hashtags weekly by searching #founderstory and checking what top-performing founder posts use.</p>
+</section>
+<!-- 14. AUDIT CADENCE -->
+<section><h2>14. How Often to Run an Audit</h2>
+<table class="data-table"><thead><tr><th>Cadence</th><th>Purpose</th><th>What to Check</th><th>Time</th></tr></thead><tbody>
+<tr><td><strong>Weekly</strong></td><td>Pulse check</td><td>Reel views, carousel saves, Story replies, new followers, LinkedIn engagement</td><td class="num">10 min</td></tr>
+<tr><td><strong>Monthly</strong></td><td>Signal read</td><td>Format performance, best-performing content pillar, follower ratio, cross-platform sync</td><td class="num">30 min</td></tr>
+<tr><td><strong>Quarterly</strong></td><td>Full audit</td><td>All metrics vs. last quarter, peer benchmark update, storytelling arc review</td><td class="num">2–3 hrs</td></tr>
+<tr><td><strong>Post-Viral</strong></td><td>Spike review</td><td>Which Reel. What hook. Did followers stick. Replication plan.</td><td class="num">45 min</td></tr></tbody></table>
+<div class="callout"><p>Next quarterly audit: <strong>August 2026.</strong> By then the face-to-camera habit should be locked in and the first "8 Exits" carousel series should be complete.</p></div>
+</section>
+<!-- 15. UPGRADE -->
+<section><h2>15. What Comes Next</h2>
+<div class="upgrade-box">
+<h3>This audit is a snapshot. The real work is telling the story.</h3>
+<p>AuditLayer Pro unlocks: monthly reassessments with updated peer benchmarks, weekly content prompts built from your top-performing formats, cross-platform performance tracking (Instagram + LinkedIn), competitor monitoring, and a dedicated strategy session to adapt the protocol as your account grows from founder to thought leader.</p>
+<p style="font-size:.82rem;opacity:.85;margin-top:8px;">The story that gets you from 2.1K to 10K is the origin story. The story that gets you from 10K to 50K is the ongoing build. Pro keeps both narratives current.</p>
+<a href="#" class="cta-btn">Upgrade to Pro →</a>
+</div>
+</section>
+<footer class="report-footer">
+<p><strong>@sean.fetcho Instagram Audit</strong> · Prepared May 2026 · Data via Instagram, public sources · For strategic use only · Not affiliated with Instagram or Meta</p>
+<div style="margin-top:28px;padding-top:20px;border-top:1px solid var(--line);text-align:center;">
+<span style="display:inline-block;background:var(--accent);color:#fff;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.15em;padding:5px 14px;border-radius:4px;">AuditLayer Report</span>
+<p style="margin-top:8px;font-size:.72rem;color:var(--muted);">narinfazlalipour.com · May 2026</p>
+</div>
+</footer>
+</div>
 </body>
 </html>
