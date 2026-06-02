@@ -123,10 +123,12 @@
 
 ## Media & Communication Experience
 
-### Hemal Patel, PhD — Instagram Management
-- Sole manager of Dr. Patel's professional Instagram presence
-- Grew audience organically from 0 to 10.7K followers
+### Hemal Patel, PhD — Instagram Management (@hemalpatelphd)
+- Sole manager of Dr. Patel's professional media presence across Instagram and beyond
+- Grew audience organically from 0 to 12K followers
 - Translated complex mitochondrial and neuroscience research into accessible content
+- Created successful viral posts and solidified collaborations with high-end accounts
+- Showcased a world-class scientist through strategic media positioning
 - Connected patient families to research networks via DMs
 - Continued voluntarily after Verséa Discovery employment ended
 
