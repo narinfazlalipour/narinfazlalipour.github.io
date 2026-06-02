@@ -129,8 +129,6 @@
 - Translated complex mitochondrial and neuroscience research into accessible content
 - Created successful viral posts and solidified collaborations with high-end accounts
 - Showcased a world-class scientist through strategic media positioning
-- Connected patient families to research networks via DMs
-- Continued voluntarily after Verséa Discovery employment ended
 
 ### Verséa Discovery
 
