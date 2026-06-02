@@ -6,222 +6,275 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>Media Management Proposal — Casa Blui</title>
+<title>Casa Blui × Narin Fazlalipour</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #f9f8f6; --surface: #ffffff;
-  --text: #1c1917; --soft: #44403c; --muted: #78716c;
-  --line: #e7e5e4;
-  --accent: #0d9488; --accent-muted: #f0fdfa;
-  --gold: #b8924a; --gold-muted: #fdf8f0;
+  --royal-deep: #0A1733; --royal: #1E3A6E; --royal-accent: #2C5AA0; --royal-light: #4A7CC9;
+  --royal-subtle: #EEF4FC; --royal-mist: #F6F9FD;
+  --cream: #FBFAF7; --paper: #FFFFFF; --ink: #14182A;
+  --warm-gray: #6B6560; --fg-muted: #6B6560; --fg-soft: #3A3F55;
+  --rule: rgba(20, 24, 42, 0.10); --border-accent: rgba(44, 90, 160, 0.28);
+  --accent: #2C5AA0; --teal: #0d9488; --teal-muted: #f0fdfa;
+  --green: #059669; --amber: #d97706; --red: #dc2626;
+  --green-muted: #ecfdf5;
+  --maxw: 860px; --gutter: clamp(1.25rem, 5vw, 3rem);
+  --radius: 10px; --radius-lg: 16px;
+  --shadow-md: 0 6px 20px rgba(11, 26, 59, 0.08);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1); --fast: 180ms;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.65; -webkit-font-smoothing: antialiased; }
+body { font-family: var(--font-sans); background: var(--cream); color: var(--ink); line-height: 1.65; -webkit-font-smoothing: antialiased; }
+.wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--gutter); }
 
-.hero { background: linear-gradient(160deg, #0f766e 0%, #115e59 40%, #0d9488 100%); padding: 56px 28px 48px; text-align: center; position: relative; overflow: hidden; }
-.hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse at 30% 50%, rgba(255,255,255,0.06) 0%, transparent 70%); pointer-events: none; }
-.hero .badge { display: inline-block; background: rgba(255,255,255,0.15); backdrop-filter: blur(4px); color: #ccfbf1; font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.18em; padding: 6px 16px; border-radius: 99px; margin-bottom: 16px; border: 1px solid rgba(255,255,255,0.15); }
-.hero h1 { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 500; color: #fff; letter-spacing: -0.02em; margin-bottom: 4px; }
-.hero .sub { font-size: 0.9rem; color: #99f6e4; opacity: 0.85; }
-.hero .tagline { font-size: 0.85rem; color: #ccfbf1; margin-top: 12px; font-style: italic; opacity: 0.75; max-width: 480px; margin-left: auto; margin-right: auto; line-height: 1.5; }
+/* Mast */
+.mast { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.25rem var(--gutter); font-family: var(--font-mono); font-size: 0.82rem; letter-spacing: 0.08em; color: var(--linen); mix-blend-mode: difference; color: #F4F0EA; }
+.mast a { color: inherit; text-decoration: none; text-transform: uppercase; }
+.mast a:hover { color: var(--royal-light); }
 
-.container { max-width: 700px; margin: 0 auto; padding: 0 24px 80px; }
+/* Hero */
+header.hero { padding: 8rem 0 4rem; }
+.hero .label { font-family: var(--font-mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.14em; color: var(--royal-accent); font-weight: 600; margin-bottom: 0.75rem; }
+.hero h1 { font-family: var(--font-serif); font-size: clamp(2rem, 4.5vw, 3.2rem); font-weight: 500; line-height: 1.1; letter-spacing: -0.02em; color: var(--royal-deep); margin-bottom: 0.75rem; }
+.hero h1 em { font-style: italic; color: var(--royal-accent); }
+.hero .sub { font-size: 1rem; color: var(--warm-gray); max-width: 560px; line-height: 1.5; }
 
-/* ── Section Cards ── */
-section { margin-bottom: 36px; }
-section h2 { font-family: 'Playfair Display', Georgia, serif; font-size: 1.2rem; font-weight: 500; margin-bottom: 14px; letter-spacing: -0.01em; color: var(--text); }
-section h3 { font-size: 0.95rem; font-weight: 600; margin: 18px 0 8px; color: var(--text); }
-section p, section li { font-size: 0.88rem; color: var(--soft); line-height: 1.6; margin-bottom: 8px; }
-section ul { padding-left: 20px; margin-bottom: 12px; }
-section ul li { margin-bottom: 6px; }
+/* Sections */
+section { padding: 3rem 0; }
+section h2 { font-family: var(--font-serif); font-size: clamp(1.5rem, 2.2vw, 1.8rem); font-weight: 500; letter-spacing: -0.01em; margin-bottom: 1.5rem; color: var(--royal-deep); padding-bottom: 0.5rem; border-bottom: 1px solid var(--rule); }
+section h3 { font-family: var(--font-serif); font-size: 1.2rem; font-weight: 500; margin: 1.8rem 0 0.75rem; color: var(--royal); }
+section p { margin-bottom: 1rem; color: #44403c; font-size: 0.95rem; }
+section p strong { color: var(--ink); }
 
-.card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 24px 26px; margin-bottom: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.03); }
-.card.accent { border-left: 4px solid var(--accent); }
-.card.gold { border-left: 4px solid var(--gold); background: var(--gold-muted); }
+/* Tables */
+table { width: 100%; border-collapse: collapse; font-size: 0.88rem; margin: 1rem 0 1.5rem; }
+table th { text-align: left; font-weight: 600; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--fg-muted); padding: 10px 14px; border-bottom: 2px solid var(--rule); }
+table td { padding: 10px 14px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+table td:first-child { font-weight: 500; }
 
-/* ── Before/After Table ── */
-.ba-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; margin: 16px 0; }
-.ba-table th { background: #f5f5f4; text-align: left; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); padding: 12px 16px; border-bottom: 1px solid var(--line); }
-.ba-table td { padding: 12px 16px; border-bottom: 1px solid var(--line); vertical-align: top; }
-.ba-table tr:last-child td { border-bottom: none; }
-.ba-table .old { color: var(--red); font-weight: 500; }
-.ba-table .new { color: var(--accent); font-weight: 500; }
+/* Callout */
+.callout { background: var(--royal-subtle); border-left: 3px solid var(--royal-accent); padding: 16px 20px; border-radius: 0 8px 8px 0; margin: 1.5rem 0; }
+.callout p { margin: 0; color: #1e3a5f; font-weight: 500; }
 
-/* ── Pricing Card ── */
-.pricing-box { background: linear-gradient(135deg, var(--accent-muted), #f5fdf9); border: 2px solid var(--accent); border-radius: 14px; padding: 28px; text-align: center; margin: 24px 0; }
-.pricing-box .price { font-family: 'JetBrains Mono', monospace; font-size: 2.4rem; font-weight: 600; color: #0f766e; }
-.pricing-box .price span { font-size: 1rem; font-weight: 400; color: var(--muted); }
-.pricing-box .term { font-size: 0.82rem; color: var(--muted); margin-top: 4px; }
+/* Pricing */
+.pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 1.5rem 0; }
+.pricing-card { background: var(--paper); border: 1px solid var(--rule); border-radius: var(--radius-lg); padding: 28px 24px; text-align: center; transition: all var(--fast) var(--ease); }
+.pricing-card.featured { border-color: var(--royal-accent); box-shadow: var(--shadow-md); position: relative; }
+.pricing-card.featured::before { content: "RECOMMENDED"; position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: var(--royal-accent); color: #fff; font-family: var(--font-mono); font-size: 0.6rem; font-weight: 700; letter-spacing: 0.12em; padding: 3px 12px; border-radius: 99px; }
+.pricing-card .tier { font-family: var(--font-mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--fg-muted); margin-bottom: 0.5rem; }
+.pricing-card .price { font-family: var(--font-serif); font-size: 2.4rem; font-weight: 600; color: var(--royal-deep); margin: 0.5rem 0; }
+.pricing-card .price span { font-size: 1rem; color: var(--fg-muted); }
+.pricing-card ul { text-align: left; list-style: none; padding: 0; margin: 1rem 0 0; font-size: 0.85rem; color: #57534e; }
+.pricing-card ul li { padding: 5px 0; }
+.pricing-card ul li::before { content: "✓ "; color: var(--green); font-weight: 700; }
 
-/* ── Easy Yes Section ── */
-.yes-box { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 28px; text-align: center; box-shadow: 0 2px 12px rgba(0,0,0,0.04); }
-.yes-box h2 { font-family: 'Playfair Display', Georgia, serif; font-size: 1.4rem; font-weight: 500; margin-bottom: 20px; }
-.yes-box .checklist { text-align: left; max-width: 420px; margin: 0 auto 20px; }
-.yes-box .checklist li { font-size: 0.9rem; margin-bottom: 10px; list-style: none; padding-left: 28px; position: relative; }
-.yes-box .checklist li::before { content: "✓"; position: absolute; left: 0; color: var(--accent); font-weight: 700; font-size: 0.9rem; }
+/* Footer */
+.foot { text-align: center; padding: 3rem 0 4rem; font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-muted); border-top: 1px solid var(--rule); margin-top: 2rem; }
+.foot a { color: var(--royal-accent); text-decoration: none; }
 
-/* ── CTA ── */
-.cta { text-align: center; margin-top: 8px; }
-.cta p { font-size: 0.9rem; color: var(--muted); margin-bottom: 12px; }
-.cta-btn { display: inline-block; background: linear-gradient(135deg, #0d9488, #0f766e); color: #fff; font-weight: 600; font-size: 0.9rem; padding: 14px 36px; border-radius: 10px; text-decoration: none; box-shadow: 0 4px 16px rgba(13,148,136,0.25); transition: transform 0.15s, box-shadow 0.15s; }
-.cta-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(13,148,136,0.35); }
+.tag { display: inline-block; font-size: 0.72rem; font-weight: 600; padding: 2px 10px; border-radius: 4px; letter-spacing: 0.03em; }
+.tag.green { background: var(--green-muted); color: var(--green); }
 
-.footer { margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--line); text-align: center; }
-.footer p { font-size: 0.72rem; color: var(--muted); }
-
-@media (max-width: 600px) {
-  .hero { padding: 40px 18px 32px; }
-  .container { padding: 0 16px 60px; }
-  .pricing-box .price { font-size: 2rem; }
+@media (max-width: 700px) {
+  .pricing-grid { grid-template-columns: 1fr; }
+  header.hero { padding: 6rem 0 2rem; }
 }
 </style>
 </head>
 <body>
 
+<header class="mast">
+  <a href="/">Narin Fazlalipour</a>
+</header>
+
 <!-- ═══════════ HERO ═══════════ -->
-<div class="hero">
-  <div class="badge">Media Management Proposal</div>
-  <h1>Casa Blui</h1>
-  <p class="sub">Instagram Media Management · June 2026</p>
-  <p class="tagline">"Your product is luxury. Your feed should feel like it."</p>
-</div>
-
-<div class="container">
-
-<!-- ═══════════ THE VISION ═══════════ -->
-<section>
-  <h2>The Vision</h2>
-  <div class="card accent">
-    <p>Casa Blui makes the best hot tubs, cold plunges, and saunas in the game. The product photography is premium. The Highlights are well-organized. But the feed reads like a showroom — not a wellness brand.</p>
-    <p style="margin-bottom:0;">My job: turn your Instagram into the editorial arm of Casa Blui. Founder stories. Client transformations. Wellness rituals that make people want to live inside your brand. I handle the strategy, the writing, the calendar, the editing, and the DMs. You focus on building the best products in luxury wellness.</p>
+<header class="hero">
+  <div class="wrap">
+    <div class="label">Media Management Proposal · June 2026</div>
+    <h1>Casa Blui × <em>Narin Fazlalipour</em></h1>
+    <p class="sub">Instagram media management for luxury home wellness — built on a brand pulse audit before a single dollar was asked.</p>
   </div>
-</section>
+</header>
 
-<!-- ═══════════ BEFORE / AFTER ═══════════ -->
+<!-- ═══════════ COVER LETTER ═══════════ -->
 <section>
-  <h2>What Changes</h2>
-  <table class="ba-table">
-    <tr><th>Right Now</th><th>With Me</th></tr>
-    <tr><td class="old">Product photos, product photos, product photos</td><td class="new">Founder voice, customer stories, wellness rituals, <em>and</em> product — in balance</td></tr>
-    <tr><td class="old">No consistent posting rhythm</td><td class="new">3-4 posts/week + daily Stories, same days every week</td></tr>
-    <tr><td class="old">Founder story is invisible</td><td class="new">"Thursdays with Casa Blui" — weekly founder blog → IG carousel → email list</td></tr>
-    <tr><td class="old">High-ticket clients, zero testimonials</td><td class="new">Voice-note testimonials over B-roll, anonymous client wall, aggregate "What clients told us" posts</td></tr>
-    <tr><td class="old">DMs go unanswered or slow</td><td class="new">Same-day DM responses, every inquiry</td></tr>
-    <tr><td class="old">No content strategy — posting reactively</td><td class="new">Monthly content calendar built around product launches, seasons, and founder moments</td></tr>
-  </table>
+  <div class="wrap">
+    <h2>Cover Letter</h2>
+
+    <div class="callout">
+      <p>Pulse Score: <strong>54/100.</strong> Product Quality (75) is elite. Community (35) is the gap. Casa Blui makes the best hot tubs, cold plunges, and saunas in luxury wellness — but the Instagram reads like a showroom, not a brand. The fix isn't more product photos. It's more story.</p>
+    </div>
+
+    <h3>What I Actually Do</h3>
+    <p>I take Casa Blui's energy — the craftsmanship, the founder's vision, the transformative wellness experiences — and build it into the Instagram. Documentary-style content. Founder stories. Client transformations. Wellness rituals that make people want to live inside your brand. No stock footage. No posts that feel like a catalog. Luxury doesn't mean stiff — it means intentional.</p>
+
+    <h3>The Before / After</h3>
+    <table>
+      <tr><td>Product photos, product photos, product photos</td><td style="text-align:center">→</td><td>Founder voice, customer stories, wellness rituals, <em>and</em> product — in balance</td></tr>
+      <tr><td>No consistent posting rhythm</td><td style="text-align:center">→</td><td>3-4 posts/week + daily Stories, same days every week</td></tr>
+      <tr><td>Founder story is invisible</td><td style="text-align:center">→</td><td>"Thursdays with Casa Blui" — weekly founder blog → IG carousel → email list</td></tr>
+      <tr><td>High-ticket clients, zero testimonials</td><td style="text-align:center">→</td><td>Voice-note testimonials over B-roll, anonymous client wall, aggregate format</td></tr>
+      <tr><td>DMs unanswered or slow</td><td style="text-align:center">→</td><td>Same-day responses, every inquiry</td></tr>
+      <tr><td>No strategy — posting reactively</td><td style="text-align:center">→</td><td>Monthly content calendar around launches, seasons, founder moments</td></tr>
+    </table>
+
+    <h3>What Makes Me Different</h3>
+    <p><strong>I know the account cold.</strong> I ran a full brand pulse on @casablui before writing a single word. Every gap in here, I found myself. <a href="projects/casablui-pulse.html" style="color:var(--royal-accent);">View the pulse →</a></p>
+    <p><strong>I build editorial brands, not product catalogs.</strong> Most media managers fill a feed with product shots. I build a publication — founder essays, client documentaries, wellness rituals that make people feel something. The products are the backdrop. The story is the foreground.</p>
+    <p><strong>I solved the high-ticket testimonial problem.</strong> Your clients don't want to be on camera. Fine. Voice-note testimonials laid over B-roll. Anonymous client walls. Aggregate "what clients told us" posts. No faces, all feeling. It's the luxury way to do social proof.</p>
+    <p><strong>I direct. Your videographers shoot.</strong> I'm the editor-in-chief — I concept, write, and direct. Your team handles production. We collaborate on set. The final product is unmistakably Casa Blui.</p>
+  </div>
 </section>
 
 <!-- ═══════════ SCOPE ═══════════ -->
-<section>
-  <h2>What I Do</h2>
-  <div class="card accent">
-    <ul style="margin-bottom:0;">
-      <li><strong>Content Strategy & Calendar</strong> — monthly plan, weekly cadence, every post has a purpose</li>
-      <li><strong>Caption Writing & Editing</strong> — I write everything. Your voice, refined.</li>
-      <li><strong>Thursdays with Casa Blui</strong> — weekly blog written or edited by me, pushed to email list, repurposed as IG carousel</li>
-      <li><strong>DM & Comment Management</strong> — same-day responses, I'm the voice of the brand</li>
-      <li><strong>Hashtag & Engagement Strategy</strong> — niche tags, community engagement, growth levers</li>
-      <li><strong>Monthly Performance Report</strong> — what grew, what didn't, what's next</li>
-      <li><strong>Testimonial Pipeline</strong> — I design the system to capture client stories without putting anyone on camera</li>
-    </ul>
-  </div>
-</section>
+<section style="background: var(--paper);">
+  <div class="wrap">
+    <h2>Scope of Work</h2>
+    <p><strong>Primary Platform:</strong> Instagram (@casablui — 8,956 followers baseline)</p>
+    <table>
+      <tr><th>Service</th><th>Detail</th></tr>
+      <tr><td>Content strategy</td><td>Monthly content calendar, content pillars, storytelling architecture</td></tr>
+      <tr><td>Content creation</td><td>3-4 Reels + 1 carousel per week — concepted and directed by Narin, shot by your videographers</td></tr>
+      <tr><td>Stories management</td><td>Daily Stories — morning ritual, midday poll, evening behind-the-scenes</td></tr>
+      <tr><td>Copywriting</td><td>Captions, hashtag strategy, bio optimization</td></tr>
+      <tr><td>Community management</td><td>Reply to all comments and DMs within 4 hours</td></tr>
+      <tr><td>Thursdays with Casa Blui</td><td>Weekly founder blog — written or edited by Narin, distributed to email list, repurposed as IG carousel</td></tr>
+      <tr><td>Testimonial pipeline</td><td>System for capturing client stories without on-camera appearances — voice notes, anonymous quotes, aggregate format</td></tr>
+      <tr><td>Analytics & reporting</td><td>Monthly performance report — growth, engagement, top-performing content</td></tr>
+    </table>
 
-<!-- ═══════════ WHAT YOU DO ═══════════ -->
-<section>
-  <h2>What You Do</h2>
-  <div class="card">
-    <ul style="margin-bottom:0;">
-      <li><strong>Videographer Access</strong> — your team has videographers. I direct the creative, provide shot lists and storyboards, and work alongside them to capture the right footage</li>
-      <li><strong>Founder Input</strong> — 30 minutes a week. I send you questions, you voice-note your answers. I turn them into Thursdays with Casa Blui</li>
-      <li><strong>Product Access</strong> — I need to understand the product line deeply. Send me spec sheets, founder notes, anything that helps me write authentically</li>
-      <li><strong>Email List Access</strong> — for Thursdays with Casa Blui distribution</li>
-    </ul>
-  </div>
-</section>
+    <h3>How We Create Together</h3>
+    <p>Narin is the <strong>editor-in-chief</strong> — she concepts every Reel, writes every carousel, structures every Story, and directs the visual direction. Your videographers shoot what she briefs. The relationship is creative director + production team. Together, we turn Casa Blui's Instagram into a wellness publication.</p>
 
-<!-- ═══════════ HOW WE CREATE ═══════════ -->
-<section>
-  <h2>How We Create Content Together</h2>
-  <div class="card accent">
-    <p style="margin-bottom:0;"><strong>I create the content.</strong> I concept the Reels, write the carousels, structure the stories, and direct the visual direction. Your videographers shoot what I brief. Think of me as the editor-in-chief — I own the creative strategy and the final output. Your team handles production. Together, we turn Casa Blui's Instagram into a wellness publication.</p>
-  </div>
-</section>
-
-<!-- ═══════════ TESTIMONIAL SOLUTION ═══════════ -->
-<section>
-  <h2>The Testimonial Problem — Solved</h2>
-  <div class="card gold">
-    <p>High-ticket clients don't want to be on camera. I get it. Here's how we capture their stories anyway:</p>
-    <ul style="margin-bottom:0;">
-      <li><strong>Voice-note testimonials:</strong> Client records a 60-second voice memo. We lay it over B-roll of the product in their home. No face, all feeling. Sounds like a podcast clip — feels premium.</li>
-      <li><strong>The Client Wall:</strong> "James, Miami — 'I haven't missed a morning plunge in 4 months.'" First name, city, one quote. Anonymous but personal. Stack 6 of these in a carousel.</li>
-      <li><strong>"What 12 Clients Told Us This Month":</strong> Aggregate feedback as data. No individuals exposed. Powerful social proof in numbers.</li>
-    </ul>
-  </div>
-</section>
-
-<!-- ═══════════ CONTENT CALENDAR ═══════════ -->
-<section>
-  <h2>Weekly Rhythm</h2>
-  <table class="ba-table">
-    <tr><th>Day</th><th>Format</th><th>Content</th></tr>
-    <tr><td>Mon</td><td>Reel</td><td>Wellness ritual — cold plunge routine, sauna protocol, contrast therapy</td></tr>
-    <tr><td>Tue</td><td>Carousel</td><td>Product spotlight — one product, three use cases, design detail</td></tr>
-    <tr><td>Wed</td><td>Reel</td><td>Client story — voice-note testimonial over B-roll</td></tr>
-    <tr><td>Thu</td><td>Carousel</td><td><strong>Thursdays with Casa Blui</strong> — founder blog snippet → IG carousel</td></tr>
-    <tr><td>Fri</td><td>Reel</td><td>Behind-the-scenes — install, workshop, founder moment</td></tr>
-  </table>
-  <p style="font-size:0.82rem; color:var(--muted); margin-top:8px;"><em>Daily Stories: morning ritual, midday poll, evening behind-the-scenes. Every day.</em></p>
-</section>
-
-<!-- ═══════════ PRICING ═══════════ -->
-<section>
-  <h2>Investment</h2>
-  <div class="pricing-box">
-    <div class="price">$2,500<span>/month</span></div>
-    <div class="term">3-month minimum · pause or walk anytime after</div>
-  </div>
-  <div class="card accent">
-    <p style="margin-bottom:0;"><strong>What's included at $2,500/mo:</strong> Full Instagram management — strategy, content calendar, 3-4 posts/week, daily Stories, caption writing, DM management, Thursdays with Casa Blui blog, monthly reporting, testimonial pipeline setup. No hidden fees. No surprise add-ons.</p>
-  </div>
-  <p style="font-size:0.82rem; color:var(--muted); text-align:center; margin-top:12px;">One-time setup: <strong>$1,000</strong> — brand voice deep-dive, content calendar build-out, highlight reorganization, first month's content plan.</p>
-</section>
-
-<!-- ═══════════ EASY YES ═══════════ -->
-<section>
-  <div class="yes-box">
-    <h2>Here's Why This Is Easy to Say Yes To</h2>
-    <ul class="checklist">
-      <li>I create the content — your videographers shoot what I direct. You don't lift a camera unless you want to</li>
-      <li>30 minutes a week from the founder. That's it</li>
-      <li>3-month minimum — if it's not working by month 3, we shake hands and walk</li>
-      <li>I already audited your account. I know exactly what's broken and exactly how to fix it</li>
-      <li>You keep doing what you're great at — building luxury products. I handle everything else</li>
-    </ul>
-    <div class="cta">
-      <p>Ready? One DM and we start Monday.</p>
-      <a href="https://instagram.com/auditlayer" class="cta-btn">DM @auditlayer →</a>
+    <div class="callout">
+      <p><strong>The rule:</strong> If it feels like a product catalog, kill it. If it makes someone want to book a cold plunge at 6am, ship it. If it doesn't show a real human — founder, client, installer — ask why not.</p>
     </div>
   </div>
 </section>
 
-<!-- ═══════════ THE AUDIT ═══════════ -->
+<!-- ═══════════ CONTENT MIX ═══════════ -->
 <section>
-  <h2>I Already Audited Your Account</h2>
-  <div class="card accent">
-    <p>Before I wrote a single word of this proposal, I ran a full brand pulse on @casablui. Score: <strong>54/100</strong>. Product Quality is your strongest dimension (75). Community is your weakest (35). The diagnosis is clear — premium products, showroom feed. Every recommendation in this contract comes from that audit.</p>
-    <p style="margin-bottom:0;"><a href="projects/casablui-pulse.html" style="color:var(--accent);font-weight:600;">View the full pulse report →</a></p>
+  <div class="wrap">
+    <h2>Content Mix & Weekly Calendar</h2>
+    <p>Every piece of content runs through: <strong>hero (the person) → transformation (the experience) → result (wellness, recovery, presence).</strong> If it doesn't have all three, it doesn't ship.</p>
+
+    <table>
+      <tr><th>Pillar</th><th>%</th><th>Storytelling Angle</th><th>Weekly Output</th></tr>
+      <tr><td><strong>Wellness Rituals</strong></td><td>35%</td><td>Not "here's a cold plunge." It's "watch this founder's Sunday contrast therapy routine." The product enables transformation — it's not the story.</td><td>1-2 Reels</td></tr>
+      <tr><td><strong>Client Transformations</strong></td><td>25%</td><td>Voice-note testimonials over B-roll. "I used to wake up stiff. Now I start every day in the sauna." Real people, real voices, no faces required.</td><td>1 Reel</td></tr>
+      <tr><td><strong>Founder / Thursdays with Casa Blui</strong></td><td>25%</td><td>Weekly founder essay — why they started, what they believe about wellness, design philosophy. Blog → email → IG carousel.</td><td>1 Carousel</td></tr>
+      <tr><td><strong>Behind the Brand</strong></td><td>15%</td><td>Installs, workshop, craftsmanship, team moments. The people behind the products. Documentary-style.</td><td>1 Reel</td></tr>
+    </table>
+
+    <h3>Weekly Calendar</h3>
+    <table>
+      <tr><th>Day</th><th>Format</th><th>Story Arc</th></tr>
+      <tr><td><strong>Mon</strong></td><td>Reel</td><td>Wellness ritual — cold plunge routine, sauna protocol, contrast therapy session</td></tr>
+      <tr><td><strong>Tue</strong></td><td>Reel</td><td>Client transformation — voice-note testimonial over home B-roll</td></tr>
+      <tr><td><strong>Wed</strong></td><td>Carousel</td><td>Product spotlight — one product, three use cases, the design detail that matters</td></tr>
+      <tr><td><strong>Thu</strong></td><td>Carousel</td><td><strong>Thursdays with Casa Blui</strong> — founder blog excerpt → 5-slide IG carousel</td></tr>
+      <tr><td><strong>Fri</strong></td><td>Reel</td><td>Behind the brand — install, workshop, team moment, founder BTS</td></tr>
+      <tr><td><strong>Sat</strong></td><td>Stories</td><td>Morning ritual poll. "Wellness question of the week." Client wall highlight.</td></tr>
+      <tr><td><strong>Sun</strong></td><td>Stories</td><td>Behind-the-scenes. Upcoming week preview. Founder reflection.</td></tr>
+    </table>
   </div>
 </section>
 
-<div class="footer">
-  <p>AuditLayer · narinfazlalipour.com · June 2026</p>
-</div>
+<!-- ═══════════ PRICING ═══════════ -->
+<section style="background: var(--paper);">
+  <div class="wrap">
+    <h2>Pricing</h2>
 
-</div>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <div class="tier">Core</div>
+        <div class="price">$2,000<span>/mo</span></div>
+        <ul>
+          <li>Strategy + content calendar</li>
+          <li>3 Reels/week</li>
+          <li>1 carousel/week</li>
+          <li>Captions + hashtags</li>
+          <li>Creative direction for videographers</li>
+        </ul>
+      </div>
+      <div class="pricing-card featured">
+        <div class="tier">Growth</div>
+        <div class="price">$3,500<span>/mo</span></div>
+        <ul>
+          <li>Everything in Core</li>
+          <li>Daily Stories (5-7/week)</li>
+          <li>Community management</li>
+          <li>100% reply within 4hrs</li>
+          <li>Thursdays with Casa Blui blog</li>
+          <li>Monthly performance report</li>
+        </ul>
+      </div>
+      <div class="pricing-card">
+        <div class="tier">Full-Stack</div>
+        <div class="price">$5,000<span>/mo</span></div>
+        <ul>
+          <li>Everything in Growth</li>
+          <li>Email list management</li>
+          <li>Testimonial pipeline (full setup)</li>
+          <li>Quarterly brand audit</li>
+          <li>Competitor monitoring</li>
+          <li>4 Reels/week (up from 3)</li>
+        </ul>
+      </div>
+    </div>
+
+    <p style="text-align:center; font-family: var(--font-mono); font-size: 0.85rem; color: var(--fg-muted); margin-top: 0.5rem;">
+      Setup fee: $1,000 one-time · Monthly invoicing, Net 15
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════ KEY TERMS ═══════════ -->
+<section>
+  <div class="wrap">
+    <h2>Key Terms</h2>
+
+    <table>
+      <tr><th>Term</th><th>Detail</th></tr>
+      <tr><td><strong>Duration</strong></td><td>90-day minimum, auto-renewing monthly. 30 days written notice to cancel after the initial term.</td></tr>
+      <tr><td><strong>Kill fee</strong></td><td>If client terminates within first 90 days: 50% of remaining months' retainer.</td></tr>
+      <tr><td><strong>Approval model</strong></td><td>Reels &amp; Stories: no approval — speed keeps the content alive. Carousels: client review within 24 hours. Calendar: monthly approval.</td></tr>
+      <tr><td><strong>Non-exclusivity</strong></td><td>Narin can work with other clients — including adjacent wellness and luxury industries. No direct competitors without prior disclosure.</td></tr>
+      <tr><td><strong>Content ownership</strong></td><td>Narin retains ownership of all content until full payment. Upon payment: client owns all published deliverables. Raw footage shot by client's videographers remains client property.</td></tr>
+      <tr><td><strong>Non-payment</strong></td><td>If payment is not received by Net 15, Narin may immediately pause all content creation, posting, and community management. Paused days do not extend the contract term.</td></tr>
+      <tr><td><strong>Confidentiality</strong></td><td>No disclosure of product roadmap, client lists, revenue figures, or unpublished business plans. Survives termination for 2 years.</td></tr>
+      <tr><td><strong>Governing law</strong></td><td>State of California. Good-faith mediation before any formal legal action.</td></tr>
+      <tr><td><strong>Liability cap</strong></td><td>Capped at total fees paid in the preceding 3 months. Narin is an independent contractor, not an employee.</td></tr>
+      <tr><td><strong>Client responsibilities</strong></td><td>Brand assets, account access, videographer availability (minimum one half-day shoot per week), founder availability (30 min/week for Thursdays with Casa Blui), email list access, 1-week notice on product launches or major announcements.</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ═══════════ KPIs ═══════════ -->
+<section style="background: var(--paper);">
+  <div class="wrap">
+    <h2>Performance Targets</h2>
+    <table>
+      <tr><th>Metric</th><th>Baseline</th><th>90-Day Target</th></tr>
+      <tr><td>Follower growth</td><td>8,956</td><td><span class="tag green">12,000–15,000</span></td></tr>
+      <tr><td>Engagement rate</td><td>Unknown (&lt;1%)</td><td><span class="tag green">2–3%</span></td></tr>
+      <tr><td>Reels avg views</td><td>Unknown</td><td><span class="tag green">3,000+</span></td></tr>
+      <tr><td>Content output</td><td>Sporadic product posts</td><td><span class="tag green">3-4 Reels + 1 carousel + daily Stories</span></td></tr>
+      <tr><td>Comment reply rate</td><td>Near zero</td><td><span class="tag green">100% within 4 hours</span></td></tr>
+      <tr><td>Brand voice</td><td>Product catalog</td><td><span class="tag green">Editorial wellness publication — founder-led, story-driven</span></td></tr>
+      <tr><td>Founder content</td><td>None</td><td><span class="tag green">Thursdays with Casa Blui — weekly blog + IG carousel</span></td></tr>
+    </table>
+  </div>
+</section>
+
+<footer class="foot">
+  <p>Narin Fazlalipour · <a href="/">narinfazlalipour.com</a> · June 2026</p>
+</footer>
+
 </body>
 </html>
