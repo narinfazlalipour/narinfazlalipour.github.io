@@ -137,6 +137,11 @@
 - **Media:** Content shooting & creation, storytelling, media management across YouTube, IG, X, LinkedIn, TikTok, customer service via DM
 - 15 months, Tampa FL (remote), paid role
 
+### Sean Fetcho, CEO — Executive Media Management
+- Personal account management on LinkedIn and Instagram
+- Curated content from conferences, presentations, and business trips
+- Tampa, FL (alongside Verséa Discovery)
+
 ### UCSD STARS
 - Social media management for the research mentorship program
 - Recruitment content and program visibility
