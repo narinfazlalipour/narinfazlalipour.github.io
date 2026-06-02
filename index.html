@@ -13,7 +13,7 @@
 
   <link rel="stylesheet" href="./styles/tokens.css" />
   <link rel="stylesheet" href="./styles/base.css" />
-  <link rel="stylesheet" href="./styles/layout.css" />
+  <link rel="stylesheet" href="./styles/layout.css?v=2" />
 
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><circle cx=%2216%22 cy=%2216%22 r=%227%22 fill=%22%232C5AA0%22/></svg>" />
 </head>
@@ -200,52 +200,97 @@
         </p>
       </header>
 
-      <div class="chronology">
+      <!-- Stats Strip -->
+      <div class="media-stats">
+        <div class="media-stat">
+          <div class="media-stat-value">0 → 12K</div>
+          <div class="media-stat-label">Organic Growth</div>
+        </div>
+        <div class="media-stat">
+          <div class="media-stat-value">5</div>
+          <div class="media-stat-label">Platforms</div>
+        </div>
+        <div class="media-stat">
+          <div class="media-stat-value">Viral</div>
+          <div class="media-stat-label">Content</div>
+        </div>
+        <div class="media-stat">
+          <div class="media-stat-value">15 Mo</div>
+          <div class="media-stat-label">Verséa Tenure</div>
+        </div>
+      </div>
 
-        <!-- Hemal Patel Instagram (most impactful) -->
-        <article class="chrono-item">
-          <div class="chrono-marker"></div>
-          <div class="chrono-body">
-            <span class="chrono-date">Jul 2024 – Present · Ongoing</span>
-            <h3>Media Manager — Dr. Hemal H. Patel <a class="ext-link" href="https://instagram.com/hemalpatelphd" target="_blank" rel="noopener">@hemalpatelphd</a></h3>
+      <!-- Cards -->
+      <div class="media-grid">
+
+        <!-- Hemal Patel -->
+        <article class="media-card">
+          <div class="media-card-header">
+            <h3 class="media-card-title">Dr. Hemal H. Patel</h3>
+            <a class="media-card-handle" href="https://instagram.com/hemalpatelphd" target="_blank" rel="noopener">@hemalpatelphd</a>
+          </div>
+          <div class="media-card-date">Jul 2024 – Present · Ongoing</div>
+          <div class="media-card-pills">
+            <span class="media-pill">Instagram Growth</span>
+            <span class="media-pill">Viral Posts</span>
+            <span class="media-pill">Collabs</span>
+          </div>
+          <div class="media-card-body">
             <p>Sole manager of Dr. Patel's professional media presence across Instagram and beyond. Built the Instagram account organically from <strong>0 to 12K followers</strong> by translating complex neuroscience and mitochondrial research into engaging, accessible content — creating successful viral posts, solidifying collaborations with high-end accounts, and showcasing a world-class scientist.</p>
           </div>
         </article>
 
         <!-- Verséa Discovery -->
-        <article class="chrono-item">
-          <div class="chrono-marker"></div>
-          <div class="chrono-body">
-            <span class="chrono-date">Jul 2024 – Oct 2025 · Tampa, FL</span>
-            <h3>Media Manager — Verséa Discovery <a class="ext-link" href="https://instagram.com/discovermescreen" target="_blank" rel="noopener">@discovermescreen</a></h3>
-
-            <h4 class="chrono-sub">Marketing</h4>
+        <article class="media-card">
+          <div class="media-card-header">
+            <h3 class="media-card-title">Verséa Discovery</h3>
+            <a class="media-card-handle" href="https://instagram.com/discovermescreen" target="_blank" rel="noopener">@discovermescreen</a>
+          </div>
+          <div class="media-card-date">Jul 2024 – Oct 2025 · Tampa, FL</div>
+          <div class="media-card-pills">
+            <span class="media-pill">Marketing</span>
+            <span class="media-pill">Meta Ads</span>
+            <span class="media-pill">Content</span>
+            <span class="media-pill">Monday Mitos</span>
+          </div>
+          <div class="media-card-body">
+            <div class="media-card-sub">Marketing</div>
             <p>Created campaigns for introducing new products, built and edited the company website, and conducted A/B analysis to optimize messaging and conversion across consumer and professional audiences.</p>
-
-            <h4 class="chrono-sub">Advertisements</h4>
+            <div class="media-card-sub">Advertisements</div>
             <p>Created advertisement content and ran ad campaigns on Meta, translating mitochondrial efficiency research into compelling paid media that reached both clinical and wellness audiences.</p>
-
-            <h4 class="chrono-sub">Media</h4>
+            <div class="media-card-sub">Media</div>
             <p>Shot and created content, developed storytelling narratives around the company's science, managed media presence end-to-end across YouTube, Instagram, X, LinkedIn, and TikTok — and provided customer service via DM, handling inquiries directly from patients and practitioners. Produced the weekly <strong>Monday Mitos</strong> series and blog content translating mitochondrial research for a growing audience.</p>
           </div>
         </article>
 
         <!-- Sean Fetcho -->
-        <article class="chrono-item">
-          <div class="chrono-marker"></div>
-          <div class="chrono-body">
-            <span class="chrono-date">Tampa, FL</span>
-            <h3>Executive Media Manager — Sean Fetcho, CEO</h3>
+        <article class="media-card">
+          <div class="media-card-header">
+            <h3 class="media-card-title">Sean Fetcho, CEO</h3>
+          </div>
+          <div class="media-card-date">Tampa, FL</div>
+          <div class="media-card-pills">
+            <span class="media-pill">LinkedIn</span>
+            <span class="media-pill">Instagram</span>
+            <span class="media-pill">Executive Brand</span>
+          </div>
+          <div class="media-card-body">
             <p>Personal account management across LinkedIn and Instagram — curating and sharing content from conferences, investor presentations, and business trips to build an executive brand that reflects the company's vision.</p>
           </div>
         </article>
 
         <!-- UCSD STARS -->
-        <article class="chrono-item">
-          <div class="chrono-marker"></div>
-          <div class="chrono-body">
-            <span class="chrono-date">Oct 2022 – Jun 2024 · UC San Diego</span>
-            <h3>Undergraduate Research Coordinator — UCSD STARS</h3>
+        <article class="media-card">
+          <div class="media-card-header">
+            <h3 class="media-card-title">UCSD STARS</h3>
+          </div>
+          <div class="media-card-date">Oct 2022 – Jun 2024 · UC San Diego</div>
+          <div class="media-card-pills">
+            <span class="media-pill">LinkedIn</span>
+            <span class="media-pill">Facebook</span>
+            <span class="media-pill">Recruitment</span>
+          </div>
+          <div class="media-card-body">
             <p>Created content for LinkedIn to attract prospective students to the program, drove engagement across Facebook and LinkedIn communities, and coordinated program logistics — matching undergraduates with PhD mentors and running seminar schedules over 20 months.</p>
           </div>
         </article>
