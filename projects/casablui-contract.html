@@ -89,6 +89,23 @@ table tr:nth-child(even) td { background: #fdfdfc; }
 .tag { display: inline-block; font-size: 0.7rem; font-weight: 600; padding: 3px 10px; border-radius: 5px; letter-spacing: 0.03em; }
 .tag.green { background: var(--green-muted); color: var(--green); }
 
+/* ── Score Diagram ── */
+.score-wrap { margin-top: -4px; position: relative; z-index: 2; }
+.score-diagram { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px 28px 20px; box-shadow: var(--shadow-sm); margin: 1.5rem 0; }
+.score-diagram .sd-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--line); }
+.score-diagram .sd-header .sd-label { font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); }
+.score-diagram .sd-header .sd-overall { font-family: var(--font-mono); font-size: 1.8rem; font-weight: 600; color: var(--text); }
+.score-diagram .sd-header .sd-overall span { font-size: 0.75rem; color: var(--muted); font-weight: 400; }
+.sd-row { display: flex; align-items: center; gap: 12px; margin-bottom: 9px; }
+.sd-row:last-child { margin-bottom: 0; }
+.sd-row .sd-name { width: 140px; text-align: right; flex-shrink: 0; font-size: 0.75rem; font-weight: 500; color: var(--soft); }
+.sd-row .sd-track { flex: 1; height: 9px; background: #f0efed; border-radius: 5px; overflow: hidden; }
+.sd-row .sd-fill { height: 100%; border-radius: 5px; }
+.sd-fill.high { background: linear-gradient(90deg, #10b981, #059669); }
+.sd-fill.mid { background: linear-gradient(90deg, #f59e0b, #d97706); }
+.sd-fill.low { background: linear-gradient(90deg, #ef4444, #dc2626); }
+.sd-row .sd-num { width: 28px; text-align: right; flex-shrink: 0; font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600; color: var(--text); }
+
 /* ── Footer ── */
 .foot { text-align: center; padding: 3rem 0 4rem; font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); border-top: 1px solid var(--line); }
 .foot a { color: var(--accent); text-decoration: none; }
@@ -141,11 +158,15 @@ table tr:nth-child(even) td { background: #fdfdfc; }
     </table>
     </div>
 
-    <h3>What Makes Me Different</h3>
-    <p><strong>I know the account cold.</strong> I ran a full brand pulse on @casablui before writing a single word. Every gap in here, I found myself. <a href="projects/casablui-pulse.html">View the pulse →</a></p>
-    <p><strong>I build editorial brands, not product catalogs.</strong> Most media managers fill a feed with product shots. I build a publication — founder essays, client documentaries, wellness rituals that make people feel something. The products are the backdrop. The story is the foreground.</p>
-    <p><strong>I solved the high-ticket testimonial problem.</strong> Your clients don't want to be on camera. Fine. Voice-note testimonials laid over B-roll. Anonymous client walls. Aggregate "what clients told us" posts. No faces, all feeling. It's the luxury way to do social proof.</p>
-    <p><strong>I direct. Your videographers shoot.</strong> I'm the editor-in-chief — I concept, write, and direct. Your team handles production. We collaborate on set. The final product is unmistakably Casa Blui.</p>
+    <div class="score-diagram">
+      <div class="sd-header"><span class="sd-label">Full Pulse Breakdown</span><span class="sd-overall">54<span>/ 100</span></span></div>
+      <div class="sd-row"><span class="sd-name">Brand Story</span><div class="sd-track"><div class="sd-fill mid" style="width:55%"></div></div><span class="sd-num">55</span></div>
+      <div class="sd-row"><span class="sd-name">Product Quality</span><div class="sd-track"><div class="sd-fill high" style="width:75%"></div></div><span class="sd-num">75</span></div>
+      <div class="sd-row"><span class="sd-name">Visual Identity</span><div class="sd-track"><div class="sd-fill mid" style="width:60%"></div></div><span class="sd-num">60</span></div>
+      <div class="sd-row"><span class="sd-name">Content Cadence</span><div class="sd-track"><div class="sd-fill mid" style="width:50%"></div></div><span class="sd-num">50</span></div>
+      <div class="sd-row"><span class="sd-name">Community</span><div class="sd-track"><div class="sd-fill low" style="width:35%"></div></div><span class="sd-num">35</span></div>
+      <div class="sd-row"><span class="sd-name">Retail-to-Social</span><div class="sd-track"><div class="sd-fill mid" style="width:45%"></div></div><span class="sd-num">45</span></div>
+    </div>
   </div>
 </section>
 
