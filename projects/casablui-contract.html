@@ -12,85 +12,101 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --royal-deep: #0A1733; --royal: #1E3A6E; --royal-accent: #2C5AA0; --royal-light: #4A7CC9;
-  --royal-subtle: #EEF4FC; --royal-mist: #F6F9FD;
-  --cream: #FBFAF7; --paper: #FFFFFF; --ink: #14182A;
-  --warm-gray: #6B6560; --fg-muted: #6B6560; --fg-soft: #3A3F55;
-  --rule: rgba(20, 24, 42, 0.10); --border-accent: rgba(44, 90, 160, 0.28);
-  --accent: #2C5AA0; --teal: #0d9488; --teal-muted: #f0fdfa;
+  --bg: #f9f8f6; --surface: #ffffff;
+  --text: #1c1917; --soft: #44403c; --muted: #78716c;
+  --line: #e7e5e4;
+  --accent: #0d9488; --accent-muted: #f0fdfa;
+  --blue: #1e3a6e; --blue-light: #2c5aa0;
   --green: #059669; --amber: #d97706; --red: #dc2626;
-  --green-muted: #ecfdf5;
+  --green-muted: #ecfdf5; --blue-muted: #eff6ff;
+  --gold: #b8924a; --gold-muted: #fdf8f0;
   --maxw: 860px; --gutter: clamp(1.25rem, 5vw, 3rem);
-  --radius: 10px; --radius-lg: 16px;
-  --shadow-md: 0 6px 20px rgba(11, 26, 59, 0.08);
+  --radius: 12px; --radius-lg: 18px;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.04);
+  --shadow-md: 0 6px 24px rgba(0,0,0,0.06);
   --font-serif: 'Cormorant Garamond', Georgia, serif;
   --font-sans: 'Inter', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
-  --ease: cubic-bezier(0.22, 1, 0.36, 1); --fast: 180ms;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --fast: 180ms;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: var(--font-sans); background: var(--cream); color: var(--ink); line-height: 1.65; -webkit-font-smoothing: antialiased; }
+body { font-family: var(--font-sans); background: var(--bg); color: var(--text); line-height: 1.65; -webkit-font-smoothing: antialiased; }
+
+/* ── Navigation ── */
+.nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.1rem var(--gutter); background: rgba(249,248,246,0.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+.nav a { font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color var(--fast); }
+.nav a:hover { color: var(--accent); }
+
+/* ── Hero ── */
+.hero { background: linear-gradient(160deg, #0f766e 0%, #115e59 40%, #0d9488 100%); padding: 7rem 0 4.5rem; text-align: center; position: relative; overflow: hidden; }
+.hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse at 30% 50%, rgba(255,255,255,0.07) 0%, transparent 70%); pointer-events: none; }
+.hero .wrap { position: relative; z-index: 2; }
+.hero .label { display: inline-block; background: rgba(255,255,255,0.12); backdrop-filter: blur(4px); color: #ccfbf1; font-family: var(--font-mono); font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.18em; padding: 6px 16px; border-radius: 99px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.12); }
+.hero h1 { font-family: var(--font-serif); font-size: clamp(2rem, 4.5vw, 3.2rem); font-weight: 500; line-height: 1.1; letter-spacing: -0.02em; color: #fff; margin-bottom: 12px; }
+.hero h1 em { font-style: italic; color: #99f6e4; }
+.hero .sub { font-size: 1rem; color: #99f6e4; max-width: 520px; margin: 0 auto; line-height: 1.5; opacity: 0.85; }
+
+/* ── Sections ── */
+section { padding: 3.5rem 0; }
+section.alt { background: var(--surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--gutter); }
+section h2 { font-family: var(--font-serif); font-size: clamp(1.5rem, 2.2vw, 1.8rem); font-weight: 500; letter-spacing: -0.01em; margin-bottom: 1.5rem; color: var(--text); padding-bottom: 0.5rem; border-bottom: 1px solid var(--line); }
+section h3 { font-family: var(--font-serif); font-size: 1.2rem; font-weight: 500; margin: 2rem 0 0.75rem; color: var(--text); }
+section p { margin-bottom: 1rem; color: var(--soft); font-size: 0.93rem; }
+section p strong { color: var(--text); }
+section a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(13,148,136,0.3); transition: border-color var(--fast); }
+section a:hover { border-color: var(--accent); }
 
-/* Mast */
-.mast { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.25rem var(--gutter); font-family: var(--font-mono); font-size: 0.82rem; letter-spacing: 0.08em; color: var(--linen); mix-blend-mode: difference; color: #F4F0EA; }
-.mast a { color: inherit; text-decoration: none; text-transform: uppercase; }
-.mast a:hover { color: var(--royal-light); }
+/* ── Callout ── */
+.callout { background: linear-gradient(135deg, var(--accent-muted), #f5fdf9); border-left: 4px solid var(--accent); padding: 18px 22px; border-radius: 0 var(--radius) var(--radius) 0; margin: 1.5rem 0; box-shadow: var(--shadow-sm); }
+.callout p { margin: 0; color: #0f766e; font-weight: 500; }
 
-/* Hero */
-header.hero { padding: 8rem 0 4rem; }
-.hero .label { font-family: var(--font-mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.14em; color: var(--royal-accent); font-weight: 600; margin-bottom: 0.75rem; }
-.hero h1 { font-family: var(--font-serif); font-size: clamp(2rem, 4.5vw, 3.2rem); font-weight: 500; line-height: 1.1; letter-spacing: -0.02em; color: var(--royal-deep); margin-bottom: 0.75rem; }
-.hero h1 em { font-style: italic; color: var(--royal-accent); }
-.hero .sub { font-size: 1rem; color: var(--warm-gray); max-width: 560px; line-height: 1.5; }
+/* ── Tables ── */
+.table-wrap { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm); margin: 1.2rem 0 1.5rem; }
+table { width: 100%; border-collapse: collapse; font-size: 0.87rem; }
+table th { text-align: left; font-weight: 600; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); padding: 12px 16px; border-bottom: 2px solid var(--line); background: #fafaf9; }
+table td { padding: 11px 16px; border-bottom: 1px solid var(--line); vertical-align: top; color: var(--soft); }
+table td:first-child { font-weight: 500; color: var(--text); }
+table tr:last-child td { border-bottom: none; }
+table tr:nth-child(even) td { background: #fdfdfc; }
 
-/* Sections */
-section { padding: 3rem 0; }
-section h2 { font-family: var(--font-serif); font-size: clamp(1.5rem, 2.2vw, 1.8rem); font-weight: 500; letter-spacing: -0.01em; margin-bottom: 1.5rem; color: var(--royal-deep); padding-bottom: 0.5rem; border-bottom: 1px solid var(--rule); }
-section h3 { font-family: var(--font-serif); font-size: 1.2rem; font-weight: 500; margin: 1.8rem 0 0.75rem; color: var(--royal); }
-section p { margin-bottom: 1rem; color: #44403c; font-size: 0.95rem; }
-section p strong { color: var(--ink); }
+/* ── Pricing ── */
+.pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin: 1.5rem 0; }
+.pricing-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 30px 24px; text-align: center; transition: all var(--fast) var(--ease); box-shadow: var(--shadow-sm); }
+.pricing-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.pricing-card.featured { border: 2px solid var(--accent); box-shadow: 0 4px 24px rgba(13,148,136,0.12); position: relative; }
+.pricing-card.featured::before { content: "RECOMMENDED"; position: absolute; top: -11px; left: 50%; transform: translateX(-50%); background: var(--accent); color: #fff; font-family: var(--font-mono); font-size: 0.6rem; font-weight: 700; letter-spacing: 0.12em; padding: 4px 14px; border-radius: 99px; }
+.pricing-card .tier { font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 0.5rem; }
+.pricing-card .price { font-family: var(--font-serif); font-size: 2.6rem; font-weight: 600; color: var(--text); margin: 0.5rem 0; }
+.pricing-card.featured .price { color: #0f766e; }
+.pricing-card .price span { font-size: 0.95rem; color: var(--muted); font-weight: 400; }
+.pricing-card ul { text-align: left; list-style: none; padding: 0; margin: 1.2rem 0 0; font-size: 0.84rem; color: var(--soft); }
+.pricing-card ul li { padding: 5px 0; padding-left: 20px; position: relative; }
+.pricing-card ul li::before { content: "✓"; position: absolute; left: 0; color: var(--green); font-weight: 700; font-size: 0.8rem; }
 
-/* Tables */
-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; margin: 1rem 0 1.5rem; }
-table th { text-align: left; font-weight: 600; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--fg-muted); padding: 10px 14px; border-bottom: 2px solid var(--rule); }
-table td { padding: 10px 14px; border-bottom: 1px solid var(--rule); vertical-align: top; }
-table td:first-child { font-weight: 500; }
-
-/* Callout */
-.callout { background: var(--royal-subtle); border-left: 3px solid var(--royal-accent); padding: 16px 20px; border-radius: 0 8px 8px 0; margin: 1.5rem 0; }
-.callout p { margin: 0; color: #1e3a5f; font-weight: 500; }
-
-/* Pricing */
-.pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 1.5rem 0; }
-.pricing-card { background: var(--paper); border: 1px solid var(--rule); border-radius: var(--radius-lg); padding: 28px 24px; text-align: center; transition: all var(--fast) var(--ease); }
-.pricing-card.featured { border-color: var(--royal-accent); box-shadow: var(--shadow-md); position: relative; }
-.pricing-card.featured::before { content: "RECOMMENDED"; position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: var(--royal-accent); color: #fff; font-family: var(--font-mono); font-size: 0.6rem; font-weight: 700; letter-spacing: 0.12em; padding: 3px 12px; border-radius: 99px; }
-.pricing-card .tier { font-family: var(--font-mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--fg-muted); margin-bottom: 0.5rem; }
-.pricing-card .price { font-family: var(--font-serif); font-size: 2.4rem; font-weight: 600; color: var(--royal-deep); margin: 0.5rem 0; }
-.pricing-card .price span { font-size: 1rem; color: var(--fg-muted); }
-.pricing-card ul { text-align: left; list-style: none; padding: 0; margin: 1rem 0 0; font-size: 0.85rem; color: #57534e; }
-.pricing-card ul li { padding: 5px 0; }
-.pricing-card ul li::before { content: "✓ "; color: var(--green); font-weight: 700; }
-
-/* Footer */
-.foot { text-align: center; padding: 3rem 0 4rem; font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-muted); border-top: 1px solid var(--rule); margin-top: 2rem; }
-.foot a { color: var(--royal-accent); text-decoration: none; }
-
-.tag { display: inline-block; font-size: 0.72rem; font-weight: 600; padding: 2px 10px; border-radius: 4px; letter-spacing: 0.03em; }
+/* ── Tags ── */
+.tag { display: inline-block; font-size: 0.7rem; font-weight: 600; padding: 3px 10px; border-radius: 5px; letter-spacing: 0.03em; }
 .tag.green { background: var(--green-muted); color: var(--green); }
+
+/* ── Footer ── */
+.foot { text-align: center; padding: 3rem 0 4rem; font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); border-top: 1px solid var(--line); }
+.foot a { color: var(--accent); text-decoration: none; }
 
 @media (max-width: 700px) {
   .pricing-grid { grid-template-columns: 1fr; }
-  header.hero { padding: 6rem 0 2rem; }
+  .hero { padding: 5.5rem 0 3rem; }
+  section { padding: 2.5rem 0; }
 }
 </style>
 </head>
 <body>
 
-<header class="mast">
+<!-- ═══════════ NAV ═══════════ -->
+<nav class="nav">
   <a href="/">Narin Fazlalipour</a>
-</header>
+  <a href="projects/casablui-pulse.html">View Pulse →</a>
+</nav>
 
 <!-- ═══════════ HERO ═══════════ -->
 <header class="hero">
@@ -114,17 +130,19 @@ table td:first-child { font-weight: 500; }
     <p>I take Casa Blui's energy — the craftsmanship, the founder's vision, the transformative wellness experiences — and build it into the Instagram. Documentary-style content. Founder stories. Client transformations. Wellness rituals that make people want to live inside your brand. No stock footage. No posts that feel like a catalog. Luxury doesn't mean stiff — it means intentional.</p>
 
     <h3>The Before / After</h3>
+    <div class="table-wrap">
     <table>
-      <tr><td>Product photos, product photos, product photos</td><td style="text-align:center">→</td><td>Founder voice, customer stories, wellness rituals, <em>and</em> product — in balance</td></tr>
-      <tr><td>No consistent posting rhythm</td><td style="text-align:center">→</td><td>3-4 posts/week + daily Stories, same days every week</td></tr>
-      <tr><td>Founder story is invisible</td><td style="text-align:center">→</td><td>"Thursdays with Casa Blui" — weekly founder blog → IG carousel → email list</td></tr>
-      <tr><td>High-ticket clients, zero testimonials</td><td style="text-align:center">→</td><td>Voice-note testimonials over B-roll, anonymous client wall, aggregate format</td></tr>
-      <tr><td>DMs unanswered or slow</td><td style="text-align:center">→</td><td>Same-day responses, every inquiry</td></tr>
-      <tr><td>No strategy — posting reactively</td><td style="text-align:center">→</td><td>Monthly content calendar around launches, seasons, founder moments</td></tr>
+      <tr><td>Product photos, product photos, product photos</td><td style="text-align:center;color:var(--muted);">→</td><td>Founder voice, customer stories, wellness rituals, <em>and</em> product — in balance</td></tr>
+      <tr><td>No consistent posting rhythm</td><td style="text-align:center;color:var(--muted);">→</td><td>3-4 posts/week + daily Stories, same days every week</td></tr>
+      <tr><td>Founder story is invisible</td><td style="text-align:center;color:var(--muted);">→</td><td>"Thursdays with Casa Blui" — weekly founder blog → IG carousel → email list</td></tr>
+      <tr><td>High-ticket clients, zero testimonials</td><td style="text-align:center;color:var(--muted);">→</td><td>Voice-note testimonials over B-roll, anonymous client wall, aggregate format</td></tr>
+      <tr><td>DMs unanswered or slow</td><td style="text-align:center;color:var(--muted);">→</td><td>Same-day responses, every inquiry</td></tr>
+      <tr><td>No strategy — posting reactively</td><td style="text-align:center;color:var(--muted);">→</td><td>Monthly content calendar around launches, seasons, founder moments</td></tr>
     </table>
+    </div>
 
     <h3>What Makes Me Different</h3>
-    <p><strong>I know the account cold.</strong> I ran a full brand pulse on @casablui before writing a single word. Every gap in here, I found myself. <a href="projects/casablui-pulse.html" style="color:var(--royal-accent);">View the pulse →</a></p>
+    <p><strong>I know the account cold.</strong> I ran a full brand pulse on @casablui before writing a single word. Every gap in here, I found myself. <a href="projects/casablui-pulse.html">View the pulse →</a></p>
     <p><strong>I build editorial brands, not product catalogs.</strong> Most media managers fill a feed with product shots. I build a publication — founder essays, client documentaries, wellness rituals that make people feel something. The products are the backdrop. The story is the foreground.</p>
     <p><strong>I solved the high-ticket testimonial problem.</strong> Your clients don't want to be on camera. Fine. Voice-note testimonials laid over B-roll. Anonymous client walls. Aggregate "what clients told us" posts. No faces, all feeling. It's the luxury way to do social proof.</p>
     <p><strong>I direct. Your videographers shoot.</strong> I'm the editor-in-chief — I concept, write, and direct. Your team handles production. We collaborate on set. The final product is unmistakably Casa Blui.</p>
@@ -132,10 +150,11 @@ table td:first-child { font-weight: 500; }
 </section>
 
 <!-- ═══════════ SCOPE ═══════════ -->
-<section style="background: var(--paper);">
+<section class="alt">
   <div class="wrap">
     <h2>Scope of Work</h2>
     <p><strong>Primary Platform:</strong> Instagram (@casablui — 8,956 followers baseline)</p>
+    <div class="table-wrap">
     <table>
       <tr><th>Service</th><th>Detail</th></tr>
       <tr><td>Content strategy</td><td>Monthly content calendar, content pillars, storytelling architecture</td></tr>
@@ -147,6 +166,7 @@ table td:first-child { font-weight: 500; }
       <tr><td>Testimonial pipeline</td><td>System for capturing client stories without on-camera appearances — voice notes, anonymous quotes, aggregate format</td></tr>
       <tr><td>Analytics & reporting</td><td>Monthly performance report — growth, engagement, top-performing content</td></tr>
     </table>
+    </div>
 
     <h3>How We Create Together</h3>
     <p>Narin is the <strong>editor-in-chief</strong> — she concepts every Reel, writes every carousel, structures every Story, and directs the visual direction. Your videographers shoot what she briefs. The relationship is creative director + production team. Together, we turn Casa Blui's Instagram into a wellness publication.</p>
@@ -163,6 +183,7 @@ table td:first-child { font-weight: 500; }
     <h2>Content Mix & Weekly Calendar</h2>
     <p>Every piece of content runs through: <strong>hero (the person) → transformation (the experience) → result (wellness, recovery, presence).</strong> If it doesn't have all three, it doesn't ship.</p>
 
+    <div class="table-wrap">
     <table>
       <tr><th>Pillar</th><th>%</th><th>Storytelling Angle</th><th>Weekly Output</th></tr>
       <tr><td><strong>Wellness Rituals</strong></td><td>35%</td><td>Not "here's a cold plunge." It's "watch this founder's Sunday contrast therapy routine." The product enables transformation — it's not the story.</td><td>1-2 Reels</td></tr>
@@ -170,8 +191,10 @@ table td:first-child { font-weight: 500; }
       <tr><td><strong>Founder / Thursdays with Casa Blui</strong></td><td>25%</td><td>Weekly founder essay — why they started, what they believe about wellness, design philosophy. Blog → email → IG carousel.</td><td>1 Carousel</td></tr>
       <tr><td><strong>Behind the Brand</strong></td><td>15%</td><td>Installs, workshop, craftsmanship, team moments. The people behind the products. Documentary-style.</td><td>1 Reel</td></tr>
     </table>
+    </div>
 
     <h3>Weekly Calendar</h3>
+    <div class="table-wrap">
     <table>
       <tr><th>Day</th><th>Format</th><th>Story Arc</th></tr>
       <tr><td><strong>Mon</strong></td><td>Reel</td><td>Wellness ritual — cold plunge routine, sauna protocol, contrast therapy session</td></tr>
@@ -182,11 +205,12 @@ table td:first-child { font-weight: 500; }
       <tr><td><strong>Sat</strong></td><td>Stories</td><td>Morning ritual poll. "Wellness question of the week." Client wall highlight.</td></tr>
       <tr><td><strong>Sun</strong></td><td>Stories</td><td>Behind-the-scenes. Upcoming week preview. Founder reflection.</td></tr>
     </table>
+    </div>
   </div>
 </section>
 
 <!-- ═══════════ PRICING ═══════════ -->
-<section style="background: var(--paper);">
+<section class="alt">
   <div class="wrap">
     <h2>Pricing</h2>
 
@@ -228,7 +252,7 @@ table td:first-child { font-weight: 500; }
       </div>
     </div>
 
-    <p style="text-align:center; font-family: var(--font-mono); font-size: 0.85rem; color: var(--fg-muted); margin-top: 0.5rem;">
+    <p style="text-align:center; font-family: var(--font-mono); font-size: 0.84rem; color: var(--muted); margin-top: 0.5rem;">
       Setup fee: $1,000 one-time · Monthly invoicing, Net 15
     </p>
   </div>
@@ -239,6 +263,7 @@ table td:first-child { font-weight: 500; }
   <div class="wrap">
     <h2>Key Terms</h2>
 
+    <div class="table-wrap">
     <table>
       <tr><th>Term</th><th>Detail</th></tr>
       <tr><td><strong>Duration</strong></td><td>90-day minimum, auto-renewing monthly. 30 days written notice to cancel after the initial term.</td></tr>
@@ -252,13 +277,16 @@ table td:first-child { font-weight: 500; }
       <tr><td><strong>Liability cap</strong></td><td>Capped at total fees paid in the preceding 3 months. Narin is an independent contractor, not an employee.</td></tr>
       <tr><td><strong>Client responsibilities</strong></td><td>Brand assets, account access, videographer availability (minimum one half-day shoot per week), founder availability (30 min/week for Thursdays with Casa Blui), email list access, 1-week notice on product launches or major announcements.</td></tr>
     </table>
+    </div>
   </div>
 </section>
 
 <!-- ═══════════ KPIs ═══════════ -->
-<section style="background: var(--paper);">
+<section class="alt">
   <div class="wrap">
     <h2>Performance Targets</h2>
+
+    <div class="table-wrap">
     <table>
       <tr><th>Metric</th><th>Baseline</th><th>90-Day Target</th></tr>
       <tr><td>Follower growth</td><td>8,956</td><td><span class="tag green">12,000–15,000</span></td></tr>
@@ -269,6 +297,7 @@ table td:first-child { font-weight: 500; }
       <tr><td>Brand voice</td><td>Product catalog</td><td><span class="tag green">Editorial wellness publication — founder-led, story-driven</span></td></tr>
       <tr><td>Founder content</td><td>None</td><td><span class="tag green">Thursdays with Casa Blui — weekly blog + IG carousel</span></td></tr>
     </table>
+    </div>
   </div>
 </section>
 
