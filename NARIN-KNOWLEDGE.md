@@ -133,9 +133,11 @@
 - Continued voluntarily after Verséa Discovery employment ended
 
 ### Verséa Discovery
-- **Media appearances** managed for company science announcements
-- **Marketing campaigns, advertisements, and website** content creation
-- Newsletter communication translating mitochondrial efficiency research
+
+- **Marketing:** Campaigns for new product introductions, website creation & edits, A/B analysis
+- **Advertisements:** Ad content creation, running ads on Meta
+- **Media:** Content shooting & creation, storytelling, media management, customer service via DM
+- 15 months, Tampa FL (remote), paid role
 
 ### UCSD STARS
 - Social media management for the research mentorship program
