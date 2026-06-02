@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>@auditlayer — Forensic Brand Audit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #fafaf9; --surface: #ffffff; --text: #1c1917;
+  --muted: #78716c; --soft: #57534e;
+  --accent: #0d9488; --accent-muted: #f0fdfa;
+  --line: #e7e5e4; --line-strong: #d6d3d1;
+  --green: #059669; --amber: #d97706; --red: #dc2626;
+  --blue: #2563eb; --blue-muted: #eff6ff;
+  --card-gap: 20px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+.container { max-width: 760px; margin: 0 auto; padding: 32px 24px 48px; }
+
+/* Header */
+.report-header { text-align: center; padding: 20px 0 0; margin-bottom: 32px; }
+.report-header .r-badge {
+  display: inline-block; background: var(--accent); color: #fff;
+  font-size: 0.62rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.18em; padding: 5px 14px; border-radius: 4px; margin-bottom: 16px;
+}
+.report-header h1 { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 8px; color: #0c0a09; }
+.report-header .r-sub { font-size: 0.9rem; color: var(--muted); }
+.report-header .r-byline { font-size: 0.78rem; color: var(--muted); margin-top: 6px; font-style: italic; }
+
+/* Circles */
+.score-circles {
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: 12px; padding: 32px 28px 24px; margin-bottom: 48px; text-align: center;
+}
+.score-circles .section-label {
+  font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.1em; color: var(--muted); margin-bottom: 24px; display: block;
+}
+.circle-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 600px; margin: 0 auto 32px; }
+.circle-card { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.circle-card svg { width: 100px; height: 100px; }
+.circle-value { font-family: 'JetBrains Mono', monospace; font-size: 1.3rem; font-weight: 600; color: var(--text); line-height: 1; margin-top: -62px; position: relative; z-index: 2; }
+.circle-label { font-size: 0.68rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); text-align: center; line-height: 1.3; max-width: 100px; }
+.overall-ring-wrap { display: flex; flex-direction: column; align-items: center; padding-top: 8px; border-top: 1px solid var(--line); }
+.overall-ring-wrap svg { width: 130px; height: 130px; }
+.overall-value { font-family: 'JetBrains Mono', monospace; font-size: 2.2rem; font-weight: 700; color: var(--text); line-height: 1; margin-top: -82px; position: relative; z-index: 2; }
+.overall-label { font-size: 0.75rem; font-weight: 500; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 2px; }
+
+/* Sections */
+section { margin-bottom: 48px; }
+section h2 { font-size: 1.2rem; font-weight: 700; color: #0c0a09; margin-bottom: 4px; letter-spacing: -0.01em; }
+section h2 span { color: var(--muted); font-weight: 500; font-size: 0.9rem; }
+section .s-intro { font-size: 0.88rem; color: var(--muted); margin-bottom: 20px; line-height: 1.55; }
+
+/* Callouts */
+.callout { padding: 16px 18px; border-radius: 8px; font-size: 0.88rem; line-height: 1.55; margin-bottom: 20px; }
+.callout.accent { background: var(--accent-muted); border-left: 3px solid var(--accent); color: #0f766e; }
+.callout.blue { background: var(--blue-muted); border-left: 3px solid var(--blue); color: #1e40af; }
+
+/* Metric Grid */
+.metric-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
+.metric-grid .m-card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 18px 14px; text-align: center; }
+.metric-grid .m-card .m-value { font-family: 'JetBrains Mono', monospace; font-size: 1.5rem; font-weight: 700; color: var(--text); }
+.metric-grid .m-card .m-label { font-size: 0.68rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 4px; }
+
+/* Data Table */
+.data-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin-bottom: 20px; }
+.data-table th { text-align: left; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); padding: 10px 12px; border-bottom: 2px solid var(--line); font-weight: 600; }
+.data-table td { padding: 10px 12px; border-bottom: 1px solid var(--line); }
+.data-table .num { font-family: 'JetBrains Mono', monospace; text-align: right; }
+.data-table .tag { display: inline-block; font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; padding: 2px 8px; border-radius: 3px; }
+.data-table .tag.green { background: #ecfdf5; color: #065f46; }
+.data-table .tag.red { background: #fef2f2; color: #991b1b; }
+.data-table .tag.amber { background: #fffbeb; color: #92400e; }
+
+/* SW Cards */
+.sw-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-bottom: 20px; }
+.sw-card { background: var(--surface); border-radius: 10px; padding: 18px; border: 1px solid var(--line); }
+.sw-card.strength { border-left: 3px solid var(--green); }
+.sw-card.weakness { border-left: 3px solid var(--red); }
+.sw-card .sw-label { font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; }
+.sw-card.strength .sw-label { color: var(--green); }
+.sw-card.weakness .sw-label { color: var(--red); }
+.sw-card .sw-title { font-size: 0.92rem; font-weight: 600; margin: 4px 0; color: var(--text); }
+.sw-card .sw-body { font-size: 0.82rem; color: var(--soft); line-height: 1.5; }
+
+/* Timeline */
+.timeline-item { display: flex; gap: 14px; margin-bottom: 18px; align-items: flex-start; }
+.t-dot { width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; color: #fff; }
+.t-dot.accent { background: var(--accent); }
+.t-dot.green { background: var(--green); }
+.t-dot.red { background: var(--red); }
+.t-content { flex: 1; }
+.t-content h4 { font-size: 0.92rem; font-weight: 600; margin-bottom: 4px; }
+.t-content p { font-size: 0.85rem; color: var(--soft); line-height: 1.5; }
+
+/* Idea cards */
+.idea-card { background: var(--surface); border-left: 3px solid var(--accent); border-radius: 10px; padding: 18px; margin-bottom: 14px; border-top: 1px solid var(--line); border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.idea-card .idea-meta { font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 4px; }
+.idea-card h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 4px; }
+.idea-card p { font-size: 0.84rem; color: var(--soft); line-height: 1.5; }
+.idea-card ul { font-size: 0.82rem; color: var(--soft); padding-left: 18px; margin-top: 4px; }
+.idea-card ul li { margin-bottom: 3px; }
+
+/* Calendar Grid */
+.calendar-grid { width: 100%; border-collapse: collapse; font-size: 0.84rem; margin-bottom: 20px; }
+.calendar-grid th { background: var(--surface); text-align: left; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); padding: 10px 12px; border-bottom: 2px solid var(--line); font-weight: 600; }
+.calendar-grid td { padding: 10px 12px; border-bottom: 1px solid var(--line); font-size: 0.82rem; vertical-align: top; }
+.calendar-grid tr:nth-child(even) td { background: #fdfdfc; }
+
+/* Upgrade Box */
+.upgrade-box { background: linear-gradient(135deg, #0d9488, #0f766e); border-radius: 12px; padding: 28px 24px; text-align: center; color: #fff; margin-top: 32px; }
+.upgrade-box h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 8px; }
+.upgrade-box p { font-size: 0.88rem; opacity: 0.9; max-width: 480px; margin: 0 auto 16px; line-height: 1.5; }
+.cta-btn { display: inline-block; background: #fff; color: #0d9488; font-weight: 700; font-size: 0.85rem; padding: 10px 24px; border-radius: 6px; text-decoration: none; transition: transform 0.15s; }
+.cta-btn:hover { transform: translateY(-1px); }
+
+/* Footer */
+.report-footer { text-align: center; padding-top: 20px; margin-top: 28px; border-top: 1px solid var(--line); font-size: 0.75rem; color: var(--muted); }
+.report-footer .badge { display: inline-block; background: var(--accent); color: #fff; font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; padding: 4px 12px; border-radius: 3px; margin-bottom: 6px; }
+
+@media (max-width: 600px) {
+  .circle-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .circle-card svg { width: 85px; height: 85px; }
+  .circle-value { font-size: 1.1rem; margin-top: -52px; }
+  .metric-grid { grid-template-columns: repeat(2, 1fr); }
+  .sw-grid { grid-template-columns: 1fr; }
+  .container { padding: 20px 16px 36px; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="report-header">
+  <div class="r-badge">Forensic Brand Audit</div>
+  <h1>@auditlayer</h1>
+  <p class="r-sub">Instagram · 3,680 followers · 8 posts · June 2026</p>
+  <p class="r-byline">Conducted by Narin Fazlalipour, AuditLayer</p>
+</header>
+
+<!-- ═══════════ SECTION 1: CIRCULAR SCORE ═══════════ -->
+<section>
+  <h2>1. Overall Score <span>— 33/100</span></h2>
+  <p class="s-intro">A strong brand concept with weak execution. The forensic audit identity is clear, but the feed reads as generic motivational content — not the diagnostic authority the bio promises. The gap between brand promise and content reality is the single biggest growth blocker.</p>
+
+  <div class="score-circles">
+    <span class="section-label">Performance Rings</span>
+    <div class="circle-grid">
+      <div class="circle-card">
+        <svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="48" fill="none" stroke="#e7e5e4" stroke-width="7"/><circle cx="60" cy="60" r="48" fill="none" stroke="#059669" stroke-width="7" stroke-dasharray="302" stroke-dashoffset="106" stroke-linecap="round" transform="rotate(-90 60 60)"/></svg>
+        <div class="circle-value">65</div>
+        <div class="circle-label">Brand Identity</div>
+      </div>
+      <div class="circle-card">
+        <svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="48" fill="none" stroke="#e7e5e4" stroke-width="7"/><circle cx="60" cy="60" r="48" fill="none" stroke="#dc2626" stroke-width="7" stroke-dasharray="302" stroke-dashoffset="242" stroke-linecap="round" transform="rotate(-90 60 60)"/></svg>
+        <div class="circle-value">20</div>
+        <div class="circle-label">Content Cadence</div>
+      </div>
+      <div class="circle-card">
+        <svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="48" fill="none" stroke="#e7e5e4" stroke-width="7"/><circle cx="60" cy="60" r="48" fill="none" stroke="#d97706" stroke-width="7" stroke-dasharray="302" stroke-dashoffset="196" stroke-linecap="round" transform="rotate(-90 60 60)"/></svg>
+        <div class="circle-value">35</div>
+        <div class="circle-label">Format Diversity</div>
+      </div>
+      <div class="circle-card">
+        <svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="48" fill="none" stroke="#e7e5e4" stroke-width="7"/><circle cx="60" cy="60" r="48" fill="none" stroke="#dc2626" stroke-width="7" stroke-dasharray="302" stroke-dashoffset="257" stroke-linecap="round" transform="rotate(-90 60 60)"/></svg>
+        <div class="circle-value">15</div>
+        <div class="circle-label">Community</div>
+      </div>
+      <div class="circle-card">
+        <svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="48" fill="none" stroke="#e7e5e4" stroke-width="7"/><circle cx="60" cy="60" r="48" fill="none" stroke="#d97706" stroke-width="7" stroke-dasharray="302" stroke-dashoffset="227" stroke-linecap="round" transform="rotate(-90 60 60)"/></svg>
+        <div class="circle-value">25</div>
+        <div class="circle-label">Growth Velocity</div>
+      </div>
+      <div class="circle-card">
+        <svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="48" fill="none" stroke="#e7e5e4" stroke-width="7"/><circle cx="60" cy="60" r="48" fill="none" stroke="#d97706" stroke-width="7" stroke-dasharray="302" stroke-dashoffset="181" stroke-linecap="round" transform="rotate(-90 60 60)"/></svg>
+        <div class="circle-value">40</div>
+        <div class="circle-label">Product-Market Fit</div>
+      </div>
+    </div>
+    <div class="overall-ring-wrap">
+      <svg viewBox="0 0 160 160"><circle cx="80" cy="80" r="68" fill="none" stroke="#e7e5e4" stroke-width="10"/><circle cx="80" cy="80" r="68" fill="none" stroke="#d97706" stroke-width="10" stroke-dasharray="427" stroke-dashoffset="286" stroke-linecap="round" transform="rotate(-90 80 80)"/></svg>
+      <div class="overall-value">33</div>
+      <div class="overall-label">/ 100</div>
+    </div>
+  </div>
+
+  <div class="callout accent">
+    <strong>Diagnosis:</strong> @auditlayer has the hardest part figured out — a clear, differentiated brand identity. The scoring gap comes entirely from execution: 8 posts, generic hashtag-stuffed captions, and zero evidence of the forensic audit work that defines the brand. The concept is a 65. The execution is a 20. Close that gap and this score doubles.
+  </div>
+</section>
+
+<!-- ═══════════ SECTION 2: RAW NUMBERS ═══════════ -->
+<section>
+  <h2>2. Raw Numbers</h2>
+  <p class="s-intro">The numbers tell the story of an account still in setup mode — not yet in growth mode.</p>
+
+  <div class="metric-grid">
+    <div class="m-card"><div class="m-value">3,680</div><div class="m-label">Followers</div></div>
+    <div class="m-card"><div class="m-value">0.03%</div><div class="m-label">Est. Engagement</div></div>
+    <div class="m-card"><div class="m-value">~1</div><div class="m-label">Avg Likes</div></div>
+    <div class="m-card"><div class="m-value">0</div><div class="m-label">Avg Comments</div></div>
+  </div>
+
+  <table class="data-table">
+    <tr><th>Metric</th><th>@auditlayer</th><th>5K-Tier Benchmark</th><th>Gap</th></tr>
+    <tr><td>Followers</td><td class="num">3,680</td><td class="num">5,000</td><td><span class="tag amber">Below</span></td></tr>
+    <tr><td>Post count</td><td class="num">8</td><td class="num">90+</td><td><span class="tag red">Critical</span></td></tr>
+    <tr><td>Engagement rate</td><td class="num">~0.03%</td><td class="num">2-5%</td><td><span class="tag red">Critical</span></td></tr>
+    <tr><td>Reels ratio</td><td class="num">~50%</td><td class="num">40-60%</td><td><span class="tag green">On track</span></td></tr>
+    <tr><td>Stories/day</td><td class="num">0</td><td class="num">2-4</td><td><span class="tag red">Critical</span></td></tr>
+    <tr><td>Highlights</td><td class="num">0</td><td class="num">4-8</td><td><span class="tag red">Missing</span></td></tr>
+    <tr><td>Bio link</td><td class="num">None</td><td class="num">Link-in-bio</td><td><span class="tag red">Missing</span></td></tr>
+    <tr><td>Hashtag strategy</td><td class="num">30+ generic</td><td class="num">3-5 niche</td><td><span class="tag red">Wrong approach</span></td></tr>
+  </table>
+  <p>The headline: with only 8 posts and no Stories, the account hasn't yet given the algorithm enough signal to distribute content. Every other metric flows from this.</p>
+</section>
+
+<!-- ═══════════ SECTION 3: STRENGTHS ═══════════ -->
+<section>
+  <h2>3. Top 5 Strengths</h2>
+  <div class="sw-grid">
+    <div class="sw-card strength"><div class="sw-label">Strength 1</div><div class="sw-title">Crystal-clear brand identity</div><div class="sw-body">"Forensic Brand Audits" is a sharp, differentiated positioning. Nobody else on Instagram owns this phrase. It's specific, memorable, and instantly communicates value.</div></div>
+    <div class="sw-card strength"><div class="sw-label">Strength 2</div><div class="sw-title">Bio copy is excellent</div><div class="sw-body">"Scores your media against your competitors, tells you what's missing, and hands you a playbook to fix it." This is a complete value proposition in one sentence.</div></div>
+    <div class="sw-card strength"><div class="sw-label">Strength 3</div><div class="sw-title">3,680 followers from 8 posts</div><div class="sw-body">The follower-to-post ratio (460:1) suggests strong word-of-mouth or off-platform discovery. People are finding the account despite minimal content — that's a positive signal.</div></div>
+    <div class="sw-card strength"><div class="sw-label">Strength 4</div><div class="sw-title">Real portfolio exists</div><div class="sw-body">The AuditLayer website (narinfazlalipour.com) already hosts detailed forensic audits. The proof of work exists — it just hasn't made it to Instagram yet.</div></div>
+    <div class="sw-card strength"><div class="sw-label">Strength 5</div><div class="sw-title">Founder credibility</div><div class="sw-body">Narin Fazlalipour's personal track record — 0→12K organic growth for @hemalpatelphd, cross-platform media management — gives the brand genuine authority, even if the feed hasn't caught up yet.</div></div>
+  </div>
+</section>
+
+<!-- ═══════════ SECTION 4: WEAKNESSES ═══════════ -->
+<section>
+  <h2>4. Top 7 Weaknesses</h2>
+  <div class="sw-grid">
+    <div class="sw-card weakness"><div class="sw-label">Weakness 1</div><div class="sw-title">Feed doesn't match the bio</div><div class="sw-body">The bio promises forensic audits. The feed delivers motivational quotes and reposted clips. This disconnect erodes trust with every profile visit.</div></div>
+    <div class="sw-card weakness"><div class="sw-label">Weakness 2</div><div class="sw-title">Zero original educational content</div><div class="sw-body">Not a single post demonstrates the core product: a scored brand analysis. There are no mini-audits, no score breakdowns, no before/after examples.</div></div>
+    <div class="sw-card weakness"><div class="sw-label">Weakness 3</div><div class="sw-title">Hashtag spam</div><div class="sw-body">Every post uses 20-30 generic hashtags (#fyp, #motivation, #business, #success). This signals desperation to the algorithm and repels the exact audience that would pay for audits.</div></div>
+    <div class="sw-card weakness"><div class="sw-label">Weakness 4</div><div class="sw-title">No Stories, no Highlights</div><div class="sw-body">Zero Story activity means zero top-of-feed presence. No Highlights means new visitors can't learn anything without scrolling the grid. The profile is a storefront with no windows.</div></div>
+    <div class="sw-card weakness"><div class="sw-label">Weakness 5</div><div class="sw-title">No call to action</div><div class="sw-body">No link-in-bio, no "DM to book" prompt, no lead capture. Someone convinced by the bio has nowhere to go and nothing to do.</div></div>
+    <div class="sw-card weakness"><div class="sw-label">Weakness 6</div><div class="sw-title">Profile picture is abstract</div><div class="sw-body">Ocean waves don't communicate "forensic brand audits." A logo mark or wordmark would establish brand recognition faster than an abstract image.</div></div>
+    <div class="sw-card weakness"><div class="sw-label">Weakness 7</div><div class="sw-title">No social proof</div><div class="sw-body">The existing client work (Hemal Patel, Verséa, Sean Fetcho) is invisible on Instagram. Testimonials, result screenshots, and client logos should be on the feed — but aren't.</div></div>
+  </div>
+</section>
+
+<!-- ═══════════ SECTION 5: IMMEDIATE ACTIONS ═══════════ -->
+<section>
+  <h2>5. Three Immediate Actions</h2>
+  <div class="timeline-item"><div class="t-dot accent">1</div><div class="t-content"><h4>Post a mini-audit carousel today</h4><p>Take one of the existing audits from your portfolio — Hemal Patel, Verséa, or Sean Fetcho — and create a 5-slide carousel: slide 1 = score + hook, slides 2-3 = two key findings, slide 4 = the gap, slide 5 = "Full audit → link in bio." This is your first piece of real content that matches the bio.</p></div></div>
+  <div class="timeline-item"><div class="t-dot accent">2</div><div class="t-content"><h4>Rewrite captions — kill the hashtag dump</h4><p>Pick your next 3 posts. Write a 2-3 sentence caption that actually explains something. Use 3-5 niche hashtags max (#brandaudit, #socialmediamanager, #founderstips). Delete the #fyp, #motivation, and #success tags — they attract bots, not clients.</p></div></div>
+  <div class="timeline-item"><div class="t-dot accent">3</div><div class="t-content"><h4>Add a link-in-bio + create 3 Highlights</h4><p>Set up a link-in-bio (Linktree or direct to narinfazlalipour.com). Create 3 Highlight covers: "Audits," "Results," "About." Even empty, they signal a real business. Fill "Audits" with your first carousel today.</p></div></div>
+</section>
+
+<!-- ═══════════ SECTION 6: COMPETITIVE COMPARISON ═══════════ -->
+<section>
+  <h2>6. Competitive Landscape</h2>
+  <p class="s-intro">@auditlayer is one of one — there's no other account on Instagram doing scored, forensic brand audits. The comparison below benchmarks against accounts in adjacent spaces (brand strategy, social media education, content marketing) to show what audience-building in this orbit looks like.</p>
+  <table class="data-table">
+    <tr><th>Metric</th><th>@auditlayer</th><th>@brock11johnson</th><th>@brandbuildersclub</th><th>@latermedia</th></tr>
+    <tr><td>Followers</td><td class="num">3,680</td><td class="num">~180K</td><td class="num">~5K</td><td class="num">~430K</td></tr>
+    <tr><td>Niche</td><td>Forensic brand audits</td><td>Instagram growth coaching</td><td>Brand building community</td><td>Social media education</td></tr>
+    <tr><td>Posts/week</td><td class="num">&lt;1</td><td class="num">5-7</td><td class="num">2-3</td><td class="num">5+</td></tr>
+    <tr><td>Primary format</td><td>Carousels</td><td>Reels + Carousels</td><td>Carousels</td><td>Carousels + Reels</td></tr>
+    <tr><td>Stories/day</td><td class="num">0</td><td class="num">5-8</td><td class="num">2-3</td><td class="num">5+</td></tr>
+    <tr><td>Engagement</td><td class="num">Near zero</td><td class="num">1-2%</td><td class="num">1-3%</td><td class="num">0.5-1%</td></tr>
+    <tr><td>Signature format</td><td>None yet</td><td>Face-to-camera coaching</td><td>Community carousels</td><td>Data-driven tips</td></tr>
+  </table>
+  <div class="callout blue"><strong>What this means:</strong> @auditlayer doesn't have a competitor — it has an open lane. Nobody else is scoring brands publicly. The accounts above built audiences through <em>consistent educational content in a recognizable format</em>. @auditlayer's equivalent is the mini-audit carousel — a format that, once established, becomes the account's signature. The lane is empty. The only question is who fills it first.</div>
+</section>
+
+<!-- ═══════════ SECTION 7: CONTENT IDEAS ═══════════ -->
+<section>
+  <h2>7. Three Content Ideas</h2>
+  <div class="idea-card">
+    <div class="idea-meta">Carousel · Weekly</div>
+    <h4>Brand Pulse — Mini-Audit of One Brand</h4>
+    <p>This is the format that proves the product. A 5-slide carousel scoring one brand. It demonstrates the forensic audit methodology and gives followers a reason to come back every week.</p>
+    <ul><li>Slide 1: Brand logo + score out of 100 + hook</li><li>Slides 2-3: Two specific findings with screenshots</li><li>Slide 4: The gap — what's missing from their feed</li><li>Slide 5: "Full audit methodology → link in bio"</li></ul>
+  </div>
+  <div class="idea-card">
+    <div class="idea-meta">Reel · 2x/week · No Face</div>
+    <h4>Hot Take — Screen-Record Format</h4>
+    <p>Screen-record yourself scrolling through a brand's feed. Voiceover only — no face on camera. Point at specific posts, explain what's working and what's not in 30 seconds. End with one sharp opinion.</p>
+    <ul><li>Episode 1: "I scrolled @brand's feed for 60 seconds. Here's what I saw."</li><li>Episode 2: "Most founders think they need better photos. They need better stories."</li><li>Episode 3: "The best brand feeds don't look like brand feeds."</li></ul>
+  </div>
+  <div class="idea-card">
+    <div class="idea-meta">Carousel · Bi-weekly</div>
+    <h4>Pattern Recognition — Cross-Brand Finding</h4>
+    <p>Compare 3 brands in the same category and identify one pattern they all share. "I audited 3 CPG brands this month. They all made the same mistake." This positions you as a category-level expert, not just an account reviewer.</p>
+    <ul><li>Round 1: "3 wellness brands, 1 missing format"</li><li>Round 2: "Why founders with great products have bad feeds"</li><li>Round 3: "The $0 content strategy 3 brands are ignoring"</li></ul>
+  </div>
+</section>
+
+<!-- ═══════════ SECTION 8: 90-DAY MAP ═══════════ -->
+<section>
+  <h2>8. 90-Day Map</h2>
+  <div class="timeline-item"><div class="t-dot green">1</div><div class="t-content"><h4>Foundation — Days 1-30</h4><p>Goal: 8 → 20 posts, 2 Stories/day. Publish 4 mini-audit carousels (one per week). Set up Highlights. Switch to niche hashtags. Add link-in-bio. Target: 4,500 followers.</p></div></div>
+  <div class="timeline-item"><div class="t-dot green">2</div><div class="t-content"><h4>Acceleration — Days 31-60</h4><p>Goal: 20 → 40 posts. Add Reels (2/week — score reveals). Daily Stories with polls. Start DM outreach to founders. Engage on 5 peer accounts daily. Target: 5,500 followers.</p></div></div>
+  <div class="timeline-item"><div class="t-dot green">3</div><div class="t-content"><h4>Compound — Days 61-90</h4><p>Goal: 40 → 60 posts. Launch "Brand Pulse Monday" as a recurring series. Publish first case study with client results. Test 1 collab Reel with a founder. Target: 7,000 followers, 2% engagement.</p></div></div>
+</section>
+
+<!-- ═══════════ SECTION 9: STORIES ═══════════ -->
+<section>
+  <h2>9. Stories & Highlights</h2>
+  <table class="calendar-grid">
+    <tr><th>Time</th><th>Format</th><th>Content</th><th>Purpose</th></tr>
+    <tr><td>Morning</td><td>Photo + text</td><td>One audit insight or finding</td><td>Top-of-feed presence</td></tr>
+    <tr><td>Midday</td><td>Poll sticker</td><td>"Which brand should I audit next?"</td><td>Engagement signal</td></tr>
+    <tr><td>Evening</td><td>Behind-the-scenes</td><td>Audit in progress (screen share)</td><td>Authority + curiosity</td></tr>
+  </table>
+  <div class="sw-grid">
+    <div class="sw-card strength"><div class="sw-label">Highlight 1</div><div class="sw-title">"Audits"</div><div class="sw-body">Collect every mini-audit carousel here. New visitors can browse your work in 30 seconds without scrolling the grid.</div></div>
+    <div class="sw-card strength"><div class="sw-label">Highlight 2</div><div class="sw-title">"Results"</div><div class="sw-body">Client testimonials, before/after metrics, DM screenshots from happy founders. Social proof lives here.</div></div>
+    <div class="sw-card strength"><div class="sw-label">Highlight 3</div><div class="sw-title">"Method"</div><div class="sw-body">Break down your audit framework — the 6 dimensions you score. This is your IP on display. It builds credibility before anyone books.</div></div>
+  </div>
+</section>
+
+<!-- ═══════════ SECTION 10: CONTENT SCHEDULE ═══════════ -->
+<section>
+  <h2>10. Content Schedule</h2>
+  <table class="calendar-grid">
+    <tr><th>Day</th><th>Format</th><th>Pillar</th><th>Example</th></tr>
+    <tr><td>Mon</td><td>Carousel</td><td>Brand Observation</td><td>Screenshot breakdown of one brand's feed</td></tr>
+    <tr><td>Tue</td><td>Reel</td><td>Hot Take</td><td>30-sec screen-record, voiceover, no face</td></tr>
+    <tr><td>Wed</td><td>Story only</td><td>Engagement</td><td>Poll + Q&A + engage on peer accounts</td></tr>
+    <tr><td>Thu</td><td>Carousel</td><td>Pattern Spotting</td><td>Cross-brand comparison (3 brands, 1 finding)</td></tr>
+    <tr><td>Fri</td><td>Reel</td><td>Hot Take</td><td>Second weekly screen-record</td></tr>
+    <tr><td>Sat</td><td>Story only</td><td>Community</td><td>Reply to DMs, engage on peer accounts</td></tr>
+    <tr><td>Sun</td><td>—</td><td>Planning</td><td>Batch-create next week's content</td></tr>
+  </table>
+</section>
+
+<!-- ═══════════ SECTION 11: 4-HOUR WINDOW ═══════════ -->
+<section>
+  <h2>11. The 4-Hour Window & No Bots</h2>
+  <div class="callout blue"><strong>The Four-Hour Rule:</strong> Instagram's algorithm weighs the first 4 hours after posting heavily. With ~3,680 followers, even 10 genuine interactions in that window signal "content worth distributing." Right now, 0 comments = 0 signal = 0 reach. Reply to every comment within 60 minutes. At your size, one real conversation can 10x a post's distribution.</div>
+  <div class="callout accent"><strong>Why Bots Are a Trap Under 10K:</strong> Bot comments, engagement pods, and fake likes are detected within weeks. They tank your trust score and make real followers harder to reach. At 3,680 followers, every engagement metric is visible — a sudden spike from 0 to 50 bot comments is obvious to both Instagram and potential clients. Reply manually. Reply fast. Reply like a human who audits brands for a living.</div>
+</section>
+
+<!-- ═══════════ SECTION 12: PRESENTABLE FEED ═══════════ -->
+<section>
+  <h2>12. Presentable Feed</h2>
+  <p class="s-intro">The feed is the first thing a potential client sees. Right now it says "motivational account." It needs to say "forensic brand auditor."</p>
+  <table class="data-table">
+    <tr><th>Element</th><th>Current</th><th>Recommended</th></tr>
+    <tr><td>Color palette</td><td>Inconsistent — varies per repost</td><td>Teal (#0D9488) on dark (#0F172A) — research-grade, distinctive</td></tr>
+    <tr><td>Thumbnail style</td><td>Random repost thumbnails</td><td>Consistent template: score number large, brand name below, teal accent</td></tr>
+    <tr><td>Grid rhythm</td><td>No pattern</td><td>Carousel → Reel → Carousel → Reel alternating</td></tr>
+    <tr><td>Text on images</td><td>Rarely used</td><td>Every carousel slide 1 should have a large score number — stop-scroll effect</td></tr>
+    <tr><td>Profile picture</td><td>Ocean waves</td><td>Logo mark or wordmark — "AL" monogram in teal on dark</td></tr>
+  </table>
+  <div class="callout accent">Think of your grid as a forensic lab report — clean, structured, undeniably professional. Every post should look like it came from the same lab.</div>
+</section>
+
+<!-- ═══════════ SECTION 13: HASHTAGS ═══════════ -->
+<section>
+  <h2>13. Hashtags</h2>
+  <table class="data-table">
+    <tr><th>Tier</th><th>Range</th><th>Examples</th><th>Use</th></tr>
+    <tr><td>Niche</td><td>10K-100K</td><td>#brandaudit, #socialmediastrategist, #founderbranding</td><td>3-4 per post</td></tr>
+    <tr><td>Community</td><td>100K-500K</td><td>#socialmediamanager, #brandstrategy, #contentmarketingtips</td><td>1-2 per post</td></tr>
+    <tr><td>Reach</td><td>500K+</td><td>#marketingstrategy, #personalbranding</td><td>1 max, occasionally</td></tr>
+  </table>
+  <p style="font-size:0.84rem;color:var(--muted);margin-top:12px;"><strong>Weekly habit:</strong> Search one niche hashtag, find 3 new accounts posting quality content, engage genuinely. New hashtags emerge from real community participation — not hashtag generators. Put them in the caption, not the first comment.</p>
+</section>
+
+<!-- ═══════════ SECTION 14: AUDIT CADENCE ═══════════ -->
+<section>
+  <h2>14. Audit Cadence</h2>
+  <table class="data-table">
+    <tr><th>Cadence</th><th>Purpose</th><th>What to Check</th><th>Time</th></tr>
+    <tr><td>Weekly</td><td>Pulse check</td><td>Top post, engagement rate, new followers</td><td>10 min</td></tr>
+    <tr><td>Monthly</td><td>Signal read</td><td>Best/worst formats, hashtag performance, Story completion rate</td><td>30 min</td></tr>
+    <tr><td>Quarterly</td><td>Full audit</td><td>Re-score all 6 dimensions, adjust 90-day targets, refresh peer comparison</td><td>2-3 hrs</td></tr>
+    <tr><td>Post-viral</td><td>Spike review</td><td>What worked, why it spread, how to replicate the mechanism</td><td>45 min</td></tr>
+  </table>
+  <div class="callout blue"><strong>Next full re-audit:</strong> September 2026. By then, the account should have 40+ posts, active Stories, and a baseline engagement rate to measure against.</div>
+</section>
+
+<!-- ═══════════ NEW: PRE-LAUNCH CONTENT ═══════════ -->
+<section>
+  <h2>15b. Pre-Launch Content — Keeping the Account Alive</h2>
+  <p class="s-intro">You're not ready to post about AuditLayer yet. That's fine. The algorithm just needs motion — you can swap in branded content whenever you're ready, and the audience you built will be there. Here's what to post in the meantime.</p>
+
+  <div class="idea-card">
+    <div class="idea-meta">Carousel · Weekly</div>
+    <h4>Brand Observations</h4>
+    <p>Pick a well-known brand, screenshot 3 things from their feed, explain what's working and what's not. No score, no audit branding — just sharp observation.</p>
+    <ul><li>"Why this brand's feed feels cold despite great products"</li><li>"The one format this brand is missing"</li><li>"Their Reels vs. their Carousels — one is working, one isn't"</li></ul>
+  </div>
+
+  <div class="idea-card">
+    <div class="idea-meta">Reel · Weekly · Screen-Record</div>
+    <h4>Hot Takes</h4>
+    <p>30-second screen-record. Your voice, your phone screen, no face. One sharp opinion about social media.</p>
+    <ul><li>"Most founders think they need better photos. They need better stories."</li><li>"The best brand feeds don't look like brand feeds."</li><li>"If your bio doesn't tell me what you do in 3 seconds, I'm gone."</li></ul>
+  </div>
+
+  <div class="idea-card">
+    <div class="idea-meta">Carousel · Bi-weekly</div>
+    <h4>Pattern Spotting</h4>
+    <p>Compare 2-3 brands and find the pattern. "I looked at 3 wellness brands. They all do this." Educational, observational, zero selling.</p>
+    <ul><li>3 wellness brands, 1 missing format</li><li>Why founder-led accounts outperform corporate ones</li><li>The feed structure that keeps people scrolling</li></ul>
+  </div>
+
+  <div class="callout accent"><strong>2 carousels + 1 Reel per week. Reply to every comment.</strong> That's it. The content is warm but unbranded — authority-building without tipping your hand. When AuditLayer is ready, you swap the content and the audience is already there.</div>
+</section>
+<section>
+  <h2>15. What Comes Next</h2>
+  <div class="upgrade-box">
+    <h3>This audit is a snapshot. The real work is the follow-through.</h3>
+    <p>AuditLayer Pro includes monthly re-scoring, competitor tracking, content calendar management, and founder outreach strategy — so the score goes up and stays up.</p>
+    <a href="https://narinfazlalipour.com" class="cta-btn">Visit AuditLayer →</a>
+  </div>
+</section>
+
+<div class="report-footer">
+  <div class="badge">AuditLayer Report</div>
+  <p>narinfazlalipour.com · June 2026</p>
+</div>
+
+</div>
+</body>
+</html>
