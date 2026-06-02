@@ -130,11 +130,11 @@
 - Created successful viral posts and solidified collaborations with high-end accounts
 - Showcased a world-class scientist through strategic media positioning
 
-### Verséa Discovery
+### Verséa Discovery (@discovermescreen)
 
 - **Marketing:** Campaigns for new product introductions, website creation & edits, A/B analysis
 - **Advertisements:** Ad content creation, running ads on Meta
-- **Media:** Content shooting & creation, storytelling, media management, customer service via DM
+- **Media:** Content shooting & creation, storytelling, media management across YouTube, IG, X, LinkedIn, TikTok, customer service via DM
 - 15 months, Tampa FL (remote), paid role
 
 ### UCSD STARS
