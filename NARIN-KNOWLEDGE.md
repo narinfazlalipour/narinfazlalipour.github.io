@@ -137,7 +137,7 @@
 - **Media:** Content shooting & creation, storytelling, media management across YouTube, IG, X, LinkedIn, TikTok, customer service via DM, weekly Monday Mitos series + blog content
 - 15 months, Tampa FL (remote), paid role
 
-### Sean Fetcho, CEO — Executive Media Management
+### Sean Fetcho, CEO — Executive Media Management (@sean.fetcho)
 - Personal account management on LinkedIn and Instagram
 - Curated content from conferences, presentations, and business trips
 - Tampa, FL (alongside Verséa Discovery)
