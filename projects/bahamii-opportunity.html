@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bahamii — Brand Opportunity Analysis</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0F172A;
+  --surface: #1E293B;
+  --surface-light: #273449;
+  --accent: #0D9488;
+  --accent-glow: rgba(13,148,136,0.15);
+  --accent-soft: rgba(13,148,136,0.08);
+  --text: #F1F5F9;
+  --text-secondary: #94A3B8;
+  --text-muted: #64748B;
+  --line: #334155;
+  --green: #22C55E;
+  --green-bg: rgba(34,197,94,0.08);
+  --amber: #F59E0B;
+  --amber-bg: rgba(245,158,11,0.08);
+  --red: #EF4444;
+  --red-bg: rgba(239,68,68,0.08);
+  --radius: 14px;
+  --radius-sm: 8px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', -apple-system, sans-serif;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 60px 28px 80px;
+}
+
+/* HERO */
+.hero {
+  text-align: center;
+  padding: 48px 0 40px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 44px;
+}
+
+.hero-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+  margin-bottom: 20px;
+}
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.6rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+
+.hero h1 span {
+  color: var(--accent);
+}
+
+.hero-sub {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  max-width: 520px;
+  margin: 0 auto;
+  font-weight: 400;
+}
+
+.hero-meta {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  margin-top: 28px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.hero-meta span {
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+/* SECTION HEADERS */
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.section-header .num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--accent);
+  opacity: 0.7;
+}
+
+.section-header h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.section-header .emoji {
+  font-size: 1.2rem;
+}
+
+/* INTRO NOTE */
+.intro-note {
+  background: var(--surface);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  padding: 20px 22px;
+  margin-bottom: 36px;
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  font-style: italic;
+}
+
+.intro-note strong {
+  color: var(--text);
+  font-style: normal;
+}
+
+/* CARDS */
+.card-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 36px;
+}
+
+.card-grid.three {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+@media (max-width: 600px) {
+  .card-grid, .card-grid.three { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 2rem; }
+  .hero-meta { flex-direction: column; gap: 6px; }
+}
+
+.strength-card {
+  background: var(--surface);
+  border-left: 3px solid var(--green);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  padding: 16px 18px;
+}
+
+.strength-card .label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--green);
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.strength-card h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.strength-card p {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* GAP CARDS */
+.gap-card {
+  background: var(--surface);
+  border-left: 3px solid var(--red);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  padding: 18px 20px;
+  margin-bottom: 14px;
+}
+
+.gap-card .gap-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--red);
+  letter-spacing: 0.1em;
+  margin-bottom: 6px;
+}
+
+.gap-card h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.08rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.gap-card p {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.gap-card .whats-there {
+  margin-top: 10px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.gap-card .whats-there strong {
+  color: var(--text-secondary);
+  font-style: normal;
+}
+
+/* WHERE I FIT */
+.fit-section {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 32px 28px;
+  margin: 36px 0;
+}
+
+.fit-section .fit-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.fit-section .fit-header h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.fit-section .fit-header p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.fit-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+@media (max-width: 600px) {
+  .fit-columns { grid-template-columns: 1fr; }
+}
+
+.fit-pillar {
+  background: var(--surface-light);
+  border-radius: var(--radius-sm);
+  padding: 20px;
+}
+
+.fit-pillar .pillar-icon {
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+}
+
+.fit-pillar h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+
+.fit-pillar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.fit-pillar ul li {
+  font-size: 0.84rem;
+  color: var(--text-secondary);
+  padding: 5px 0;
+  padding-left: 16px;
+  position: relative;
+  line-height: 1.6;
+}
+
+.fit-pillar ul li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* FEED VISUAL SNAPSHOT */
+.visual-snapshot {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin: 24px 0 36px;
+}
+
+@media (max-width: 600px) {
+  .visual-snapshot { grid-template-columns: 1fr; }
+}
+
+.vs-col h4 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 12px;
+}
+
+.vs-col.current h4 { color: var(--text-muted); }
+.vs-col.opportunity h4 { color: var(--accent); }
+
+.vs-item {
+  font-size: 0.85rem;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--line);
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.vs-item:last-child { border-bottom: none; }
+
+.vs-item .tag {
+  display: inline-block;
+  font-size: 0.65rem;
+  padding: 2px 8px;
+  border-radius: 3px;
+  margin-right: 6px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.tag-missing { background: var(--red-bg); color: var(--red); }
+.tag-have { background: var(--green-bg); color: var(--green); }
+
+/* CONTENT PILLAR MAP */
+.pillar-map {
+  margin: 24px 0 36px;
+}
+
+.pillar-row {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.88rem;
+}
+
+.pillar-row:last-child { border-bottom: none; }
+
+.pillar-name {
+  flex: 1;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.pillar-status {
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 3px 12px;
+  border-radius: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.status-strong { background: var(--green-bg); color: var(--green); }
+.status-weak { background: var(--amber-bg); color: var(--amber); }
+.status-missing { background: var(--red-bg); color: var(--red); }
+
+/* OPPORTUNITY CALLOUT */
+.opportunity-callout {
+  background: linear-gradient(135deg, rgba(13,148,136,0.12) 0%, rgba(13,148,136,0.04) 100%);
+  border: 1px solid rgba(13,148,136,0.25);
+  border-radius: var(--radius);
+  padding: 28px 28px 24px;
+  margin: 36px 0;
+  text-align: center;
+}
+
+.opportunity-callout h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.opportunity-callout p {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.opportunity-callout p strong {
+  color: var(--text);
+}
+
+/* METRIC HIGHLIGHT */
+.metric-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin: 24px 0 36px;
+}
+
+@media (max-width: 600px) {
+  .metric-row { grid-template-columns: 1fr; }
+}
+
+.metric-card {
+  background: var(--surface);
+  border-radius: var(--radius-sm);
+  padding: 18px;
+  text-align: center;
+}
+
+.metric-card .metric-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.metric-card .metric-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* CTA */
+.cta-section {
+  text-align: center;
+  padding: 40px 0 20px;
+  border-top: 1px solid var(--line);
+  margin-top: 40px;
+}
+
+.cta-section h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+
+.cta-section p {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  max-width: 500px;
+  margin: 0 auto 24px;
+  line-height: 1.7;
+}
+
+.cta-button {
+  display: inline-block;
+  background: var(--accent);
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 12px 32px;
+  border-radius: 6px;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: background 0.2s;
+}
+
+/* FOOTER */
+.footer-badge {
+  text-align: center;
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+
+.footer-badge .badge {
+  display: inline-block;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  padding: 5px 14px;
+  border-radius: 4px;
+}
+
+.footer-badge p {
+  margin-top: 8px;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.section-spacer {
+  height: 40px;
+}
+
+/* STATS STRIP */
+.stats-strip {
+  display: flex;
+  justify-content: center;
+  gap: 36px;
+  padding: 22px 0;
+  margin: 20px 0 32px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-val {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.stat-lbl {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* DIAGNOSIS BOX */
+.diagnosis {
+  background: var(--surface);
+  border-left: 3px solid var(--amber);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  padding: 18px 20px;
+  margin: 24px 0 36px;
+}
+
+.diagnosis .diag-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--amber);
+  margin-bottom: 6px;
+}
+
+.diagnosis p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Brand Opportunity Analysis</div>
+  <h1>Bahamii <span>×</span> Content Strategy</h1>
+  <p class="hero-sub">A look at what's working, what's missing, and where a dedicated media manager changes the trajectory.</p>
+  <div class="hero-meta">
+    <div>@eatbahamii &nbsp;·&nbsp; <span>4,558</span> followers</div>
+    <div>382 posts &nbsp;·&nbsp; 31 following</div>
+    <div>June 2026</div>
+  </div>
+</div>
+
+<!-- INTRO NOTE -->
+<div class="intro-note">
+  <strong>I put this together to better show you what we could work on.</strong> Bahamii has one of the richest brand stories I've seen in CPG — first-gen founders, a Farsi name that means "together," a kitchen-to-Costco journey in 18 months, and a social impact program that's reached 5,000+ students. Most of this is invisible on Instagram. This isn't a critique — it's a map of what's possible when the feed catches up to the brand.
+</div>
+
+<!-- STATS STRIP -->
+<div class="stats-strip">
+  <div class="stat-item">
+    <div class="stat-val">4,558</div>
+    <div class="stat-lbl">Followers</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-val">382</div>
+    <div class="stat-lbl">Posts</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-val">25</div>
+    <div class="stat-lbl">Costco Locations</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-val">5K+</div>
+    <div class="stat-lbl">Students Reached</div>
+  </div>
+</div>
+
+<!-- SECTION 1: WHAT'S WORKING -->
+<div class="section-header">
+  <span class="emoji">✅</span>
+  <h2>What's Working</h2>
+</div>
+
+<div class="card-grid three">
+  <div class="strength-card">
+    <div class="label">Retail Presence</div>
+    <h4>Costco Is Real</h4>
+    <p>25 Southern California locations. Amazon. Kroger. The distribution is legit — and Costco shoppers are already posting about finding Bahamii in-warehouse.</p>
+  </div>
+  <div class="strength-card">
+    <div class="label">Product Truth</div>
+    <h4>Clean Label Credibility</h4>
+    <p>7 ingredients. No preservatives. No added sugar. Non-GMO + Kosher certified. The product backs up every claim — this isn't marketing fluff.</p>
+  </div>
+  <div class="strength-card">
+    <div class="label">Brand Foundation</div>
+    <h4>Story Goldmine</h4>
+    <p>First-gen founders. Persian heritage. "Baham" = together. Two blenders burned perfecting the recipe. 18 months to big box. Social impact built in. Most brands spend years trying to manufacture this.</p>
+  </div>
+</div>
+
+<!-- SECTION 2: THE GAPS -->
+<div class="section-spacer"></div>
+<div class="section-header">
+  <span class="emoji">🔍</span>
+  <h2>What's Missing From the Feed</h2>
+</div>
+
+<div class="gap-card">
+  <div class="gap-num">GAP 01</div>
+  <h4>The Founder Story Is Nowhere</h4>
+  <p>Noah Nazarian's journey — great-grandmother's love of dates, the Farsi meaning of Bahamii, burning through two blenders in his mom's kitchen — is the kind of story that builds emotional connection with buyers. Right now, the feed doesn't tell it at all. A Costco shopper sees a date bar; they don't see the first-gen founder who refused to compromise on ingredients.</p>
+  <div class="whats-there"><strong>What's there now:</strong> UGC reposts and Costco location announcements. No founder content, no origin storytelling.</div>
+</div>
+
+<div class="gap-card">
+  <div class="gap-num">GAP 02</div>
+  <h4>The Social Impact Is Invisible</h4>
+  <p>Bahamii's Youth Venture Program has taught 5,000+ students financial literacy and entrepreneurship through the Boys & Girls Club. That's rare. Most CPG brands bolt on a charity partnership; Bahamii built a self-sustaining curriculum. This belongs on the feed — photos from sessions, student stories, curriculum highlights. It's a trust-builder, a differentiator, and exactly the kind of content that earns saves and shares.</p>
+  <div class="whats-there"><strong>What's there now:</strong> No mention of the Youth Venture Program on Instagram. The packaging carries it — the feed doesn't.</div>
+</div>
+
+<div class="gap-card">
+  <div class="gap-num">GAP 03</div>
+  <h4>The Feed Is Almost Entirely UGC Reposts</h4>
+  <p>Scrolling @eatbahamii feels like reading a Costco influencer campaign dashboard — #izzybahamii, #costcofinds, #ad. UGC has its place, but when it's 90%+ of the grid, the brand has no voice of its own. There's no product education, no usage inspiration, no behind-the-scenes, no community. The brand is outsourcing its entire visual identity to micro-influencers, and the result is a feed that looks like everyone else's Costco snack page.</p>
+  <div class="whats-there"><strong>What's there now:</strong> Nearly every visible post is an Izzy Group influencer reel with #izzybahamii. Organic brand content is buried or non-existent.</div>
+</div>
+
+<div class="gap-card">
+  <div class="gap-num">GAP 04</div>
+  <h4>No Visual Identity or Grid Rhythm</h4>
+  <p>The feed lacks a recognizable visual system — no consistent color palette, no typography hierarchy, no grid pattern. When someone lands on the profile, they should know within 3 seconds that this is Bahamii. Right now, it looks like a generic snack repost page. The warm date-browns, the gold from honey, the cream from coconut — these are beautiful colors that aren't being used intentionally.</p>
+  <div class="whats-there"><strong>What's there now:</strong> Inconsistent thumbnails, no brand color system, no visual through-line across posts.</div>
+</div>
+
+<div class="gap-card">
+  <div class="gap-num">GAP 05</div>
+  <h4>No Community or Conversation</h4>
+  <p>4,558 followers after 382 posts, a Costco launch, and paid influencer campaigns is a signal. The content drives awareness but not connection. There's no reply strategy visible, no community-building content, no reason for someone to come back to the profile after they've bought a box. The feed broadcasts; it doesn't build.</p>
+  <div class="whats-there"><strong>What's there now:</strong> One-directional posting. No engagement-forward content (polls, Q&As, community spotlights, user recipe features).</div>
+</div>
+
+<!-- DIAGNOSIS -->
+<div class="diagnosis">
+  <div class="diag-label">Diagnosis</div>
+  <p>Bahamii has <strong>distribution without differentiation</strong> on Instagram. The product is in Costco — that's the hard part. But the feed is doing what every other CPG brand does: repost UGC and announce retail wins. The brand story, the founder journey, the social impact, the ingredient philosophy — the things that make Bahamii <em>Bahamii</em> — are absent. The feed is functional. It could be magnetic.</p>
+</div>
+
+<!-- SECTION 3: VISUAL IDENTITY -->
+<div class="section-spacer"></div>
+<div class="section-header">
+  <span class="emoji">🎨</span>
+  <h2>Feed Identity — Current vs. Opportunity</h2>
+</div>
+
+<div class="visual-snapshot">
+  <div class="vs-col current">
+    <h4>Current Feed</h4>
+    <div class="vs-item"><span class="tag tag-missing">UGC-DRIVEN</span> Relies on influencer reposts for visual content</div>
+    <div class="vs-item"><span class="tag tag-missing">NO PALETTE</span> No consistent brand color system</div>
+    <div class="vs-item"><span class="tag tag-missing">NO GRID PLAN</span> Posts feel randomly sequenced</div>
+    <div class="vs-item"><span class="tag tag-missing">NO TYPOGRAPHY</span> Caption-first, no designed text graphics</div>
+    <div class="vs-item"><span class="tag tag-missing">COSTCO-FOCUSED</span> Every post sells the same retail story</div>
+  </div>
+  <div class="vs-col opportunity">
+    <h4>Where It Could Go</h4>
+    <div class="vs-item"><span class="tag tag-have">BRAND-LED</span> Original photography + designed carousels</div>
+    <div class="vs-item"><span class="tag tag-have">WARM EARTH</span> Date-brown · Honey-gold · Cream · Almond</div>
+    <div class="vs-item"><span class="tag tag-have">RHYTHM</span> Carousel → Reel → Carousel → Story pattern</div>
+    <div class="vs-item"><span class="tag tag-have">DESIGNED</span> Typography that feels editorial, premium</div>
+    <div class="vs-item"><span class="tag tag-have">STORY-DRIVEN</span> Founder, impact, ingredients, community</div>
+  </div>
+</div>
+
+<!-- SECTION 4: CONTENT PILLAR MAP -->
+<div class="section-header">
+  <span class="emoji">🗺️</span>
+  <h2>Content Pillar Map</h2>
+</div>
+
+<div class="pillar-map">
+  <div class="pillar-row">
+    <span class="pillar-name">Retail Availability & Distribution</span>
+    <span class="pillar-status status-strong">Strong</span>
+  </div>
+  <div class="pillar-row">
+    <span class="pillar-name">UGC & Influencer Content</span>
+    <span class="pillar-status status-strong">Strong</span>
+  </div>
+  <div class="pillar-row">
+    <span class="pillar-name">Founder Story & Brand Origin</span>
+    <span class="pillar-status status-missing">Missing</span>
+  </div>
+  <div class="pillar-row">
+    <span class="pillar-name">Social Impact & Community</span>
+    <span class="pillar-status status-missing">Missing</span>
+  </div>
+  <div class="pillar-row">
+    <span class="pillar-name">Product Education & Ingredients</span>
+    <span class="pillar-status status-weak">Weak</span>
+  </div>
+  <div class="pillar-row">
+    <span class="pillar-name">Behind-the-Scenes & Production</span>
+    <span class="pillar-status status-missing">Missing</span>
+  </div>
+  <div class="pillar-row">
+    <span class="pillar-name">Usage Inspiration & Recipes</span>
+    <span class="pillar-status status-missing">Missing</span>
+  </div>
+  <div class="pillar-row">
+    <span class="pillar-name">Community Engagement & Conversation</span>
+    <span class="pillar-status status-missing">Missing</span>
+  </div>
+  <div class="pillar-row">
+    <span class="pillar-name">Press & Media Features</span>
+    <span class="pillar-status status-weak">Weak</span>
+  </div>
+</div>
+
+<!-- SECTION 5: WHERE I FIT -->
+<div class="fit-section">
+  <div class="fit-header">
+    <h2>Where I Fit</h2>
+    <p>Media management for Bahamii — strategy, content, and community in one seat</p>
+  </div>
+
+  <div class="fit-columns">
+    <div class="fit-pillar">
+      <div class="pillar-icon">🧠</div>
+      <h4>Content Strategy & Creative Direction</h4>
+      <ul>
+        <li>Build the content pillars that are missing — founder story, social impact, product education, community</li>
+        <li>Develop a visual identity system: color palette, typography, grid rhythm, thumbnail templates</li>
+        <li>Plan the weekly content calendar across Reels, carousels, and Stories</li>
+        <li>Write captions that tell stories, not just announce retail wins</li>
+      </ul>
+    </div>
+
+    <div class="fit-pillar">
+      <div class="pillar-icon">🎬</div>
+      <h4>Content Creation</h4>
+      <ul>
+        <li>Original Reels — product storytelling, behind-the-scenes, founder features, impact highlights</li>
+        <li>Designed carousels for ingredient education, brand values, press features</li>
+        <li>Story content: daily presence, polls, Q&As, community spotlights</li>
+        <li>UGC curation — keep the best influencer content, but make it 20% of the feed, not 90%</li>
+      </ul>
+    </div>
+
+    <div class="fit-pillar">
+      <div class="pillar-icon">💬</div>
+      <h4>Community Management</h4>
+      <ul>
+        <li>Daily engagement — reply to comments, DMs, and tagged posts with a real voice</li>
+        <li>Build conversation-forward content: ask questions, run polls, feature customer stories</li>
+        <li>Nurture the Costco-to-Instagram pipeline — shoppers who discover in-warehouse should find a feed worth following</li>
+      </ul>
+    </div>
+
+    <div class="fit-pillar">
+      <div class="pillar-icon">📊</div>
+      <h4>Performance & Reporting</h4>
+      <ul>
+        <li>Track what's working — engagement rate, Reels views, follower growth, save rate</li>
+        <li>Monthly performance reports with insights and adjustments</li>
+        <li>Competitive monitoring — what are other better-for-you snack brands doing on IG?</li>
+        <li>Quarterly brand pulse audits to track progress against the strategy</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 6: THE OPPORTUNITY -->
+<div class="opportunity-callout">
+  <h3>The Open Lane</h3>
+  <p>Bahamii already won the hard battle — <strong>getting on shelves.</strong> The product is in Costco, on Amazon, in Kroger. People are trying it. They're posting about it. But the Instagram feed isn't converting that discovery into loyalty. It's a retail announcement board when it could be a brand home — a place where people come to learn the story, see the impact, feel the care behind the ingredients, and become the kind of customer who buys boxes, not bars. <strong>The feed just needs to catch up to the brand.</strong></p>
+</div>
+
+
+</div>
+
+</body>
+</html>
