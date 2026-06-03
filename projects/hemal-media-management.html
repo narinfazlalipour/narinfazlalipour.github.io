@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dr. Hemal Patel — Media Management Proposal</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0F172A;
+  --surface: #1E293B;
+  --surface-light: #273449;
+  --accent: #0D9488;
+  --accent-glow: rgba(13,148,136,0.12);
+  --text: #F1F5F9;
+  --text-secondary: #94A3B8;
+  --text-muted: #64748B;
+  --line: #334155;
+  --gold: #D4A853;
+  --radius: 14px;
+  --radius-sm: 8px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', -apple-system, sans-serif;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 60px 28px 80px;
+}
+
+/* HERO */
+.hero {
+  text-align: center;
+  padding: 40px 0 36px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 40px;
+}
+
+.hero-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+  margin-bottom: 18px;
+}
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+
+.hero h1 span {
+  color: var(--accent);
+}
+
+.hero-sub {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  max-width: 500px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* SECTION HEADERS */
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 40px 0 18px;
+}
+
+.section-header:first-of-type {
+  margin-top: 0;
+}
+
+.section-header h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* COVER LETTER */
+.cover-letter {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.85;
+  margin-bottom: 36px;
+}
+
+.cover-letter p {
+  margin-bottom: 14px;
+}
+
+.cover-letter strong {
+  color: var(--text);
+}
+
+/* SCOPE TABLE */
+.scope-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0 32px;
+  font-size: 0.87rem;
+}
+
+.scope-table th {
+  text-align: left;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  padding: 10px 0;
+  border-bottom: 2px solid var(--line);
+}
+
+.scope-table td {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+  color: var(--text-secondary);
+  vertical-align: top;
+  line-height: 1.6;
+}
+
+.scope-table td:first-child {
+  color: var(--text);
+  font-weight: 500;
+  width: 30%;
+}
+
+.scope-table .hours {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+/* PILLAR CARDS */
+.pillar-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin: 16px 0 32px;
+}
+
+@media (max-width: 550px) {
+  .pillar-grid { grid-template-columns: 1fr; }
+}
+
+.pillar-card {
+  background: var(--surface);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  padding: 18px;
+}
+
+.pillar-card h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.02rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.pillar-card p {
+  font-size: 0.84rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* CALENDAR */
+.calendar {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0 32px;
+  font-size: 0.85rem;
+}
+
+.calendar th {
+  text-align: left;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  padding: 10px 0;
+  border-bottom: 2px solid var(--line);
+}
+
+.calendar td {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+  color: var(--text-secondary);
+  vertical-align: top;
+  line-height: 1.5;
+}
+
+.calendar td:first-child {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--text);
+  font-weight: 500;
+}
+
+/* CALLOUT */
+.callout {
+  background: var(--surface);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  padding: 18px 20px;
+  margin: 24px 0 32px;
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.callout strong {
+  color: var(--text);
+}
+
+/* CHANNEL BOX */
+.channel-box {
+  background: linear-gradient(135deg, rgba(139,92,246,0.1) 0%, rgba(139,92,246,0.03) 100%);
+  border: 1px solid rgba(139,92,246,0.25);
+  border-radius: var(--radius);
+  padding: 24px 26px;
+  margin: 24px 0 32px;
+}
+
+.channel-box h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #A78BFA;
+  margin-bottom: 10px;
+}
+
+.channel-box p {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+/* PRICING PLACEHOLDER */
+.pricing-placeholder {
+  background: var(--surface);
+  border: 1px dashed var(--line);
+  border-radius: var(--radius);
+  padding: 22px;
+  margin: 24px 0 32px;
+  text-align: center;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* KEY TERMS */
+.terms-list {
+  font-size: 0.86rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin: 16px 0 32px;
+}
+
+.terms-list li {
+  margin-bottom: 6px;
+}
+
+.terms-list li::marker {
+  color: var(--accent);
+}
+
+/* HOURS BREAKDOWN */
+.hours-bar {
+  margin: 20px 0 32px;
+}
+
+.hours-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  font-size: 0.84rem;
+}
+
+.hours-label {
+  width: 160px;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+.hours-track {
+  flex: 1;
+  height: 8px;
+  background: var(--surface-light);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-right: 12px;
+}
+
+.hours-fill {
+  height: 100%;
+  border-radius: 4px;
+  background: var(--accent);
+}
+
+.hours-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--accent);
+  width: 50px;
+  text-align: right;
+  flex-shrink: 0;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Media Management Proposal</div>
+  <h1>Dr. Hemal Patel <span>×</span> Narin Fazlalipour</h1>
+  <p class="hero-sub">Personal brand management for @hemalpatelphd — building the researcher's voice, community, and legacy outside of product content</p>
+</div>
+
+<!-- COVER LETTER -->
+<div class="cover-letter">
+  <p><strong>I have been managing @hemalpatelphd since 2024.</strong> What started as content support has grown into something more defined — a voice, a community, and an account that is beginning to reflect the depth of Dr. Patel's work beyond any single product.</p>
+
+  <p>mescreen recently brought on a new media team to handle mitochondria-focused product content. That is the right move — product content needs its own lane. But Dr. Patel is more than mescreen. He is a tenured UCSD professor, a VA Research Career Scientist, a NASA Twin Study collaborator, and the author of 186 publications. His personal brand deserves a dedicated steward who understands the science, the voice, and the audience — someone who has been in the seat since the beginning.</p>
+
+  <p><strong>Dr. Patel has suggested that mescreen formalize this arrangement.</strong> This proposal outlines what that looks like: 10–12 hours per week of dedicated media management for @hemalpatelphd — personal brand strategy, content direction, community management, and the activation of new channels to diversify his presence beyond the feed.</p>
+</div>
+
+<!-- SCOPE -->
+<div class="section-header">
+  <h2>1. Scope of Work</h2>
+</div>
+
+<p style="font-size:0.88rem; color: var(--text-secondary); margin-bottom: 16px;">10–12 hours per week, dedicated exclusively to @hemalpatelphd. This is separate from any mescreen product content — the new media team owns the product lane. I own the personal brand.</p>
+
+<table class="scope-table">
+  <tr>
+    <th>Responsibility</th>
+    <th>Detail</th>
+    <th class="hours">Est. Hrs/Wk</th>
+  </tr>
+  <tr>
+    <td>Content strategy & creative direction</td>
+    <td>Monthly content calendar, pillar planning, storytelling architecture, visual identity stewardship</td>
+    <td class="hours">2–3</td>
+  </tr>
+  <tr>
+    <td>Content creation & curation</td>
+    <td>Reels, carousels, and Stories — concepted and directed by me, using existing lab footage, paper figures, podcast clips, and new brief recordings where needed</td>
+    <td class="hours">3–4</td>
+  </tr>
+  <tr>
+    <td>Community management</td>
+    <td>Reply to all comments and DMs within 4 hours of posting. Cultivate the comment section as a space for real scientific dialogue — not just emoji replies</td>
+    <td class="hours">2–3</td>
+  </tr>
+  <tr>
+    <td>Broadcast channel</td>
+    <td>Launch and manage Dr. Patel's Instagram broadcast channel — a direct line to followers for blog links, scientific concepts, paper summaries, and personal notes</td>
+    <td class="hours">1</td>
+  </tr>
+  <tr>
+    <td>Brand voice & copywriting</td>
+    <td>Captions, bio optimization, hashtag strategy, highlight curation. Maintain a consistent editorial voice that bridges academic credibility with public accessibility</td>
+    <td class="hours">1</td>
+  </tr>
+  <tr>
+    <td>Analytics & reporting</td>
+    <td>Monthly performance report — follower growth, engagement rate, top-performing content, audience insights, and strategic recommendations</td>
+    <td class="hours">1</td>
+  </tr>
+</table>
+
+<!-- HOURS VISUAL -->
+<div class="hours-bar">
+  <div class="hours-row">
+    <span class="hours-label">Content creation</span>
+    <div class="hours-track"><div class="hours-fill" style="width:68%"></div></div>
+    <span class="hours-num">~4h</span>
+  </div>
+  <div class="hours-row">
+    <span class="hours-label">Community mgmt</span>
+    <div class="hours-track"><div class="hours-fill" style="width:51%"></div></div>
+    <span class="hours-num">~3h</span>
+  </div>
+  <div class="hours-row">
+    <span class="hours-label">Strategy & direction</span>
+    <div class="hours-track"><div class="hours-fill" style="width:51%"></div></div>
+    <span class="hours-num">~3h</span>
+  </div>
+  <div class="hours-row">
+    <span class="hours-label">Channel, voice, reporting</span>
+    <div class="hours-track"><div class="hours-fill" style="width:34%"></div></div>
+    <span class="hours-num">~2h</span>
+  </div>
+</div>
+
+<!-- CONTENT STRATEGY -->
+<div class="section-header">
+  <h2>2. Content Strategy — Personal Brand, Not Product</h2>
+</div>
+
+<p style="font-size:0.88rem; color: var(--text-secondary); margin-bottom: 16px;">The mescreen team handles mitochondria product content. My focus is everything that makes Dr. Patel <em>Dr. Patel</em> — the researcher, the teacher, the scientific voice. These four pillars diversify the account beyond any single product or partnership.</p>
+
+<div class="pillar-grid">
+  <div class="pillar-card">
+    <h4>Research Storytelling</h4>
+    <p>186 publications is a content library. Each paper becomes a carousel. Each finding becomes a Reel. Paper-to-post breakdowns — the format that already reached 1.2M views — made recurring. Research is not a one-time announcement. It is the ongoing narrative of the account.</p>
+  </div>
+  <div class="pillar-card">
+    <h4>Behind the Lab</h4>
+    <p>A UCSD mitochondrial biology lab is one of the most under-filmed content assets in science communication. Pipetting, cell cultures, the mescreen analyzer, liquid nitrogen — short B-roll Reels with voiceover that make the research tangible. The audience for "what does mitochondrial research actually look like" is massive and underserved.</p>
+  </div>
+  <div class="pillar-card">
+    <h4>The Educator</h4>
+    <p>Dr. Patel is a professor before he is anything else. Carousels that teach — "How to read a scientific paper," "What your doctor isn't measuring," "Mitochondria 101." Designed for saves and shares. Content that positions him as the authority without requiring a purchase.</p>
+  </div>
+  <div class="pillar-card">
+    <h4>Personal Voice & Philosophy</h4>
+    <p>The account currently informs. It needs to <em>move</em>. Personal reflections on science, mentorship, fatherhood, the research life. The moments between the papers. This is the pillar that builds emotional connection — the reason someone follows <em>him</em> and not just the research.</p>
+  </div>
+</div>
+
+<!-- BROADCAST CHANNEL -->
+<div class="section-header">
+  <h2>3. Instagram Broadcast Channel</h2>
+</div>
+
+<div class="channel-box">
+  <h3>A direct line to the audience — no algorithm, no feed ranking</h3>
+  <p>Instagram's broadcast channel feature gives @hemalpatelphd a dedicated space to share longer-form insights without competing for feed placement. Subscribers opt in and receive notifications — every message lands. This becomes the distribution engine for:</p>
+  <ul style="padding-left:16px; margin-top:10px; font-size:0.88rem; color: var(--text-secondary); line-height:1.8;">
+    <li><strong>Blog links</strong> — full essay versions of the ideas teased in Reels and carousels</li>
+    <li><strong>Scientific concepts</strong> — deeper dives that are too long for a caption, too nuanced for a 60-second Reel</li>
+    <li><strong>Paper summaries</strong> — "What I'm reading this week" — a curation of published work with brief context from Dr. Patel</li>
+    <li><strong>Personal notes</strong> — conference takeaways, lab updates, reflections that don't need a full post</li>
+    <li><strong>Early access</strong> — subscribers hear about new content, collaborations, and appearances before the feed does</li>
+  </ul>
+  <p style="margin-top:12px; font-size:0.88rem; color: var(--text-secondary);">The channel is a lightweight, high-impact addition. One hour per week of my time keeps it active — and it gives Dr. Patel an owned audience channel that no algorithm change can touch.</p>
+</div>
+
+<!-- WEEKLY CALENDAR -->
+<div class="section-header">
+  <h2>4. Weekly Rhythm</h2>
+</div>
+
+<table class="calendar">
+  <tr>
+    <th>Day</th>
+    <th>Format</th>
+    <th>Content</th>
+  </tr>
+  <tr>
+    <td>Mon</td>
+    <td>Reel</td>
+    <td>Behind the Lab — short B-roll from the UCSD lab with voiceover. "This is what mitochondrial research actually looks like."</td>
+  </tr>
+  <tr>
+    <td>Tue</td>
+    <td>Carousel</td>
+    <td>Research Storytelling — one paper, 7–10 slides, broken down for a lay audience. Save-designed.</td>
+  </tr>
+  <tr>
+    <td>Wed</td>
+    <td>Stories + Channel</td>
+    <td>Midweek engagement — poll, Q&A box, or "Ask Me Anything" prompt. Broadcast channel: paper summary or blog link.</td>
+  </tr>
+  <tr>
+    <td>Thu</td>
+    <td>Reel</td>
+    <td>The Educator — one concept explained in 60 seconds. "How to read a scientific paper." "What your doctor isn't measuring." High save, high share.</td>
+  </tr>
+  <tr>
+    <td>Fri</td>
+    <td>Carousel or Reel</td>
+    <td>Personal Voice — a reflection, a story, a moment. The human behind the research.</td>
+  </tr>
+  <tr>
+    <td>Sat</td>
+    <td>Community</td>
+    <td>Reply to all comments & DMs from the week. Engage in conversations. Cultivate the comment section.</td>
+  </tr>
+  <tr>
+    <td>Sun</td>
+    <td>Channel</td>
+    <td>Broadcast channel: "What I'm reading this week" — curated papers, articles, or thoughts. Light lift, high signal.</td>
+  </tr>
+</table>
+
+<div class="callout">
+  <strong>Output target:</strong> 2 Reels + 1–2 carousels + 3–5 Stories per week + 2 broadcast channel messages. This cadence respects the 10–12 hour constraint while ensuring consistent, diversified presence. Quality over volume — every post earns its place.
+</div>
+
+<!-- PRICING -->
+<div class="section-header">
+  <h2>5. Investment</h2>
+</div>
+
+<div class="pricing-placeholder">
+  Monthly retainer — to be discussed
+</div>
+
+<!-- KEY TERMS -->
+<div class="section-header">
+  <h2>6. Key Terms</h2>
+</div>
+
+<ol class="terms-list">
+  <li><strong>Duration:</strong> 90-day initial term, auto-renewing monthly thereafter. Either party may terminate with 30 days' written notice after the initial term.</li>
+  <li><strong>Scope boundary:</strong> This agreement covers @hemalpatelphd personal brand content only. mescreen product content and strategy remain with the existing media team. I serve as the creative director for Dr. Patel's personal voice — curator, strategist, and community manager for the account.</li>
+  <li><strong>Content approval:</strong> Reels and Stories do not require pre-approval — speed and authenticity are essential to the platform. Carousels and broadcast channel messages are shared for review before posting.</li>
+  <li><strong>Non-exclusivity:</strong> This agreement is non-exclusive. I retain the right to work with other clients. Dr. Patel and mescreen retain the right to post additional content outside this scope.</li>
+  <li><strong>Reporting:</strong> Monthly performance report delivered by the 5th of each month — growth metrics, engagement analysis, top content, and strategic recommendations for the following month.</li>
+  <li><strong>Independent contractor:</strong> I am engaged as an independent contractor. This agreement does not create an employment, partnership, or joint venture relationship.</li>
+</ol>
+
+<div style="text-align:center; margin-top: 48px; padding-top: 28px; border-top: 1px solid var(--line);">
+  <p style="font-size:0.82rem; color: var(--text-muted);">Narin Fazlalipour · June 2026</p>
+</div>
+
+</div>
+
+</body>
+</html>
