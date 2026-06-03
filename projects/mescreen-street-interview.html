@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>mescreen × Narin Fazlalipour — Street Interview Rate & Approach</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0F172A;
+  --surface: #1E293B;
+  --accent: #0D9488;
+  --text: #F1F5F9;
+  --text-secondary: #94A3B8;
+  --text-muted: #64748B;
+  --line: #334155;
+  --radius: 14px;
+  --radius-sm: 8px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', -apple-system, sans-serif;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 60px 28px 80px;
+}
+
+.hero {
+  text-align: center;
+  padding: 40px 0 36px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 40px;
+}
+
+.hero-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+  margin-bottom: 18px;
+}
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+
+.hero h1 span {
+  color: var(--accent);
+}
+
+.hero-sub {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  max-width: 440px;
+  margin: 0 auto;
+}
+
+.rate-box {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 28px;
+  margin-bottom: 28px;
+  text-align: center;
+}
+
+.rate-box .rate-figure {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 2.4rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.rate-box .rate-label {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+.rate-box .rate-note {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-top: 12px;
+  font-style: italic;
+}
+
+.in-out-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin: 24px 0 36px;
+}
+
+@media (max-width: 500px) {
+  .in-out-grid { grid-template-columns: 1fr; }
+}
+
+.in-col, .out-col {
+  background: var(--surface);
+  border-radius: var(--radius-sm);
+  padding: 18px;
+}
+
+.in-col h4 { font-family: 'Playfair Display', serif; font-size: 1rem; color: #22C55E; margin-bottom: 10px; }
+.out-col h4 { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--text-muted); margin-bottom: 10px; }
+
+.in-col ul, .out-col ul {
+  list-style: none;
+  padding: 0;
+}
+
+.in-col ul li, .out-col ul li {
+  font-size: 0.84rem;
+  color: var(--text-secondary);
+  padding: 4px 0;
+  line-height: 1.5;
+}
+
+.in-col ul li::before { content: '+ '; color: #22C55E; font-weight: 600; }
+.out-col ul li::before { content: '— '; color: var(--text-muted); }
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 14px;
+}
+
+.addon-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0 28px;
+  font-size: 0.86rem;
+}
+
+.addon-table td {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+  color: var(--text-secondary);
+}
+
+.addon-table td:last-child {
+  text-align: right;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--text);
+  font-weight: 500;
+}
+
+.approach-box {
+  background: var(--surface);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  padding: 20px 22px;
+  margin: 16px 0 28px;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+.approach-box ol {
+  padding-left: 18px;
+  margin-top: 10px;
+}
+
+.approach-box ol li {
+  margin-bottom: 4px;
+  font-style: italic;
+  color: var(--text);
+}
+
+.diff-box {
+  background: linear-gradient(135deg, rgba(13,148,136,0.1) 0%, rgba(13,148,136,0.03) 100%);
+  border: 1px solid rgba(13,148,136,0.2);
+  border-radius: var(--radius);
+  padding: 22px 24px;
+  margin: 28px 0;
+  text-align: center;
+}
+
+.diff-box p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.diff-box em {
+  color: var(--text);
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<div class="hero">
+  <div class="hero-eyebrow">Street Interview</div>
+  <h1>mescreen <span>×</span> Narin Fazlalipour</h1>
+  <p class="hero-sub">Rate &amp; approach for on-the-street mitochondrial health interviews</p>
+</div>
+
+<!-- RATE -->
+<div class="rate-box">
+  <div class="rate-figure">$1,500</div>
+  <div class="rate-label">per half-day session · 4 hours active interviewing</div>
+  <div class="rate-note">Mitochondrial biology expertise, curated question design, and on-camera presence — mileage billed separately</div>
+</div>
+
+<!-- WHAT'S IN / WHAT'S OUT -->
+<div class="in-out-grid">
+  <div class="in-col">
+    <h4>Included</h4>
+    <ul>
+      <li>Curated question design for natural, easy conversations</li>
+      <li>4 hours on-the-street interviewing</li>
+      <li>Real-time scientific credibility on camera</li>
+      <li>Raw footage delivered within 48 hours</li>
+    </ul>
+  </div>
+  <div class="out-col">
+    <h4>Not Included</h4>
+    <ul>
+      <li>Mileage &amp; travel — billed separately</li>
+      <li>Equipment, permits, and editing</li>
+      <li>Post-production — provided by your team</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ADD-ONS -->
+<div class="section-title">Add-ons</div>
+<table class="addon-table">
+  <tr><td>Edited highlight reel (60–90s, captioned, branded)</td><td>+$800</td></tr>
+  <tr><td>Extended session (+2 hours)</td><td>+$1,000</td></tr>
+  <tr><td>Second location (same day, within same city)</td><td>+$400</td></tr>
+  <tr><td>Social copy (5 posts)</td><td>+$500</td></tr>
+  <tr><td>Voiceover for final edit</td><td>+$600</td></tr>
+  <tr><td>Raw transcript of all interviews</td><td>+$300</td></tr>
+</table>
+
+<!-- APPROACH -->
+<div class="section-title">The Approach</div>
+<div class="approach-box">
+  <p>Conversational, person-on-the-street. No clipboard energy. I act as both interviewer and someone who genuinely knows the science — because I do. Questions are designed to open people up, not box them in, and mescreen™ is introduced naturally in conversation rather than as a hard pitch. The science sells itself when explained by someone who understands it.</p>
+  <ol>
+    <li>"When you hear the word mitochondria, what comes to mind?"</li>
+    <li>"Do you ever think about your energy at a cellular level?"</li>
+    <li>"Did you know you can now test your mitochondrial function from home — with a few drops of blood?"</li>
+    <li>"What would it change for you to know your cellular energy score?"</li>
+  </ol>
+</div>
+
+<!-- WHY -->
+<div class="diff-box">
+  <p>This is not a generic street interview. The interviewer is the differentiator. When someone on the street asks <em>"Wait, how does that actually work?"</em> — I can answer. That's the difference between content that builds trust and content that gets scrolled past.</p>
+</div>
+
+</div>
+
+</body>
+</html>
