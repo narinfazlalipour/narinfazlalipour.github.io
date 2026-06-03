@@ -75,11 +75,8 @@ table tr:nth-child(even) td { background: #fdfdfc; }
 .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin: 1.5rem 0; }
 .pricing-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 30px 24px; text-align: center; transition: all var(--fast) var(--ease); box-shadow: var(--shadow-sm); }
 .pricing-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
-.pricing-card.featured { border: 2px solid var(--accent); box-shadow: 0 4px 24px rgba(13,148,136,0.12); position: relative; }
-.pricing-card.featured::before { content: "RECOMMENDED"; position: absolute; top: -11px; left: 50%; transform: translateX(-50%); background: var(--accent); color: #fff; font-family: var(--font-mono); font-size: 0.6rem; font-weight: 700; letter-spacing: 0.12em; padding: 4px 14px; border-radius: 99px; }
 .pricing-card .tier { font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 0.5rem; }
 .pricing-card .price { font-family: var(--font-serif); font-size: 2.6rem; font-weight: 600; color: var(--text); margin: 0.5rem 0; }
-.pricing-card.featured .price { color: #0f766e; }
 .pricing-card .price span { font-size: 0.95rem; color: var(--muted); font-weight: 400; }
 .pricing-card ul { text-align: left; list-style: none; padding: 0; margin: 1.2rem 0 0; font-size: 0.84rem; color: var(--soft); }
 .pricing-card ul li { padding: 5px 0; padding-left: 20px; position: relative; }
@@ -90,7 +87,6 @@ table tr:nth-child(even) td { background: #fdfdfc; }
 .tag.green { background: var(--green-muted); color: var(--green); }
 
 /* ── Score Diagram ── */
-.score-wrap { margin-top: -4px; position: relative; z-index: 2; }
 .score-diagram { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px 28px 20px; box-shadow: var(--shadow-sm); margin: 1.5rem 0; }
 .score-diagram .sd-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--line); }
 .score-diagram .sd-header .sd-label { font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); }
@@ -130,7 +126,7 @@ table tr:nth-child(even) td { background: #fdfdfc; }
   <div class="wrap">
     <div class="label">Media Management Proposal · June 2026</div>
     <h1>Casa Blui × <em>Narin Fazlalipour</em></h1>
-    <p class="sub">Instagram media management for luxury home wellness — built on a brand pulse audit before a single dollar was asked.</p>
+    <p class="sub">Instagram media management for luxury home wellness — built on a brand pulse audit.</p>
   </div>
 </header>
 
@@ -139,8 +135,14 @@ table tr:nth-child(even) td { background: #fdfdfc; }
   <div class="wrap">
     <h2>Cover Letter</h2>
 
-    <div class="callout">
-      <p>Pulse Score: <strong>54/100.</strong> Product Quality (75) is elite. Community (35) is the gap. Casa Blui makes the best hot tubs, cold plunges, and saunas in luxury wellness — but the Instagram reads like a showroom, not a brand. The fix isn't more product photos. It's more story.</p>
+    <div class="score-diagram">
+      <div class="sd-header"><span class="sd-label">Full Pulse Breakdown</span><span class="sd-overall">54<span>/ 100</span></span></div>
+      <div class="sd-row"><span class="sd-name">Brand Story</span><div class="sd-track"><div class="sd-fill mid" style="width:55%"></div></div><span class="sd-num">55</span></div>
+      <div class="sd-row"><span class="sd-name">Product Quality</span><div class="sd-track"><div class="sd-fill high" style="width:75%"></div></div><span class="sd-num">75</span></div>
+      <div class="sd-row"><span class="sd-name">Visual Identity</span><div class="sd-track"><div class="sd-fill mid" style="width:60%"></div></div><span class="sd-num">60</span></div>
+      <div class="sd-row"><span class="sd-name">Content Cadence</span><div class="sd-track"><div class="sd-fill mid" style="width:50%"></div></div><span class="sd-num">50</span></div>
+      <div class="sd-row"><span class="sd-name">Community</span><div class="sd-track"><div class="sd-fill low" style="width:35%"></div></div><span class="sd-num">35</span></div>
+      <div class="sd-row"><span class="sd-name">Retail-to-Social</span><div class="sd-track"><div class="sd-fill mid" style="width:45%"></div></div><span class="sd-num">45</span></div>
     </div>
 
     <h3>What I Actually Do</h3>
@@ -156,16 +158,6 @@ table tr:nth-child(even) td { background: #fdfdfc; }
       <tr><td>DMs unanswered or slow</td><td style="text-align:center;color:var(--muted);">→</td><td>Same-day responses, every inquiry</td></tr>
       <tr><td>No strategy — posting reactively</td><td style="text-align:center;color:var(--muted);">→</td><td>Monthly content calendar around launches, seasons, founder moments</td></tr>
     </table>
-    </div>
-
-    <div class="score-diagram">
-      <div class="sd-header"><span class="sd-label">Full Pulse Breakdown</span><span class="sd-overall">54<span>/ 100</span></span></div>
-      <div class="sd-row"><span class="sd-name">Brand Story</span><div class="sd-track"><div class="sd-fill mid" style="width:55%"></div></div><span class="sd-num">55</span></div>
-      <div class="sd-row"><span class="sd-name">Product Quality</span><div class="sd-track"><div class="sd-fill high" style="width:75%"></div></div><span class="sd-num">75</span></div>
-      <div class="sd-row"><span class="sd-name">Visual Identity</span><div class="sd-track"><div class="sd-fill mid" style="width:60%"></div></div><span class="sd-num">60</span></div>
-      <div class="sd-row"><span class="sd-name">Content Cadence</span><div class="sd-track"><div class="sd-fill mid" style="width:50%"></div></div><span class="sd-num">50</span></div>
-      <div class="sd-row"><span class="sd-name">Community</span><div class="sd-track"><div class="sd-fill low" style="width:35%"></div></div><span class="sd-num">35</span></div>
-      <div class="sd-row"><span class="sd-name">Retail-to-Social</span><div class="sd-track"><div class="sd-fill mid" style="width:45%"></div></div><span class="sd-num">45</span></div>
     </div>
   </div>
 </section>
@@ -191,18 +183,34 @@ table tr:nth-child(even) td { background: #fdfdfc; }
 
     <h3>How We Create Together</h3>
     <p>Narin is the <strong>editor-in-chief</strong> — she concepts every Reel, writes every carousel, structures every Story, and directs the visual direction. Your videographers shoot what she briefs. The relationship is creative director + production team. Together, we turn Casa Blui's Instagram into a wellness publication.</p>
+  </div>
+</section>
 
-    <div class="callout">
-      <p><strong>The rule:</strong> If it feels like a product catalog, kill it. If it doesn't show a real human — founder, client, installer — ask why not.</p>
+<!-- ═══════════ PERFORMANCE TARGETS ═══════════ -->
+<section>
+  <div class="wrap">
+    <h2>Performance Targets</h2>
+
+    <div class="table-wrap">
+    <table>
+      <tr><th>Metric</th><th>Baseline</th><th>90-Day Target</th></tr>
+      <tr><td>Follower growth</td><td>8,956</td><td><span class="tag green">12,000–15,000</span></td></tr>
+      <tr><td>Engagement rate</td><td>Unknown (&lt;1%)</td><td><span class="tag green">2–3%</span></td></tr>
+      <tr><td>Reels avg views</td><td>Unknown</td><td><span class="tag green">3,000+</span></td></tr>
+      <tr><td>Content output</td><td>Sporadic product posts</td><td><span class="tag green">3-4 Reels + 1 carousel + 3-5 Stories/week</span></td></tr>
+      <tr><td>Comment reply rate</td><td>Near zero</td><td><span class="tag green">100% within 4 hours</span></td></tr>
+      <tr><td>Brand voice</td><td>Product catalog</td><td><span class="tag green">Editorial wellness publication — founder-led, story-driven</span></td></tr>
+      <tr><td>Founder content</td><td>None</td><td><span class="tag green">Thursdays with Casa Blui — weekly blog + IG carousel</span></td></tr>
+    </table>
     </div>
   </div>
 </section>
 
 <!-- ═══════════ CONTENT MIX ═══════════ -->
-<section>
+<section class="alt">
   <div class="wrap">
     <h2>Content Mix & Weekly Calendar</h2>
-    <p>Every piece of content runs through: <strong>hero (the person) → transformation (the experience) → result (wellness, recovery, presence).</strong> If it doesn't have all three, it doesn't ship.</p>
+    <p>Content isn't about products — it's about the people using them. Every post should make someone feel something: the shock of cold water, the relief of recovery, the peace of presence. If it wouldn't stop a scroll, it doesn't ship.</p>
 
     <div class="table-wrap">
     <table>
@@ -231,14 +239,14 @@ table tr:nth-child(even) td { background: #fdfdfc; }
 </section>
 
 <!-- ═══════════ PRICING ═══════════ -->
-<section class="alt">
+<section>
   <div class="wrap">
     <h2>Pricing</h2>
 
     <div class="pricing-grid">
       <div class="pricing-card">
         <div class="tier">Core</div>
-        <div class="price">$2,500<span>/biweekly</span></div>
+        <div class="price">$2,500<span>/mo</span></div>
         <ul>
           <li>Strategy + content calendar</li>
           <li>3 Reels/week</li>
@@ -249,7 +257,7 @@ table tr:nth-child(even) td { background: #fdfdfc; }
       </div>
       <div class="pricing-card">
         <div class="tier">Growth</div>
-        <div class="price">$3,500<span>/biweekly</span></div>
+        <div class="price">$3,500<span>/mo</span></div>
         <ul>
           <li>Everything in Core</li>
           <li>3-5 Stories/week</li>
@@ -262,7 +270,7 @@ table tr:nth-child(even) td { background: #fdfdfc; }
       </div>
       <div class="pricing-card">
         <div class="tier">Full-Stack</div>
-        <div class="price">$5,000<span>/biweekly</span></div>
+        <div class="price">$5,000<span>/mo</span></div>
         <ul>
           <li>Everything in Growth</li>
           <li>4 Reels/week (up from 3)</li>
@@ -276,13 +284,16 @@ table tr:nth-child(even) td { background: #fdfdfc; }
     </div>
 
     <p style="text-align:center; font-family: var(--font-mono); font-size: 0.84rem; color: var(--muted); margin-top: 0.5rem;">
-      Setup fee: $1,000 one-time · Biweekly invoicing, Net 15
+      Setup fee: $1,000 one-time · Monthly retainer, paid biweekly · Net 15
+    </p>
+    <p style="text-align:center; font-size: 0.76rem; color: var(--muted); margin-top: 0.3rem;">
+      Biweekly payments: Core $1,250 · Growth $1,750 · Full-Stack $2,500
     </p>
   </div>
 </section>
 
 <!-- ═══════════ KEY TERMS ═══════════ -->
-<section>
+<section class="alt">
   <div class="wrap">
     <h2>Key Terms</h2>
 
@@ -299,26 +310,6 @@ table tr:nth-child(even) td { background: #fdfdfc; }
       <tr><td><strong>Governing law</strong></td><td>State of California. Good-faith mediation before any formal legal action.</td></tr>
       <tr><td><strong>Liability cap</strong></td><td>Capped at total fees paid in the preceding 3 months. Narin is an independent contractor, not an employee.</td></tr>
       <tr><td><strong>Client responsibilities</strong></td><td>Brand assets, account access, videographer availability (minimum one half-day shoot per week), founder availability (30 min/week for Thursdays with Casa Blui), email list access, 1-week notice on product launches or major announcements.</td></tr>
-    </table>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════ KPIs ═══════════ -->
-<section class="alt">
-  <div class="wrap">
-    <h2>Performance Targets</h2>
-
-    <div class="table-wrap">
-    <table>
-      <tr><th>Metric</th><th>Baseline</th><th>90-Day Target</th></tr>
-      <tr><td>Follower growth</td><td>8,956</td><td><span class="tag green">12,000–15,000</span></td></tr>
-      <tr><td>Engagement rate</td><td>Unknown (&lt;1%)</td><td><span class="tag green">2–3%</span></td></tr>
-      <tr><td>Reels avg views</td><td>Unknown</td><td><span class="tag green">3,000+</span></td></tr>
-      <tr><td>Content output</td><td>Sporadic product posts</td><td><span class="tag green">3-4 Reels + 1 carousel + 3-5 Stories/week</span></td></tr>
-      <tr><td>Comment reply rate</td><td>Near zero</td><td><span class="tag green">100% within 4 hours</span></td></tr>
-      <tr><td>Brand voice</td><td>Product catalog</td><td><span class="tag green">Editorial wellness publication — founder-led, story-driven</span></td></tr>
-      <tr><td>Founder content</td><td>None</td><td><span class="tag green">Thursdays with Casa Blui — weekly blog + IG carousel</span></td></tr>
     </table>
     </div>
   </div>
