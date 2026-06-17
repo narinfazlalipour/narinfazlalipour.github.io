@@ -129,6 +129,18 @@
 - Created successful viral posts and solidified collaborations with high-end accounts
 - Showcased a world-class scientist through strategic media positioning
 
+### Verséa Discovery (@discovermescreen)
+
+- **Marketing:** Campaigns for new product introductions, website creation & edits, A/B analysis
+- **Advertisements:** Ad content creation, running ads on Meta
+- **Media:** Content shooting & creation, storytelling, media management across YouTube, IG, X, LinkedIn, TikTok, customer service via DM, weekly Monday Mitos series + blog content
+- 15 months, Tampa FL (remote), paid role
+
+### Sean Fetcho, CEO — Executive Media Management (@sean.fetcho)
+- Personal account management on LinkedIn and Instagram
+- Curated content from conferences, presentations, and business trips
+- Tampa, FL (alongside Verséa Discovery)
+
 ### UCSD STARS — Undergraduate Research Coordinator
 - LinkedIn content creation to attract prospects to the program
 - Facebook and LinkedIn community engagement
