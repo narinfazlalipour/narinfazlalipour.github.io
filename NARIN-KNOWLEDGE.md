@@ -71,39 +71,38 @@
    - One of four student speakers selected
 
 ### 2024 — Science Communication
-10. **Verséa Discovery — Media Manager** _(Jul 2024 – Oct 2025, 15 months)_
-    - Tampa, Florida (remote-capable biotech)
-    - Managed social media channels and newsletter for mitochondrial efficiency research
-    - **Media appearances** managed for the company's science
-    - **Marketing:** campaigns, advertisements, and website content
-    - Post-employment: continued voluntarily managing Dr. Hemal Patel's Instagram profile, growing audience from 0 → 10.7K followers
-    - Connected patient families to scientific testing networks (e.g., mitochondrial testing alternatives to muscle biopsy)
-
-11. **Teaching Assistant — Neurophysiology & Anatomy** _(1 quarter)_
+10. **Teaching Assistant — Neurophysiology & Anatomy** _(1 quarter)_
     - Under Dr. Mary Boyle, UCSD
     - Held discussion sections, grading, office hours for 53 students
     - Adapted neurophysiological concepts to diverse learning styles
 
-12. **Give to Give — Founder & President** _(1 quarter)_
+11. **Give to Give — Founder & President** _(1 quarter)_
     - Founded student organization for mindfulness awareness
     - Supported vulnerable women in Mexican prisons
     - Fundraising campaigns, educational curriculum
 
 ### 2025 — Clinical Phase
-13. **Physician Shadowing — Neurology** _(Jul 2025 – Sep 2025)_
+12. **Physician Shadowing — Neurology** _(Jul 2025 – Sep 2025)_
     - Under Dr. Mina Eian, Neurology
     - Private practice + USC Verdugo Hospital rounds
     - Observed patient evaluations, diagnostic interviews, EEG examinations, neurological treatment planning
 
-14. **UCLA Care Extenders — Clinical Volunteer** _(Nov 2025 – Present)_
+13. **UCLA Care Extenders — Clinical Volunteer** _(Nov 2025 – Present)_
     - UCLA Health, Neurology & ER departments
     - Transporting patients, restocking medical cabinets, assisting nurses
     - Bedside presence with families and anxious patients
 
-15. **UCLA Care Extenders — Department Coordinator** _(Nov 2025 – Present)_
+14. **UCLA Care Extenders — Department Coordinator** _(Nov 2025 – Present)_
     - Auditing volunteer performance
     - Gathering staff feedback on program quality
     - Communication bridge between volunteers and management
+
+### 2026
+15. **ThinkNeuro — Research Intern** _(Jun – Aug 2026)_
+    - Virtual (Sacramento, CA)
+    - 10-week neuroscience research internship under Harvard and Stanford mentorship
+    - Bibliometric analysis and neuroscience research with R programming
+    - Research poster and oral presentation
 
 ---
 
@@ -129,18 +128,6 @@
 - Translated complex mitochondrial and neuroscience research into accessible content
 - Created successful viral posts and solidified collaborations with high-end accounts
 - Showcased a world-class scientist through strategic media positioning
-
-### Verséa Discovery (@discovermescreen)
-
-- **Marketing:** Campaigns for new product introductions, website creation & edits, A/B analysis
-- **Advertisements:** Ad content creation, running ads on Meta
-- **Media:** Content shooting & creation, storytelling, media management across YouTube, IG, X, LinkedIn, TikTok, customer service via DM, weekly Monday Mitos series + blog content
-- 15 months, Tampa FL (remote), paid role
-
-### Sean Fetcho, CEO — Executive Media Management (@sean.fetcho)
-- Personal account management on LinkedIn and Instagram
-- Curated content from conferences, presentations, and business trips
-- Tampa, FL (alongside Verséa Discovery)
 
 ### UCSD STARS — Undergraduate Research Coordinator
 - LinkedIn content creation to attract prospects to the program
