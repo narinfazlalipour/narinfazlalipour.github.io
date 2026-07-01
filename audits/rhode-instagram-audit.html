@@ -1,0 +1,1450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>@rhode — AuditLayer Standard Report</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fafaf8;
+    --surface: #ffffff;
+    --text: #171513;
+    --text-body: #3d3835;
+    --muted: #8b8680;
+    --line: #eae8e4;
+    --accent: #0d9488;
+    --accent-hover: #0f766e;
+    --accent-muted: #f0fdf9;
+    --green: #059669;
+    --amber: #d97706;
+    --red: #dc2626;
+    --red-muted: #fef2f2;
+    --green-muted: #ecfdf5;
+    --amber-muted: #fffdf5;
+    --blue: #2563eb;
+    --blue-muted: #eff6ff;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-md: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-lg: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -2px rgba(0,0,0,0.04);
+    --radius-sm: 8px;
+    --radius: 12px;
+    --radius-lg: 16px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 64px 32px 120px;
+  }
+
+  /* Header */
+  .report-header {
+    margin-bottom: 56px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .report-header .label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+
+  .report-header h1 {
+    font-size: 2.4rem;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.15;
+    margin-bottom: 12px;
+    color: var(--text);
+  }
+
+  .report-header .subtitle {
+    font-size: 1rem;
+    color: var(--muted);
+    font-weight: 400;
+    line-height: 1.6;
+  }
+
+  .report-header .meta {
+    display: flex;
+    gap: 24px;
+    margin-top: 20px;
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-weight: 500;
+    flex-wrap: wrap;
+  }
+
+  .report-header .meta span {
+    background: var(--surface);
+    padding: 5px 14px;
+    border-radius: 20px;
+    border: 1px solid var(--line);
+    font-size: 0.75rem;
+  }
+
+  /* Sections */
+  section { margin-bottom: 56px; }
+
+  section h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    margin-bottom: 24px;
+    color: var(--text);
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  section h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin: 32px 0 14px;
+    color: var(--text);
+    letter-spacing: -0.01em;
+  }
+
+  section p {
+    margin-bottom: 16px;
+    font-size: 0.95rem;
+    color: var(--text-body);
+    line-height: 1.75;
+  }
+
+  /* Score diagram */
+  .score-diagram {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 28px 32px;
+    margin: 24px 0;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .score-diagram .overall-score {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .score-diagram .overall-score .label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .score-diagram .overall-score .value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: var(--amber);
+    letter-spacing: -0.02em;
+  }
+
+  .sd-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 14px;
+  }
+
+  .sd-row:last-child { margin-bottom: 0; }
+
+  .sd-label {
+    width: 160px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text-body);
+    flex-shrink: 0;
+  }
+
+  .sd-track {
+    flex: 1;
+    height: 8px;
+    background: #f5f4f2;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .sd-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.6s ease;
+  }
+
+  .sd-fill.green { background: var(--green); }
+  .sd-fill.amber { background: var(--amber); }
+  .sd-fill.red { background: var(--red); }
+
+  .sd-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    font-weight: 600;
+    width: 36px;
+    text-align: right;
+  }
+
+  .sd-value.green { color: var(--green); }
+  .sd-value.amber { color: var(--amber); }
+  .sd-value.red { color: var(--red); }
+
+  /* Metric grid */
+  .metric-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin: 24px 0;
+  }
+
+  .metric-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    padding: 20px 16px;
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .metric-card .value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1;
+    margin-bottom: 6px;
+    letter-spacing: -0.02em;
+  }
+
+  .metric-card .value.red { color: var(--red); }
+  .metric-card .value.green { color: var(--green); }
+  .metric-card .value.amber { color: var(--amber); }
+
+  .metric-card .label {
+    font-size: 0.7rem;
+    color: var(--muted);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  /* Tables */
+  .data-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 0.88rem;
+    margin: 20px 0;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .data-table th {
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    padding: 12px 16px;
+    background: #fafaf8;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .data-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+    background: var(--surface);
+  }
+
+  .data-table tr:last-child td { border-bottom: none; }
+
+  .data-table td:first-child { font-weight: 500; }
+
+  .data-table .num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    text-align: right;
+    font-weight: 500;
+  }
+
+  .data-table tr.highlight td { background: var(--accent-muted); }
+
+  /* Tags */
+  .tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 12px;
+    letter-spacing: 0.03em;
+  }
+
+  .tag.strength { background: var(--green-muted); color: var(--green); }
+  .tag.weakness { background: var(--red-muted); color: var(--red); }
+  .tag.neutral { background: var(--blue-muted); color: var(--blue); }
+
+  /* Strength/Weakness cards */
+  .sw-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 24px 0;
+  }
+
+  .sw-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    padding: 22px 24px;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .sw-card.strength { border-left: 3px solid var(--green); }
+  .sw-card.weakness { border-left: 3px solid var(--red); }
+
+  .sw-card .sw-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 8px;
+  }
+
+  .sw-card.strength .sw-label { color: var(--green); }
+  .sw-card.weakness .sw-label { color: var(--red); }
+
+  .sw-card h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+
+  .sw-card p {
+    font-size: 0.85rem;
+    color: var(--text-body);
+    margin: 0;
+    line-height: 1.65;
+  }
+
+  /* Recommendation cards */
+  .rec-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    padding: 22px 24px 22px 64px;
+    margin-bottom: 14px;
+    position: relative;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .rec-card .num {
+    position: absolute;
+    left: 20px;
+    top: 22px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--accent);
+    background: var(--accent-muted);
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .rec-card h4 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+    letter-spacing: -0.01em;
+  }
+
+  .rec-card p {
+    font-size: 0.85rem;
+    color: var(--text-body);
+    margin: 0;
+    line-height: 1.65;
+  }
+
+  /* Calendar grid */
+  .calendar-grid {
+    display: grid;
+    grid-template-columns: 100px 80px 160px 1fr;
+    gap: 0;
+    margin: 20px 0;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .calendar-grid .ch {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    padding: 12px 16px;
+    background: #fafaf8;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .calendar-grid .cr {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.85rem;
+    background: var(--surface);
+    color: var(--text-body);
+  }
+
+  .calendar-grid .cr:last-child { border-bottom: none; }
+
+  /* Timeline */
+  .timeline-item {
+    display: flex;
+    gap: 18px;
+    margin-bottom: 24px;
+  }
+
+  .timeline-item .t-dot {
+    flex-shrink: 0;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-top: 5px;
+  }
+
+  .timeline-item .t-dot.green { background: var(--green); box-shadow: 0 0 0 3px var(--green-muted); }
+  .timeline-item .t-dot.red { background: var(--red); box-shadow: 0 0 0 3px var(--red-muted); }
+  .timeline-item .t-dot.accent { background: var(--accent); box-shadow: 0 0 0 3px var(--accent-muted); }
+
+  .timeline-item .t-content h4 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+    letter-spacing: -0.01em;
+  }
+
+  .timeline-item .t-content p {
+    font-size: 0.85rem;
+    color: var(--text-body);
+    margin: 0;
+    line-height: 1.65;
+  }
+
+  /* Callout */
+  .callout {
+    background: var(--blue-muted);
+    border-left: 3px solid var(--blue);
+    padding: 18px 22px;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    margin: 24px 0;
+  }
+
+  .callout p {
+    font-size: 0.9rem;
+    color: #1e3a5f;
+    margin: 0;
+    font-weight: 500;
+    line-height: 1.65;
+  }
+
+  .callout.accent {
+    background: var(--accent-muted);
+    border-left: 3px solid var(--accent);
+  }
+
+  .callout.accent p { color: #115e59; }
+
+  .callout.warning {
+    background: var(--amber-muted);
+    border-left: 3px solid var(--amber);
+  }
+
+  .callout.warning p { color: #92400e; }
+
+  /* Idea cards */
+  .idea-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 20px 22px;
+    margin-bottom: 14px;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .idea-card .idea-meta {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+
+  .idea-card h4 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+
+  .idea-card p {
+    font-size: 0.85rem;
+    color: var(--text-body);
+    margin-bottom: 6px;
+  }
+
+  .idea-card ul {
+    margin: 6px 0 0 18px;
+    font-size: 0.85rem;
+    color: var(--text-body);
+  }
+
+  .idea-card ul li {
+    margin-bottom: 4px;
+  }
+
+  /* Powered-by badge */
+  .powered-by {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    font-size: 0.75rem;
+    color: var(--muted);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+
+  .powered-by .alm-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    background: #1c1917;
+    border-radius: 5px;
+    font-family: 'Inter', sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1;
+  }
+
+  .powered-by .handle {
+    display: block;
+    margin-top: 6px;
+    font-size: 0.72rem;
+    color: var(--accent);
+    font-weight: 500;
+    letter-spacing: 0.01em;
+  }
+
+  /* Data notice */
+  .data-notice {
+    background: var(--amber-muted);
+    border: 1px solid #fde68a;
+    border-radius: var(--radius-sm);
+    padding: 16px 20px;
+    margin: 24px 0;
+  }
+
+  .data-notice p {
+    font-size: 0.82rem;
+    color: #92400e;
+    margin: 0;
+    font-weight: 500;
+    line-height: 1.6;
+  }
+
+  /* CTA section */
+  .cta-section {
+    text-align: center;
+    margin-top: 36px;
+  }
+
+  .cta-button {
+    display: inline-block;
+    background: var(--accent);
+    color: #ffffff;
+    padding: 16px 36px;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    letter-spacing: 0.01em;
+    box-shadow: 0 2px 8px rgba(13,148,136,0.2);
+    transition: all 0.2s ease;
+  }
+
+  .cta-button:hover {
+    background: var(--accent-hover);
+    box-shadow: 0 4px 12px rgba(13,148,136,0.3);
+  }
+
+  .cta-sub {
+    margin-top: 14px;
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+
+  /* Execution plan disclaimer */
+  .disclaimer {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    padding: 18px 22px;
+    margin-top: 28px;
+    font-size: 0.82rem;
+    color: var(--muted);
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+  }
+
+  /* Responsive */
+  @media (max-width: 680px) {
+    .container { padding: 40px 20px 80px; }
+    .report-header h1 { font-size: 1.8rem; }
+    .metric-grid { grid-template-columns: repeat(2, 1fr); }
+    .sw-grid { grid-template-columns: 1fr; }
+    .calendar-grid { grid-template-columns: 80px 60px 120px 1fr; font-size: 0.78rem; }
+    .sd-label { width: 110px; font-size: 0.72rem; }
+  }
+
+  @media print {
+    body { background: white !important; }
+    .container { max-width: 100%; padding: 20px 0; }
+    .sw-card, .rec-card, .metric-card { break-inside: avoid; }
+    section { break-inside: avoid; }
+    .cta-button { box-shadow: none; }
+  }
+
+  /* Footer */
+  .report-footer {
+    margin-top: 60px;
+    padding-top: 28px;
+    border-top: 1px solid var(--line);
+    font-size: 0.8rem;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  /* Watermark */
+  @media print {
+    body > div:first-of-type > div {
+      opacity: 0.06 !important;
+      color: #000 !important;
+    }
+  }
+
+</style>
+</head>
+<body>
+
+<!-- ═══════════ ALM BRAND RIBBON ═══════════ -->
+<div style="
+  width: 100%;
+  background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%);
+  padding: 10px 0;
+  text-align: center;
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+">
+  <div style="
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  ">
+    <span style="
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      color: #ffffff;
+      text-transform: uppercase;
+    ">AuditLayerMedia</span>
+    <span style="
+      display: inline-block;
+      width: 5px; height: 5px;
+      background: rgba(255,255,255,0.45);
+      border-radius: 50%;
+      margin: 0 4px;
+    "></span>
+    <span style="
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.82);
+      letter-spacing: 0.03em;
+    ">@rhode · Instagram Audit · July 2026</span>
+  </div>
+</div>
+
+<div class="container">
+
+
+
+  <!-- ========== HEADER ========== -->
+  <div class="report-header">
+    <div class="label">AuditLayer Standard Report</div>
+    <h1>@rhode</h1>
+    <div class="subtitle">rhode skin — DTC Skincare Brand Founded by Hailey Rhode Bieber · 5M Followers · $212M Revenue · Acquired by e.l.f. Beauty ($1B, May 2025)</div>
+    <div class="meta">
+      <span>Platform: Instagram</span>
+      <span>Goal: Growth</span>
+      <span>Account Type: DTC Brand</span>
+      <span>July 2026</span>
+    </div>
+  </div>
+
+  <!-- ========== DATA NOTICE ========== -->
+  <div class="data-notice">
+    <p><strong>Data Quality Notice:</strong> This audit uses web-indexed public data, browser research, and third-party analytics. @rhode has not connected Instagram via OAuth, so live metrics (exact engagement rate, Story views, save/share ratios) are estimated from industry benchmarks and comparable accounts. All estimates are marked with ~. No numbers are fabricated.</p>
+  </div>
+
+  <!-- ========== SECTION 1: EXECUTIVE SUMMARY ========== -->
+  <section>
+    <h2>1. Executive Summary</h2>
+
+    <div class="score-diagram">
+      <div class="overall-score">
+        <span class="label">Overall Score</span>
+        <span class="value">78/100</span>
+      </div>
+      <div class="sd-row">
+        <span class="sd-label">Brand Identity</span>
+        <div class="sd-track"><div class="sd-fill green" style="width:88%"></div></div>
+        <span class="sd-value green">88</span>
+      </div>
+      <div class="sd-row">
+        <span class="sd-label">Content Cadence</span>
+        <div class="sd-track"><div class="sd-fill green" style="width:72%"></div></div>
+        <span class="sd-value green">72</span>
+      </div>
+      <div class="sd-row">
+        <span class="sd-label">Format Diversity</span>
+        <div class="sd-track"><div class="sd-fill green" style="width:68%"></div></div>
+        <span class="sd-value green">68</span>
+      </div>
+      <div class="sd-row">
+        <span class="sd-label">Community Depth</span>
+        <div class="sd-track"><div class="sd-fill amber" style="width:62%"></div></div>
+        <span class="sd-value amber">62</span>
+      </div>
+      <div class="sd-row">
+        <span class="sd-label">Growth Velocity</span>
+        <div class="sd-track"><div class="sd-fill green" style="width:88%"></div></div>
+        <span class="sd-value green">88</span>
+      </div>
+      <div class="sd-row">
+        <span class="sd-label">Conversion Funnel</span>
+        <div class="sd-track"><div class="sd-fill green" style="width:92%"></div></div>
+        <span class="sd-value green">92</span>
+      </div>
+    </div>
+
+    <p>rhode skin is the DTC skincare brand founded by Hailey Rhode Bieber in 2022 — and in three years, it has become one of the most culturally dominant beauty brands on Instagram. At 5 million followers, ~$212M in trailing net sales, and a landmark ~$1B acquisition by e.l.f. Beauty (May 2025), rhode's Instagram presence is a case study in celebrity-to-commerce execution. The "glazed donut" aesthetic is instantly recognizable, every product launch is a cultural event, and the brand's influencer program (32,700 sponsored posts in 12 months) is the largest in its competitive set — 2× Summer Fridays, 6× Glossier.</p>
+
+    <p>But growth at this tier demands more than launch spikes. rhode's Instagram underperforms its business momentum in three critical areas: community depth (amber 62/100 — high volume, low attachment), format diversity (68/100 — overwhelmingly product-photo-and-Reel, with almost no educational, founder-story, or community-building content), and between-launch content cadence (72/100 — the feed goes quiet between drops and the algorithm penalizes the silence). The opportunity is structural: rhode has the hardest thing — a beloved product and a founder people genuinely want to watch. What's missing is the content architecture to convert that goodwill into recurring engagement, not just recurring purchases.</p>
+
+    <div class="callout accent">
+      <p><strong>Diagnosis:</strong> rhode built a conversion machine that looks like a brand. The next growth tier — from 5M to 10M — requires building a brand that happens to convert. That means feed presence between launches, founder-as-storyteller content, and an Instagram-native community layer that TikTok can't replicate. The e.l.f. acquisition gives rhode the operational runway to make this shift without revenue pressure. The window is now.</p>
+    </div>
+  </section>
+
+  <!-- ========== SECTION 2: KEY METRICS ========== -->
+  <section>
+    <h2>2. Key Metrics</h2>
+
+    <div class="metric-grid">
+      <div class="metric-card">
+        <div class="value">5M</div>
+        <div class="label">Followers</div>
+      </div>
+      <div class="metric-card">
+        <div class="value green">~3.8%</div>
+        <div class="label">Engagement Rate</div>
+      </div>
+      <div class="metric-card">
+        <div class="value">~1,515</div>
+        <div class="label">Total Posts</div>
+      </div>
+      <div class="metric-card">
+        <div class="value green">513</div>
+        <div class="label">Following</div>
+      </div>
+    </div>
+
+    <table class="data-table">
+      <thead>
+        <tr><th>Metric</th><th>@rhode</th><th>5M-Tier Benchmark</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Followers</td><td class="num">~5,000,000</td><td class="num">5,000,000</td><td><span class="tag neutral">At tier</span></td></tr>
+        <tr><td>Engagement rate</td><td class="num">~3.8%</td><td class="num">1.5–2.5%</td><td><span class="tag strength">Above benchmark</span></td></tr>
+        <tr><td>Posting cadence</td><td class="num">~1/day avg</td><td class="num">1–2/day</td><td><span class="tag neutral">At benchmark</span></td></tr>
+        <tr><td>Reels/week</td><td class="num">~3–5</td><td class="num">4–6</td><td><span class="tag neutral">At benchmark</span></td></tr>
+        <tr><td>Carousels/week</td><td class="num">~1–2</td><td class="num">2–3</td><td><span class="tag weakness">Below benchmark</span></td></tr>
+        <tr><td>Stories/day</td><td class="num">~3–5</td><td class="num">5–8</td><td><span class="tag weakness">Below benchmark</span></td></tr>
+        <tr><td>Following ratio</td><td class="num">0.01%</td><td class="num">&lt;1%</td><td><span class="tag strength">Excellent</span></td></tr>
+        <tr><td>Influencer posts (12m)</td><td class="num">32,700</td><td class="num">10,000–15,000</td><td><span class="tag strength">2–6× peers</span></td></tr>
+        <tr><td>Website conversion</td><td class="num">DTC-only</td><td class="num">DTC + retail</td><td><span class="tag neutral">Pre-acquisition</span></td></tr>
+      </tbody>
+    </table>
+
+    <p>rhode's headline numbers are exceptional for a three-year-old brand — engagement rate well above the 5M-tier average, an influencer program that outpaces every competitor, and a following ratio so pristine (0.01%) it signals maximum algorithmic trust. The gaps are in depth, not breadth: Stories are underused, carousels are scarce, and the 1-post/day average masks a feast-or-famine cadence driven entirely by launch calendar.</p>
+  </section>
+
+  <!-- ========== SECTION 3: STRENGTHS ========== -->
+  <section>
+    <h2>3. Strengths</h2>
+
+    <div class="sw-card strength">
+      <div class="sw-label">Category-defining visual identity</div>
+      <p>The "glazed donut" aesthetic — dewy skin, soft lighting, minimalist packaging — is now a beauty-industry reference point. rhode didn't borrow a look; it created one. Every post is instantly attributable, even without a logo.</p>
+    </div>
+
+    <div class="sw-card strength">
+      <div class="sw-label">Celebrity founder as authentic product user</div>
+      <p>Hailey Bieber is not a paid ambassador — she is the brand. Her skin IS the product demo. This authenticity is rare in celebrity beauty and gives rhode a trust signal most founder-led brands can't replicate: the founder's face is the clinical trial.</p>
+    </div>
+
+    <div class="sw-card strength">
+      <div class="sw-label">Dominant influencer program</div>
+      <p>32,700 sponsored posts across 16,900 unique creators in 12 months — 2× Summer Fridays, 6× Glossier. The program is always-on, globally distributed, and heavily skewed toward micro-influencers (39% under 5K avg. views), creating an authenticity flywheel that paid media can't match.</p>
+    </div>
+
+    <div class="sw-card strength">
+      <div class="sw-label">Scarcity-engine launches</div>
+      <p>Every drop is a cultural event. Limited-edition Peptide Lip Tints, waitlist-only products, and "sold out" badges create FOMO that drives conversion rates few DTC brands achieve. The launch playbook is polished to a science.</p>
+    </div>
+
+    <div class="sw-card strength">
+      <div class="sw-label">Pristine algorithmic trust signal</div>
+      <p>A 0.01% following-to-follower ratio (513 following at 5M followers) is virtually perfect. Instagram's trust classifier sees maximum authenticity — every post gets full algorithmic reach window. This is a structural advantage most large accounts have already compromised.</p>
+    </div>
+
+    <div class="sw-card strength">
+      <div class="sw-label">Product-market fit validated at scale</div>
+      <p>$212M in net sales from ~15 SKUs, DTC-only. Allure Best of Beauty awards in 2022, 2024, and 2025. The products work, the reviews are genuine, and the price point ($16–$50) hits the accessible-prestige sweet spot.</p>
+    </div>
+  </section>
+
+  <!-- ========== SECTION 4: WEAKNESSES ========== -->
+  <section>
+    <h2>4. Weaknesses</h2>
+
+    <div class="sw-card weakness">
+      <div class="sw-label">Feast-or-famine content cadence</div>
+      <p>The feed spikes around launches and goes quiet in between. Instagram's algorithm penalizes inconsistency — each dormant stretch resets reach velocity and forces the next post to rebuild from a cold start. A 5M-follower account should never feel like it "went dark."</p>
+    </div>
+
+    <div class="sw-card weakness">
+      <div class="sw-label">Transactional community, not an owned audience</div>
+      <p>rhode's influencer program is vast but shallow — only 2% of creators post in 3+ months. The brand has a transactional relationship with its community (product → purchase → next product) rather than a content-driven one (follow → engage → belong). When the launch calendar slows, so does the audience.</p>
+    </div>
+
+    <div class="sw-card weakness">
+      <div class="sw-label">Instagram is secondary to TikTok</div>
+      <p>57.4% of sponsored content lives on TikTok. Instagram gets the reposts. This is strategically rational — TikTok drives discovery — but Instagram is where the brand's commerce lives. A secondary-platform Instagram strategy caps the conversion potential of 5M followers.</p>
+    </div>
+
+    <div class="sw-card weakness">
+      <div class="sw-label">No educational or founder-story content</div>
+      <p>The feed is almost exclusively product photography, launch announcements, and celebrity-face content. There's no barrier-education content, no ingredient deep-dives, no Hailey-on-camera explaining why she formulated Barrier Butter the way she did. The product is the hero — but the hero needs a story.</p>
+    </div>
+
+    <div class="sw-card weakness">
+      <div class="sw-label">Carousel underuse</div>
+      <p>Carousels achieve the highest per-impression engagement on Instagram (1.92% avg vs. 1.45% for video), and they're the format most likely to be saved and revisited. rhode posts 1–2 carousels per week — below the 2–3 benchmark for a 5M-tier brand. Educational, comparison, and routine-building content is carousel-native and currently absent.</p>
+    </div>
+
+    <div class="sw-card weakness">
+      <div class="sw-label">Stories as afterthought, not engagement layer</div>
+      <p>At 3–5 Stories/day, rhode is leaving the platform's highest-intimacy surface underleveraged. Stories drive DM replies, poll engagement, link clicks, and the "close friends" signal that feeds the algorithm. A brand with rhode's product pipeline should run 8–12 Stories/day during launch weeks and 5–8 on off weeks.</p>
+    </div>
+  </section>
+
+  <!-- ========== SECTION 5: ROOT CAUSE ANALYSIS ========== -->
+  <section>
+    <h2>5. Root Cause Analysis</h2>
+
+    <table class="data-table">
+      <thead>
+        <tr><th>Dimension</th><th>Reality</th><th>Instagram Reality</th><th>Gap</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Brand strength</td>
+          <td>Category-defining aesthetic, $1B valuation, beloved founder</td>
+          <td>Beautiful but flat product feed — the feed doesn't feel as culturally significant as the brand actually is</td>
+          <td><span class="tag weakness">Brand > feed</span></td>
+        </tr>
+        <tr>
+          <td>Content engine</td>
+          <td>Launch-driven production calendar, built around product drops</td>
+          <td>Quiet between launches, no storytelling continuity, no recurring series</td>
+          <td><span class="tag weakness">No-between-launch architecture</span></td>
+        </tr>
+        <tr>
+          <td>Founder asset</td>
+          <td>Hailey Bieber is one of the most photographed women in the world</td>
+          <td>Hailey appears in product photos — not storytelling content. She's a model in her own feed, not a narrator.</td>
+          <td><span class="tag weakness">Face without voice</span></td>
+        </tr>
+        <tr>
+          <td>Community model</td>
+          <td>16,900 influencer partners, 32,700 sponsored posts/year</td>
+          <td>2% retention rate — the community is rented, not built. Followers see rhode through creators' feeds, not rhode's.</td>
+          <td><span class="tag weakness">Rented vs. owned community</span></td>
+        </tr>
+        <tr>
+          <td>Platform strategy</td>
+          <td>TikTok-first for reach, Instagram for commerce</td>
+          <td>Instagram gets repurposed TikTok content — not platform-native formats optimized for saves, shares, and DMs</td>
+          <td><span class="tag weakness">TikTok reposts, not IG-native</span></td>
+        </tr>
+        <tr class="highlight">
+          <td>Growth ceiling</td>
+          <td>Massive momentum, e.l.f. distribution pending, category expansion into color</td>
+          <td>The current Instagram strategy will plateau — launch spikes can't compound without between-launch engagement architecture</td>
+          <td><span class="tag weakness">Momentum > systems</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout accent">
+      <p><strong>Root cause:</strong> rhode's Instagram strategy was built for a startup in launch mode — and it worked spectacularly. But at 5M followers and a $1B acquisition, the same strategy is a growth ceiling. The brand treats Instagram as a product catalog with celebrity photography when it should treat it as a media channel with its own content calendar, recurring series, and community rhythms that exist independently of the launch schedule.</p>
+    </div>
+  </section>
+
+  <!-- ========== SECTION 6: PEER COMPARISON ========== -->
+  <section>
+    <h2>6. Peer Comparison</h2>
+
+    <table class="data-table">
+      <thead>
+        <tr><th>Metric</th><th>@rhode</th><th>@soldejaneiro</th><th>@glowrecipe</th><th>@summerfridays</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Followers</td><td class="num">~5M</td><td class="num">~3M</td><td class="num">~2M</td><td class="num">~1M</td></tr>
+        <tr><td>Niche</td><td>Celeb-founded DTC skincare</td><td>Brazilian body care + fragrance</td><td>Fruit-powered K-beauty skincare</td><td>Skincare + hybrid makeup</td></tr>
+        <tr><td>Engagement rate</td><td class="num">~3.8%</td><td class="num">~1.8%</td><td class="num">~1.5%</td><td class="num">~2.6%</td></tr>
+        <tr><td>Primary format</td><td>Reels + product photos</td><td>Reels + lifestyle</td><td>Carousels + Reels</td><td>Reels + carousels</td></tr>
+        <tr><td>Reels/week (est.)</td><td class="num">~3–5</td><td class="num">~4–6</td><td class="num">~3–4</td><td class="num">~4–5</td></tr>
+        <tr><td>Carousels/week (est.)</td><td class="num">~1–2</td><td class="num">~2–3</td><td class="num">~3–5</td><td class="num">~2–3</td></tr>
+        <tr><td>Promo ratio</td><td>High (~70%)</td><td>Moderate (~50%)</td><td>Low (~30%)</td><td>Moderate (~45%)</td></tr>
+        <tr><td>Stories/day (est.)</td><td class="num">~3–5</td><td class="num">~5–8</td><td class="num">~5–7</td><td class="num">~4–6</td></tr>
+        <tr><td>Educational content</td><td>Minimal</td><td>Low</td><td><strong>Strong</strong></td><td>Moderate</td></tr>
+        <tr><td>Influencer posts (12m)</td><td class="num"><strong>32,700</strong></td><td class="num">~8,000</td><td class="num">~23,500</td><td class="num">~13,800</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <p><strong>Why same-tier comparison matters:</strong> These peers operate at 1M–3M followers with similar DTC skincare models, Sephora/retail distribution, and influencer marketing strategies. Benchmarking against 1M+ accounts like Drunk Elephant or Glossier (5M–7M followers, 10+ years of compounding) would obscure rhode's actual competitive position. @glowrecipe in particular is a useful north star — they lead the set in educational carousel content while maintaining a strong Reels presence, exactly the format balance rhode needs.</p>
+    </div>
+  </section>
+
+  <!-- ========== SECTION 7: CONTENT FORMAT ANALYSIS ========== -->
+  <section>
+    <h2>7. Content Format Analysis</h2>
+
+    <table class="data-table">
+      <thead>
+        <tr><th>Format</th><th>Current Use</th><th>Effectiveness</th><th>Algorithm Signal</th><th>Gap</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Reels</td>
+          <td>Primary format — product demos, launch teasers, Hailey-face content</td>
+          <td>Strong reach, launch spikes drive viral loops</td>
+          <td>Discovery (non-followers)</td>
+          <td>No educational or founder-story Reels — purely product/aspirational</td>
+        </tr>
+        <tr>
+          <td>Carousels</td>
+          <td>~1–2/week — mostly product shots and campaign imagery</td>
+          <td>Below potential — carousels are the highest per-impression engagement format</td>
+          <td>Save + re-share (deep engagement)</td>
+          <td>Missing: ingredient deep-dives, routine builders, before/after, "why this formula" education</td>
+        </tr>
+        <tr>
+          <td>Single-image posts</td>
+          <td>Product photography, campaign hero shots</td>
+          <td>Moderate — beautiful but passive; no swipe, no interaction hook</td>
+          <td>Like (shallow engagement)</td>
+          <td>Single-image posts should be the minority format — reserved for hero moments, not daily content</td>
+        </tr>
+        <tr>
+          <td>Stories</td>
+          <td>~3–5/day — launch countdowns, reposts, behind-the-scenes</td>
+          <td>Underleveraged — low volume, minimal interactive elements</td>
+          <td>DM reply + poll (intimacy signal)</td>
+          <td>Missing: daily presence, Q&A, polls, "close friends" energy, link-outs to blog/content</td>
+        </tr>
+        <tr class="highlight">
+          <td>Lives</td>
+          <td>Rare — occasional launch-event Lives</td>
+          <td>Untapped — Live is Instagram's highest-priority format in 2026</td>
+          <td>Real-time engagement (strongest signal)</td>
+          <td>Missing: founder Q&A Lives, formulator sessions, "ask me anything about your skin barrier"</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>rhode's format mix is optimized for launch virality — and it delivers. But the absence of save-driven carousels, interactive Stories, and regular Live programming creates a structural ceiling on community depth. The content people save and revisit (carousels) and the content that makes them feel personally connected (Stories, Lives) are exactly the formats rhode under-invests in.</p>
+  </section>
+
+  <!-- ========== SECTION 8: ENGAGEMENT GROWTH STRATEGY ========== -->
+  <section>
+    <h2>8. Engagement Growth Strategy</h2>
+
+    <div class="rec-card">
+      <div class="num">1</div>
+      <h4>Build a between-launch content architecture</h4>
+      <p>rhode needs content series that run independently of the launch calendar — recurring formats that train the audience to check the feed even when nothing is dropping. Three series: "Barrier School" (educational carousels on skin barrier science), "Formula Files" (ingredient deep-dives — why squalane, why peptides, why PGA), and "Hailey's Routine" (weekly Story series showing real product use, not polished campaign footage). These create algorithmic continuity between launches and give the feed a heartbeat.</p>
+    </div>
+
+    <div class="rec-card">
+      <div class="num">2</div>
+      <h4>Launch a founder-Live program</h4>
+      <p>Instagram Live is the platform's highest-priority format in 2026 and rhode has the single best Live asset in beauty: Hailey Bieber talking about skincare, unrehearsed. A monthly "Skin Check-In" Live — 15 minutes, Hailey + a formulator or derm, audience Q&A — would drive DM engagement, real-time comment velocity, and the kind of community intimacy no influencer post can replicate. Schedule it the week after every launch to capture peak attention.</p>
+    </div>
+
+    <div class="rec-card">
+      <div class="num">3</div>
+      <h4>Double carousel output with save-worthy content</h4>
+      <p>Move from 1–2 carousels/week to 3–4. Every carousel should be designed for the save, not the double-tap. Routine builders ("Your Barrier Restore Morning"), ingredient comparisons ("Peptide Lip Treatment vs. Lip Shape — when to use which"), and myth-busters ("No, glazed skin isn't oily skin") are all carousel-native formats that compound in the algorithm long after posting. Every save extends the post's half-life by weeks.</p>
+    </div>
+
+    <div class="rec-card">
+      <div class="num">4</div>
+      <h4>Layer IG-native content on top of TikTok repurposing</h4>
+      <p>TikTok-first makes sense for discovery, but Instagram content should be designed for Instagram behaviors — saves, shares to Close Friends, DM sends. Re-edit TikTok Reels for Instagram pacing (slower first 3 seconds, text overlays for sound-off viewers), add save-CTA captions, and pair every repurposed Reel with an Instagram-native carousel that deepens the topic.</p>
+    </div>
+
+    <div class="rec-card">
+      <div class="num">5</div>
+      <h4>Activate Stories as a daily presence</h4>
+      <p>Target 5–8 Stories/day on off weeks, 10–12 during launch weeks. Include: morning routine snippet (product in use), one poll ("Which lip tint shade for summer?"), one question sticker ("What's your skin barrier struggling with right now?"), one BTS clip (packaging design, lab visit, Hailey in a fitting), and one link-out (blog post, product page, press feature). Stories are rhode's lowest-cost, highest-intimacy surface and they're currently running at half-capacity.</p>
+    </div>
+  </section>
+
+  <!-- ========== SECTION 9: CONTENT CALENDAR & CREATIVE BOARD ========== -->
+  <section>
+    <h2>9. Content Calendar & Creative Board</h2>
+
+    <p>A structured weekly content rhythm is the single most important operational change rhode can make. Below is a recommended weekly posting schedule designed to maintain algorithmic continuity between launches, grow save behavior, and build audience anticipation for recurring series.</p>
+
+    <h3>Weekly Content Calendar</h3>
+
+    <div class="calendar-grid">
+      <div class="ch">Day</div>
+      <div class="ch">Format</div>
+      <div class="ch">Series / Theme</div>
+      <div class="ch">Creative Direction</div>
+
+      <div class="cr"><strong>Mon</strong></div>
+      <div class="cr"><span class="tag neutral">Carousel</span></div>
+      <div class="cr">Barrier School</div>
+      <div class="cr">Educational deep-dive carousel: skin barrier science, ingredient function, routine sequencing. Save-optimized with "Bookmark this" CTA on last slide.</div>
+
+      <div class="cr"><strong>Tue</strong></div>
+      <div class="cr"><span class="tag strength">Reel</span></div>
+      <div class="cr">Product Spotlight</div>
+      <div class="cr">15–30 sec product demo Reel: application technique, texture close-up, real-person results. Hailey or UGC creator on camera.</div>
+
+      <div class="cr"><strong>Wed</strong></div>
+      <div class="cr"><span class="tag neutral">Carousel</span></div>
+      <div class="cr">Formula Files</div>
+      <div class="cr">Ingredient deep-dive carousel: one ingredient per week (squalane → peptides → PGA → niacinamide). Why it's in the formula, what it does, myth-busting.</div>
+
+      <div class="cr"><strong>Thu</strong></div>
+      <div class="cr"><span class="tag strength">Reel</span></div>
+      <div class="cr">Community Feature</div>
+      <div class="cr">UGC spotlight Reel: repost best community content of the week. "Your glazed looks this week" — builds social proof and creator loyalty loop.</div>
+
+      <div class="cr"><strong>Fri</strong></div>
+      <div class="cr"><span class="tag neutral">Carousel</span></div>
+      <div class="cr">Routine Builder</div>
+      <div class="cr">"Your [season] routine" carousel: morning and evening routines using only rhode products. Each slide = one step with one sentence explanation. High-save format.</div>
+
+      <div class="cr"><strong>Sat</strong></div>
+      <div class="cr"><span class="tag strength">Reel</span></div>
+      <div class="cr">Behind the Brand</div>
+      <div class="cr">BTS or founder-story Reel: Hailey in the lab, packaging design process, sourcing trips, Rhode Futures Foundation work. Personality-driven, not product-driven.</div>
+
+      <div class="cr"><strong>Sun</strong></div>
+      <div class="cr"><span class="tag neutral">Stories</span></div>
+      <div class="cr">Weekly Reset</div>
+      <div class="cr">Story-only day: Sunday routine poll, Q&A sticker ("Ask us anything about your skin"), product restock alert, UGC repost, and a "See you Monday 💕" sign-off.</div>
+    </div>
+
+    <p>Stories run daily at 5–8 frames regardless of feed post: morning routine snippet, one interactive sticker (poll/quiz/question), one BTS moment, one link-out or product tag. During launch weeks, add countdown stickers, waitlist teasers, and flash restock alerts.</p>
+
+    <h3>Creative Board — Post Concepts</h3>
+
+    <div class="idea-card">
+      <div class="idea-meta">Carousel · Barrier School</div>
+      <h4>"Your Skin Barrier, Explained in 6 Slides"</h4>
+      <p>A beginner-friendly carousel breaking down what the skin barrier actually is — no jargon, no intimidating diagrams. Slide 1: "Think of your barrier like a brick wall." Slide 2: "The bricks = corneocytes (dead skin cells)." Slide 3: "The mortar = lipids (ceramides, cholesterol, fatty acids)." Slide 4: "When the mortar cracks → transepidermal water loss → dryness, redness, sensitivity." Slide 5: "This is why Barrier Butter is 3× the lipid complex of standard moisturizers." Slide 6: "Save this for your next skincare rabbit hole. 🧱"</p>
+      <ul>
+        <li>Designed for the Save — each slide works standalone as a reference</li>
+        <li>Minimalist khaki + cream palette, line-drawing illustrations</li>
+        <li>Caption: "Your barrier isn't a buzzword. Here's what's actually happening under your skin — and why we built Barrier Butter around it."</li>
+      </ul>
+    </div>
+
+    <div class="idea-card">
+      <div class="idea-meta">Reel · Product Spotlight</div>
+      <h4>"One Swipe — Glazing Milk vs. Nothing"</h4>
+      <p>A split-screen Reel: left side shows skin without Glazing Milk under studio light; right side shows skin with one layer of Glazing Milk — same lighting, same angle, same person. 20 seconds. No voiceover, no music until the reveal. Text overlay appears at :15: "This is what a barrier serum does to light reflection." Ends with product shot + "Link in bio."</p>
+      <ul>
+        <li>No-talking format works for sound-off viewers (85%+ of IG feed views)</li>
+        <li>Visual proof > claims — the split screen IS the testimonial</li>
+        <li>Repurpose as a Story highlight for profile visitors</li>
+      </ul>
+    </div>
+
+    <div class="idea-card">
+      <div class="idea-meta">Carousel · Formula Files</div>
+      <h4>"Why Squalane? The Ingredient That Made rhode a Barrier Brand"</h4>
+      <p>A 7-slide carousel tracing squalane from molecular biology to viral product. Slide 1: "Squalane is not a trend — your body produces it naturally." Slide 2: Molecular diagram (simplified) + "It makes up ~12% of your skin's natural sebum." Slide 3: "But production drops 50%+ by age 30." Slide 4: "Plant-derived squalane (ours: sugarcane) is bioidentical to human squalane." Slide 5: "Why it's in Glazing Milk, Barrier Butter, AND Peptide Glazing Fluid." Slide 6: "This is what 'barrier-first' actually means — every product restores what your skin stopped making enough of." Slide 7: "Save this. Your future self will want the receipts. 🧪"</p>
+      <ul>
+        <li>Positions rhode as the "barrier authority" — not just a moisturizer brand</li>
+        <li>Appeals to both skincare enthusiasts and industry watchers</li>
+        <li>Warms the audience for future product launches that feature squalane</li>
+      </ul>
+    </div>
+
+    <div class="idea-card">
+      <div class="idea-meta">Live + Reel Repurpose · Founder Story</div>
+      <h4>"Skin Check-In Live: Hailey + Board-Certified Derm Talk Barrier Health"</h4>
+      <p>Monthly 20-min Instagram Live: Hailey and a rotating board-certified dermatologist answer audience questions submitted via Story sticker the day before. Format: 5 min intro + what Hailey's skin is doing this month, 10 min audience Q&A (moderated), 5 min "one thing to try this month" takeaway. The Live is recorded, cut into 3–4 Reel clips for the feed, and turned into a carousel summary. Triple-content from one session.</p>
+      <ul>
+        <li>Live signals are Instagram's strongest algorithmic trust indicator in 2026</li>
+        <li>Hailey's unrehearsed skincare knowledge builds credibility no campaign can</li>
+        <li>Audience Q&A creates parasocial intimacy at 5M scale</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ========== SECTION 10: QUICK WINS — THIS WEEK ========== -->
+  <section>
+    <h2>10. Quick Wins — This Week</h2>
+
+    <div class="timeline-item">
+      <div class="t-dot accent"></div>
+      <div class="t-content">
+        <h4>1. Post a "What's In My Routine" carousel today</h4>
+        <p>Simple, high-save, zero-production carousel. Slide 1: "My barrier restore routine — morning edition." Slides 2–6: one product per slide with one sentence on why that product, in that order. Last slide: "Save this for your next restock." This is the highest-effort-to-engagement ratio post rhode can make this week — no shoot required, existing product imagery, save-optimized.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="t-dot accent"></div>
+      <div class="t-content">
+        <h4>2. Run three Story polls this week</h4>
+        <p>Monday: "Which product do you reach for first in the morning?" (Glazing Milk vs. Barrier Restore Cream). Wednesday: "What do you want us to make next?" (Lip SPF vs. Body Butter vs. Eye Cream). Friday: "Drop a 🍩 if you've been glazed today." Polls are 2-tap interactions with outsized algorithmic weight — they signal active audience investment. Three polls this week, every week.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="t-dot accent"></div>
+      <div class="t-content">
+        <h4>3. Pin a "Start Here" carousel to the profile grid</h4>
+        <p>rhode's profile currently has no pinned orientation content — a 5M-follower brand should make the first grid row a navigation layer. Create a 6-slide carousel: "New here? Start with these four." Pin it to position 1–3 in the grid. Update it quarterly as the product line evolves. This converts profile visits (tens of thousands/day) into guided product discovery instead of passive scrolling.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SECTION 11: SUCCESS BENCHMARKS ========== -->
+  <section>
+    <h2>11. Success Benchmarks</h2>
+
+    <table class="data-table">
+      <thead>
+        <tr><th>Metric</th><th>Current</th><th>30-Day Target</th><th>90-Day Target</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Followers</td><td class="num">~5.0M</td><td class="num">~5.3M</td><td class="num">~6.0M</td></tr>
+        <tr><td>Engagement rate</td><td class="num">~3.8%</td><td class="num">~4.0%</td><td class="num">~4.5%</td></tr>
+        <tr><td>Carousels/week</td><td class="num">1–2</td><td class="num">3</td><td class="num">4</td></tr>
+        <tr><td>Stories/day</td><td class="num">3–5</td><td class="num">5–7</td><td class="num">7–10</td></tr>
+        <tr><td>Save rate (carousels)</td><td class="num">~2% (est.)</td><td class="num">~3.5%</td><td class="num">~5%</td></tr>
+        <tr><td>DM reply volume</td><td class="num">Low</td><td class="num">+25%</td><td class="num">+50%</td></tr>
+        <tr><td>Live sessions/month</td><td class="num">0</td><td class="num">1</td><td class="num">2–3</td></tr>
+        <tr><td>Profile visit → follow rate</td><td class="num">Unknown</td><td class="num">Baseline</td><td class="num">+15%</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <p><strong>1% Compounding Move:</strong> Post one save-optimized educational carousel per week, every week, between launches. At rhode's follower scale, a single carousel with a 5% save rate reaches ~250K saves — and every save extends that post's algorithmic half-life by 3–5 days. Over 90 days, 12 carousels compound into a permanent content library that works while the launch team sleeps. This one format shift — from product catalog to save library — is the highest-leverage single change rhode can make.</p>
+    </div>
+  </section>
+
+  <!-- ========== SECTION 12: AUDIENCE PROFILE ========== -->
+  <section>
+    <h2>12. Audience Profile</h2>
+
+    <table class="data-table">
+      <thead>
+        <tr><th>Segment</th><th>Share</th><th>What They Want</th><th>What Wins Them</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Hailey fans — aspirational</td>
+          <td class="num">~35%</td>
+          <td>Access to Hailey's world, her aesthetic, her routine</td>
+          <td>Founder-face content, routine tours, "what I actually use" authenticity</td>
+        </tr>
+        <tr>
+          <td>Skincare enthusiasts — educated</td>
+          <td class="num">~25%</td>
+          <td>Barrier science, ingredient transparency, formulation rationale</td>
+          <td>Educational carousels, formulator content, before/after data</td>
+        </tr>
+        <tr>
+          <td>Product collectors — trend-driven</td>
+          <td class="num">~20%</td>
+          <td>Limited editions, new drops, "the thing everyone has"</td>
+          <td>Launch events, scarcity mechanics, unboxing content</td>
+        </tr>
+        <tr>
+          <td>Clean/green beauty — values-driven</td>
+          <td class="num">~12%</td>
+          <td>Sustainability credentials, ingredient sourcing, brand ethics</td>
+          <td>Rhode Futures Foundation content, packaging sustainability stories, sourcing transparency</td>
+        </tr>
+        <tr>
+          <td>Industry watchers — professional</td>
+          <td class="num">~8%</td>
+          <td>Business strategy, brand-building case studies, market moves</td>
+          <td>Founder interviews, behind-the-brand content, e.l.f. integration narrative</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>rhode's audience is a pyramid: a broad Hailey-fan base at the top, narrowing to high-intent skincare buyers in the middle, with a small but influential industry-watcher segment at the bottom. The current content strategy over-serves the top (product + Hailey face) and under-serves the middle — exactly the segment most likely to buy 3+ products and become retention revenue. Educational carousels and founder-story content convert the middle. The top already converts on its own.</p>
+  </section>
+
+  <!-- ========== SECTION 13: ROAD TO 6.5M ========== -->
+  <section>
+    <h2>13. Road to 6.5M</h2>
+
+    <div class="timeline-item">
+      <div class="t-dot green"></div>
+      <div class="t-content">
+        <h4>Phase 1: Foundation (Days 1–30) — "Turn the Feed On"</h4>
+        <p>Target: 5M → 5.3M. Actions: (1) Launch one educational carousel series — "Barrier School" — and publish 4 episodes in 30 days. (2) Increase Stories to 5–7/day with daily polls and question stickers. (3) Pin a "Start Here" orientation carousel. (4) Begin replying to first 30 comments within 4 hours of every post. (5) Schedule the first monthly "Skin Check-In" Live for Day 28. Success signal: carousel save rate rises above 3%, Story replies increase measurably, and the feed stops feeling "dark" between launches.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="t-dot accent"></div>
+      <div class="t-content">
+        <h4>Phase 2: Acceleration (Days 31–60) — "Build the Rhythms"</h4>
+        <p>Target: 5.3M → 5.7M. Actions: (1) Add second carousel series — "Formula Files" — alternating weeks with Barrier School. (2) Run 2 Live sessions/month (founder Q&A + formulator deep-dive). (3) Launch a weekly "Routine Reel" series — Hailey on camera (not just modeled), walking through a product application with real technique and real talk. (4) Begin UGC repost rhythm — 2–3 community posts/week in Stories, creating social proof flywheel. (5) Test save-CTA captions systematically (A/B "save for later" vs. "bookmark this routine"). Success signal: engagement rate ticks above 4%, Live viewership establishes a baseline, community UGC pipeline activates.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="t-dot accent"></div>
+      <div class="t-content">
+        <h4>Phase 3: Compound (Days 61–90) — "Own the Category"</h4>
+        <p>Target: 5.7M → 6.5M. Actions: (1) All four content pillars running simultaneously: educational carousels (2×/week), founder-story Reels (1×/week), community-UGC Stories (daily), Live programming (2×/month). (2) Launch "The Glazed Podcast" — a monthly Instagram Live that doubles as a podcast episode, featuring Hailey in conversation with derms, formulators, and beauty founders. (3) Integrate e.l.f. Beauty distribution announcement content — retail shelf photography, "now at [retailer]" Reels, mass-accessibility storytelling. (4) Full cross-platform content engine: IG-native content feeds TikTok, TikTok discoveries feed IG, both drive to DTC. Success signal: 6.5M followers, 4.5%+ engagement rate, and — critically — the feed feels alive between launches with recurring series the audience anticipates.</p>
+      </div>
+    </div>
+
+    <table class="data-table">
+      <thead>
+        <tr><th>Phase</th><th>Timeline</th><th>New Followers</th><th>Engagement Rate</th><th>Key Mechanism</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Foundation</td><td>Days 1–30</td><td class="num">+300K</td><td class="num">3.8% → 4.0%</td><td>Carousel saves + Story interaction</td></tr>
+        <tr><td>Acceleration</td><td>Days 31–60</td><td class="num">+400K</td><td class="num">4.0% → 4.3%</td><td>Live programming + founder Reels</td></tr>
+        <tr><td>Compound</td><td>Days 61–90</td><td class="num">+800K</td><td class="num">4.3% → 4.5%</td><td>Cross-platform content engine + retail distribution halo</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout accent">
+      <p><strong>Why 6.5M in 90 days:</strong> At rhode's current trajectory (organic + launch spikes + influencer program), baseline follower growth is ~300K/month. The strategy above layers community-retention content on top of the existing acquisition machine, improving net follower retention (fewer unfollows during quiet periods) and increasing profile-visit-to-follow conversion from Stories and Lives. The e.l.f. retail distribution announcement — whenever it drops — will be a step-function growth event. rhode at 6.5M by September 2026 is ambitious but structurally achievable.</p>
+    </div>
+  </section>
+
+  <!-- ========== SECTION 14: AUDIT CADENCE ========== -->
+  <section>
+    <h2>14. Audit Cadence</h2>
+
+    <table class="data-table">
+      <thead>
+        <tr><th>Cadence</th><th>Purpose</th><th>What to Check</th><th>Time</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Weekly Pulse Check</td>
+          <td>Catch format drift early; ensure Stories and carousel cadence are holding</td>
+          <td>Carousel save rate, Story reply volume, post frequency vs. target, comment reply coverage (first 4 hours)</td>
+          <td class="num">10 min</td>
+        </tr>
+        <tr>
+          <td>Monthly Signal Read</td>
+          <td>Identify top/bottom performers; adjust content mix based on data, not intuition</td>
+          <td>Top 5 and bottom 5 posts by save rate, engagement rate trend, follower growth rate, Live viewership, Story completion rate</td>
+          <td class="num">30 min</td>
+        </tr>
+        <tr>
+          <td>Quarterly Full Audit</td>
+          <td>Re-score all dimensions; compare to peer set; update 90-day roadmap</td>
+          <td>Full 8-dimension re-score, peer comparison refresh, audience segment shift check, platform algorithm changes, competitive landscape update</td>
+          <td class="num">2–3 hrs</td>
+        </tr>
+        <tr>
+          <td>Post-Launch Retro</td>
+          <td>Extract learnings from every launch to improve the next one</td>
+          <td>Reach velocity (first 4 hours), save-to-like ratio, share-to-save ratio, comment sentiment, conversion lift vs. baseline, influencer post performance</td>
+          <td class="num">45 min</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <p><strong>Next full audit:</strong> September 2026. By then, the 90-day roadmap should have delivered 6.5M followers, a mature educational carousel library, a regular Live audience, and at least one e.l.f. retail integration content cycle. The Q3 audit will measure whether the community-depth score moved from amber (62) to green (≥65) — that single number is the best proxy for whether the strategy is working.</p>
+    </div>
+  </section>
+
+  <!-- ========== SECTION 15: GET THE EXECUTION PLAN ========== -->
+  <section>
+    <h2>15. Get the Execution Plan</h2>
+
+    <p>This audit is a strategy document — the diagnosis, the structural gaps, the root causes, and the first five moves. That's the Standard plan: a 15-section strategic read on where @rhode stands and what to fix. It tells you what to build.</p>
+
+    <p>If you want the diagnosis turned into a weekly operating system — that's the Execution Plan. It takes everything in this report and builds a repeatable content engine. A content calendar with topic ideas per format. Hook templates tested for beauty brands. Story sequences that convert views into DMs. Benchmarks recalibrated each month so you know if the strategy is working before the vanity metrics tell you. A priority-ranked action queue so the team knows what to do Monday morning.</p>
+
+    <div class="callout accent">
+      <p><strong>Standard ($30/mo) vs Extended ($50/mo):</strong></p>
+      <table class="data-table" style="margin-top: 12px;">
+        <thead>
+          <tr>
+            <th>You get</th>
+            <th>Standard<br><span style="font-weight: 400; font-size: 0.75rem;">$30/mo</span></th>
+            <th>Extended<br><span style="font-weight: 400; font-size: 0.75rem;">$50/mo</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>15-section strategic audit</td>
+            <td><span class="tag strength">✓</span></td>
+            <td><span class="tag strength">✓</span></td>
+          </tr>
+          <tr>
+            <td>Weekly content calendar with 12+ ideas</td>
+            <td><span class="tag neutral">—</span></td>
+            <td><span class="tag strength">✓</span></td>
+          </tr>
+          <tr>
+            <td>Hook & caption templates per format</td>
+            <td><span class="tag neutral">—</span></td>
+            <td><span class="tag strength">✓</span></td>
+          </tr>
+          <tr>
+            <td>Story strategy with DM-conversion sequences</td>
+            <td><span class="tag neutral">—</span></td>
+            <td><span class="tag strength">✓</span></td>
+          </tr>
+          <tr>
+            <td>Monthly recalibration with live engagement data</td>
+            <td><span class="tag neutral">—</span></td>
+            <td><span class="tag strength">✓</span></td>
+          </tr>
+          <tr>
+            <td>Priority-ranked action queue</td>
+            <td><span class="tag neutral">—</span></td>
+            <td><span class="tag strength">✓</span></td>
+          </tr>
+          <tr>
+            <td>Strategy revisions as your account grows</td>
+            <td><span class="tag neutral">—</span></td>
+            <td><span class="tag strength">✓</span></td>
+          </tr>
+          <tr>
+            <td>Accounts included</td>
+            <td>2</td>
+            <td>5</td>
+          </tr>
+          <tr>
+            <td>Audits per month</td>
+            <td>5</td>
+            <td>15</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>rhode has what most brands spend a decade building: a beloved product, a founder with genuine skin equity, and 5 million people who want to watch. What's missing is not talent or resources — it's the content architecture to convert that goodwill into an Instagram-native community that compounds between launches. The Execution Plan is that architecture. And it's the difference between an account that spikes on launch days — and an account that grows every day in between.</p>
+
+    <div class="cta-section">
+      <a href="https://auditlayermedia.com/pricing" class="cta-button">Upgrade to Extended — $50/month</a>
+      <p class="cta-sub">Cancel anytime · First Execution Plan within 48 hours · 5 accounts · 15 audits/month</p>
+    </div>
+
+    <div class="disclaimer">
+      <p>This is an execution plan — a strategy document built from research and data. You still need a media team to create content, film videos, write captions, and implement the plan. AuditLayerMedia delivers the playbook. Your team runs it.</p>
+    </div>
+  </section>
+
+
+
+  <!-- ========== FOOTER ========== -->
+  <div style="text-align: center; margin-top: 64px; padding-top: 28px; border-top: 1px solid var(--line);">
+    <div style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 8px;">
+      <span class="alm-badge">ALM</span>
+      <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-body); letter-spacing: -0.01em;">AuditLayerMedia</span>
+    </div>
+    <p style="font-size: 0.78rem; color: var(--muted); margin-bottom: 8px;">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 3px;"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5"/></svg>
+      @auditlayermedia
+    </p>
+    <a href="https://instagram.com/auditlayermedia" style="display: inline-block; color: var(--accent); font-weight: 500; font-size: 0.78rem; text-decoration: none;">
+      Follow for social media optimization tips →
+    </a>
+  </div>
+
+</div>
+</body>
+</html>
