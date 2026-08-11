@@ -1134,6 +1134,111 @@
 }
 
 /* ─────────────────────────────────────────────────────────────
+   WARM PALETTE — SITE-WIDE CONTINUITY
+   Carries the AuditLayerMedia clay, apricot and sand accents
+   through the personal, medicine, media and publication tabs.
+   ───────────────────────────────────────────────────────────── */
+#tab-narin .narin-hero::before {
+  background: linear-gradient(90deg, transparent, var(--clay), var(--royal-accent), transparent);
+}
+#tab-narin .narin-eyebrow {
+  color: var(--clay-dark);
+  border-color: var(--border-warm);
+  background: var(--sand-light);
+}
+#tab-narin .nav-card:nth-child(2),
+#tab-narin .nav-card:nth-child(4) {
+  background: linear-gradient(145deg, var(--sand-light), var(--paper));
+  border-color: var(--border-warm);
+}
+#tab-narin .nav-card:nth-child(3) {
+  background: linear-gradient(145deg, var(--royal-subtle), var(--paper));
+}
+#tab-narin .nav-card:not(.nav-card--venture) .nav-card-arrow { color: var(--clay-dark); }
+#tab-narin .nav-card:hover,
+#tab-narin .nav-card:focus-visible {
+  border-color: var(--clay);
+  background: var(--sand-light);
+}
+
+#tab-medicine .chronology::before {
+  background: linear-gradient(180deg,
+    transparent 0%,
+    var(--clay-soft) 10%,
+    var(--royal-soft) 50%,
+    var(--clay-soft) 90%,
+    transparent 100%);
+}
+#tab-medicine .chrono-item:nth-child(odd) .chrono-marker { border-color: var(--clay); }
+#tab-medicine .chrono-item:nth-child(odd) .chrono-marker::after { background: var(--clay); }
+#tab-medicine .chrono-date {
+  color: var(--clay-dark);
+  background: var(--sand-light);
+  border-left-color: var(--clay);
+}
+#tab-medicine .chrono-sub::before { background: var(--clay); }
+#tab-medicine .ext-link {
+  background: var(--sand-light);
+  border-color: var(--border-warm);
+}
+#tab-medicine .ext-link:hover {
+  background: var(--clay);
+  border-color: var(--clay);
+}
+
+#tab-publications .pub-featured .chrono-body {
+  background:
+    radial-gradient(circle at 96% 4%, rgba(216, 154, 114, 0.13), transparent 28%),
+    linear-gradient(145deg, var(--sand-light), var(--royal-subtle) 78%, var(--paper));
+  border-color: var(--border-warm);
+}
+#tab-publications .pub-featured .chrono-body::before {
+  background: linear-gradient(180deg, var(--clay), var(--royal-accent));
+}
+#tab-publications .pub-journal { color: var(--clay-dark); }
+#tab-publications .pub-authors {
+  background: rgba(255,255,255,0.72);
+  border-left-color: var(--clay-soft);
+}
+#tab-publications .pub-figure:nth-child(odd),
+#tab-publications .pub-detail:nth-child(even) {
+  background: var(--sand-light);
+  border-color: var(--border-warm);
+}
+#tab-publications .pub-abstract-details summary,
+#tab-publications .pub-ref-link {
+  color: var(--clay-dark);
+  background: var(--sand-light);
+  border-color: var(--border-warm);
+}
+#tab-publications .pub-abstract-details summary:hover,
+#tab-publications .pub-ref-link:hover {
+  color: var(--cream);
+  background: var(--clay);
+  border-color: var(--clay);
+}
+
+#tab-media .media-stat:nth-child(odd) {
+  background: var(--sand-light);
+  border-color: var(--border-warm);
+}
+#tab-media .media-stat:nth-child(odd) .media-stat-value { color: var(--clay-dark); }
+#tab-media .media-stat:nth-child(even) { background: var(--royal-subtle); }
+#tab-media .media-card::before {
+  background: linear-gradient(180deg, var(--clay), var(--royal-accent));
+}
+#tab-media .media-card:nth-child(even) {
+  background: linear-gradient(145deg, var(--sand-light), var(--paper));
+  border-color: var(--border-warm);
+}
+#tab-media .media-pill {
+  color: var(--clay-dark);
+  background: var(--sand-light);
+  border-color: var(--border-warm);
+}
+#tab-media .media-card-sub { border-left-color: var(--clay); }
+
+/* ─────────────────────────────────────────────────────────────
    FOOTER
    ───────────────────────────────────────────────────────────── */
 .foot {
