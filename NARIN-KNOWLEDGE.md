@@ -87,18 +87,17 @@
     - Private practice + USC Verdugo Hospital rounds
     - Observed patient evaluations, diagnostic interviews, EEG examinations, neurological treatment planning
 
-13. **UCLA Care Extenders — Clinical Volunteer** _(Nov 2025 – Present)_
-    - UCLA Health, Neurology & ER departments
+13. **UCLA Health — Department Coordinator at Santa Monica Hospital & Clinical Volunteer** _(Nov 2025 – Present, 190+ volunteer hours)_
+    - Care Extender staff profile: https://www.uclahealth.org/volunteer/care-extender/current-care-extenders/meet-care-extender-staff
+    - Neurology & ER departments
     - Transporting patients, restocking medical cabinets, assisting nurses
     - Bedside presence with families and anxious patients
-
-14. **UCLA Care Extenders — Department Coordinator** _(Nov 2025 – Present)_
     - Auditing volunteer performance
     - Gathering staff feedback on program quality
     - Communication bridge between volunteers and management
 
 ### 2026
-15. **ThinkNeuro — Research Intern** _(Jun – Aug 2026)_
+14. **ThinkNeuro — Research Intern** _(Jun – Aug 2026)_
     - Virtual (Sacramento, CA)
     - 10-week neuroscience research internship under Harvard and Stanford mentorship
     - Bibliometric analysis and neuroscience research with R programming
