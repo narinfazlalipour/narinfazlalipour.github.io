@@ -118,6 +118,17 @@
 - **Press coverage:** [UC San Diego Today](https://today.ucsd.edu/story/meditation-retreat-rapidly-reprograms-body-and-mind) (Nov 6, 2025)
 - **Funded by:** InnerScience Research Fund ($10M initiative)
 
+## Research Poster
+
+**Artificial Intelligence for Long-Term Monitoring of ADHD**
+
+- **Program:** ThinkNeuro Research Internship
+- **Completed:** Summer 2026
+- **Authors:** **Narin Fazlalipour**, Anaya Sinha, Lucas Lam, Jade Zaw, Shatakshi Sinha, Adya Singh, Abigail Jacob, Kaylene Tran, Saukhya Sannapu
+- **Format:** Literature review and bibliometric analysis
+- **Summary:** Maps current AI research in ADHD and examines the evidence needed for clinically meaningful long-term monitoring. AI can classify ADHD-related patterns and repeated sensing is promising, but reliable multi-year, within-person tracking has not yet been established.
+- **Website files:** `assets/publications/artificial-intelligence-long-term-adhd-poster.pdf` and `assets/publications/artificial-intelligence-long-term-adhd-poster-preview.webp`
+
 ---
 
 ## Media & Communication Experience

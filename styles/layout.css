@@ -491,6 +491,26 @@
 }
 .pub-authors strong { color: var(--royal-deep); }
 
+.pub-poster-preview {
+  display: block;
+  margin: 1rem 0 1.25rem;
+  border: 1px solid var(--border-accent);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--paper);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--med) var(--ease), box-shadow var(--med) var(--ease);
+}
+.pub-poster-preview:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+.pub-poster-preview img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 .pub-details {
   display: flex;
   flex-wrap: wrap;
