@@ -27,9 +27,16 @@
   --rule:          rgba(20, 24, 42, 0.10);
   --rule-soft:     rgba(20, 24, 42, 0.06);
 
-  /* ── Accent (warm contrast for selection / highlights) ── */
+  /* ── Warm Accents ── */
   --gold:          #B8924A;
   --gold-soft:     #E8D9B8;
+  --clay:          #B86F5A;
+  --clay-dark:     #8F4F40;
+  --clay-soft:     #F0D8D0;
+  --apricot:       #D89A72;
+  --sand:          #F3E5D6;
+  --sand-light:    #FBF5EE;
+  --border-warm:   rgba(184, 111, 90, 0.28);
 
   /* ── Semantic Mapping ── */
   --bg:            var(--cream);

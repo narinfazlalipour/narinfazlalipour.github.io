@@ -130,6 +130,14 @@
 
 ## Media & Communication Experience
 
+### AuditLayerMedia — Co-Founder & Head of Product and Media Strategy
+- **Dates:** 2026 – Present
+- Co-founded an evidence-led brand and social-media intelligence company serving creators, teams, businesses, and organizations across industries
+- Leads product direction, client discovery, sales, brand positioning, report editorial quality, and company media strategy
+- Directs company content, editorial voice, product education, campaigns, and social channels
+- Product structure: 6 decision dimensions, 15 report sections, and a 90-day action path
+- Public links: [auditlayermedia.com](https://auditlayermedia.com/) · [@auditlayermedia](https://instagram.com/auditlayermedia)
+
 ### Hemal Patel, PhD — Instagram Management (@hemalpatelphd)
 - Sole manager of Dr. Patel's professional media presence across Instagram and beyond
 - Grew audience organically from 0 to 12K followers

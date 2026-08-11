@@ -11,9 +11,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="./styles/tokens.css" />
-  <link rel="stylesheet" href="./styles/base.css" />
-  <link rel="stylesheet" href="./styles/layout.css?v=4" />
+  <link rel="stylesheet" href="./styles/tokens.css?v=2" />
+  <link rel="stylesheet" href="./styles/base.css?v=2" />
+  <link rel="stylesheet" href="./styles/layout.css?v=5" />
 
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><circle cx=%2216%22 cy=%2216%22 r=%227%22 fill=%22%232C5AA0%22/></svg>" />
 </head>
@@ -30,7 +30,7 @@
       <button class="tab-btn" data-tab="medicine" role="tab" aria-selected="false" tabindex="-1">Medicine</button>
       <button class="tab-btn" data-tab="media" role="tab" aria-selected="false" tabindex="-1">Media</button>
       <button class="tab-btn" data-tab="publications" role="tab" aria-selected="false" tabindex="-1">Publications</button>
-      <button class="tab-btn" data-tab="projects" role="tab" aria-selected="false" tabindex="-1">Projects</button>
+      <button class="tab-btn" data-tab="auditlayer" role="tab" aria-selected="false" tabindex="-1">AuditLayer</button>
     </nav>
   </header>
 
@@ -45,7 +45,7 @@
           B.S. Cognitive Science: Behavioral &amp; Neuroscience — UC San Diego
         </p>
         <p class="narin-tagline">
-          Researcher, science communicator, and future physician.
+          Researcher, digital communicator, and future physician.
         </p>
       </div>
 
@@ -68,6 +68,11 @@
         <a class="nav-card" href="#publications" data-tab="publications">
           <span class="nav-card-label">Publications</span>
           <span class="nav-card-desc">Peer-reviewed work</span>
+          <span class="nav-card-arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="nav-card nav-card--venture" href="#auditlayer" data-tab="auditlayer">
+          <span class="nav-card-label">AuditLayerMedia</span>
+          <span class="nav-card-desc">Co-founder · Product, media strategy &amp; competitive intelligence</span>
           <span class="nav-card-arrow" aria-hidden="true">→</span>
         </a>
       </nav>
@@ -232,6 +237,25 @@
 
       <!-- Cards -->
       <div class="media-grid">
+
+        <!-- AuditLayerMedia -->
+        <article class="media-card media-card--featured">
+          <div class="media-card-header">
+            <h3 class="media-card-title">AuditLayerMedia — Company Media &amp; Brand</h3>
+            <a class="media-card-handle" href="https://instagram.com/auditlayermedia" target="_blank" rel="noopener">@auditlayermedia</a>
+          </div>
+          <div class="media-card-date">2026 – Present · Co-Founder</div>
+          <div class="media-card-pills">
+            <span class="media-pill">Brand Strategy</span>
+            <span class="media-pill">Editorial Direction</span>
+            <span class="media-pill">Product Education</span>
+            <span class="media-pill">Community</span>
+          </div>
+          <div class="media-card-body">
+            <p>Lead the company’s media and editorial direction — shaping the brand voice, explaining the product through clear content, planning campaigns, and turning social-media intelligence into useful stories for creators, teams, businesses, and organizations.</p>
+            <a class="media-card-link" href="#auditlayer" data-tab="auditlayer">See AuditLayerMedia &amp; selected work →</a>
+          </div>
+        </article>
 
         <!-- Hemal Patel -->
         <article class="media-card">
@@ -437,51 +461,111 @@
     </div>
   </section>
 
-  <!-- ═══════════════════════ TAB: PROJECTS ═══════════════════════ -->
-  <section class="tab-panel" id="tab-projects" role="tabpanel">
+  <!-- ═══════════════════════ TAB: AUDITLAYERMEDIA ═══════════════════════ -->
+  <section class="tab-panel" id="tab-auditlayer" role="tabpanel">
     <div class="wrap">
 
       <header class="tab-header">
-        <span class="tab-icon" aria-hidden="true">📋</span>
-        <h2 class="tab-title">Projects &amp; Audits</h2>
+        <span class="tab-icon" aria-hidden="true">◈</span>
+        <h2 class="tab-title">AuditLayerMedia</h2>
         <p class="tab-intro">
-          Social media audits and competitive intelligence reports for evidence-based health, wellness, and biohacking creators.
+          Evidence-led brand and social-media intelligence for creators, teams, businesses, and organizations.
         </p>
       </header>
 
-      <div class="project-grid">
-
-
-
-        <a class="project-card" href="projects/hemal-media-management.html">
-          <span class="project-kind">Media Management Proposal</span>
-          <span class="project-name">Dr. Hemal Patel — Personal Brand</span>
-          <span class="project-meta">10–12 hrs/week · Instagram · June 2026</span>
-          <span class="project-desc">
-            Media management proposal for @hemalpatelphd — personal brand strategy, community management, broadcast channel activation, and content diversification beyond product. Built on a working relationship since 2024.
-          </span>
-          <span class="project-cta">View Proposal &rarr;</span>
-        </a>
-
-        <a class="project-card" href="projects/hemal-dispenza-collabs.html">
-          <span class="project-kind">Collaboration Roadmap</span>
-          <span class="project-name">Dr. Hemal Patel × Dr Joe Dispenza</span>
-          <span class="project-meta">5 content formats · 2.2M existing views · June 2026</span>
-          <span class="project-desc">
-            Five collaboration formats to turn a proven partnership into a recurring engine — Q&A Reels, paper deep-dives, Meditation Lab, transformation stories, and joint Instagram Lives. Built on two collabs that already hit 1.2M and 1M views.
-          </span>
-          <span class="project-cta">View Roadmap &rarr;</span>
-        </a>
-
-        <div class="project-card project-placeholder">
-          <span class="project-kind">Coming Soon</span>
-          <span class="project-name">Additional audits &amp; work samples</span>
-          <span class="project-meta">Social media audits &amp; competitive intelligence</span>
-          <span class="project-desc">
-            Future projects will appear here — social media audits and competitive intelligence for creators in health, wellness, and biohacking.
-          </span>
+      <article class="venture-hero">
+        <span class="venture-kicker">Co-Founder · 2026 – Present</span>
+        <h3>Co-Founder &amp; Head of Product and Media Strategy</h3>
+        <p>I co-founded AuditLayerMedia to help people make better brand and social-media decisions from evidence rather than generic advice. I lead product direction, client discovery, sales, brand positioning, report editorial quality, and the company’s media strategy.</p>
+        <div class="venture-actions">
+          <a class="venture-btn venture-btn--primary" href="https://auditlayermedia.com/" target="_blank" rel="noopener">Visit AuditLayerMedia ↗</a>
+          <a class="venture-btn" href="https://instagram.com/auditlayermedia" target="_blank" rel="noopener">Instagram ↗</a>
         </div>
+      </article>
+
+      <div class="venture-stats" aria-label="AuditLayerMedia product structure">
+        <div class="venture-stat"><strong>6</strong><span>Decision dimensions</span></div>
+        <div class="venture-stat"><strong>15</strong><span>Report sections</span></div>
+        <div class="venture-stat"><strong>90</strong><span>Day action path</span></div>
+        <div class="venture-stat"><strong>Live</strong><span>Production product</span></div>
       </div>
+
+      <section class="venture-section" aria-labelledby="venture-lead-title">
+        <header class="venture-section-head">
+          <span>My role</span>
+          <h3 id="venture-lead-title">What I lead</h3>
+        </header>
+        <div class="venture-role-grid">
+          <article class="venture-role-card">
+            <span>01</span>
+            <h4>Product direction</h4>
+            <p>Shape what the product should answer, how clients move from intake to decision, and where human judgment must remain visible.</p>
+          </article>
+          <article class="venture-role-card">
+            <span>02</span>
+            <h4>Client discovery &amp; sales</h4>
+            <p>Lead conversations that identify the real business decision, calibrate the engagement, and turn client needs into a useful scope.</p>
+          </article>
+          <article class="venture-role-card">
+            <span>03</span>
+            <h4>Media &amp; brand</h4>
+            <p>Direct company positioning, editorial voice, product education, campaigns, and social content across the brand’s public channels.</p>
+          </article>
+          <article class="venture-role-card">
+            <span>04</span>
+            <h4>Report quality</h4>
+            <p>Set the editorial standard for client-facing intelligence so evidence, limitations, competitive context, and next actions remain clear.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="venture-section" aria-labelledby="venture-work-title">
+        <header class="venture-section-head">
+          <span>Evidence</span>
+          <h3 id="venture-work-title">Product &amp; selected work</h3>
+        </header>
+        <div class="project-grid">
+          <a class="project-card" href="https://auditlayermedia.com/" target="_blank" rel="noopener">
+            <span class="project-kind">Live Product</span>
+            <span class="project-name">AuditLayerMedia</span>
+            <span class="project-meta">Brand &amp; social-media intelligence · Production</span>
+            <span class="project-desc">A working product that moves from observable signals to diagnosis, competitive context, and ranked next actions while keeping data limits visible.</span>
+            <span class="project-cta">Visit Product ↗</span>
+          </a>
+
+          <a class="project-card" href="https://auditlayermedia.com/sample" target="_blank" rel="noopener">
+            <span class="project-kind">Sample Intelligence Brief</span>
+            <span class="project-name">From Evidence to Decision</span>
+            <span class="project-meta">6 dimensions · 15 sections · 90-day path</span>
+            <span class="project-desc">A fictional-data sample showing the report structure, diagnosis, same-tier context, ranked actions, and transparent evidence boundaries.</span>
+            <span class="project-cta">View Sample ↗</span>
+          </a>
+
+          <a class="project-card" href="audits/rhode-instagram-audit.html">
+            <span class="project-kind">Instagram Audit</span>
+            <span class="project-name">Rhode</span>
+            <span class="project-meta">Competitive intelligence · Brand analysis</span>
+            <span class="project-desc">A structured brand and Instagram assessment that separates observable account signals from interpretation and actionable recommendations.</span>
+            <span class="project-cta">View Audit →</span>
+          </a>
+
+          <a class="project-card" href="projects/hemal-media-management.html">
+            <span class="project-kind">Media Management Proposal</span>
+            <span class="project-name">Dr. Hemal Patel — Personal Brand</span>
+            <span class="project-meta">10–12 hrs/week · Instagram · June 2026</span>
+            <span class="project-desc">Personal-brand strategy, community management, broadcast-channel activation, and content diversification built on an active working relationship since 2024.</span>
+            <span class="project-cta">View Proposal →</span>
+          </a>
+
+          <a class="project-card" href="projects/hemal-dispenza-collabs.html">
+            <span class="project-kind">Collaboration Roadmap</span>
+            <span class="project-name">Dr. Hemal Patel × Dr Joe Dispenza</span>
+            <span class="project-meta">5 formats · 2.2M existing views · June 2026</span>
+            <span class="project-desc">Five repeatable collaboration formats built from two existing collaborations that reached 1.2M and 1M views.</span>
+            <span class="project-cta">View Roadmap →</span>
+          </a>
+        </div>
+      </section>
 
     </div>
   </section>
@@ -493,6 +577,6 @@
   </footer>
 
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
-  <script type="module" src="./scripts/main.js"></script>
+  <script type="module" src="./scripts/main.js?v=2"></script>
 </body>
 </html>

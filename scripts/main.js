@@ -2,7 +2,11 @@
    Main JS — Tabs · Progress · A11y
    ═══════════════════════════════════════════════════════════════ */
 
-const VALID_TABS = ['narin', 'medicine', 'media', 'publications', 'projects'];
+const VALID_TABS = ['narin', 'medicine', 'media', 'publications', 'auditlayer'];
+
+function normalizeTab(tabName) {
+  return tabName === 'projects' ? 'auditlayer' : tabName;
+}
 
 document.addEventListener('DOMContentLoaded', () => {
   const tabBtns   = Array.from(document.querySelectorAll('.tab-btn'));
@@ -68,13 +72,13 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /* ── Initial hash routing ─────────────────────────────────── */
-  const initialHash = window.location.hash.replace('#', '');
+  const initialHash = normalizeTab(window.location.hash.replace('#', ''));
   if (initialHash && VALID_TABS.includes(initialHash)) {
     switchTab(initialHash, { pushHash: false, scroll: false });
   }
 
   window.addEventListener('hashchange', () => {
-    const h = window.location.hash.replace('#', '');
+    const h = normalizeTab(window.location.hash.replace('#', ''));
     if (VALID_TABS.includes(h)) switchTab(h, { pushHash: false });
   });
 
@@ -96,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function updateProgressVisibility(tabName) {
     if (!progress) return;
     /* show on long content tabs */
-    const show = tabName === 'medicine' || tabName === 'media' || tabName === 'projects';
+    const show = tabName === 'medicine' || tabName === 'media' || tabName === 'auditlayer';
     progress.classList.toggle('is-active', show);
   }
 
