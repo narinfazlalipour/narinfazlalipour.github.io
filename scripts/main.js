@@ -25,6 +25,13 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.setAttribute('tabindex', isActive ? '0' : '-1');
     });
 
+    const activeBtn = tabBtns.find(btn => btn.dataset.tab === tabName);
+    const tabNav = activeBtn?.closest('.tab-nav');
+    if (activeBtn && tabNav && tabNav.scrollWidth > tabNav.clientWidth) {
+      const left = activeBtn.offsetLeft - ((tabNav.clientWidth - activeBtn.offsetWidth) / 2);
+      tabNav.scrollTo({ left: Math.max(0, left), behavior: scroll ? 'smooth' : 'auto' });
+    }
+
     tabPanels.forEach(panel => {
       panel.classList.toggle('active', panel.id === `tab-${tabName}`);
     });
