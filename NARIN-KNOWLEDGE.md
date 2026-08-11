@@ -89,9 +89,7 @@
 
 13. **UCLA Health — Department Coordinator at Santa Monica Hospital & Clinical Volunteer** _(Nov 2025 – Present, 190+ volunteer hours)_
     - Care Extender staff profile: https://www.uclahealth.org/volunteer/care-extender/current-care-extenders/meet-care-extender-staff
-    - Neurology & ER departments
-    - Transporting patients, restocking medical cabinets, assisting nurses
-    - Bedside presence with families and anxious patients
+    - Currently shadowing in the Surgery Center
     - Auditing volunteer performance
     - Gathering staff feedback on program quality
     - Communication bridge between volunteers and management
