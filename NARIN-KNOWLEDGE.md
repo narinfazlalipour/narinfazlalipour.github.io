@@ -26,6 +26,8 @@
 
 ## Chronology (Complete Timeline)
 
+Website Medicine tab: show roles marked Present first, newest start date first, followed by completed roles from most recent to oldest. Preserve the existing relative order where dates are tied or lack month-level detail.
+
 ### 2020–2022 — Glendale Community College Era
 1. **GCC Honors — Community Service Outreach** _(2 years)_
    - Served food to individuals experiencing homelessness at Hope Hollywood
