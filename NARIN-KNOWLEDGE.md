@@ -24,6 +24,10 @@
 
 ---
 
+## Certifications
+
+- **CPR certification** — confirmed directly by Narin. Issuer, exact credential title, issue date, and expiration date have not been provided; do not infer BLS, AED, or first-aid credentials.
+
 ## Chronology (Complete Timeline)
 
 Website Medicine tab: show roles marked Present first, newest start date first, followed by completed roles from most recent to oldest. Preserve the existing relative order where dates are tied or lack month-level detail.
