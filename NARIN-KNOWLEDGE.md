@@ -20,7 +20,7 @@
 | Degree | Institution | Years | Notes |
 |--------|-------------|-------|-------|
 | B.S. Cognitive Science: Behavioral & Neuroscience | **UC San Diego** | 2022 – 2024 | Transferred from GCC |
-| Pre-Med / Honors coursework | **Glendale Community College** | 2020 – 2022 | Honors program, multiple leadership roles |
+| A.S., Biology | **Glendale Community College** | 2020 – 2022 | Honors program, multiple leadership roles |
 
 ---
 
@@ -93,7 +93,7 @@ Website Medicine tab: show roles marked Present first, newest start date first, 
     - Private practice + USC Verdugo Hospital rounds
     - Observed patient evaluations, diagnostic interviews, EEG examinations, neurological treatment planning
 
-13. **UCLA Health — Department Coordinator at Santa Monica Hospital & Clinical Volunteer** _(Nov 2025 – Present, 252+ volunteer hours)_
+13. **UCLA Health — Department Coordinator at Santa Monica Hospital & Clinical Volunteer** _(Nov 2025 – Present, 252+ Care Extender hours at UCLA Health)_
     - Care Extender staff profile: https://www.uclahealth.org/volunteer/care-extender/current-care-extenders/meet-care-extender-staff
     - Currently shadowing in the Surgery Center
     - Auditing volunteer performance
