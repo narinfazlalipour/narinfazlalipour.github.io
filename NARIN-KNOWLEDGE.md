@@ -20,7 +20,7 @@
 | Degree | Institution | Years | Notes |
 |--------|-------------|-------|-------|
 | B.S. Cognitive Science: Behavioral & Neuroscience | **UC San Diego** | 2022 – 2024 | Transferred from GCC |
-| A.S., Biology | **Glendale Community College** | 2020 – 2022 | Honors program, multiple leadership roles |
+| A.S., Biology | **Glendale Community College** | 2020 – 2022 | Degree conferred June 2022; honors program, multiple leadership roles |
 
 ---
 
